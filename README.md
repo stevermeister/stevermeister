@@ -38,17 +38,9 @@
   <img align="center" alt="Stepan Suvorov LinkedIn" height="30" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/linkedin.svg" width="40"/></a>
 </p>
 
-<h3 align="left">Languages and Tools:</h3>
-<ul>
-    <li>JavaScript</li>
-    <li>TypeScript</li>
-    <li>Angular</li>
-    <li>AngularJs</li>
-    <li>AWS</li>
-    <li>Terraform</li>
-    <li>SQL</li>
-</ul>
-</p>
+### Languages and Tools: ###
+  JavaScript, TypeScript, Angular, AngularJs, AWS, Terraform, SQL
+
 
 ![stevermeister](https://github-readme-stats.vercel.app/api/top-langs/?username=stevermeister&layout=compact)
  
