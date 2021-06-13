@@ -17,13 +17,13 @@
 
 - 🌱 I'm Javascript/Angular teacher at [javascript.info](https://javascript.info)
 
-- 🎥  [angular.ninja](https://angular.ninja/)
+- 🎥 I keep adding new episodes to Angular Pro Screencast - [angular.ninja](https://angular.ninja/)
 
 - 👨‍💻 All of my projects are available at [https://github.com/stevermeister](https://github.com/stevermeister)
 
 - 📝 I wrote articles on my [blog](https://blog.stepansuvorov.com/)
 
-- 💬 Ask me about **Angular, JavaScript, TypeScript, RxJs, AWS, Terraform, Agile and how to scale your startup**
+- 💬 Ask me about **how to scale your startup**
 
 
 ### Could be interesting to read
