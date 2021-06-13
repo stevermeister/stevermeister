@@ -50,16 +50,15 @@
 
 <table>
       <tr>
-        <td>2015</td>
-        <td><a href="https://learn.javascript.ru/">JavaScript.ru</a>.
+        <td>2015 - ...</td>
+        <td><a href="https://javascript.info/">JavaScript.info</a>.
           Mentor. Online courses
         </td>
       </tr>
       <tr>
-        <td>2014</td>
+        <td>2014 - ...</td>
         <td><a href="https://www.studytube.nl/">Studytube</a>.
-          Front-end Evangelist.
-          Learning management system.
+          CTO
         </td>
       </tr>
       <tr>
