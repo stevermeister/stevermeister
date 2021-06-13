@@ -2,9 +2,6 @@
 <h3 align="center">A passionate Developer Advocate from 🇳🇱Netherlands(born in 🇺🇦Ukraine)</h3>
 
 
-<p align="left"><img alt="stevermeister"
-                     src="https://komarev.com/ghpvc/?username=stevermeiser&label=Profile%20views&color=0e75b6&style=flat"/></p>
-
 <p align="left"><a href="https://twitter.com/stevermeister" target="blank"><img
         alt="stevermeister" src="https://img.shields.io/twitter/follow/stevermeister?logo=twitter&style=for-the-badge"/></a>
 </p>
@@ -102,3 +99,9 @@
 
   optimistic, hard-working,
   flexible thinking, leader skills, decision-maker
+  
+  
+  
+
+<p align="left"><img alt="stevermeister"
+                     src="https://komarev.com/ghpvc/?username=stevermeiser&label=Profile%20views&color=0e75b6&style=flat"/></p>
