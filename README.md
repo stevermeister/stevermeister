@@ -50,15 +50,21 @@
 
 <table>
       <tr>
+        <td>2017 - ...</td>
+        <td><a href="https://www.studytube.nl/">Studytube</a>.
+          CTO
+        </td>
+      </tr>  
+      <tr>
         <td>2015 - ...</td>
         <td><a href="https://javascript.info/">JavaScript.info</a>.
           Mentor. Online courses
         </td>
       </tr>
       <tr>
-        <td>2014 - ...</td>
+        <td>2014 - 2017</td>
         <td><a href="https://www.studytube.nl/">Studytube</a>.
-          CTO
+          Software Engineer
         </td>
       </tr>
       <tr>
