@@ -6,21 +6,21 @@
         alt="stevermeister" src="https://img.shields.io/twitter/follow/stevermeister?logo=twitter&style=for-the-badge"/></a>
 </p>
 
-- 🐝  I work as a **CTO @ Studytube** 
+- 🐝    I work as a **CTO @ Studytube** 
 
-- 🅰️  I'm Google Developer Expert at Angular
+- 🅰️    I'm Google Developer Expert at Angular
 
-- 🛗  I'm an organiser of **Angular Kharkiv Meetup** and active member of **Dutch Angular Group**.
+- 🛗    I'm an organiser of **Angular Kharkiv Meetup** and active member of **Dutch Angular Group**.
 
-- 🌱  I'm Javascript/Angular teacher at [javascript.info](https://javascript.info)
+- 🌱    I'm Javascript/Angular teacher at [javascript.info](https://javascript.info)
 
-- 🎥  I keep adding new episodes to Angular Pro Screencast - [angular.ninja](https://angular.ninja/)
+- 🎥    I keep adding new episodes to Angular Pro Screencast - [angular.ninja](https://angular.ninja/)
 
-- 👨‍💻  All of my projects are available at [https://github.com/stevermeister](https://github.com/stevermeister)
+- 👨‍💻    All of my projects are available at [https://github.com/stevermeister](https://github.com/stevermeister)
 
-- 📝  I wrote articles on my [blog](https://blog.stepansuvorov.com/)
+- 📝    I wrote articles on my [blog](https://blog.stepansuvorov.com/)
 
-- 💬  Ask me about **how to scale your startup**
+- 💬    Ask me about **how to scale your startup**
 
 
 ### Could be interesting to read
