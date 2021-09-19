@@ -14,7 +14,7 @@
 
 - 🌱  I'm Javascript/Angular teacher at [javascript.info](https://javascript.info)
 
-- 🎥  I keep adding new episodes to Angular Pro Screencast - [angular.ninja](https://angular.ninja/)
+- 🎥  I keep adding new episodes to [Angular Pro Screencast](https://www.youtube.com/channel/UClJMItOKKr1_B6YFrHDetKQ)
 
 - 👨‍💻  All of my projects are available at [https://github.com/stevermeister](https://github.com/stevermeister)
 
