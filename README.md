@@ -8,7 +8,7 @@
 
 - 🐝  I work as a **CTO @ Studytube** 
 
-- 🅰️  I'm Google Developer Expert at Angular
+- 🅰️  I'm a **Google Developer Expert** at Angular
 
 - 🛗  I'm an organiser of **Angular Kharkiv Meetup** and active member of **Dutch Angular Group**.
 
