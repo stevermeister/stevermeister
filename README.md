@@ -23,8 +23,10 @@
 - 💬  Ask me about **how to scale your startup**
 
 
-### Could be interesting to read
-- [How to migrate WordPress to Scully](https://indepth.dev/posts/1302/how-to-migrate-wordpress-to-scully)
+### Open Source Projects:
+- [The Tax | Online Income Tax Calculation for Netherlands](https://thetax.nl)
+- [ngx-wig | Pure lightweight WYSIWYG editor for Angular](https://github.com/stevermeister/ngx-wig)
+- [ngx-cookie-service | Service to manage cookies in Angular](https://github.com/stevermeister/ngx-cookie-service)
 
 <p align="left">
 <h3 align="left">Connect with me:</h3>
