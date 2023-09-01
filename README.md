@@ -18,7 +18,7 @@
 
 - 👨‍💻  All of my projects are available at [https://github.com/stevermeister](https://github.com/stevermeister)
 
-- 📝  I wrote articles on my [blog](https://blog.stepansuvorov.com/)
+- 📝  I wrote articles on my [devblog](https://blog.stepansuvorov.com/) and my [ctoblog](https://ctoiam.com/)
 
 - 💬  Ask me about **how to scale your startup**
 
