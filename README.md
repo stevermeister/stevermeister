@@ -72,31 +72,31 @@
         </td>
       </tr>
       <tr>
-        <td>2012-2014</td>
+        <td>2012 - 2014</td>
         <td><a href="http://www.daxx.com/">DAXX</a>.
           Front-end consultant
         </td>
       </tr>
       <tr>
-        <td>2011-2012:</td>
+        <td>2011 - 2012</td>
         <td><a href="http://envionsoftware.com/">EnvionSoftware</a>.
           Lead Developer.
           Asset Management SaaS project</td>
       </tr>
       <tr>
-        <td>2010-2011:</td>
+        <td>2010 - 2011</td>
         <td><a href="http://www.rightfusion.com/">RightFusion</a> .
           Web developer.
-          Data processing, analytics, visualisation</td>
+          Data processing, analytics, visualization </td>
       </tr>
       <tr>
-        <td>2008-2010:</td>
+        <td>2008 - 2010</td>
         <td><a href="http://www.gameloft.com/">Gameloft</a>.
           PHP developer.
           eCommerce department</td>
       </tr>
       <tr>
-        <td>2004-2008:</td>
+        <td>2004 - 2008</td>
         <td>Freelance.
           Web Developer.
           Different projects</td>
