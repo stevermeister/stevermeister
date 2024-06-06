@@ -22,6 +22,8 @@
 
 - 💬  Ask me about **how to scale your startup**
 
+- Archive of my presentations - https://stepan.js.org/slides.com/
+
 
 ### Open Source Projects:
 - [The Tax | Online Income Tax Calculation for Netherlands](https://thetax.nl)
