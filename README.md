@@ -60,7 +60,7 @@
         </td>
       </tr>  
       <tr>
-        <td>2015 - ...</td>
+        <td>2015 - 2022</td>
         <td><a href="https://javascript.info/">JavaScript.info</a>.
           Mentor. Online courses
         </td>
