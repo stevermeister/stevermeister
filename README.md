@@ -44,8 +44,6 @@
 ### Languages and Tools: ###
   JavaScript, TypeScript, Angular, AngularJs, AWS, Terraform, SQL
 
-
-![stevermeister](https://github-readme-stats.vercel.app/api/top-langs/?username=stevermeister&layout=compact)
  
 
 ## Background
