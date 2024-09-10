@@ -2,10 +2,6 @@
 <h3 align="center">A passionate Developer Advocate from 🇳🇱Netherlands(born in 🇺🇦Ukraine)</h3>
 
 
-<p align="left"><a href="https://twitter.com/stevermeister" target="blank"><img
-        alt="stevermeister" src="https://img.shields.io/twitter/follow/stevermeister?logo=twitter&style=for-the-badge"/></a>
-</p>
-
 - 🐝  I work as a **CTO @ Studytube** 
 
 - 🅰️  I'm a **Google Developer Expert** at Angular
