@@ -38,7 +38,7 @@
 </p>
 
 ### Languages and Tools: ###
-  JavaScript, TypeScript, Angular, AngularJs, AWS, Terraform, SQL
+  Python, OpenAI, JavaScript, TypeScript, Angular, AWS, Terraform, SQL
 
  
 
