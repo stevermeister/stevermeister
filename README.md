@@ -88,13 +88,9 @@ Python, OpenAI, JavaScript, TypeScript, Angular, AWS, Terraform, SQL
   </tr>
 </table>
 
-## Character 
+## Personal Characteristics:
+Optimistic, hard-working, flexible thinker, effective leader, and decision-maker.  
 
-
-  optimistic, hard-working,
-  flexible thinking, leader skills, decision-maker
-  
-  
   
 
 <p align="left"><img alt="stevermeister"
