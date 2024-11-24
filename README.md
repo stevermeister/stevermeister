@@ -18,15 +18,9 @@
 - [ngx-wig](https://github.com/stevermeister/ngx-wig) - A lightweight WYSIWYG editor for Angular  
 - [ngx-cookie-service](https://github.com/stevermeister/ngx-cookie-service) - A service to manage cookies in Angular  
 
-<h3 align="left">Connect with me:</h3>
-<p align="left">
-<a href="https://twitter.com/stevermeister" target="_blank">
-  <img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/twitter.svg" alt="stevermeister Twitter" height="30" width="40" />
-</a>
-<a href="https://www.linkedin.com/in/stepansuvorov" target="_blank">
-  <img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/linkedin.svg" alt="Stepan Suvorov LinkedIn" height="30" width="40" />
-</a>
-</p>
+## 📬 Let's Connect!
+- [LinkedIn](https://www.linkedin.com/in/stepansuvorov)
+- [Twitter](https://twitter.com/stevermeister)
 
 ### Languages and Tools:
 Python, OpenAI, JavaScript, TypeScript, Angular, AWS, Terraform, SQL  
