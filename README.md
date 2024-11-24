@@ -3,15 +3,13 @@
 
 - 🐝 I am the **CTO at Studytube**.  
 - 🅰️ Recognized as a **Google Developer Expert (GDE)** in Angular.  
-- 🛗 Organizer of the **Angular Kharkiv Meetup** and an active member of the **Dutch Angular Group**.  
-- 🌱 **JavaScript/Angular teacher** at [JavaScript.info](https://javascript.info).  
+- 🛗 Organizer of the **Angular Kharkiv Meetup** (before the war 😔 #StandWithUkraine).[old recordings](https://www.youtube.com/@AngularKharkiv).
 - 🎥 Regularly publishing episodes on:  
   - [Angular Pro Screencast](https://www.youtube.com/@AngularPro)  
   - [AI Pro Screencast](https://www.youtube.com/@aiproai)  
-- 👨‍💻 Explore my projects on [GitHub](https://github.com/stevermeister).  
-- 📝 Read my articles on my [DevBlog](https://blog.stepansuvorov.com) and [CTO Blog](https://ctoiam.com).  
-- 💬 Feel free to ask me about **scaling your startup**.  
+- 📝 Read my articles on my [CTO Blog](https://ctoiam.com), where I share insights on leadership, technology, and scaling startups.
 - 🎤 View my presentation archive at [slides.com](https://stepan.js.org/slides.com).
+- 💬 Feel free to ask me about **scaling your startup**.  
 
 ### Open Source Projects:
 - [The Tax](https://thetax.nl) - Online Income Tax Calculation for the Netherlands  
@@ -20,10 +18,20 @@
 
 ## 📬 Let's Connect!
 - [LinkedIn](https://www.linkedin.com/in/stepansuvorov)
+- [GitHub](https://github.com/stevermeister)
 - [Twitter](https://twitter.com/stevermeister)
 
-### Languages and Tools:
-Python, OpenAI, JavaScript, TypeScript, Angular, AWS, Terraform, SQL  
+## 🛠️ Languages and Tools:
+
+![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![TypeScript](https://img.shields.io/badge/-TypeScript-007ACC?logo=typescript&logoColor=white)
+![Python](https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white)
+![Angular](https://img.shields.io/badge/-Angular-DD0031?logo=angular&logoColor=white)
+![AWS](https://img.shields.io/badge/-AWS-232F3E?logo=amazon-aws&logoColor=white)
+![Terraform](https://img.shields.io/badge/-Terraform-623CE4?logo=terraform&logoColor=white)
+![OpenAI](https://img.shields.io/badge/-OpenAI-412991?logo=openai&logoColor=white)
+![SQL](https://img.shields.io/badge/-SQL-4479A1?logo=MySQL&logoColor=white)
+
  
 
 ## Background
