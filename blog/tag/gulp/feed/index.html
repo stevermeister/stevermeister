@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>gulp &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/gulp/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 06 Mar 2014 15:55:27 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Сделаем gulp javascript проекту</title>
+		<link>https://stepansuvorov.com/blog/2014/03/gulp/</link>
+					<comments>https://stepansuvorov.com/blog/2014/03/gulp/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 04 Mar 2014 14:48:07 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[grunt]]></category>
+		<category><![CDATA[gulp]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1417</guid>
+
+					<description><![CDATA[Gulp.js это потоковый сборщик проектов на JavaScript, интересная альтернатива Grunt.js. Установка сначала глобально, чтобы можно было вызывать из командной строки: $ sudo npm install gulp -g потом локально, в папку проекта, чтобы его могла вызывать нода: $ npm install gulp проверим: $ &#8230; <a href="https://stepansuvorov.com/blog/2014/03/gulp/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-full wp-image-1514" title="gulp logo" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/03/gulp.png" alt="" width="114" height="257" /></p>
+<p><a href="http://gulpjs.com/">Gulp.js</a> это потоковый сборщик проектов на <strong>JavaScript</strong>, интересная альтернатива <a title="gruntjs.com" href="http://gruntjs.com/">Grunt.js</a>.</p>
+<h2><span id="more-1417"></span>Установка</h2>
+<p>сначала глобально, чтобы можно было вызывать из командной строки:</p>
+<pre>$ sudo npm install gulp -g</pre>
+<p>потом локально, в папку проекта, чтобы его могла вызывать нода:</p>
+<pre>$ npm install gulp</pre>
+<p>проверим:</p>
+<pre>$ gulp --version
+[gulp] CLI version 3.5.2
+[gulp] Local version 3.5.2</pre>
+<p>установка <a href="http://gratimax.github.io/search-gulp-plugins/">плагинов</a>:</p>
+<pre>$ npm install gulp-livereload gulp-imagemin gulp-uglify gulp-concat</pre>
+<h2></h2>
+<h2>Создание конфигурационного файла</h2>
+<p>Для <strong>gulp</strong> конфигурационным файлом является <strong>gulpfile.js</strong>.</p>
+<p>Для начала можем создать этот файл со следующим содержимым:</p>
+<pre>var gulp = require('gulp');
+
+gulp.task('default', function(){
+  // place code for your default task here
+});</pre>
+<p>и запустить, выполнив команду:</p>
+<pre>$ gulp
+[gulp] Using file .../gulpfile.js
+[gulp] Working directory changed to ...
+[gulp] Running 'default'...
+[gulp] Finished 'default' in 58 μs</pre>
+<p>Принцип вызова тасков из командной строки полностью идентичен <strong>Grunt.js</strong>.</p>
+<p>Инициализация/подключение <strong>плагинов</strong>:</p>
+<pre>var livereload = require('gulp-livereload'),
+    uglify = require('gulp-uglify'),
+    concat = require('gulp-concat'),
+    connect = require('connect');</pre>
+<p>&nbsp;</p>
+<h2>Пишем свои задания</h2>
+<p>Методы <strong>gulp</strong>, которые могут понадобиться при создании таска:</p>
+<table>
+<tbody>
+<tr>
+<th>Метод</th>
+<th>Синтаксис</th>
+<th>ПримеР</th>
+</tr>
+<tr>
+<td>gulp.<strong>task</strong></td>
+<td> gulp.task(name[, deps], fn)</td>
+<td>
+<pre>gulp.task('do-log',
+  function(){console.log('Hello!')
+});</pre>
+<pre>gulp.task('test', ['do-log']);</pre>
+</td>
+</tr>
+<tr>
+<td>gulp.<strong>src</strong></td>
+<td> gulp.src(globs[, options])</td>
+<td>
+<pre>gulp.src('./gulpfile.js')</pre>
+</td>
+</tr>
+<tr>
+<td>gulp.<strong>dest</strong></td>
+<td> gulp.dest(path)</td>
+<td>
+<pre>gulp.dest('main.min.css')</pre>
+</td>
+</tr>
+<tr>
+<td>gulp.<strong>watch</strong></td>
+<td> gulp.watch(glob [, opts], tasks)<br />
+or gulp.watch(glob [, opts, cb])</td>
+<td>
+<pre>var watcher = gulp.watch('js/**/*.js',
+             ['uglify','reload']);
+watcher.on('change', function(event){
+  console.log(event.path+' -&gt; '+event.type);
+});</pre>
+<pre>gulp.watch('gulpfile.js', function(changes){
+console.log(changes) });</pre>
+</td>
+</tr>
+<tr>
+<td>gulp.<strong>run</strong></td>
+<td> gulp.run(task)</td>
+<td>
+<pre> gulp.run('subtask')</pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Если собрать все методы в одном примере получим:</p>
+<pre>var gulp = require('gulp'),
+    jshint = require('gulp-jshint');
+
+gulp.task('jshint', function() {
+  gulp.src('./gulpfile.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
+
+gulp.task('do-log', function(){
+	gulp.watch('*.js', function(changes){
+		console.log(changes);
+		gulp.run('jshint');
+	});
+});
+
+gulp.task('start', ['do-log']);</pre>
+<p>&#8211; при изменении любого javascript файла (*.js) &#8211; выводим изменения в консоль и запускаем <strong>jshint</strong>-задание.</p>
+<p>Вы уже вероятно обратили внимание что вся последовательность действий связанна через <strong>pipe</strong>-метод передающий по цепочке поток данных (<strong>stream</strong>). Концепция взята из <a href="https://github.com/substack/stream-handbook">node.js стримов</a>.</p>
+<p>С <strong>gulp</strong> можно прекрасно работать и не понимая, что происходит внутри <strong>pipe</strong>, но если вы уже перешли на следующий уровень и хотите &#8220;вклиниться в поток&#8221; либо написать свой <strong>плагин</strong>, то думаю вам может помочь разобраться этот пример:</p>
+<pre>function myPlugin(){
+  var stream = through.obj(function (file, enc, callback) {
+    console.log(file, enc, callback);
+    this.push(file);
+    return callback();
+  });
+
+  return stream;
+}
+var through = require('through2');
+gulp.task('jshint', function() {
+  gulp.src('./gulpfile.js')
+  .pipe(myPlugin())
+   .pipe(jshint())
+   .pipe(jshint.reporter('default'));
+});</pre>
+<p>Методом <strong>myPlugin</strong> мы вклиниваемся в поток выполнения при этом не нарушая его: возвращаем <strong>stream</strong>. Вместо</p>
+<pre>console.log(file, enc, callback);</pre>
+<p>может быть ваш код по изменению контента.</p>
+<h2>Запуск локального сервера</h2>
+<p>так же делается довольно просто</p>
+<pre>var connect = require('gulp-connect');
+gulp.task('server', function() {
+    connect
+        .use(connect.static('./public'))
+        .listen('3000');
+});</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Материалы, которые вдохновляли на пост:</p>
+<ul>
+<li><a href="https://laracasts.com/lessons/gulp-this">Gulp This</a></li>
+<li><a href="http://habrahabr.ru/post/208890/">GulpJS — фантастически быстрый сборщик проектов</a></li>
+<li><a href="http://markdalgleish.github.io/presentation-build-wars-gulp-vs-grunt/">Build Wars</a></li>
+<li><a href="http://www.sitepoint.com/introduction-gulp-js/">An Introduction to Gulp.js</a></li>
+<li><a title="http://tooling.github.io/" href="http://tooling.github.io/book-of-modern-frontend-tooling/build-systems/gulp/writing-tasks.html">Writing Tasks</a></li>
+</ul>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/03/gulp/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

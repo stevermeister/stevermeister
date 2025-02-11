@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>socket.io &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/socket-io/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Wed, 04 Apr 2012 08:41:36 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>node.js вместе c модулем socket.io</title>
+		<link>https://stepansuvorov.com/blog/2012/04/node-js-%d0%b2%d0%bc%d0%b5%d1%81%d1%82%d0%b5-c-%d0%bc%d0%be%d0%b4%d1%83%d0%bb%d0%b5%d0%bc-socket-io/</link>
+					<comments>https://stepansuvorov.com/blog/2012/04/node-js-%d0%b2%d0%bc%d0%b5%d1%81%d1%82%d0%b5-c-%d0%bc%d0%be%d0%b4%d1%83%d0%bb%d0%b5%d0%bc-socket-io/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 04 Apr 2012 08:40:50 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[node.js]]></category>
+		<category><![CDATA[socket.io]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=199</guid>
+
+					<description><![CDATA[Продолжим совместный разбор-изучение ноды. В этот раз разберем использования модуля socket.io, который реализует принцип сокетного взаимодействия между клиетом и сервером. При установленной ноде и менеджере пакетов, поставить модуль socket.io не составит труда &#8211; пишем простую команду: npm install socket.io Скачаем &#8230; <a href="https://stepansuvorov.com/blog/2012/04/node-js-%d0%b2%d0%bc%d0%b5%d1%81%d1%82%d0%b5-c-%d0%bc%d0%be%d0%b4%d1%83%d0%bb%d0%b5%d0%bc-socket-io/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Продолжим совместный разбор-изучение ноды. В этот раз разберем использования модуля socket.io, который реализует принцип сокетного взаимодействия между клиетом и сервером.<br />
+При установленной ноде и менеджере пакетов, поставить модуль socket.io не составит труда &#8211; пишем простую команду:</p>
+<pre>npm install socket.io</pre>
+<p><span id="more-199"></span></p>
+<p>Скачаем саму библиотеку в рабочую директорию с github, <a title="github socket.io lib path" href="https://github.com/LearnBoost/socket.io/tree/master/lib" target="_blank">отсюда</a>. Поместим ее в каталог socket.io.</p>
+<p>На <a title="socket.io examples" href="http://socket.io/#how-to-use" target="_blank">оф сайте</a> есть примеры использования, один из них и разберем:</p>
+<pre>var app = require('http').createServer(handler)
+  , io = require('socket.io').listen(app)
+  , fs = require('fs')
+
+app.listen(80);
+
+function handler (req, res) {
+  fs.readFile(__dirname + '/index.html',
+  function (err, data) {
+    if (err) {
+      res.writeHead(500);
+      return res.end('Error loading index.html');
+    }
+
+    res.writeHead(200);
+    res.end(data);
+  });
+}
+
+io.sockets.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});</pre>
+<p>Последовательно посмотрим что происходит:</p>
+<pre>var app = require('http').createServer(handler)
+  , io = require('socket.io').listen(app)
+  , fs = require('fs')
+
+app.listen(80);</pre>
+<p>Подкючаем необходимые модули в том числе и socket.io. Ставим на прослушку 80ты порт, если он занят &#8211; можно любой другой свободный &#8211; я у себя поставил на 83.</p>
+<pre>function handler (req, res) {</pre>
+<p>Функция handler присутствует тут &#8220;для мебели&#8221; и особого отношения к сокетам не имеет, но она поможет нам запустить пример и отдать пользователю html страничку.</p>
+<pre>io.sockets.on('connection', function (socket) {</pre>
+<p>Открываем соединение. Вторым параметром идет callback функция, которая параметром принимаем ссылку socket на конкретное подключение.</p>
+<pre> socket.emit('news', { hello: 'world' });</pre>
+<p>Передаем на клиент данные(а именно объект { hello: &#8216;world&#8217; } ) в потоке &#8216;news&#8217;.</p>
+<pre> socket.on('my other event', function (data) {
+    console.log(data);
+  });</pre>
+<p>Принимаем с клиента данные в потоке &#8216;my other event&#8217; и выводим в консоль.</p>
+<p>С серверной частью разобрались, теперь посмотрим на код на стороне клиента, который мы поместим в файле index.html:</p>
+<pre>&lt;script src="/socket.io/socket.io.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  var socket = io.connect('http://localhost');
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+&lt;/script&gt;</pre>
+<p>Тут все еще проще:</p>
+<pre>&lt;script src="/socket.io/socket.io.js"&gt;&lt;/script&gt;</pre>
+<p>Подключаем библиотеку, именно таким способом: запрашиваем ее со стороны сервера, где она динамически генерируется. Не стоит пытаться ее скачать уже скомпилированную.</p>
+<pre>  var socket = io.connect('http://localhost');</pre>
+<p>Открываем соединение, вместо &#8216;localhost&#8217; тут понятно дело может быть имя вашего хоста или просто IP адрес. Также если вы меняли номер порта стоит его указать, например localhost:83.</p>
+<pre>  socket.on('news', function (data) {
+     console.log(data);</pre>
+<p>Читаем данные из потока &#8216;news&#8217; (они нам передаются параметром data в callback функции) и выводим их в консоль.</p>
+<pre>socket.emit('my other event', { my: 'data' });</pre>
+<p>Передаем серверу данные в поток &#8216;my other event&#8217;.</p>
+<p>Ну вот и все: запускаем наш http://localhost и смотрим в консоль.</p>
+<p>* Вывод в консоль идет с помощью метода consol.log: в обычную консоль на стороне сервера и в консоль браузера(например FireBug для FireFox) &#8211; для клиента.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/04/node-js-%d0%b2%d0%bc%d0%b5%d1%81%d1%82%d0%b5-c-%d0%bc%d0%be%d0%b4%d1%83%d0%bb%d0%b5%d0%bc-socket-io/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

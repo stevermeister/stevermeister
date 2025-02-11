@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>ssh &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/ssh/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Wed, 08 Jan 2014 09:37:29 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>ssh to ubuntu on virtualbox</title>
+		<link>https://stepansuvorov.com/blog/2014/01/ssh-to-ubuntu-on-virtualbox/</link>
+					<comments>https://stepansuvorov.com/blog/2014/01/ssh-to-ubuntu-on-virtualbox/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 08 Jan 2014 09:37:29 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[ssh]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[virtualbox]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1353</guid>
+
+					<description><![CDATA[Network tab of VirtualBox instance settings, be sure that it is NAT. Port forwarding: Host port = 2022(you custom one), guest port 22, name ssh, other left blank. Install ssh-server on ubuntu: sudo apt-get install openssh-server Connect: ssh -p 2022 username@localhost username &#8230; <a href="https://stepansuvorov.com/blog/2014/01/ssh-to-ubuntu-on-virtualbox/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><strong>Network</strong> tab of <strong>VirtualBox</strong> instance settings, be sure that it is <strong>NAT</strong>.</p>
+<p><strong>Port forwarding</strong>: Host port = 2022(you custom one), guest port 22, name ssh, other left blank.</p>
+<p>Install <strong>ssh-server</strong> on ubuntu:</p>
+<pre>sudo apt-get install openssh-server</pre>
+<p>Connect:</p>
+<pre>ssh -p 2022 username@localhost</pre>
+<p>username &#8211; your username within the VM.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/01/ssh-to-ubuntu-on-virtualbox/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Управление SSH ключами</title>
+		<link>https://stepansuvorov.com/blog/2013/04/%d1%83%d0%bf%d1%80%d0%b0%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d0%b5-ssh-%d0%ba%d0%bb%d1%8e%d1%87%d0%b0%d0%bc%d0%b8/</link>
+					<comments>https://stepansuvorov.com/blog/2013/04/%d1%83%d0%bf%d1%80%d0%b0%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d0%b5-ssh-%d0%ba%d0%bb%d1%8e%d1%87%d0%b0%d0%bc%d0%b8/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 22 Apr 2013 14:10:34 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[ssh]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=989</guid>
+
+					<description><![CDATA[Повесть о том, что бывает, когда мы начинаем использовать больше одной SSH ключевой пары. Error: Permission denied (publickey) в данном случае уже мало сделать просто команду ssh-keygen и забыть. Необходимо также ссылаться на него при подключении. Это можно сделать 3мя &#8230; <a href="https://stepansuvorov.com/blog/2013/04/%d1%83%d0%bf%d1%80%d0%b0%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d0%b5-ssh-%d0%ba%d0%bb%d1%8e%d1%87%d0%b0%d0%bc%d0%b8/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Повесть о том, что бывает, когда мы начинаем использовать больше одной <strong>SSH</strong> ключевой пары.</p>
+<pre>Error: Permission denied (publickey)</pre>
+<p>в данном случае уже мало сделать просто команду <strong>ssh-keygen</strong> и забыть. Необходимо также ссылаться на него при подключении. Это можно сделать 3мя способами:</p>
+<p>1. Очевидный &#8211; добавить параметром в команду при подключении (слажок <strong>-i</strong>)</p>
+<pre>ssh -i ~/.ssh/dev.prk stevermeister@dev.com -p 22;</pre>
+<p><span id="more-989"></span></p>
+<p>2. Добавить новый ключ в список используемых:</p>
+<pre>$ ssh-add path/to/private_key</pre>
+<p>чтобы посмотреть список уже загруженых ключей:</p>
+<pre>$ ssh-add -l</pre>
+<p>3. Добаваить описание хоста в конфиг файл( <strong>~/.ssh/config</strong> )</p>
+<pre>Host dev
+  HostName dev.com
+  Port 22
+  User stevermeister
+  IdentityFile ~/.ssh/dev.prk</pre>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/04/%d1%83%d0%bf%d1%80%d0%b0%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d0%b5-ssh-%d0%ba%d0%bb%d1%8e%d1%87%d0%b0%d0%bc%d0%b8/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Настройка авторизации SSH через ключевую пару.</title>
+		<link>https://stepansuvorov.com/blog/2012/08/%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d0%b8-ssh-%d1%87%d0%b5%d1%80%d0%b5%d0%b7-%d0%ba%d0%bb%d1%8e%d1%87%d0%b5%d0%b2%d1%83/</link>
+					<comments>https://stepansuvorov.com/blog/2012/08/%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d0%b8-ssh-%d1%87%d0%b5%d1%80%d0%b5%d0%b7-%d0%ba%d0%bb%d1%8e%d1%87%d0%b5%d0%b2%d1%83/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 04 Aug 2012 08:27:57 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[auth]]></category>
+		<category><![CDATA[ssh]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=382</guid>
+
+					<description><![CDATA[Столкнулся с необходимостью создания авторизации SSH основанной не на паролях, а на ключевой паре. Сюда выкладываю краткие заметки по процессу настройки(оказалось все довольно просто): 1. генерируем ключевую пару на стороне клиента: $: ssh-keygen причем в разных источниках предлагается использовать разные &#8230; <a href="https://stepansuvorov.com/blog/2012/08/%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d0%b8-ssh-%d1%87%d0%b5%d1%80%d0%b5%d0%b7-%d0%ba%d0%bb%d1%8e%d1%87%d0%b5%d0%b2%d1%83/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Столкнулся с необходимостью создания <strong>авторизации</strong> <strong>SSH</strong> основанной не на паролях, а на <strong>ключевой паре</strong>. Сюда выкладываю краткие заметки по процессу настройки(оказалось все довольно просто):</p>
+<p>1. генерируем ключевую пару на стороне клиента:</p>
+<pre>$: ssh-keygen</pre>
+<p><span id="more-382"></span>причем в разных источниках предлагается использовать разные параметры для этой команды. Чаще всего предлагают использовать опцию type( флажок <strong>-t</strong> ) и туда записывать: rsa, dsa&#8230;; плюс есть вариант изменить размерность ключа с помощью флага <strong>-b</strong> и еще много других вариантов. На сколько я понял: можно использовать команду по умолчанию и не париться.</p>
+<p>Мастер генерации ключевой пары еще задаст несколько вопросов, таких как: куда сгенерировать, нужен ли пароль на файл ключей. Тут тоже можно оставлять все по умолчанию.</p>
+<p>2. Следующим шагом необходим скопировать наш <strong>открытый</strong>(public) ключ на сервер, куда мы хотим удаленно подключаться. Это опять же можно сделать простой командой на клиенте:</p>
+<pre>$: ssh-copy-id serveruser@serverhost</pre>
+<p>и если все прошло хорошо &#8211; выдаст где-то следующее:</p>
+<pre>Now try logging into the machine, with "ssh 'serveruser@serverhost'", and check in:
+
+  .ssh/authorized_keys
+
+to make sure we haven't added extra keys that you weren't expecting.</pre>
+<p>&nbsp;</p>
+<p>Приятных настроек!</p>
+<p>&nbsp;</p>
+<p>P.S.: бывают случаи когда нет встроенной команды <strong>ssh-copy-id</strong>, тогда немного по другому:</p>
+<pre># через scp копируем с клиента
+$: scp ~/.ssh/id_rsa.pub serveruser@serverhost:/home/serveruse</pre>
+<pre># на сервере добавляем в список
+$: cat ~/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</pre>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/08/%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d0%b8-ssh-%d1%87%d0%b5%d1%80%d0%b5%d0%b7-%d0%ba%d0%bb%d1%8e%d1%87%d0%b5%d0%b2%d1%83/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

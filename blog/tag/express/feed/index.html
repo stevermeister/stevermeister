@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>express &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/express/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 05 Oct 2017 09:18:51 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Делаем HTTPS на Node.js используя express</title>
+		<link>https://stepansuvorov.com/blog/2012/09/%d0%b4%d0%b5%d0%bb%d0%b0%d0%b5%d0%bc-https-%d0%bd%d0%b0-node-js-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-express/</link>
+					<comments>https://stepansuvorov.com/blog/2012/09/%d0%b4%d0%b5%d0%bb%d0%b0%d0%b5%d0%bc-https-%d0%bd%d0%b0-node-js-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-express/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Thu, 27 Sep 2012 18:27:38 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[express]]></category>
+		<category><![CDATA[https]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[node.js]]></category>
+		<category><![CDATA[ssl]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=650</guid>
+
+					<description><![CDATA[Такая вот быстрая заметка по организации HTTPS(SSL) соединения на ноде через фреймворк, чего не нашел в официальной документации express. Модули которые необходимо подключить: var express = require('express'); // сам фреймворк var https = require( "https" ); // для организации https &#8230; <a href="https://stepansuvorov.com/blog/2012/09/%d0%b4%d0%b5%d0%bb%d0%b0%d0%b5%d0%bc-https-%d0%bd%d0%b0-node-js-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-express/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Такая вот быстрая заметка по организации <strong>HTTPS</strong>(<strong>SSL</strong>) соединения на ноде через фреймворк, чего не нашел в официальной документации <strong>express</strong>.</p>
+<p><span id="more-650"></span>Модули которые необходимо подключить:</p>
+<pre>var express = require('express');  // сам фреймворк
+var https = require( "https" );  // для организации https
+var fs = require( "fs" );   // для чтения ключевых файлов</pre>
+<p>Задать опции ключевой информации:</p>
+<pre>httpsOptions = {
+    key: fs.readFileSync("server.key"), // путь к ключу
+    cert: fs.readFileSync("server.crt") // путь к сертификату
+}</pre>
+<p>Открыть порт</p>
+<pre>https.createServer(httpsOptions, app).listen(443);</pre>
+<p>*app &#8211; это объект полученый от express().</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/09/%d0%b4%d0%b5%d0%bb%d0%b0%d0%b5%d0%bc-https-%d0%bd%d0%b0-node-js-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-express/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>express фреймворк для node.js</title>
+		<link>https://stepansuvorov.com/blog/2012/09/express-%d1%84%d1%80%d0%b5%d0%b9%d0%bc%d0%b2%d0%be%d1%80%d0%ba-%d0%b4%d0%bb%d1%8f-node-js/</link>
+					<comments>https://stepansuvorov.com/blog/2012/09/express-%d1%84%d1%80%d0%b5%d0%b9%d0%bc%d0%b2%d0%be%d1%80%d0%ba-%d0%b4%d0%bb%d1%8f-node-js/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 21 Sep 2012 20:26:39 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[express]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[node.js]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=559</guid>
+
+					<description><![CDATA[Если вы давно пишете на JavaScript, вы понимаете комфорт использования jQuery. Так же и для серверной стороны: когда вы создаете приложение под node.js, удобно будет использовать express фреймворк модуль (npm install express). Хотел написать пост с разбором базовых задач на &#8230; <a href="https://stepansuvorov.com/blog/2012/09/express-%d1%84%d1%80%d0%b5%d0%b9%d0%bc%d0%b2%d0%be%d1%80%d0%ba-%d0%b4%d0%bb%d1%8f-node-js/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" fetchpriority="high" class="alignnone size-full wp-image-628" title="express-nodejs" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/09/express-nodejs.jpg" alt="" width="480" height="166" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2012/09/express-nodejs.jpg 480w, https://stepansuvorov.com/blog/wp-content/uploads/2012/09/express-nodejs-300x103.jpg 300w" sizes="(max-width: 480px) 100vw, 480px" /></p>
+<p>Если вы давно пишете на JavaScript, вы понимаете комфорт использования jQuery. Так же и для серверной стороны: когда вы создаете приложение под node.js, удобно будет использовать express фреймворк модуль (npm install express). Хотел написать пост с разбором базовых задач на нем, но похоже офсайт таки разродился <a href="http://expressjs.com/api.html">нормальными примерами</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/09/express-%d1%84%d1%80%d0%b5%d0%b9%d0%bc%d0%b2%d0%be%d1%80%d0%ba-%d0%b4%d0%bb%d1%8f-node-js/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

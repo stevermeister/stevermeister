@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>i18n &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/i18n/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Tue, 06 Jan 2015 09:51:47 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>JavaScript for detecting browser language preference</title>
+		<link>https://stepansuvorov.com/blog/2015/01/javascript-for-detecting-browser-language-preference/</link>
+					<comments>https://stepansuvorov.com/blog/2015/01/javascript-for-detecting-browser-language-preference/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 06 Jan 2015 19:25:19 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[i18n]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2176</guid>
+
+					<description><![CDATA[Just not to forget: [javascript] var language = window.navigator.userLanguage &#124;&#124; window.navigator.languages[0]; [/javascript] and more crazy(but more trustful) way: [javascript] $.ajax({ url: &#34;http://ajaxhttpheaders.appspot.com&#34;, dataType: &#8216;jsonp&#8217;, success: function(headers) { var language = headers[&#8216;Accept-Language&#8217;]; } }); [/javascript]]]></description>
+										<content:encoded><![CDATA[<p>Just not to forget:</p>
+<p>[javascript]<br />
+var language = window.navigator.userLanguage || window.navigator.languages[0];<br />
+[/javascript]</p>
+<p>and more crazy(but more trustful) way:</p>
+<p>[javascript]<br />
+$.ajax({<br />
+    url: &quot;http://ajaxhttpheaders.appspot.com&quot;,<br />
+    dataType: &#8216;jsonp&#8217;,<br />
+    success: function(headers) {<br />
+        var language = headers[&#8216;Accept-Language&#8217;];<br />
+    }<br />
+});<br />
+[/javascript]</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/01/javascript-for-detecting-browser-language-preference/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

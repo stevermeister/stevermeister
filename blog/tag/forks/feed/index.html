@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>forks &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/forks/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Mon, 02 Jul 2012 12:34:50 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Совсем немного о многопроцессовости в PHP</title>
+		<link>https://stepansuvorov.com/blog/2012/07/%d1%81%d0%be%d0%b2%d1%81%d0%b5%d0%bc-%d0%bd%d0%b5%d0%bc%d0%bd%d0%be%d0%b3%d0%be-%d0%be-%d0%bc%d0%bd%d0%be%d0%b3%d0%be%d0%bf%d1%80%d0%be%d1%86%d0%b5%d1%81%d1%81%d0%be%d0%b2%d0%be%d1%81%d1%82%d0%b8/</link>
+					<comments>https://stepansuvorov.com/blog/2012/07/%d1%81%d0%be%d0%b2%d1%81%d0%b5%d0%bc-%d0%bd%d0%b5%d0%bc%d0%bd%d0%be%d0%b3%d0%be-%d0%be-%d0%bc%d0%bd%d0%be%d0%b3%d0%be%d0%bf%d1%80%d0%be%d1%86%d0%b5%d1%81%d1%81%d0%be%d0%b2%d0%be%d1%81%d1%82%d0%b8/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 02 Jul 2012 12:33:35 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[forks]]></category>
+		<category><![CDATA[php]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=265</guid>
+
+					<description><![CDATA[Только ключевые моменты: &#8211; магия происходит с помощью функции pcntl_fork. &#8211; работает только в CGI и CLI-режимах &#8211; немного кода $pid = pcntl_fork(); // создался дочерний процесс, все просто // но дальше основная магия: выполнение едет в 2 независимых потока &#8230; <a href="https://stepansuvorov.com/blog/2012/07/%d1%81%d0%be%d0%b2%d1%81%d0%b5%d0%bc-%d0%bd%d0%b5%d0%bc%d0%bd%d0%be%d0%b3%d0%be-%d0%be-%d0%bc%d0%bd%d0%be%d0%b3%d0%be%d0%bf%d1%80%d0%be%d1%86%d0%b5%d1%81%d1%81%d0%be%d0%b2%d0%be%d1%81%d1%82%d0%b8/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Только ключевые моменты:</p>
+<p>&#8211; магия происходит с помощью функции <code>pcntl_fork</code>.</p>
+<p>&#8211; работает только в CGI и CLI-режимах</p>
+<p>&#8211; немного кода</p>
+<pre>$pid = pcntl_fork();
+// создался дочерний процесс, все просто
+// но дальше основная магия: выполнение едет в 2 независимых потока
+// и все что будет дальше выполнится 2 раза
+// резонный вопрос: как нам определить основной потом и дочерний
+// а вот так:
+if ($pid == -1) {
+    //функции не удалось создать поток - ошибка
+} elseif ($pid) {
+    //если идентификатор есть - это родительский поток
+} else {
+    //если нет - соответственно дочерний
+}
+i++; //а этот код будет выполнен обеими потоками</pre>
+<p><span id="more-265"></span></p>
+<p>&#8211; теперь пример</p>
+<pre>$pid = pcntl_fork();
+if ($pid == -1) {
+     die('Error of pcntl_fork');
+} elseif ($pid) {
+    echo '[first]';
+} else {
+    echo '[second]';
+}
+echo '[both]';</pre>
+<p>Выполним через командную строку:</p>
+<pre>$ php fork.php
+[first][both][second][both]</pre>
+<p>Вот такой вот порядок.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/07/%d1%81%d0%be%d0%b2%d1%81%d0%b5%d0%bc-%d0%bd%d0%b5%d0%bc%d0%bd%d0%be%d0%b3%d0%be-%d0%be-%d0%bc%d0%bd%d0%be%d0%b3%d0%be%d0%bf%d1%80%d0%be%d1%86%d0%b5%d1%81%d1%81%d0%be%d0%b2%d0%be%d1%81%d1%82%d0%b8/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

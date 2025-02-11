@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>BrowserStack &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/browserstack/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Tue, 20 Jan 2015 10:06:13 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Запукаем Protractor на Browserstack</title>
+		<link>https://stepansuvorov.com/blog/2015/01/%d0%b7%d0%b0%d0%bf%d1%83%d0%ba%d0%b0%d0%b5%d0%bc-protractor-%d0%bd%d0%b0-browserstack/</link>
+					<comments>https://stepansuvorov.com/blog/2015/01/%d0%b7%d0%b0%d0%bf%d1%83%d0%ba%d0%b0%d0%b5%d0%bc-protractor-%d0%bd%d0%b0-browserstack/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 19 Jan 2015 20:40:20 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[BrowserStack]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[protractor]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2185</guid>
+
+					<description><![CDATA[Небольшая заметка о том, как запустить protractor тесты на разных браузерах используя сервис Browserstack. Подробно о protractor можно почитать тут и тут. Настройка конфига Ключевые опции это capabilities и seleniumAddress: [javascript] capabilities: { //эти параметры можно получить на странице &#8211; https://www.browserstack.com/automate &#8216;browserstack.user&#8217; : &#8230; <a href="https://stepansuvorov.com/blog/2015/01/%d0%b7%d0%b0%d0%bf%d1%83%d0%ba%d0%b0%d0%b5%d0%bc-protractor-%d0%bd%d0%b0-browserstack/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Небольшая заметка о том, как запустить <strong>protractor</strong> тесты на разных браузерах используя сервис <strong>Browserstack</strong>.</p>
+<p><span id="more-2185"></span></p>
+<p>Подробно о <strong>protractor</strong> можно почитать <a title="Тестируем AngularJS используя Protractor" href="https://stepansuvorov.com/blog/2014/02/angularjs-protractor/">тут</a> и <a title="Автоматизируем тестирование AngularJS с Protractor" href="https://stepansuvorov.com/blog/2014/11/protractor/">тут</a>.</p>
+<h2>Настройка конфига</h2>
+<p>Ключевые опции это <strong>capabilities</strong> и <strong>seleniumAddress</strong>:</p>
+<p>[javascript]<br />
+  capabilities: {<br />
+    //эти параметры можно получить на странице &#8211; https://www.browserstack.com/automate<br />
+    &#8216;browserstack.user&#8217; : &#8216;my_user_name&#8217;,<br />
+    &#8216;browserstack.key&#8217; : &#8216;my_secret_key&#8217;,</p>
+<p>    &#8216;browserstack.local&#8217; : &#8216;true&#8217;,</p>
+<p>    &#8216;browser&#8217; : &#8216;Chrome&#8217;,<br />
+    &#8216;browser_version&#8217; : &#8216;36.0&#8217;,<br />
+    &#8216;os&#8217; : &#8216;OS X&#8217;,<br />
+    &#8216;os_version&#8217; : &#8216;Mavericks&#8217;,<br />
+    &#8216;resolution&#8217; : &#8216;1024&#215;768&#8217;<br />
+  },</p>
+<p>  seleniumAddress: &#8216;http://hub.browserstack.com/wd/hub&#8217;<br />
+[/javascript]</p>
+<p>Более подробно о возможных параметрах <a title="browserstack.com" href="http://www.browserstack.com/automate/capabilities">тут</a>.</p>
+<p>Подробный лог (например: для отладки) можно включить следующей опцией:</p>
+<p>[javascript]<br />
+  capabilities: {<br />
+      //&#8230;<br />
+      &#8216;browserstack.debug&#8217; : &#8216;true&#8217;,<br />
+      //&#8230;<br />
+  },<br />
+[/javascript]</p>
+<h2>Настройка Browserstack для локального запуска</h2>
+<p>Достаточно скачать(<a title="browserstack.com" href="http://www.browserstack.com/automate/node#setting-local-tunnel">тут</a>) и запустить файл:</p>
+<p>[bash]<br />
+./BrowserStackLocal my_secret_key localhost,3000,0<br />
+[/bash]</p>
+<p>3000 &#8211; номер порта, на котором локально проект (только для случая локального тестирования)</p>
+<h2>Запуск протрактора</h2>
+<p>Тут ничего нового, так же команда с указанием конфиг-файла:</p>
+<p>[bash]<br />
+protractor protractor-browserstack.config.js<br />
+[/bash]</p>
+<p>&nbsp;</p>
+<p><strong>UPD:</strong> Если вы тестируете реальный сайт (не локальное окружение), то <strong>BrowserStackLocal</strong> запускать не нужно. Но в любом случае его лучше иметь для локальной отладки.</p>
+<p><strong>UPD2</strong>: Если вы хотите использовать несколько браузеров (и запускать тесты параллельно) используйте опцию <strong>multiCapabilities</strong> вместо <strong>capabilities</strong>.</p>
+<p><em>* Если что, автоматические тесты &#8211; это платная услуга, но ее можно попробовать бесплатно (на данный момент предоставляется 100 минут бесплатно)</em></p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/01/%d0%b7%d0%b0%d0%bf%d1%83%d0%ba%d0%b0%d0%b5%d0%bc-protractor-%d0%bd%d0%b0-browserstack/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	Comments on: Тестируем JavaScript c помощью QUnit	</title>
+	<atom:link href="https://stepansuvorov.com/blog/2012/09/%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d1%83%d0%b5%d0%bc-javascript-c-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e-qunit/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog/2012/09/%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d1%83%d0%b5%d0%bc-javascript-c-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e-qunit/</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 07 Feb 2013 07:00:06 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>
+		By: it's me		</title>
+		<link>https://stepansuvorov.com/blog/2012/09/%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d1%83%d0%b5%d0%bc-javascript-c-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e-qunit/#comment-2040</link>
+
+		<dc:creator><![CDATA[it's me]]></dc:creator>
+		<pubDate>Thu, 07 Feb 2013 07:00:06 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=641#comment-2040</guid>
+
+					<description><![CDATA[Разобрался:
+function foo(callback) {
+$.ajax({
+url: “some/method”,
+async: true,
+success: function(result) {
+  return callback(result);
+}
+})
+}
+
+ajaxTest(&quot;ajaxTest&quot;, function() {
+  foo(function(res) {
+    equal(res, /*expected value*/);
+  }
+})]]></description>
+			<content:encoded><![CDATA[<p>Разобрался:<br />
+function foo(callback) {<br />
+$.ajax({<br />
+url: “some/method”,<br />
+async: true,<br />
+success: function(result) {<br />
+  return callback(result);<br />
+}<br />
+})<br />
+}</p>
+<p>ajaxTest(&#8220;ajaxTest&#8221;, function() {<br />
+  foo(function(res) {<br />
+    equal(res, /*expected value*/);<br />
+  }<br />
+})</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: it's me		</title>
+		<link>https://stepansuvorov.com/blog/2012/09/%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d1%83%d0%b5%d0%bc-javascript-c-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e-qunit/#comment-2035</link>
+
+		<dc:creator><![CDATA[it's me]]></dc:creator>
+		<pubDate>Wed, 06 Feb 2013 14:42:24 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=641#comment-2035</guid>
+
+					<description><![CDATA[Так и не разобрался с асинхронными тестами. Не могли бы на конкретном примере показать? Как проверить следующую функцию?
+function foo() {
+  $.ajax({
+    url: &quot;some/method&quot;,
+    async: true,
+    success: function(result) {
+      // что-то делается и необходимо проверить значение, которе вернулось.
+    }
+  })
+}
+
+PS: Извиняюсь за предыдущий комментарий - рука дрогнула :)]]></description>
+			<content:encoded><![CDATA[<p>Так и не разобрался с асинхронными тестами. Не могли бы на конкретном примере показать? Как проверить следующую функцию?<br />
+function foo() {<br />
+  $.ajax({<br />
+    url: &#8220;some/method&#8221;,<br />
+    async: true,<br />
+    success: function(result) {<br />
+      // что-то делается и необходимо проверить значение, которе вернулось.<br />
+    }<br />
+  })<br />
+}</p>
+<p>PS: Извиняюсь за предыдущий комментарий &#8211; рука дрогнула :)</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: it's me		</title>
+		<link>https://stepansuvorov.com/blog/2012/09/%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d1%83%d0%b5%d0%bc-javascript-c-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e-qunit/#comment-2034</link>
+
+		<dc:creator><![CDATA[it's me]]></dc:creator>
+		<pubDate>Wed, 06 Feb 2013 14:36:25 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=641#comment-2034</guid>
+
+					<description><![CDATA[Так и не разобрался с асинхронными тестами. Не могли бы на конкретном примере показать. Например: есть функция, которая выполняет асинхронный]]></description>
+			<content:encoded><![CDATA[<p>Так и не разобрался с асинхронными тестами. Не могли бы на конкретном примере показать. Например: есть функция, которая выполняет асинхронный</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

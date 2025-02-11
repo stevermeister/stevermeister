@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>angular-directive &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/angular-directive/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Tue, 28 Mar 2017 07:43:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Angular: Пример структурной директивы</title>
+		<link>https://stepansuvorov.com/blog/2017/03/angular-stuctural-directive-example/</link>
+					<comments>https://stepansuvorov.com/blog/2017/03/angular-stuctural-directive-example/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 26 Mar 2017 10:02:14 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[angular-directive]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3329</guid>
+
+					<description><![CDATA[Структурные директивы &#8211; директивы изменяющие DOM. Синтаксис начинается со специального символа &#8211; * . Мы уже знаем что в Angular существуют такие структурные директивы как *ngIf и *ngFor. Самый лучший на мой взгляд пример структурной директивы на данный момент предоставлен командой &#8230; <a href="https://stepansuvorov.com/blog/2017/03/angular-stuctural-directive-example/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><a href="https://angular.io/docs/ts/latest/guide/structural-directives.html">Структурные директивы</a> &#8211; директивы изменяющие <strong>DOM</strong>. Синтаксис начинается со специального символа &#8211; <strong>* </strong>. Мы уже знаем что в <strong>Angular</strong> существуют такие структурные директивы как <strong>*ngIf</strong> и <strong>*ngFor</strong>.</p>
+<p>Самый лучший на мой взгляд пример структурной директивы на данный момент предоставлен командой <a href="https://rangle.io/">rangle.io</a>: директива, которая задает задержку перед выводом компонента, то есть, например:</p>
+<p>[javascript]<br />
+&lt;card *appDelay=&quot;5000&quot;&gt;&lt;/card&gt;<br />
+[/javascript]</p>
+<p>&#8211; элемент card будет выведен(добавлен в DOM) через 5 секунд.</p>
+<p><span id="more-3329"></span></p>
+<p>В исходном коде директивы нет ничего сложного:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/d1444736b5316584ff5552fa5f77fc56">Gist</a>.</p>
+<p>Нужно понимать, что весь компонент, к которому применена структурная директива удаляется из <strong>DOM</strong> и заносится в <strong>templateRef</strong>, после чего мы можем управлять его поведением.</p>
+<p><a href="https://plnkr.co/edit/DqVpXDOSoeJUrk1SMhEM?p=preview">Полный код примера</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/03/angular-stuctural-directive-example/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Zepto.js &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/zepto-js/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sun, 16 Sep 2012 12:49:31 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Выкидываем jQuery и начинаем использовать Zepto.js</title>
+		<link>https://stepansuvorov.com/blog/2012/09/%d0%b2%d1%8b%d0%ba%d0%b8%d0%b4%d1%8b%d0%b2%d0%b0%d0%b5%d0%bc-jquery-%d0%b8-%d0%bd%d0%b0%d1%87%d0%b8%d0%bd%d0%b0%d0%b5%d0%bc-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d1%82%d1%8c-zep/</link>
+					<comments>https://stepansuvorov.com/blog/2012/09/%d0%b2%d1%8b%d0%ba%d0%b8%d0%b4%d1%8b%d0%b2%d0%b0%d0%b5%d0%bc-jquery-%d0%b8-%d0%bd%d0%b0%d1%87%d0%b8%d0%bd%d0%b0%d0%b5%d0%bc-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d1%82%d1%8c-zep/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 14 Sep 2012 13:02:24 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[Zepto.js]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=583</guid>
+
+					<description><![CDATA[Недавно открыл для себя библиотеку Zepto.js, которая оказалась оптимизированной версией jQuery. Ключевой момент оптимизации &#8211; отказ от мега-кроссбраузерности, т.е. разработчики сосредоточились только на движке WebKit. И правда, если у вас нет необходимости поддерживать ИЕ, то зачем использовать jQuery? Платформы, которые &#8230; <a href="https://stepansuvorov.com/blog/2012/09/%d0%b2%d1%8b%d0%ba%d0%b8%d0%b4%d1%8b%d0%b2%d0%b0%d0%b5%d0%bc-jquery-%d0%b8-%d0%bd%d0%b0%d1%87%d0%b8%d0%bd%d0%b0%d0%b5%d0%bc-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d1%82%d1%8c-zep/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-medium wp-image-584" title="logo" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/09/logo-300x71.png" alt="" width="300" height="71" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2012/09/logo-300x71.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2012/09/logo-1024x245.png 1024w, https://stepansuvorov.com/blog/wp-content/uploads/2012/09/logo-500x119.png 500w, https://stepansuvorov.com/blog/wp-content/uploads/2012/09/logo.png 1052w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>Недавно открыл для себя библиотеку <a title="zeptojs of-site" href="http://zeptojs.com/">Zepto.js</a>, которая оказалась оптимизированной версией jQuery. Ключевой момент оптимизации &#8211; отказ от мега-кроссбраузерности, т.е. разработчики сосредоточились только на движке WebKit. И правда, если у вас нет необходимости поддерживать ИЕ, то зачем использовать jQuery?</p>
+<p><span id="more-583"></span>Платформы, которые поддерживает текущая версия(1.0rc1):</p>
+<ul>
+<li>Safari 5+ (desktop)</li>
+<li>Chrome 5+ (desktop)</li>
+<li>Mozilla Firefox 4+</li>
+<li>iOS 4+ Safari</li>
+<li>Android 2.2+ Browser</li>
+<li>Other WebKit-based browsers/runtimes</li>
+<li>webOS 1.4.5+ Browser</li>
+<li>BlackBerry Tablet OS 1.0.7+ Browser</li>
+<li>Amazon Silk 1.0+</li>
+<li>Opera 10+</li>
+</ul>
+<p>Причем для IE мы всегда сможем подключить jQuery. На сайте это советуют сделать так:</p>
+<pre>&lt;script&gt;
+document.write('&lt;script src=' + ('__proto__' in {} ? 'zepto' : 'jquery') + '.js&gt;&lt;\/script&gt;')
+&lt;/script&gt;</pre>
+<p><a href="http://api.jquery.com/category/selectors/jquery-selector-extensions/">jQuery CSS селекторы</a> правда не поддерживаются, но поддерживается некоторые самые популярные для совместимости.</p>
+<p>При использовании следует быть аккуратным с animate, т.к. там есть мелкие расхождения, а так все тоже. Если опыт показал еще какие-то глюки &#8211; пишите.</p>
+<p><strong>UPD</strong>: провел сравнительные тест &#8211; ладно, выкидываем Zepto, а новый jQuery(1.8.1) достаточно хорош, особенно в плане создания новых элементов.</p>
+<p>Ссылка на тест: http://jsfiddle.net/STEVER/w2Jmn/</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/09/%d0%b2%d1%8b%d0%ba%d0%b8%d0%b4%d1%8b%d0%b2%d0%b0%d0%b5%d0%bc-jquery-%d0%b8-%d0%bd%d0%b0%d1%87%d0%b8%d0%bd%d0%b0%d0%b5%d0%bc-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d1%82%d1%8c-zep/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

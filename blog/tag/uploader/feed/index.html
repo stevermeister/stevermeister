@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>uploader &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/uploader/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Mon, 30 Jul 2012 11:17:21 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Пишем свой Uploader с нуля на javascript используя FileApi. Часть4</title>
+		<link>https://stepansuvorov.com/blog/2012/07/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0-4/</link>
+					<comments>https://stepansuvorov.com/blog/2012/07/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0-4/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 30 Jul 2012 11:17:21 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[ajax]]></category>
+		<category><![CDATA[fileApi]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[uploader]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=341</guid>
+
+					<description><![CDATA[В частях 1, 2, 3 мы научились читать файлы с диска.Теперь попробуем разобрать процесс отправки файлов на сервер с помощью технологии ajax. В начале вспомним как работать с аяксом для передачи файла на сервер: Метод передачи будет POST Обязательно нужно &#8230; <a href="https://stepansuvorov.com/blog/2012/07/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0-4/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>В частях <a href="https://stepansuvorov.com/blog/2012/04/%D0%BF%D0%B8%D1%88%D0%B5%D0%BC-%D1%81%D0%B2%D0%BE%D0%B9-uploader-%D1%81-%D0%BD%D1%83%D0%BB%D1%8F-%D0%BD%D0%B0-javascript-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D1%83%D1%8F-fileapi-%D1%87%D0%B0/">1</a>, <a href="https://stepansuvorov.com/blog/2012/06/%D0%BF%D0%B8%D1%88%D0%B5%D0%BC-%D1%81%D0%B2%D0%BE%D0%B9-uploader-%D1%81-%D0%BD%D1%83%D0%BB%D1%8F-%D0%BD%D0%B0-javascript-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D1%83%D1%8F-fileapi-%D1%87%D0%B0-2/">2</a>, <a href="https://stepansuvorov.com/blog/2012/07/%D0%BF%D0%B8%D1%88%D0%B5%D0%BC-%D1%81%D0%B2%D0%BE%D0%B9-uploader-%D1%81-%D0%BD%D1%83%D0%BB%D1%8F-%D0%BD%D0%B0-javascript-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D1%83%D1%8F-fileapi-%D1%87%D0%B0-3/">3</a> мы научились читать файлы с диска.Теперь попробуем разобрать процесс отправки файлов на сервер с помощью технологии ajax.</p>
+<p>В начале вспомним как работать с аяксом для передачи файла на сервер:</p>
+<ol>
+<li>Метод передачи будет POST</li>
+<li>Обязательно нужно будет указать Content-Type, а именно multipart/form-data</li>
+<li>Правильно сформировать само тело сообщения</li>
+</ol>
+<p>Получим следующий код(по пунктам):</p>
+<pre>var request = new XMLHttpRequest(); 
+request.onreadystatechange = ajaxReady; 
+request.open('POST', 'uploader.php', true); // (1)
+request.setRequestHeader('Content-Type', contentType); // (2)
+request.sendAsBinary(createTestMsg()); // (3)</pre>
+<p><span id="more-341"></span>ajaxReady &#8211; это просто callback-функция, которая вызовется при ajax-ответе. Для нее пока установим простую заглушку:</p>
+<pre>function ajaxReady() {
+    if (request.readyState == 4 &amp;&amp; request.status == 200) {
+        alert(request.responseText);
+    }
+}</pre>
+<p>uploader.php  &#8211; тоже пока файл-заглушка на стороне сервера, следующего содержания:</p>
+<pre>&lt;?php
+
+var_dump($_POST);
+var_dump($_FILES);</pre>
+<p>Теперь перейдем к более важным моментам. contentType определяем следующим образом:</p>
+<pre>var boundary = "AJAX-----------------------" + (new Date).getTime();
+var contentType = "multipart/form-data; boundary=" + boundary;</pre>
+<p>boundary &#8211; это случайная последовательность байт, которые не должны встречаться в самом файле. Вы можете придумать свой алгоритм для генерации данной последовательности, т.к. это лишь пример.</p>
+<p>Ну и самое основное &#8211; формирование сообщения:</p>
+<pre>function createTestMsg(){
+    var fieldName = 'testfile';
+    var fileName  = '4.jpg';
+    var CRLF = "\r\n";
+
+    var msg = "--" + boundary + CRLF;
+    msg += 'Content-Disposition: form-data; ';
+    msg += 'name="' + fieldName + '"; ';
+    msg += 'filename="'+ fileName + '"' + CRLF;
+    msg += 'Content-Type: application/octet-stream';
+    msg += CRLF + CRLF; // marks end of the headers part
+    msg += Array(9999).join(7) + CRLF;
+    msg += "--" + boundary + "--" + CRLF;
+    return msg;
+}</pre>
+<p>Array(9999).join(7) &#8211; это такой вариант генерации фэйкового контента для файла.</p>
+<p>Вот тут можно посмотреть весь код: http://learn.javascript.ru/play/E1MhM, но в песочнице он работать не будет, т.к. нет файла uploader.php на строне сервера, так что в любом случае нужно копировать локально и смотреть.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/07/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0-4/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Пишем свой Uploader с нуля на javascript используя FileApi. Часть3</title>
+		<link>https://stepansuvorov.com/blog/2012/07/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0-3/</link>
+					<comments>https://stepansuvorov.com/blog/2012/07/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0-3/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Thu, 26 Jul 2012 14:41:46 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[uploader]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=261</guid>
+
+					<description><![CDATA[В этой части мы рассмотрим ключевой момент: чтение файла частями &#8211; это очень важно при отправке больших файлов( от 400-700МБ ), т.к. если мы будем пытаться их читать целиком &#8211; это вызовет дикие тормоза браузера. Введем новое определение Blob. Если &#8230; <a href="https://stepansuvorov.com/blog/2012/07/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0-3/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>В этой части мы рассмотрим ключевой момент: чтение файла частями &#8211; это очень важно при отправке больших файлов( от 400-700МБ ), т.к. если мы будем пытаться их читать целиком &#8211; это вызовет дикие тормоза браузера.</p>
+<p><span id="more-261"></span>Введем новое определение <strong>Blob</strong>. Если раньше мы говорили о <strong>File</strong>, как об объекте всего файла, то Blob &#8211; это объект-интерфейс работы с куском файла. Для получения этого объекта необходимо выполнить метод <strong>slice</strong> для File (в зависимости от браузера это <strong>webkitSlice</strong> или <strong>mozSlice</strong>). Думаю мы можем сделать универсальный метод следующим образом:</p>
+<pre>function fixSlice(file, startingByte, endindByte){
+    var blob;
+    if (file.webkitSlice) {
+        blob = file.webkitSlice(startingByte, endindByte);
+    } else if (file.mozSlice) {
+        blob = file.mozSlice(startingByte, endindByte);
+    }
+    return blob;
+}</pre>
+<p>А вот так будет выглядеть код для чтения блоба(мы прочитаем с 0 по 15 байт файла):</p>
+<pre>document.getElementById('file-field').onchange = function(){
+    var file = this.files[0];
+    var start = 0;
+    var stop = 15;
+    var reader = new FileReader;
+    reader.onloadend = function(e){
+        if (e.target.readyState == FileReader.DONE) {
+            document.getElementById('buffer').innerHTML =
+             'bytes: ' + start + ' - ' + stop + ' total:' + file.size;
+        }
+    }
+    var blob = fixSlice(file, start, stop);
+    reader.readAsBinaryString(blob);
+}</pre>
+<p>Внимание! Тут есть некоторая специфика, по сравнению с чтением объекта File: вместо метода <strong>onload</strong> используется метод <strong>onloadend. </strong>И добавилась дополнительная проверка <strong>e.target.readyState</strong>.</p>
+<p>Теперь усложним пример: добавим еще кнопочку чтения  и будем читать файл частями по нажатию этой кнопки:</p>
+<pre>var file;
+var pointer = 0;
+var blob_size = 16;
+var reader;
+
+document.getElementById('file-field').onchange = function(){
+  file = this.files[0];
+  reader = new FileReader;
+  reader.onloadend = function(e){
+    if (e.target.readyState == FileReader.DONE) {
+      pointer += blob_size;
+      document.getElementById('buffer').innerHTML =
+         'bytes: ' + pointer + '/from' + file.size;
+    }
+  }
+}
+
+function doRead(){
+  if(window.file){
+    var blob = fixSlice(file, pointer, pointer+blob_size);
+    reader.readAsBinaryString(blob);
+  }else{
+    alert('Please select the file');
+  }
+}
+
+var readbutton = document.getElementById('read-button');
+readbutton.addEventListener( "click" , doRead, false);</pre>
+<p>Как-то так.</p>
+<pre>pointer - запоминаем текущее положение указателя чтения</pre>
+<p>Вот тут можно поиграться с текущим кодом: http://learn.javascript.ru/play/yn9Zgb</p>
+<p>И еще один вариант с выводом контента файла:  http://learn.javascript.ru/play/qi8olc</p>
+<p>Теперь автоматизируем процесс загрузки(не давя на кнопочку): http://learn.javascript.ru/play/K2XUsc</p>
+<p>Вот мы и научились загружать файлы по частям используя blob.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/07/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0-3/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Пишем свой Uploader с нуля на javascript используя FileApi. Часть2</title>
+		<link>https://stepansuvorov.com/blog/2012/06/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0-2/</link>
+					<comments>https://stepansuvorov.com/blog/2012/06/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0-2/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 30 Jun 2012 10:21:10 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[fileApi]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[uploader]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=255</guid>
+
+					<description><![CDATA[Вот и созрело продолжение первой части, где мы разобрались как можно использовать родной объект FileReader для чтения файла. Давайте еще добавим прогресс чтения файла для нашего загрузчика. Для этого зададим callback метод для FileReader: reader.onprogress = updateProgress; Рассмотрим что из &#8230; <a href="https://stepansuvorov.com/blog/2012/06/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0-2/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Вот и созрело продолжение <a href="https://stepansuvorov.com/blog/2012/04/%D0%BF%D0%B8%D1%88%D0%B5%D0%BC-%D1%81%D0%B2%D0%BE%D0%B9-uploader-%D1%81-%D0%BD%D1%83%D0%BB%D1%8F-%D0%BD%D0%B0-javascript-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D1%83%D1%8F-fileapi-%D1%87%D0%B0/">первой части</a>, где мы разобрались как можно использовать родной объект FileReader для чтения файла.</p>
+<p>Давайте еще добавим прогресс чтения файла для нашего загрузчика. Для этого зададим callback метод для FileReader:</p>
+<pre>reader.onprogress = updateProgress;</pre>
+<p><span id="more-255"></span></p>
+<p>Рассмотрим что из себя представляет метод <strong>updateProgress</strong>:</p>
+<pre>function updateProgress(event) {
+    if (event.lengthComputable) {
+        var progress = Math.round((event.loaded / event.total) * 100);
+        document.getElementById('buffer').innerHTML = progress + '%';
+    }
+}</pre>
+<p>Все просто. <strong>event.lengthComputable</strong> нам необходимо чтобы убедится что event &#8211; объект того события, которое мы ждем, а именно <strong>ProgressEvent</strong>.</p>
+<pre>Math.round((event.loaded / event.total) * 100)</pre>
+<p>Примитивная математика для вычисления процента.</p>
+<pre>document.getElementById('buffer').innerHTML = progress + '%';</pre>
+<p>Тут мы использовали уже имеющийся textarea элемент с id = buffer, чтобы вывести проценты туда.</p>
+<p>Вот что в итоге получилось:  http://learn.javascript.ru/play/u0bbrb<br />
+<em>Советую использовать большие файлы( от 100МБ) для проверки работоспособности.</em></p>
+<p>!Внимание: мы рассмотрели пока прогресс загрузки файла локально, т.е. непосредственно чтения содержимого файла скриптом, но еще не саму загрузку данных на сервер.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/06/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0-2/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Пишем свой Uploader с нуля на javascript используя FileApi. Часть1</title>
+		<link>https://stepansuvorov.com/blog/2012/04/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0/</link>
+					<comments>https://stepansuvorov.com/blog/2012/04/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 29 Apr 2012 12:33:20 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[fileApi]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[uploader]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=150</guid>
+
+					<description><![CDATA[Отметим ключевые моменты, которые нас интересуют по FileApi: &#8211; у input с атрибутом type=&#8221;file&#8221; теперь есть свойство files(массив объектов класса File) а объект класса File содержит следующие свойства: name — имя файла type — MIME тип файла size — размер &#8230; <a href="https://stepansuvorov.com/blog/2012/04/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Отметим ключевые моменты, которые нас интересуют по FileApi:<br />
+&#8211; у input с атрибутом type=&#8221;file&#8221; теперь есть свойство files(массив объектов класса File)<br />
+а объект класса File содержит следующие свойства:<br />
+name — имя файла<br />
+type — MIME тип файла<br />
+size — размер в байтах</p>
+<p><span id="more-150"></span></p>
+<p>Для чтения файла мы теперь можем использовать класс FileReader, который имеет следующие методы:<br />
+readAsBinaryString(file) — чтение в бинарном режиме.<br />
+readAsText(file[, encoding]) — чтение в текстовом режиме. Дополнительным аргументом указывается кодировка (по-умолчанию UTF-8).<br />
+readAsDataURL(/forum/file) — чтение в бинарном режиме с последующей перекодировкой в Data:URL.</p>
+<p>Основные моменты теории разобрали, остальное &#8211; по ходу дела.</p>
+<p>Создадим простую HTMLку:</p>
+<p>&lt;input type=&#8221;file&#8221; name=&#8221;file&#8221; id=&#8221;file-field&#8221;/&gt;<br />
+&lt;textarea id=&#8221;buffer&#8221;&gt;&lt;/textarea&gt;</p>
+<p>Для наглядности мы не будем сразу отправлять файл, а разберем пошагово процесс и загрузим содержимое файла в тег textarea:</p>
+<p>Для этого повесим обработчик изменения состояния на поле ввода файла:</p>
+<p>document.getElementById(&#8216;file-field&#8217;).onchange = function(){<br />
+var reader = new FileReader;<br />
+reader.onload = function(e){<br />
+document.getElementById(&#8216;buffer&#8217;).innerHTML = e.target.result;<br />
+}<br />
+reader.readAsDataURL(this.files[0]);<br />
+}</p>
+<p>Если мы все правильно сделали, то после выбора файла его содержимое будет загружено в textarea.</p>
+<p>Вот тут можно поиграться с кодом: http://learn.javascript.ru/play/esPXY</p>
+<p>Подробнее можно почитать в спецификации: http://www.w3.org/TR/FileAPI/</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/04/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

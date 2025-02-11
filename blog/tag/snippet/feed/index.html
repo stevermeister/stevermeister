@@ -1,0 +1,741 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>snippet &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/snippet/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 22 Oct 2015 18:54:09 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Keep an eye on AngularJS perfomance with ng-stats</title>
+		<link>https://stepansuvorov.com/blog/2015/10/keep-an-eye-on-angularjs-perfomance-with-ng-stats/</link>
+					<comments>https://stepansuvorov.com/blog/2015/10/keep-an-eye-on-angularjs-perfomance-with-ng-stats/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Thu, 22 Oct 2015 18:54:09 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[Рекомендую]]></category>
+		<category><![CDATA[$digest]]></category>
+		<category><![CDATA[$watch]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[ng-stats]]></category>
+		<category><![CDATA[snippet]]></category>
+		<category><![CDATA[tool]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2877</guid>
+
+					<description><![CDATA[ng-stats is nice utility from Kent C. Dodds that allows you to see statistics for your page&#8217;s angular digest/watches. to install just put this code into your bookmarks: [javascript] javascript: (function() {var a = document.createElement(&#34;script&#34;);a.src = &#34;https://rawgithub.com/kentcdodds/ng-stats/master/dist/ng-stats.js&#34;;a.onload=function(){window.showAngularStats()};document.head.appendChild(a)})(); [/javascript]]]></description>
+										<content:encoded><![CDATA[<p><a href="https://github.com/kentcdodds/ng-stats"><img decoding="async" class="alignnone size-full wp-image-2878" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/10/Screenshot-2015-10-22-20.00.42.png" alt="ng-stats" width="213" height="186" /></a></p>
+<p><a href="https://github.com/kentcdodds/ng-stats">ng-stats</a> is nice utility from <a href="https://github.com/kentcdodds">Kent C. Dodds</a> that allows you to see statistics for your page&#8217;s angular digest/watches.</p>
+<p>to install just put this code into your bookmarks:</p>
+<p>[javascript]<br />
+javascript: (function() {var a = document.createElement(&quot;script&quot;);a.src = &quot;https://rawgithub.com/kentcdodds/ng-stats/master/dist/ng-stats.js&quot;;a.onload=function(){window.showAngularStats()};document.head.appendChild(a)})();<br />
+[/javascript]</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/10/keep-an-eye-on-angularjs-perfomance-with-ng-stats/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Оптимизируем AngularJS. Подробный разбор.</title>
+		<link>https://stepansuvorov.com/blog/2015/02/angularjs-optimization/</link>
+					<comments>https://stepansuvorov.com/blog/2015/02/angularjs-optimization/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 10 Feb 2015 10:10:06 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[chrome]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[performance]]></category>
+		<category><![CDATA[snippet]]></category>
+		<category><![CDATA[оптимизация]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2063</guid>
+
+					<description><![CDATA[Вольный перевод статьи &#8220;Improving Angular web app performance example&#8220;. Трактат довольно фундаментальный. Большая часть методик оценки производительности подойдет для любого веб-приложения (не только AngularJS). Состоит из следующих разделов: Пример не оптимизированного приложения Поверхностная оценка производительности Профилирование в Chrome с использованием &#8230; <a href="https://stepansuvorov.com/blog/2015/02/angularjs-optimization/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Вольный перевод статьи &#8220;<a href="http://bahmutov.calepin.co/improving-angular-web-app-performance-example.html">Improving Angular web app performance example</a>&#8220;. Трактат довольно фундаментальный. Большая часть методик оценки производительности подойдет для любого веб-приложения (не только AngularJS).</p>
+<p>Состоит из следующих разделов:</p>
+<ul>
+<li><a href="#not-optimized-example">Пример не оптимизированного приложения</a></li>
+<li><a href="#quick-performance-overview">Поверхностная оценка производительности</a></li>
+<li><a href="#profiling-with-snippets">Профилирование в Chrome с использованием сниппетов</a></li>
+<li><a href="#digest-optimization">Оптимизация цикла дайджеста</a></li>
+<li><a href="#bind-once">Использование директивы bind-once</a></li>
+<li><a href="#get-rid-off-ng-repeat">Избавляемся от ng-repeat</a></li>
+<li><a href="#initial-rendering">Ускоряем начальный рендеринг</a></li>
+<li><a href="#in-to-pieces">Разбиваем &#8220;тяжелые&#8221; компоненты на небольшие части</a></li>
+<li><a href="#web-workers">Перекладываем вычисления на WebWorkers</a></li>
+<li><a href="#memory-allocation-optimization">Оптимизация процесса выделения памяти</a></li>
+<li><a href="#memory-profile-isolation">Изоляция профиля памяти</a></li>
+<li><a href="#on-request-compulation">Вычисление только по запросу</a></li>
+<li><a href="#watched-objects-minimization">Минимизация наблюдаемых объектов</a></li>
+<li><a href="#conclusions">Выводы</a></li>
+</ul>
+<p><span id="more-2063"></span></p>
+<p>Как только необходимая функциональность вашего <strong>AngularJS</strong> приложения готова, следующий шаг &#8211; работа над <strong>производительностью</strong>, то есть: начальное время загрузки, отзывчивость к действиям пользователя: приложение должно работать быстро не заставляя пользователя ждать, иначе оно будет не очень удобным. Существую множество различных советов по повышению производительности, например: Steven Czerwinksi в своем посте &#8220;<a title="blog.scalyr.com" href="http://blog.scalyr.com/2013/10/angularjs-1200ms-to-35ms/">Optimizing AngularJS: 1200ms to 35ms</a>&#8221; предлагает следующие шаги:</p>
+<ul>
+<li>кеширование DOM элементов</li>
+<li>сокращение количества вотчеров</li>
+<li>отложенное создание элемента</li>
+<li>пропускать вотчеры спрятанных элементов</li>
+</ul>
+<p>Я считаю все эти советы приемлемыми, но слишком сложными в правильной реализации. Вместо них я предлагаю следующие:</p>
+<ul>
+<li>Индивидуальная функциональность
+<ul>
+<li>оптимизировать <strong>очевидные узкие места</strong> на <strong>JavaScript</strong> (не AngularJS)</li>
+</ul>
+</li>
+<li>Оценить и оптимизировать холостые проходы цикла дайджеста
+<ul>
+<li>удалить <strong>ненужные фильтры</strong> (тем самым сократив количество вотчеров)</li>
+<li>удалить ненужные вотчеры переходом от <strong>двунаправленого</strong> связывания к <strong>одностороннему</strong></li>
+</ul>
+</li>
+<li>Проанализировать все места <strong>обновления DOM</strong>
+<ul>
+<li>тяжелые операции могут быть разбиты на более <strong>простые модули </strong></li>
+<li>некоторые манипуляции могут быть сделаны за чет <strong>вебворкеров</strong></li>
+</ul>
+</li>
+<li>Минимизировать события по <strong>сборке мусора</strong>
+<ul>
+<li><strong>Повторно использовать память</strong> вместо выделения новой</li>
+</ul>
+</li>
+</ul>
+<h2></h2>
+<h2 id="not-optimized-example">Пример не оптимизированного приложения</h2>
+<p>В примере используется <strong>AngularJS 1.2</strong>, но техники профилирования приложения и нахождения &#8220;узких мест&#8221; могут быть применимы так же  и для последующих версий.</p>
+<p>Для примера я написал небольшое <strong>AngularJS</strong> приложение( исходный код доступен <a title="github.com" href="https://github.com/bahmutov/primes">тут</a>). Весь пример помещен в <code>index.html</code> файл, который может быть открыт в браузере (то есть веб сервер для запуска не нужен). Задача приложения  &#8211; вычислить N <a title="ru.wikipedia.org" href="http://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D1%81%D1%82%D0%BE%D0%B5_%D1%87%D0%B8%D1%81%D0%BB%D0%BE">простых чисел</a>. Начнем мы с крайне неэффективной реализации и шаг за шагом будем улучшать ее.</p>
+<p>Разворачиваем приложение локально:</p>
+<p>[shell]<br />
+git clone git@github.com:bahmutov/primes.git<br />
+cd primes<br />
+bower install angular-bindonce jquery angular-vs-repeat &#8211;force<br />
+git checkout step-0<br />
+[/shell]</p>
+<p>Откроем <code>index.html</code>. Страница выглядит очень просто: пользователь вводит желаемое число простых чисел и нажимает &#8220;Find&#8221;. После чего числа вычисляются и выводятся в таблицу:</p>
+<p>[html]<br />
+&lt;div ng-controller=&quot;primesController&quot; ng-cloak&gt;<br />
+  &lt;button id=&quot;find&quot; ng-click=&quot;find()&quot;&gt;Find&lt;/button&gt; &lt;input ng-model=&quot;n&quot; /&gt; primes.<br />
+  &lt;table&gt;<br />
+    &lt;tr ng-repeat=&quot;prime in primes | orderBy:$index &quot;&gt;<br />
+      &lt;td&gt;{{ &quot;index&quot; | lowercase }}&lt;/td&gt;<br />
+      &lt;td&gt;{{ $index + 1 | number:0 | uppercase }}&lt;/td&gt;<br />
+      &lt;td&gt;{{ &quot;prime number&quot; | lowercase }}&lt;/td&gt;<br />
+      &lt;td&gt;{{ prime | number:0 | uppercase }}&lt;/td&gt;<br />
+      &lt;td&gt;is prime? {{ prime | isPrime }}&lt;/td&gt;<br />
+    &lt;/tr&gt;<br />
+  &lt;/table&gt;<br />
+&lt;/div&gt;<br />
+[/html]</p>
+<p>Таблица содержит фильтры и порядок, чтобы показывать проблемы производительности с ними связанные.</p>
+<p>Первый 5 простых чисел выглядят так:</p>
+<p><img decoding="async" fetchpriority="high" class="alignnone size-full wp-image-2278" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/primes.png" alt="primes" width="752" height="464" /></p>
+<h2 id="quick-performance-overview">Поверхностная оценка производительности</h2>
+<p>Первоначальная версия довольно быстро находит первые 10 или даже 100 простых чисел. Но если попробовать найти 1000, то обязательно приложение начнет тормозить. Откуда такие тормоза?</p>
+<p>Код AngularJS приложения довольно простой:</p>
+<p>[javascript]<br />
+function isPrime() &#8230;<br />
+function findPrime() &#8230;<br />
+angular.module(&#8216;Primes&#8217;, [])<br />
+  .filter(&#8216;isPrime&#8217;, function () {<br />
+    return isPrime;<br />
+  })<br />
+  .controller(&#8216;primesController&#8217;, function ($scope) {<br />
+    $scope.n = 10;<br />
+    $scope.find = function () {<br />
+      console.log(&#8216;computing first&#8217;, $scope.n, &#8216;primes&#8217;);<br />
+      $scope.primes = [];<br />
+      var k;<br />
+      for (k = 0; k &lt; $scope.n; k += 1) {<br />
+        var prime = findPrime(k + 2);<br />
+        $scope.primes.push(prime);<br />
+      }<br />
+    };<br />
+  });</p>
+<p>[/javascript]</p>
+<p>метод <code>$scope.find</code> выполняется очень долго для большого значения <code>$scope.n</code>. Обычно мы начинаем профилирование JavaScript вот так:</p>
+<p>[javascript]<br />
+$scope.find = function () {<br />
+  console.log(&#8216;computing first&#8217;, $scope.n, &#8216;primes&#8217;);<br />
+  var started = new Date();<br />
+  // computation<br />
+  var finished = new Date();<br />
+  console.log(&#8216;find took&#8217;, finished &#8211; started, &#8216;ms&#8217;);<br />
+};<br />
+[/javascript]</p>
+<p>Я предпочитаю <a title="https://developer.chrome.com/devtools/docs/console-api#consoletimelabel" href="https://developer.chrome.com/devtools/docs/console-api#consoletimelabel">console.time</a> &#8211; что позволяет использовать меньше дополнительных переменных.</p>
+<p>[javascript]<br />
+$scope.find = function () {<br />
+  console.log(&#8216;computing first&#8217;, $scope.n, &#8216;primes&#8217;);<br />
+  console.time(&#8216;computing primes&#8217;);<br />
+  // computation<br />
+  console.timeEnd(&#8216;computing primes&#8217;);<br />
+};<br />
+[/javascript]</p>
+<p>для 1000 у меня выдало</p>
+<pre>computing primes: 13084.714ms</pre>
+<p>То есть расчет занял 13 секунд!</p>
+<h2 id="profiling-with-snippets">Профилирование в Chrome с использованием сниппетов</h2>
+<p>Вместо того, чтобы править код и вставлять метки времени, я использую <a href="https://github.com/bahmutov/code-snippets/blob/master/ng-profile-scope-method.js">ng-profile-scope-method</a> сниппет (о сниппетах можно почитать <a title="JavaScript сниппеты в Chrome" href="https://stepansuvorov.com/blog/2015/01/javascript-%D1%81%D0%BD%D0%B8%D0%BF%D0%BF%D0%B5%D1%82%D1%8B-%D0%B2-chrome/">тут</a>). В этом методе зафиксированы id элемента и имя анализируемого метода (в нашем случае это &#8220;<em>find</em>&#8220;, но вы можете их легко поменять профилируя другое приложение).</p>
+<p>Запускаем сниппет, нажимаем на &#8220;Find&#8221;, смотрим результаты:</p>
+<p><img decoding="async" class="alignnone size-full wp-image-2279" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/Screenshot-2015-02-01-11.03.19.png" alt="ng-profile-scope-method" width="439" height="600" /></p>
+<p>Когда метод закончит работу, мы можем перейти во кладку <strong>Profiles</strong> и посмотреть загруженность процессора в момент выполнения метода. Начнем разбор с представления &#8220;<strong>Chart</strong>&#8220;:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2283" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/Screenshot-2015-02-02-11.44.24.png" alt="cpu profiling" width="579" height="541" /></p>
+<p>Отметим, что стек вызовов тривиален: функция обработчика события выполняется всего один раз за эти 13 секунд, так же как <code>$apply</code>, <code>$eval</code> и так до <code>$scope.find</code>. Внутри нашего метода <code>find</code> мы видим множественные вызовы к функции <code>findPrime</code>. Давайте посмотрим является ли <code>findPrime</code> &#8220;узким местом&#8221; для производительности.</p>
+<p>Переключимся из предстваления &#8220;<strong>Chart</strong>&#8221; в &#8220;<strong>Heavy</strong>&#8220;. Оно показывает функции, расположенные в порядке убывания по времени выполнения. <img decoding="async" loading="lazy" class="alignnone size-full wp-image-2284" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/Screenshot-2015-02-02-11.52.03.png" alt="cpu profiling 2" width="746" height="454" /></p>
+<p>В топе мы видим 2 функции &#8211; <code>isPrime</code> и <code>findPrime</code>, которые выполняются дольше всех. Обратите внимание на желтый треугольничек рядом с <code>isPrime</code>. Если вы наведете на него мышкой, то увидите всплывающую подсказку о том, что метод не может быть оптимизирован компилятором &#8220;<a title="wiki" href="https://ru.wikipedia.org/wiki/JIT-%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D0%BB%D1%8F%D1%86%D0%B8%D1%8F">на лету</a>&#8220;. В данном случае это из-за <code>try-catch</code>, который находится внутри функции.</p>
+<p>В нашем случае <code>isPrime</code> не требует <code>try-catch</code> блока совсем:</p>
+<p>[javascript]<br />
+function isPrime(n) {<br />
+  try {<br />
+    var k;<br />
+    for (k = 2; k &lt; n; k += 1) {<br />
+      if (n % k === 0) {<br />
+        return false;<br />
+      }<br />
+    }<br />
+  } catch (err) {<br />
+    console.error(err);<br />
+  }<br />
+  return true;<br />
+}<br />
+[/javascript]</p>
+<p>Уберем его и запустим профайлер еще раз:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2285" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/Screenshot-2015-02-02-12.07.51.png" alt="cpu-profiling 3" width="598" height="466" /></p>
+<p>после чего мы видим как время выполнение <code>isPrime</code> с 7.2 секунд упало до 40 миллисекунд, а общее время выполнения с 13 до 5,8 секунд. Сниппет позволяет сохранять профили для разных запусков отдельно, что дает нам возможность сравнить их.</p>
+<p>Итак, <code>findPrime</code> &#8211; наша новая цель для оптимизации. Давайте посмотрим на исходник:</p>
+<p>[javascript]<br />
+function findPrime(n) {<br />
+  var k = 1;<br />
+  var foundPrimes = [];<br />
+  while (foundPrimes.length &lt; n) {<br />
+    if (isPrime(k)) {<br />
+      foundPrimes.push(k);<br />
+    }<br />
+    k += 1;<br />
+  };<br />
+  return foundPrimes[foundPrimes.length &#8211; 1];<br />
+}<br />
+[/javascript]</p>
+<p>Функция ищет N-ое простое число по средством вычисления всех предшествующих и возвращает последнее. Но при этом для нахождения следующего (N + 1) числа она проделает все сначала. Давайте попробуем использовать ранее найденые простые числа вынеся массив <code>foundPrimes</code> за пределы функции:</p>
+<p>[javascript]<br />
+var foundPrimes = [];<br />
+function findPrime(n) {<br />
+  var k;<br />
+  if (foundPrimes.length) {<br />
+    k = foundPrimes[foundPrimes.length &#8211; 1] + 1;<br />
+  } else {<br />
+    k = 1;<br />
+  }<br />
+  while (foundPrimes.length &lt; n) {<br />
+    if (isPrime(k)) {<br />
+      foundPrimes.push(k);<br />
+    }<br />
+    k += 1;<br />
+  };<br />
+  return foundPrimes[n &#8211; 1];<br />
+}<br />
+[/javascript]</p>
+<p>Изменения (тег <a href="https://github.com/bahmutov/primes/releases/tag/step-2">step-2</a>) приводят к серьезному скачку производительности:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2286" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/Screenshot-2015-02-02-12.43.07.png" alt="cpu-profiling 4" width="631" height="376" /></p>
+<p>Теперь весь метод <code>$scope.find</code> выполняется за 389 мс, то есть скорость по сравнению с первоначальным вариантом увеличилась более чем в 40 раз!</p>
+<p>Мы можем сделать еще одну простое изменение с целью оптимизации функции <code>isPrime</code>: тут больше вопрос математики &#8211; проверяя N на простоту, нам не нужно проверять остаток от деления на все простые числа идущие до него &#8211; достаточно дойти до корня из N:</p>
+<p>[javascript]<br />
+function isPrime(n) {<br />
+  var k;<br />
+  var limit = Math.sqrt(n);<br />
+  for (k = 2; k &lt;= limit; k += 1) {<br />
+    if (n % k === 0) {<br />
+      return false;<br />
+    }<br />
+  }<br />
+  return true;<br />
+}<br />
+[/javascript]</p>
+<p>Обновить код можно перейдя к тегу <a href="https://github.com/bahmutov/primes/releases/tag/step-3">step-3</a>. Профайлер <code>$scope.find</code> показывает что мы избавились от всех явных тормозов:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2287" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/Screenshot-2015-02-02-12.59.00.png" alt="cpu-profiling 4" width="605" height="379" /></p>
+<h2 id="digest-optimization">Оптимизация цикла дайджеста</h2>
+<p>Теперь можем переходить к профилирования метода объекта <code>scope</code>. Чтобы точно выявить слабые места, сделаем оценку на более серьезном объеме входных данных. Но сначала я добавлю небольшую деталь: вывод количества простых чисел (изменение в теге <a href="https://github.com/bahmutov/primes/releases/tag/step-4">step-4</a>):</p>
+<p>[html]<br />
+&lt;button id=&quot;find&quot; ng-click=&quot;find()&quot;&gt;Find&lt;/button&gt; &lt;input ng-model=&quot;n&quot; /&gt; primes.<br />
+&lt;p&gt;AngularJs application that finds first {{ n }} prime numbers&lt;/p&gt;<br />
+[/html]</p>
+<p>Давайте попробуем сгенерировать 100 000 простых чисел. Это займет несколько секунд ( обновления DOM). Как только 100 000 простых чисел будут выведены на экран, попробуйте поменять количество (например: удалить один ноль). Обратите внимание на существенную задержку после нажатия на кнопку и обновления данных. Мы не модифицируем данные модели, только одно число. Таблица не должна обновляться, откуда задержка?</p>
+<p>Чтобы отдебажить эту проблему давайте используем другой сниппет &#8211; <a href="https://github.com/bahmutov/code-snippets/blob/master/ng-idle-apply-timing.js">ng-idle-apply-timing</a> (опять таки ничего не изменяя в коде). Он покажет сколько времени занимает грязная проверка (dirty checking) каждой переменной  в нашем приложении. Двойное связывание, $watch выражения и фильтры &#8211;  все это делает проход цикла дайджста более медленным.</p>
+<p>Взглянем что получилось в профайле:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2288" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/Screenshot-2015-02-02-16.15.37.png" alt="scope digest profiling" width="664" height="399" /></p>
+<p>Мы видим, что только на цикл дайджеста уходит больше секунды (1274 мс). Хотелось бы это исправить. Самый надежный способ ускорить работу дайджеста &#8211; повыкидывать ненужные вотчеры.</p>
+<p>Для начала посмотрим на элементы с самыми медленными вотчерами. Используем еще 2 сниппета: сначала <a href="https://github.com/bahmutov/code-snippets/blob/master/ng-profile-local-digest.js">ng-profile-local-digest.js</a>, после чего &#8211; <a href="https://github.com/bahmutov/code-snippets/blob/master/ng-find-expensive-digest.js">ng-find-expensive-digest.js</a> (так исторически сложилось, что второй требует метод, который определяется в первом). Просто запустите их один за одним. И у нас в консоли появится вспомогательный метод <code>findExpensiveDigest</code>, который можем выполнить для таблицы и поля ввода:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2290" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/Screenshot-2015-02-03-11.34.21.png" alt="digest profiling" width="475" height="138" /></p>
+<p>Используем сниппет &#8211; <a href="https://github.com/bahmutov/code-snippets/blob/master/ng-count-watchers.js">ng-count-watchers</a>, чтобы посчитать общее количество вотчеров. Можете убедиться, что для случая с 100 000 простыми числами в приложении появляется аж 500 003 вотчеров! Из них 3 &#8211; обслуживают ng-repeat, вводимое значение и число в шаблоне. Остальные ( 500 000) занимаются наблюдением в ячейках таблицы:</p>
+<p>[html]<br />
+&lt;tr ng-repeat=&quot;prime in primes | orderBy:$index &quot;&gt;<br />
+  &lt;td&gt;{{ &quot;index&quot; | lowercase }}&lt;/td&gt;<br />
+  &lt;td&gt;{{ $index + 1 | number:0 | uppercase }}&lt;/td&gt;<br />
+  &lt;td&gt;{{ &quot;prime number&quot; | lowercase }}&lt;/td&gt;<br />
+  &lt;td&gt;{{ prime | number:0 | uppercase }}&lt;/td&gt;<br />
+  &lt;td&gt;is prime? {{ prime | isPrime }}&lt;/td&gt;<br />
+&lt;/tr&gt;<br />
+[/html]</p>
+<p>Обратим внимание, что для каждой строчки используются избыточные фильтры. Например:<code>{{ "index" | lowercase }}</code> &#8211; это статический текст, который никогда не меняется, но Ангуляр вычисляет его снова и снова, а результаты всегда одни и те же, даже когда количество строк меняется. Давайте удалим фильтры <code>lowercase</code>, <code>uppercase</code>, <code>isPrime</code> , которые по сути ничего не делают(можно обновиться до тега <a href="https://github.com/bahmutov/primes/releases/tag/step-5">step-5</a>):</p>
+<p>[html]<br />
+&lt;tr ng-repeat=&quot;prime in primes | orderBy:$index &quot;&gt;<br />
+  &lt;td&gt;index&lt;/td&gt;<br />
+  &lt;td&gt;{{ $index + 1 | number:0 }}&lt;/td&gt;<br />
+  &lt;td&gt;prime number&lt;/td&gt;<br />
+  &lt;td&gt;{{ prime | number:0 }}&lt;/td&gt;<br />
+  &lt;td&gt;is prime? true&lt;/td&gt;<br />
+&lt;/tr&gt;<br />
+[/html]</p>
+<p>Обновленное приложение содержит уже только 200 003 вотчеров, и соотвественно цикл дайджеста проходит в 2 раза быстрее.</p>
+<h2 id="bind-once">Использование директивы bind-once</h2>
+<p>Производительность уже серьезно была улучшена удалением ненужных фильтров, но мы можем ускорить еще. Отметим то, что в то время, как таблица не меняется, мы продолжаем вычислять 2 вотчера на каждую строчку, каждый раз, когда мы меняем значение поля ввода( что запускает цикл дайджеста). Данные не изменяются, поэтому мы не должны вычислять выражение еще раз. Angular1.3 <a href="https://docs.angularjs.org/guide/expression#one-time-binding">представляет</a> &#8220;одноразовое связывание&#8221; следующим синтаксисом <code>{{ ::prime}}</code>. Но AngularJS 1.2 &#8220;из коробки&#8221; такого увы не предоставляет. Как вариант можно использовать модуль <a href="https://github.com/Pasvaz/bindonce">bindonce</a>: изменения незначительны; фильтры также поддерживаются:</p>
+<p>[html]<br />
+&lt;tr ng-repeat=&quot;prime in primes | orderBy:$index &quot; bindonce&gt;<br />
+  &lt;td&gt;index&lt;/td&gt;<br />
+  &lt;td bo-text=&quot;$index + 1 | number:0&quot; /&gt;<br />
+  &lt;td&gt;prime number&lt;/td&gt;<br />
+  &lt;td bo-text=&quot;prime | number:0&quot; /&gt;<br />
+  &lt;td&gt;is prime? true&lt;/td&gt;<br />
+&lt;/tr&gt;<br />
+[/html]</p>
+<p>Обновленное приложение имеет только 3 вотчера (после отображения 100 000 простых чисел), и цикл дайджеста занимает в этом случае только 5мс. Ну что ж это уже похоже на отзывчивый интерфейс.</p>
+<p>Обновить код можно по тегу <a href="https://github.com/bahmutov/primes/releases/tag/step-6">step-6</a>. И не забудьте поставить модуль <a href="https://github.com/Pasvaz/bindonce">bindonce</a>:</p>
+<p>[shell]<br />
+bower instal angular-bindonce<br />
+[/shell]</p>
+<p>&nbsp;</p>
+<h2 id="get-rid-off-ng-repeat">Избавляемся от ng-repeat</h2>
+<p>Как показало профилирование: генерация таблицы занимает 10 секунд, при этом каждая строчка и ячейка порождают несколько функциональных вызовов.</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2291" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/each-row-linked.png" alt="each-row-linked" width="1111" height="729" /></p>
+<p>Чтобы как-то улучшить эту часть, я написал свою функцию генерирования HTML и вывод его просто через <code>innerHTML</code>. То есть выкидываем <code>ng-repeat</code> вместе с содержимым (тег <a href="https://github.com/bahmutov/primes/releases/tag/step-7">step-7</a>):</p>
+<p>[javascript]<br />
+// use AngularJs built-in filter<br />
+var number = $filter(&#8216;number&#8217;);<br />
+function generateTableRows() {<br />
+  var k;<br />
+  var str = &#8221;;<br />
+  for(k = 0; k &lt; $scope.n; k += 1) {<br />
+    str += &#8216;&lt;tr&gt;&lt;td&gt;index&lt;/td&gt;&#8217;;<br />
+    str += &#8216;&lt;td&gt;&#8217; + number(k + 1, 0) + &#8216;&lt;/td&gt;&#8217;;<br />
+    str += &#8216;&lt;td&gt;prime number&lt;/td&gt;&#8217;;<br />
+    str += &#8216;&lt;td&gt;&#8217; + number($scope.primes[k], 0) + &#8216;&lt;/td&gt;&#8217;;<br />
+    str += &#8216;&lt;td&gt;is prime? true&lt;/td&gt;&lt;/tr&gt;&#8217;;<br />
+  }<br />
+  document.getElementsByTagName(&#8216;table&#8217;)[0].innerHTML = str;<br />
+}<br />
+$scope.find = function () {<br />
+  // generate primes list as before<br />
+  generateTableRows();<br />
+}<br />
+[/javascript]</p>
+<p>Такое изменение дало увеличение производительности в 10 раз:</p>
+<p><a href="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/in-code-table-generation.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2292" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/in-code-table-generation.png" alt="in-code-table-generation" width="1110" height="475" /></a></p>
+<p>Конечно же это лишает вас гибкости связывания представления с моделью, которую дает <code>ng-repeat</code> и так можно делать только тогда, когда вы точно уверенны, что данные меняться не будут.</p>
+<p>&nbsp;</p>
+<h2 id="initial-rendering">Ускоряем начальный рендеринг</h2>
+<p>Давайте подойдем к проблеме с другой стороны: если процесс вычисления всех результатов занимает много времени, то мы можем показать только первоначальные результаты, и сделать это довольно быстро. То есть пользователь увидит какие-то результаты, в то время как остальные все еще будут рассчитываться. Мы можем вычислить и вывести первые 100 чисел очень быстро ( &lt; 30 мс). Я разбил логику на 2 шага и использовал $timeout сервис, чтобы выполнить второй шаг после того, как обновиться DOM и браузер отобразит эти первые 100 строк:</p>
+<p>[javascript]<br />
+$scope.find = function () {<br />
+  // code as before<br />
+  var firstBatchN = 100;<br />
+  var k;<br />
+  for (k = 0; k &lt; firstBatchN; k += 1) {<br />
+    var prime = findPrime(k + 2);<br />
+    $scope.primes.push(prime);<br />
+  }<br />
+  generateTableRows(0, firstBatchN);<br />
+  // start second batch via event loop to let browser repaint<br />
+  // return promise to allow timing this action<br />
+  return $timeout(function computeSecondBatch() {<br />
+    for (k = firstBatchN; k &lt; $scope.n; k += 1) {<br />
+      var prime = findPrime(k + 2);<br />
+      $scope.primes.push(prime);<br />
+    }<br />
+    generateTableRows(firstBatchN, $scope.n);<br />
+  }, 0);<br />
+};<br />
+[/javascript]</p>
+<p>Код доступен по тегу <a href="https://github.com/bahmutov/primes/releases/tag/step-8">step-8</a>.</p>
+<p>На временном графике мы видим эти 2 шага довольно четко. Первая отрисовка заканчивается через 20мс после нажатия на кнопку find. Но пользователь не может ничего сделать с таблицей, так как вторая порция тормозит браузер пока вычисляются остальные числа и вычисляет отображение для всей таблицы:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2293" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/fast-first-batch.png" alt="fast-first-batch" width="2548" height="1212" /></p>
+<p>&nbsp;</p>
+<h2 id="in-to-pieces">Разбиваем &#8220;тяжелые&#8221; компоненты на небольшие части</h2>
+<p>В ходе работы приложения для генерации и вывода чисел на экран браузер выполняет следующие операции:</p>
+<ul>
+<li>выполнение JavaScript</li>
+<li>построение отображения (позиция или размер каждого DOM элемента)</li>
+<li>отрисовка каждого компонента отдельно в буфер</li>
+<li>отрисовка всех элементов из буфера</li>
+</ul>
+<p>Все действия совершаются в одном потоке, и это может представлять проблему производительности, когда одна из частей занимает много времени. Например: сложные CSS стили ведут к долгой отрисовке, блокировке клиентского кода. Каждая такая итерация(из 4 действий) должна занимать не больше чем 33мс, если мы хотим достичь <strong>30 fps</strong>, или меньше 16мс, если наша цель <strong>60 fps</strong>.</p>
+<p>Предыдущем шаге мы разбили наше приложение на 2 части: первую выдачу и дальнейшую загрузку, которая уже серьезно тормозит браузер и не дает пользователю работать со страницей.</p>
+<p>Давайте разобьем весь процесс на много маленьких частей, которые будут вычислять и отображать только 50 чисел. Полный цикл (выполнение кода, обновление DOM и рендеринг) не должен занять больше 30мс, не мешая пользователю взаимодействовать со страницей ( например: прокручивать вниз).</p>
+<p>Чтобы запланировать выполнение кода после того как браузер отрисует предыдущую часть мы используем <code>$timeout</code> сервис:</p>
+<p>[javascript]<br />
+function computePrimes(first, last) {<br />
+  var k;<br />
+  for (k = first; k &lt; last; k += 1) {<br />
+    var prime = findPrime(k + 2);<br />
+    $scope.primes.push(prime);<br />
+  }<br />
+}<br />
+function generateTableRows(first, last) {<br />
+  // &#8230; тут мы генерируем HTML и сохраняем в str<br />
+  document.getElementsByTagName(&#8216;tbody&#8217;)[0].innerHTML += str;<br />
+  console.timeStamp(&#8216;updated tbody &#8216; + first + &#8216; to &#8216; + last);<br />
+}<br />
+function computeAndRenderBatch(first, last) {<br />
+  computePrimes(first, last);<br />
+  generateTableRows(first, last);<br />
+  // возвращает промис, который разрешиться после отрисовки DOM<br />
+  return $timeout(angular.noop, 0);<br />
+}<br />
+[/javascript]</p>
+<p>Главный вычислительный метод <code>$scope.find</code> теперь создает большую цепочку промисов, которые будут выполнятся один за одним. И на каждом шаге будет вычислено 50 простых чисел,  сгенерирован HTML и добавлен в DOM:</p>
+<p>[javascript]<br />
+$scope.find = function () {<br />
+  var batchSize = 50;<br />
+  var k;<br />
+  // начинаем с &quot;нулевого&quot; промиса (который сразу отрезолвится)<br />
+  var computeAndLetUiRender = $q.when();<br />
+  var computeNextBatch;<br />
+  for (k = 0; k &lt; $scope.n; k += batchSize) {<br />
+    computeNextBatch = angular.bind(null, computeAndRenderBatch,<br />
+      k, Math.min(k + batchSize, $scope.n));<br />
+    computeAndLetUiRender = computeAndLetUiRender.then(computeNextBatch);<br />
+  }<br />
+  // return promise to let timing code snippet know when we are done<br />
+  return computeAndLetUiRender;<br />
+};<br />
+[/javascript]</p>
+<p>Изменения кода доступны в теге <a href="https://github.com/bahmutov/primes/releases/tag/step-9">step-9</a>.</p>
+<p>Посмотрим на результаты профилирования:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2296" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/small-batches-profile.png" alt="small-batches-profile" width="2218" height="912" /></p>
+<p>Мы можем посмотреть на каждую порцию временного графика в отдельности, чтобы убедиться что наши действия выполняются одно за одним.</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2297" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/after-dom-update-using-timeout.png" alt="after-dom-update-using-timeout" width="1550" height="666" /></p>
+<p>Но мы также можем заметить, что обновления постепенно замедляются. Фиолетовый столбик(отрисовка) становится все больше и больше с каждым разом.</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2298" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/small-batches-timeline.png" alt="small-batches-timeline" width="950" height="284" /></p>
+<p>Проблема в способе добавления новых строк в таблицу: каждый раз при добавлении браузеру приходиться перерисовывать всю таблицу!</p>
+<p>[javascript]<br />
+function generateTableRows(first, last) {<br />
+  // generate new rows HTML markup into variable str<br />
+  document.getElementsByTagName(&#8216;tbody&#8217;)[0].innerHTML += str;<br />
+}<br />
+[/javascript]</p>
+<p>Вместо замены всего содержимого таблицы мы можем создавать новую таблицу и просто добавлять ее в структуру документа ( <em>Мы так же можем добавлять другой элемент tbody в ту же самую таблицу. Но этот вариант не оценивался</em> )</p>
+<p>[javascript]<br />
+function generateTableRows(first, last) {<br />
+  var k, txt = angular.bind(document, document.createTextNode);<br />
+  var table = document.createElement(&#8216;table&#8217;);<br />
+  for(k = first; k &lt; last; k += 1) {<br />
+    var row = table.insertRow();<br />
+    row.insertCell().appendChild(txt(&#8216;index&#8217;));<br />
+    row.insertCell().appendChild(txt(k + 1));<br />
+    row.insertCell().appendChild(txt(&#8216;prime number&#8217;));<br />
+    row.insertCell().appendChild(txt($scope.primes[k]));<br />
+    row.insertCell().appendChild(txt(&#8216;is prime? true&#8217;));<br />
+  }<br />
+  // schedule DOM update by attaching new table element to the body<br />
+  document.body.appendChild(table);<br />
+}<br />
+[/javascript]</p>
+<p>Обновленния берем в теге <a href="https://github.com/bahmutov/primes/releases/tag/step-10">step-10</a>.</p>
+<p>Ну вот мы и добились 30fps. Что означает, что мы можем прокручивать и смотреть результаты относительно без тормозов, в то время как браузер продолжает вычислять оставшиеся результаты.</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2299" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/appending-separate-tables.png" alt="appending-separate-tables" width="2794" height="652" /></p>
+<p>&nbsp;</p>
+<h2 id="web-workers">Перекладываем вычисления на WebWorkers</h2>
+<p>В итоге, я решил вынести вычисление простых чисел в поток вебворкеров, чтобы выполнять параллельно с основным кодом.  Перемещаем <code>isPrime</code> и <code>findPrime</code> методы в файл <code>primes.js</code>. Они будут общаться с основным кодом по средством сообщений:</p>
+<p>[javascript]<br />
+// primes.js<br />
+onmessage = function (e) {<br />
+  var first = e.data.first;<br />
+  var last = e.data.last;<br />
+  var k, primes = [];<br />
+  for (k = first; k &lt; last; k += 1) {<br />
+    var prime = findPrime(k + 2);<br />
+    primes.push(prime);<br />
+  }<br />
+  // посылаем результаты обратно<br />
+  postMessage(primes);<br />
+};<br />
+[/javascript]</p>
+<p>Чтобы упростить взаимодействие с вебворкерами, я создал сервис:</p>
+<p>[javascript]<br />
+angular.module(&#8216;Primes&#8217;, [])<br />
+  .factory(&#8216;PrimeWorker&#8217;, function ($q) {<br />
+    var worker = new Worker(&#8216;./primes.js&#8217;);<br />
+    var defer;<br />
+    worker.onmessage = function(e) {<br />
+      defer.resolve(e.data);<br />
+    };<br />
+    return {<br />
+      computePrimes: function (first, last) {<br />
+        defer = $q.defer();<br />
+        worker.postMessage({<br />
+          first: first,<br />
+          last: last<br />
+        });<br />
+        return defer.promise;<br />
+      }<br />
+    }<br />
+  });<br />
+[/javascript]</p>
+<p>Метод <code>$scope.find </code>должен обрабатывать вычисления асинхронно, поэтому</p>
+<p>[javascript]<br />
+.controller(&#8216;primesController&#8217;, function ($scope, $filter, $timeout, $q, PrimeWorker) {<br />
+  function computePrimes(first, last) {<br />
+    return PrimeWorker.computePrimes(first, last).then(function (numbers) {<br />
+      // копируем результаты в массив<br />
+      var k, n = numbers.length;<br />
+      for(k = 0; k &lt; n; k += 1) {<br />
+        $scope.primes.push(numbers[k]);<br />
+      }<br />
+    });<br />
+  }<br />
+  function computeAndRenderBatch(first, last) {<br />
+    // результатом будет промис<br />
+    return computePrimes(first, last).then(function () {<br />
+      generateTableRows(first, last);<br />
+      return $timeout(angular.noop, 0);<br />
+    });<br />
+  }<br />
+[/javascript]</p>
+<p>Код доступен по тегу <a href="https://github.com/bahmutov/primes/releases/tag/step-11">step-11</a>.</p>
+<p>!Внимание: Для загрузки вебворкеров нам понадобится локально запустить веб-сервер. Могу порекомендовать <a href="https://github.com/nodeapps/http-server">http-server</a>. Устанавливает и запускается очень просто(команды выполняем из директории проекта):</p>
+<p>[shell]<br />
+$ npm install http-server -g<br />
+$ http-server<br />
+[/shell]</p>
+<p>Профилирования процессора теперь показывает приятные узкие столбики для основного кода:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2300" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/web-worker-cpu-profile.png" alt="web-worker-cpu-profile" width="2794" height="724" /></p>
+<p>Временной график показывает, что все выполняется быстрее и почти все итерации попадают под <strong>60fps</strong>:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2301" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/web-worker-timeline.png" alt="web-worker-timeline" width="2794" height="668" /></p>
+<h2></h2>
+<h2 id="memory-allocation-optimization">Оптимизация процесса выделения памяти</h2>
+<p>Если наше приложение в процессе выполнения занимает и освобождает много памяти, то браузер должен переодически останавливаться, чтобы собрать освободившуюся память. Задержки при сборке мусора непредсказуемы и могут быть долгими. Чтобы найти этим события(сборка мусора) на временном графике включите фильтр и введите &#8220;<em>gc</em>&#8221; (garbage collection). В нашем случае мы видим серьезные задержки по сборке мусора: несколько мегабайт освобождаются каждый раз и это занимает более чем 100мс. (Для теста я генерировал 150 000 простых чисел порциями по 10 000). Это заметно не вооруженным взглядом, если вы включите график работы с памятью (галочка &#8220;Memory&#8221;):</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2303" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/memory-dynamically-allocated.png" alt="memory-dynamically-allocated" width="2798" height="888" /></p>
+<p>Первый кандидат на освобождение памяти &#8211; массив <code>$scope.primes</code>. Отметим, что он растет динамически, потому что он начинается с размерности 0 и мы продолжаем добавлять новые простые числа в массив одно за одним:</p>
+<p>[javascript]<br />
+var k, n = numbers.length;<br />
+for(k = 0; k &lt; n; k += 1) {<br />
+  $scope.primes.push(numbers[k]);<br />
+}<br />
+[/javascript]</p>
+<p>Это очень не эффективно с точки зрения выделения памяти: когда новый элемент добавляется в непустой массив, среда выполнения выделяет память под новый массив (обычно выделяется в 2 раза больше памяти), скопировать числа и почистить память за исходным. Я изменил код задав массив необходимой длинны с самого начала (используя заданное количество простых чисел):</p>
+<p>[javascript]<br />
+$scope.primes = new Array($scope.n);<br />
+$scope.computedN = 0;<br />
+// copy numbers<br />
+var k, n = numbers.length;<br />
+for(k = 0; k &lt; n; k += 1) {<br />
+  $scope.primes[$scope.computedN] = numbers[k];<br />
+  $scope.computedN += 1;<br />
+}<br />
+[/javascript]</p>
+<p>Обновляемся из тега <a href="https://github.com/bahmutov/primes/releases/tag/step-12">step-12</a>.</p>
+<p>Теперь временной график показывает не такие серьезные скачки в памяти:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2304" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/memory-preallocated.png" alt="memory-preallocated" width="2796" height="890" /></p>
+<p>Примечание: иногда профайлер барахлит и нужно закрыть все и открыть заново.</p>
+<p>&nbsp;</p>
+<h2 id="memory-profile-isolation">Изоляция профиля памяти</h2>
+<p>Чтобы лучше увидеть выделение памяти давайте изолируем конкретные шаги. Для начала давайте выключим генерацию DOM &#8211; она создает много &#8220;шума&#8221; на графике при размещении элементов.</p>
+<p>[javascript]<br />
+function computeAndRenderBatch(first, last) {<br />
+  return computePrimes(first, last).then(function () {<br />
+    // generateTableRows(first, last);<br />
+    return $timeout(angular.noop, 0);<br />
+  });<br />
+}<br />
+[/javascript]</p>
+<p>Теперь мы можем запустить профайлер выделяемой памяти, а не профайлер процессора. Включаем профайлер и затем нажимаем кнопку &#8220;Find&#8221;:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2305" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/profile-heap-allocations.png" alt="profile-heap-allocations" width="2018" height="744" /></p>
+<p>После чего мы можем увидеть выделение памяти под большие массивы с начала. (прим.:<em> можем навести мышкой, чтобы увидеть конкретные значения</em>). Также можно отметить что общий размер памяти 600 008 байт (при генерации 150 000 простых чисел). Движок V8 обнаружил что мы добавляем только целые числа в массив, поэтому используется только 4 байта на элемент. Массив также имеет свойство <code>length</code> &#8211; эти дополнительные 8 байт.</p>
+<p><img decoding="async" loading="lazy" class="alignnone  wp-image-2306" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/primes-array.png" alt="primes-array" width="648" height="242" /></p>
+<p>Этот профиль дает нам представление о выделении памяти из основного кода, но он не показывает выделение памяти в вебворкерах. Изучить утечки памяти в вебворкерах выберите &#8220;primes.js&#8221; перед стартом профилирования памяти</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2307" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/profile-web-worker-heap.png" alt="profile-web-worker-heap" width="2018" height="732" /></p>
+<p>Собраный профиль веделения памяти на вебворкерах менее детален из-за браузерных ограничений. Но мы все равно можем четко увидеть растущее выделение памяти. Если посмотрим детально &#8211; обнаружим массив <code>foundPrimes</code>:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2308" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/inspect-web-worker-heap.png" alt="inspect-web-worker-heap" width="2798" height="874" /></p>
+<p>Для массива <code>foundPrimes</code> мы так же можем сразу выделить необходимое количество памяти (тем самым предотвращая постоянное изменение размера и сборку мусора).</p>
+<h2 id="on-request-compulation">Вычисление только по запросу</h2>
+<p>Давайте изменим способ генерации данных приложением. Вместо предвычислений тысяч простых чисел, сгенерируем небольшую часть чисел и отрисуем таблицу. Если пользователь прокрутит до конца таблицы в поисках большего количества чисел, мы сгенерируем новую партию чисел и добавим их в DOM. Можно легко привязать генерацию к прокрутке используя директиву <a href="http://binarymuse.github.io/ngInfiniteScroll/index.html">ngInfiniteScroll</a>. Для этой директивы нам понадобится также подключить jQuery:</p>
+<p>[html]<br />
+&lt;script src=&quot;bower_components/jquery/dist/jquery.min.js&quot;&gt;&lt;/script&gt;<br />
+&lt;script src=&quot;bower_components/angular/angular.js&quot;&gt;&lt;/script&gt;<br />
+&lt;script src=&quot;bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js&quot;&gt;&lt;/script&gt;<br />
+[/html]</p>
+<p>Для простоты я снова использую <code>ng-repeat</code>. Мы запустим <code>$scope.find</code> метод тогда, когда границы таблицы сравняются с границами окна пользователя. Первый вызов <code>$scope.find</code> сделаем вручную с помощью атрибута <code>infinite-scroll-immediate-check</code>.</p>
+<p>[html]<br />
+&lt;table id=&quot;table&quot; width=&quot;500&quot;&gt;<br />
+  &lt;tbody infinite-scroll=&quot;find()&quot;<br />
+    infinite-scroll-distance=&quot;3&quot;<br />
+    infinite-scroll-immediate-check=&quot;true&quot;<br />
+    infinite-scroll-disabled=&quot;computing&quot;&gt;<br />
+    &lt;tr ng-repeat=&quot;prime in primes&quot;&gt;<br />
+      &lt;td&gt;index&lt;/td&gt;<br />
+      &lt;td&gt;{{ $index + 1 | number:0 }}&lt;/td&gt;<br />
+      &lt;td&gt;prime number&lt;/td&gt;<br />
+      &lt;td&gt;{{ prime | number:0 }}&lt;/td&gt;<br />
+      &lt;td&gt;is prime? true&lt;/td&gt;<br />
+    &lt;/tr&gt;<br />
+  &lt;/tbody&gt;<br />
+&lt;/table&gt;<br />
+[/html]</p>
+<p>Я выкинул ручную генерацию html таблицы, оставил только вычисление числа (которое по прежнему в вебворкере).</p>
+<p>[javascript]<br />
+$scope.find = function () {<br />
+  $scope.computing = true;<br />
+  return computePrimes($scope.primes.length, $scope.primes.length + batchSize)<br />
+  .then(function () {<br />
+    console.log(&#8216;computed&#8217;, $scope.primes.length, &#8216;primes&#8217;);<br />
+    $scope.computing = false;<br />
+  });<br />
+};<br />
+[/javascript]</p>
+<p>Обновляем код в теге <a href="https://github.com/bahmutov/primes/releases/tag/step-13">step-13</a>.</p>
+<p>Теперь страница показывает только первые 100 чисел. Если вы начнете прокручивать вниз, то новые будут вычислены новые числа  и добавлены к таблице. Генерация довольно быстрая, чтобы не тормозить прокрутку. На временном графике мы можем увидеть 3 столбика для генерации первых 400 чисел (первые 100 сгенерированны до профилирования):</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2311" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/infinite-scroll.png" alt="infinite-scroll" width="1530" height="1254" /></p>
+<h2></h2>
+<h2 id="watched-objects-minimization">Минимизация наблюдаемых объектов</h2>
+<p>Еще одна не очевидная причина тормозов в AngularJS &#8211; тяжелые вотчеры, а именно вотчеры, которые наблюдают за сложным объектом, а еще хуже за результатом функции, которая возвращает такой объект. Вот эти 2 вотчера:</p>
+<p>[javascript]<br />
+angular.module(&#8216;Primes&#8217;, [])<br />
+  .controller(&#8216;primesController&#8217;, function ($scope) {<br />
+    $scope.primes = &#8230;<br />
+    $scope.$watch(&#8216;primes&#8217;, &#8230;);<br />
+    // OR<br />
+    $scope.$watch(function () {<br />
+      return $scope.primes;<br />
+    }, &#8230;);</p>
+<p>[/javascript]</p>
+<p>AngularJS делает грязную проверку &#8211; в ходе каждого цикла дайджеста каждая наблюдаемая функция вычисляется и возвращает значение, которое сравнивается с предыдущим возвращенным значением. Это означает, что последнее значение было сохранено. Если вы используете вотчер с <a title="для объектов это полное сравнение вложенных значений, а не только ссылки на объект" href="#">глубоким сравнением</a>, тогда ангуляр сохраняет полную копию возвращаемого объекта. Это может быть довольно дорого с точки зрения производительности. Например массив с объектами:</p>
+<p>[javascript]<br />
+$scope.n = 10000;<br />
+$scope.primes = new Array($scope.n);<br />
+for (k = 0; k &lt; $scope.n; k += 1) {<br />
+  $scope.primes[k] = { foo: { bar: &#8216;baz&#8217; } };<br />
+}<br />
+$scope.$watch(function primesWatcher() {<br />
+  return $scope.primes;<br />
+}, angular.noop, true); // do nothing on value change<br />
+[/javascript]</p>
+<p>Взять код можно из тега <a href="https://github.com/bahmutov/primes/releases/tag/step-14">step-14</a>.</p>
+<p>Изначально загрузка приложения задерживатся на 500мс из-за объекта возвращаемого из <code>primesWatcher</code> и копируемого для дальнейшего сравнения. Приложение понесет тоже наказание каждый раз, когда объект primes будет изменен.</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2312" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/deep-copy-profile.png" alt="deep-copy-profile" width="2370" height="960" /></p>
+<p>Важная заметка: <span style="text-decoration: underline;">полная копия занимает НАМНОГО больше времени, чем полное сравнение</span>. Отсюда и задержка, которая появляется не в момент прохода дайджеста, а только когда что-то изменено. На практике это означает медленную реакцию на ввод пользовательских данных, когда результат вотчера копируется.</p>
+<p>Несколько предложений как победить дорогостоящее полное копирование в вотчерах:</p>
+<ul>
+<li>стараться использовать сравнение по ссылке (но не полный перебор)</li>
+<li>повторно использовать один и тот же  вотчер для нескольких действий</li>
+</ul>
+<p>Например:</p>
+<p>[javascript]<br />
+// вместо нескольких вотчеров<br />
+$scope.$watch(function () {<br />
+  return $scope.primes;<br />
+}, foo, true);<br />
+$scope.$watch(function () {<br />
+  return $scope.primes;<br />
+}, bar, true);<br />
+$scope.$watch(function () {<br />
+  return $scope.primes;<br />
+}, baz, true);<br />
+// используем один<br />
+$scope.$watch(function () {<br />
+  return $scope.primes;<br />
+}, function () {<br />
+  foo();<br />
+  bar();<br />
+  baz();<br />
+}, true);<br />
+[/javascript]</p>
+<ul>
+<li> использовать свою логику определения изменения состояния</li>
+</ul>
+<p>Объект <code>primes</code> изменяется каждый раз, когда мы добавляем новое число:</p>
+<p>[javascript]<br />
+.controller(&#8216;primesController&#8217;, function ($scope) {<br />
+  var primesChanged = 0;<br />
+  $scope.find = function () {<br />
+    $scopes.primes.push(findNextPrime());<br />
+    primesChanged += 1;<br />
+  };<br />
+  $scope.$watch(function () {<br />
+    return primesChanged;<br />
+  }, function () { &#8230; });<br />
+});<br />
+[/javascript]</p>
+<p>Тут я использую счетчик, чтобы гарантировано запускать вотчер, когда значение изменяется. Если бы я просто возвращал true/false, цикл дайджеста бы не заметил разницы, так как только разница возвращаемых значений играет роль, а не сами значения возвращаемые функцией.</p>
+<h2></h2>
+<h2 id="conclusions">Выводы и дальнейшее исследование</h2>
+<p>Улучшение производительности любого приложения это пошаговый процесс.</p>
+<ol>
+<li>Профилируйте, чтобы найти проблемные места</li>
+<li>Удаляется проблемные места</li>
+<li>Повторяйте шаги 1-2</li>
+</ol>
+<p>Я считаю целесообразным сначала удалить самые явные проблемные места, прежде чем погружаться в полный анализ. Во-первых, мы удаляем код, который дает основные тормоза. Во-вторых, удаление этого кода могло повлиять на другие проблемные места.</p>
+<p>Как правило код любого JavaScript приложения имеет проблемные места. Как только клиентский код оптимизирован, я переключаюсь на профилирование и оптимизацию Ангуляра, по большей части это удаление лишней работы, которую делает фреймворк. После чего, я переключаю внимание на выполнение кода/браузерную отрисовку, в надежде разбить большие куски на сравнительно небольшие части.</p>
+<p>Граматное решение по улучшению производительности требует знаний JavaScript, оптимизаторов среды выполнения, процесса браузерного рендеринга и специфики фреймворка вашего приложения. В первую очередь оно требует сравнение производительности приложения с ожиданиями пользователя интерфейса при различных сценариях. AngularJS имеет некоторые проблематичные места, такие как грязная проверка в ходе цикла дайджеста. Однако, это очень гибкий фреймворк, как вы могли убедиться на примерах. Я смог изменить части системы, заменить шаги, но это по прежнему Ангулар приложение. То есть мы можем улучшить производительность каких-то конкретных частей без жертвы гибкости и простоты для всего приложения.</p>
+<p><strong>UPD</strong>: как альтернативу ng-repeat c ngInfiniteScroll можно использовать директиву <a title="http://kamilkp.github.io/angular-vs-repeat" href="http://kamilkp.github.io/angular-vs-repeat">angular-vs-repeat</a> (обрабатывать только &#8220;видимые&#8221; строчки), которая так же дает хороший прирост к производительности.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/02/angularjs-optimization/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>JavaScript сниппеты в Chrome</title>
+		<link>https://stepansuvorov.com/blog/2015/01/javascript-%d1%81%d0%bd%d0%b8%d0%bf%d0%bf%d0%b5%d1%82%d1%8b-%d0%b2-chrome/</link>
+					<comments>https://stepansuvorov.com/blog/2015/01/javascript-%d1%81%d0%bd%d0%b8%d0%bf%d0%bf%d0%b5%d1%82%d1%8b-%d0%b2-chrome/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 30 Jan 2015 21:22:21 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[chrome]]></category>
+		<category><![CDATA[Developer Tools]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[snippet]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2243</guid>
+
+					<description><![CDATA[Еще одна прекрасная вещь внезапно обнаруженная мной в Chrome &#8211; это возможность создания JavaScript сниппетов &#8211; кусочков кода, которые можно будет выполнить в любой момент на странице. Чтобы добавить новый сниппет просто заходим в WebDeveloper -&#62; Sources -&#62; Snippets (табик справа) и &#8230; <a href="https://stepansuvorov.com/blog/2015/01/javascript-%d1%81%d0%bd%d0%b8%d0%bf%d0%bf%d0%b5%d1%82%d1%8b-%d0%b2-chrome/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Еще одна прекрасная вещь внезапно обнаруженная мной в <strong>Chrome</strong> &#8211; это возможность создания<strong> JavaScript сниппетов</strong> &#8211; кусочков кода, которые можно будет выполнить в любой момент на странице.</p>
+<p><span id="more-2243"></span></p>
+<p>Чтобы добавить новый сниппет просто заходим в <strong>WebDeveloper</strong> -&gt; <strong>Sources</strong> -&gt; <strong>Snippets</strong> (табик справа) и жмем &#8220;New&#8221;:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2267" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/01/Screenshot-2015-01-30-12.33.11.png" alt="add js snippet" width="278" height="178" /></p>
+<p>Крайне удобно для тестирования и отладки. Например: я добавил <strong>сниппет</strong>, который подсчитывает <strong>количество вотчеров</strong> для моего <strong>AngularJS</strong> приложения:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2268" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/01/Screenshot-2015-01-30-16.04.01.png" alt="count watcher snippet" width="833" height="397" /></p>
+<p>Ключевые моменты JS-снипетов:</p>
+<ul>
+<li>позволяют использовать библиотеки подключенные к странице</li>
+<li>возможность выставлять брейкпоинты как в обычном скрипте</li>
+<li>прекрасная альтернатива <a title="http://userscripts-mirror.org/" href="http://userscripts-mirror.org/">userscripts</a> и браузерным закладкам(<a title="Debug ON. Кнопка в FireFox для разработчика." href="https://stepansuvorov.com/blog/2012/03/debug-on/">в которых тоже можно выполнять javascript код</a>)</li>
+</ul>
+<p>Глеб Бахмутов уже успел собрать <a title="github.com/bahmutov" href="https://github.com/bahmutov/code-snippets">коллекцию популярных сниппетов</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/01/javascript-%d1%81%d0%bd%d0%b8%d0%bf%d0%bf%d0%b5%d1%82%d1%8b-%d0%b2-chrome/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

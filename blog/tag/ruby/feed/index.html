@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>ruby &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/ruby/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Fri, 10 Jan 2014 13:19:02 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Быстрый старт с Rails</title>
+		<link>https://stepansuvorov.com/blog/2014/01/%d0%b1%d1%8b%d1%81%d1%82%d1%80%d1%8b%d0%b9-%d1%81%d1%82%d0%b0%d1%80%d1%82-%d1%81-rails/</link>
+					<comments>https://stepansuvorov.com/blog/2014/01/%d0%b1%d1%8b%d1%81%d1%82%d1%80%d1%8b%d0%b9-%d1%81%d1%82%d0%b0%d1%80%d1%82-%d1%81-rails/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 10 Jan 2014 13:17:49 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[rails]]></category>
+		<category><![CDATA[ruby]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1348</guid>
+
+					<description><![CDATA[Rails - фреймворк для построения веб-приложений, который основан на архитектуре MVC, ориентирован на быстрое написание кода(не производительность). Сервером может быть Apache или nginx с модулем Phusion Passenger. В качестве СУБД можно использовать MySQL, PostgreSQL, SQLite, Oracle и прочие. Пост, который поможет за &#8230; <a href="https://stepansuvorov.com/blog/2014/01/%d0%b1%d1%8b%d1%81%d1%82%d1%80%d1%8b%d0%b9-%d1%81%d1%82%d0%b0%d1%80%d1%82-%d1%81-rails/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" fetchpriority="high" class="alignnone size-medium wp-image-1349" title="Ruby_on_Rails_logo" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Ruby_on_Rails_logo-252x300.jpg" alt="" width="252" height="300" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Ruby_on_Rails_logo-252x300.jpg 252w, https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Ruby_on_Rails_logo.jpg 316w" sizes="(max-width: 252px) 100vw, 252px" /></p>
+<p><strong>Rails</strong> - фреймворк для построения веб-приложений, который основан на архитектуре MVC, ориентирован на быстрое написание кода(не производительность). Сервером может быть <strong>Apache</strong> или <strong>nginx</strong> с модулем <strong>Phusion Passenger</strong>. В качестве СУБД можно использовать <strong>MySQL</strong>, <strong>PostgreSQL</strong>, <strong>SQLite</strong>, <strong>Oracle</strong> и прочие.</p>
+<p>Пост, который поможет за несколько шагов развернуть простой проект на <strong>ruby on rails</strong> без знания <strong>ruby</strong>. Без претензии на новизну либо подробное рассмотрение деталей(внимание: те, кто уже знаком с <strong>Ruby</strong> либо <strong>Rails</strong>, могут сильно плеваться).</p>
+<p><span id="more-1348"></span></p>
+<h2>Установка Ruby</h2>
+<p>Для невиндовых операционных систем я предлагаю установку через <a title="rvm" href="http://rvm.io/">RVM</a>:</p>
+<pre>$ \curl -sSL https://get.rvm.io | bash -s stable</pre>
+<p>а затем:</p>
+<pre>$ rvm install ruby</pre>
+<p>* также тут можно указать какую версию(по умолчанию &#8211; последняя) поставить, например:</p>
+<pre>$ rvm install ruby-1.9.3-p484</pre>
+<p>Для пользователей Windows остается довольствоваться <a title="Ruby Installer" href="http://rubyinstaller.org/">RubyInstaller</a>.</p>
+<p>Проверим установился ли руби:</p>
+<pre>$ ruby --version</pre>
+<p>&nbsp;</p>
+<h2>Пробуем Ruby</h2>
+<p>Чтобы поиграться с руби можно запустить <a title="ruby shell" href="http://ru.wikipedia.org/wiki/Interactive_Ruby_Shell">irb</a> &#8211; командную оболочку, для выполнения кода из консоли</p>
+<pre>$ irb</pre>
+<p>и попробовать что-то такое</p>
+<pre>&gt; "somestring".reverse</pre>
+<p>Если о самом <strong>Ruby</strong> представления нет, то желательно пройти какой-то крайткий курс по синтаксису, например <a title="try ruby" href="http://tryruby.org/">TryRuby</a>.</p>
+<h2>Установка Rails</h2>
+<pre>$ gem install rails</pre>
+<p>Проверяем</p>
+<pre>$ rails -v</pre>
+<h2>Выбор среды для разработки на Ruby on Rails</h2>
+<p>полноценные среды разработки:</p>
+<ul>
+<li><a title="radrails" href="http://www.aptana.com/products/radrails">Aptana RadRails</a></li>
+<li><a title="rubyMine" href="http://www.jetbrains.com/ruby/">RubyMine</a> (платный)</li>
+<li><a title="netbeans" href="https://netbeans.org/">Netbeans</a></li>
+</ul>
+<p>текстовые редакторы с подсветкой кода:</p>
+<ul>
+<li><a href="http://macromates.com/">TextMate</a></li>
+<li><a title="SublimeText" href="http://www.sublimetext.com/">SublimeText</a></li>
+<li>Vim (с плагинами и оболочками)</li>
+</ul>
+<h2>Создание структуры проекта на Rails</h2>
+<div>Для разбора зададимся целью написать простейший блог.</div>
+<div>Сгенерировать структуру проекта нам поможет команда( в рабочей директории)</div>
+<pre>$ rails new blog</pre>
+<div><em>blog</em> &#8211; название вашего проекта.</div>
+<div>После, мы увидим новую директорию с первоначальной структурой.</div>
+<div><img decoding="async" class="alignnone size-medium wp-image-1361" title="rails project structure" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-08-15.00.59-282x300.png" alt="" width="282" height="300" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-08-15.00.59-282x300.png 282w, https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-08-15.00.59.png 305w" sizes="(max-width: 282px) 100vw, 282px" /></div>
+<div>Посмотреть все возможные настройки так:</div>
+<div>
+<pre>$ rails new -h</pre>
+</div>
+<div>Разберем более подробно структуру каталогов</div>
+<div>
+<table>
+<tbody>
+<tr>
+<td><tt>app/</tt></td>
+<td>главный каталог, включает модели, представления, контроллеры и помощники</td>
+</tr>
+<tr>
+<td><tt>config/</tt></td>
+<td>файлы конфигурации</td>
+</tr>
+<tr>
+<td><tt>db/</tt></td>
+<td>управления базой данных: схема базы данных и миграции</td>
+</tr>
+<tr>
+<td><tt>doc/</tt></td>
+<td>документация</td>
+</tr>
+<tr>
+<td><tt>lib/</tt></td>
+<td>дополнительные библиотеки</td>
+</tr>
+<tr>
+<td><tt>log/</tt></td>
+<td>логи</td>
+</tr>
+<tr>
+<td><tt>public/</tt></td>
+<td>единственная папка, видимая для пользователей; содержит картинки, стили, статические html странички</td>
+</tr>
+<tr>
+<td><tt>script/rails</tt></td>
+<td>Скрипт Rails для генерации кода, открытия консоли сессий, или запуск локального веб-сервера</td>
+</tr>
+<tr>
+<td><tt>test/</tt></td>
+<td>Юнит-тесты</td>
+</tr>
+<tr>
+<td><tt>tmp/</tt></td>
+<td>Временные файлы</td>
+</tr>
+<tr>
+<td><tt>vendor/</tt></td>
+<td>Сторонний код, например плагины и гемы</td>
+</tr>
+<tr>
+<td><tt>README.rdoc</tt></td>
+<td>инструкции к проекту</td>
+</tr>
+<tr>
+<td><tt>Rakefile</tt></td>
+<td>Описание задач выполняемых в командной строке (команда rake)</td>
+</tr>
+<tr>
+<td><tt>Gemfile</tt></td>
+<td>Gem требования для приложения, используется Bundler</td>
+</tr>
+<tr>
+<td><tt>config.ru</tt></td>
+<td>Файл конфигурации для Rack middleware</td>
+</tr>
+<tr>
+<td><tt>.gitignore</tt></td>
+<td>стандартный файл git- инструкций (список файлов, которые должны быть проигнорированы Git)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>Запуск Rails сервера</h2>
+<div>Чтобы вывести в браузере наш проект, нам необходим веб-сервер. Стартуем:</div>
+<div>Переходим <span style="text-decoration: underline;">в папку нашего проекта</span>:</div>
+<pre>$ cd blog</pre>
+<div>выполняем команду запуска сервера:</div>
+<pre>$ rails server</pre>
+<div>Теперь можем открыть <a href="http://localhost:3000/">http://localhost:3000</a> и увидеть следующее содержимое:</div>
+<div><img decoding="async" class="alignnone size-medium wp-image-1362" title="rails welcome page" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/rails_welcome-300x225.png" alt="" width="300" height="225" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/rails_welcome-300x225.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/01/rails_welcome-400x300.png 400w, https://stepansuvorov.com/blog/wp-content/uploads/2014/01/rails_welcome.png 756w" sizes="(max-width: 300px) 100vw, 300px" /></div>
+<h2></h2>
+<h2>Создаем controller и action</h2>
+<div>Для создания контроллера <em>welcome</em> и экшена <em>index</em> в нем, нам достаточно выполнить одну команду:</div>
+<pre>$ rails generate controller welcome index</pre>
+<div>это создаст для нас не только файл контроллера, но также шаблон представления, файл тестов, вспомогательные статические файлы и пропишет новую инструкцию в маршруты(route).</div>
+<div>Теперь можем открыть в редакторе новый шаблон</div>
+<pre>app/views/welcome/index.html.erb</pre>
+<div> и отредактировать его по своему усмотрению, например написать</div>
+<pre>&lt;h1&gt;Hello, Rails!&lt;/h1&gt;</pre>
+<div>Теперь, если мы перейдем по адресу <a href="http://127.0.0.1:3000/welcome/index">http://127.0.0.1:3000/welcome/index</a>, мы увидим нашу страничку.</div>
+<h2></h2>
+<h2>Вносим изменения в route конфигурацию</h2>
+<div>Предположим что мы захотели чтобы наша страничка выводилась по умолчанию. Для этого открываем файл <strong>config/routes.rb</strong>. Находим строчку</div>
+<pre># root :to =&gt; 'welcome#index'</pre>
+<div>
+<p>и раскомментируем ее. Тем самым указав что наш корневой путь будет ссылаться на</p>
+<pre>'welcome#index'</pre>
+</div>
+<div>также удалим статическую страничку, она нам больше не нужна:</div>
+<pre>$ rm public/index.html</pre>
+<div>и теперь зайдем на  <a href="http://127.0.0.1:3000/welcome/index">http://127.0.0.1:3000</a> (сервер перегружать при этом не нужно) и должны увидеть нашу страничку.</div>
+<div><img decoding="async" loading="lazy" class="alignnone size-full wp-image-1367" title="Screenshot 2014-01-08 17.28.08" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-08-17.28.08.png" alt="" width="262" height="210" /></div>
+<div>Если выполнить команду</div>
+<div>
+<pre>$ rake routes</pre>
+<p>то можно увидеть список всех роутов:</p>
+<pre>welcome_index GET /welcome/index(.:format) welcome#index
+      root     /                        welcome#index</pre>
+</div>
+<h2>Добавляем ресурс</h2>
+<p>Ресурс (<strong>resourse</strong>) в терминологии <strong>Rails</strong> &#8211; это коллекция объектов, над которыми можно выполнять <strong>CRUD</strong> операции.</p>
+<p>Чтобы добавить путь в роутах для нового ресурса достаточно написать resources :%resourseName%, т.е. в нашем примере добавим строчку:</p>
+<pre>resources :posts</pre>
+<p>в <strong>config/routes.rb</strong>.</p>
+<p>Пероверим роуты уже знакомой командой:</p>
+<pre>$ rake routes
+welcome_index GET    /welcome/index(.:format)  welcome#index
+posts GET    /posts(.:format)          posts#index
+POST   /posts(.:format)          posts#create
+new_post GET    /posts/new(.:format)      posts#new
+edit_post GET    /posts/:id/edit(.:format) posts#edit
+post GET    /posts/:id(.:format)      posts#show
+PUT    /posts/:id(.:format)      posts#update
+DELETE /posts/:id(.:format)      posts#destroy
+root        /                         welcome#index</pre>
+<div>как видим этой одной строчкой мы задали инструкции для всех CRUD путей.</div>
+<div>Добавим контроллер для нашего ресурса:</div>
+<pre>$ rails g controller posts index</pre>
+<div>команда создаст файл app/controllers/posts_controller.rb</div>
+<div>Теперь можем перейти на созданный index-экшен &#8211; <a href="http://localhost:3000/posts">http://localhost:3000/posts</a></div>
+<div><img decoding="async" loading="lazy" class="alignnone size-full wp-image-1368" title="Screenshot 2014-01-09 15.15.51" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-09-15.15.51.png" alt="" width="294" height="136" /></div>
+<div>Созданим экшен для добавления нового поста: для этого перейдем в файл posts-контроллера &#8211; app/controllers/posts_controller.rb и пропишем там новый метод <em>new</em>:</div>
+<pre>def new
+end</pre>
+<div>Теперь можем попробовать перейти на <a href="http://localhost:3000/posts/new">http://localhost:3000/posts/new</a></div>
+<div>И получить сообщение об ошибке:</div>
+<div><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-1369" title="Screenshot 2014-01-09 16.22.53" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-09-16.22.53-300x101.png" alt="" width="300" height="101" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-09-16.22.53-300x101.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-09-16.22.53.png 427w" sizes="(max-width: 300px) 100vw, 300px" /></div>
+<div>которая нам говорит о том, что мы еще не создали шаблон представления для этого экшена. Создалим его (app/views/posts/new.html.erb) с содержимым &lt;h1&gt;New Post&lt;/h1&gt;.</div>
+<div>Перейдем еще раз на <a href="http://localhost:3000/posts/new">http://localhost:3000/posts/new</a> и увидим уже наш контент:</div>
+<div><a href="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-09-16.29.00.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-1370" title="Screenshot 2014-01-09 16.29.00" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-09-16.29.00.png" alt="" width="256" height="158" /></a></div>
+<h2></h2>
+<h2>Работа с представлением(view)</h2>
+<div>Итак у нас есть страничка для создания поста, добавим к ней форму. Для этого используем form_for хелпер(вспомогательный метод для представления), получим:</div>
+<div>
+<pre>&lt;%= form_for :post, url: posts_path do |f| %&gt;
+  &lt;p&gt;
+    &lt;%= f.label :title %&gt;&lt;br&gt;
+    &lt;%= f.text_field :title %&gt;
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    &lt;%= f.label :text %&gt;&lt;br&gt;
+    &lt;%= f.text_area :text %&gt;
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    &lt;%= f.submit %&gt;
+  &lt;/p&gt;
+&lt;% end %&gt;</pre>
+</div>
+<div>Перейдем на  <a href="http://localhost:3000/posts/new">http://localhost:3000/posts/new</a> и увидим нашу формочку:</div>
+<div><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-1371" title="Screenshot 2014-01-09 16.39.42" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-09-16.39.42-231x300.png" alt="" width="231" height="300" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-09-16.39.42-231x300.png 231w, https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-09-16.39.42.png 327w" sizes="(max-width: 231px) 100vw, 231px" /></div>
+<div>Вот <a href="http://rusrails.ru/rails-form-helpers">тут</a>можно почитать о форм-хелперах более подробно. Единственно что хочу разъяснить &#8220;<span style="background-color: #f4f4f4; font-family: 'Courier 10 Pitch', Courier, monospace; font-size: 13px; font-style: normal; line-height: 1.5;">posts_path</span>&#8221; &#8211; это ссылка на путь /posts. Rails отправляет данные формы POST запросом, поэтому мы попадем на posts#create в роутерах:</div>
+<div><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-1372" title="Screenshot 2014-01-09 17.21.24" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-09-17.21.24-300x39.png" alt="" width="300" height="39" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-09-17.21.24-300x39.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-09-17.21.24.png 392w" sizes="(max-width: 300px) 100vw, 300px" /></div>
+<div>Осталось создать экшен create в контроллере posts, так же как и для new создаем новый метод, итого получим контроллер</div>
+<div>
+<pre>class PostsController &lt; ApplicationController
+  def index
+  end
+
+  def new
+  end
+
+  def create
+    render text: params[:post].inspect
+  end
+end</pre>
+</div>
+<div>с 3мя методами. Экшн <em>create</em> содержит в себе метод <em>render</em>, который принимает параметр с ключем &#8216;<em>text</em>&#8216; и значением &#8216;<em>params[:post].inspect</em>&#8216;.</div>
+<div>Теперь, если отправить форму, мы увидим значение заполненных полей.</div>
+<h2></h2>
+<h2>Создание моделей</h2>
+<div>Имя <strong>Rails-модели</strong> в <span style="text-decoration: underline;">единственном числе</span>, а соответствующая ей таблица в базе данных &#8211; во <span style="text-decoration: underline;">множественном</span>. Для создания модели <em>Post</em> со свойствами <em>title</em> и <em>text</em> выполним команду:</div>
+<pre>$ rails generate model Post title:string text:text</pre>
+<div>после чего будет создано несколько файлов: модель, файл тестов и файл инструкций для обновления базы</div>
+<div><strong>Связывание модели с базой данный</strong></div>
+<div>Файл инструкций для обноления базы уже был создан в предыдущем шаге. Нам остается только запустить команду миграции:</div>
+<div>
+<pre>$ rake db:migrate</pre>
+</div>
+<div>которая создаст для нас таблицу Posts.</div>
+<div>* Настройки базы данных лежат <strong>config/database.yml</strong></div>
+<h2></h2>
+<h2>Сохранение данных модели в базу</h2>
+<p>Теперь перепишем на метод create так, чтобы он сохранял данные в базу:</p>
+<pre>  def create
+    @post = Post.new(params[:post])  #создаем модель и наполняем данными формы
+
+    @post.save    # сохраняем модель
+    redirect_to @post    #переадресовываем на страницу отображения поста
+  end</pre>
+<h2></h2>
+<h2>Вывод данных</h2>
+<p>По умолчанию для вывода модели используется экшн <em>show</em>, что можно проверить опять же такие командой <em>rake routes</em>:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-1376" title="Screenshot 2014-01-09 18.29.02" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-09-18.29.02-300x23.png" alt="" width="300" height="23" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-09-18.29.02-300x23.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-09-18.29.02.png 420w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>Создадим в нашем контроллере данный метод:</p>
+<pre>  def show
+    @post = Post.find(params[:id])
+  end</pre>
+<div>который получит данные по :id. Не забудем так же создать вьюху (<em>app/views/posts/show.html.erb</em>):</div>
+<div>
+<pre>&lt;p&gt;
+  &lt;strong&gt;Title:&lt;/strong&gt;
+  &lt;%= @post.title %&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+  &lt;strong&gt;Text:&lt;/strong&gt;
+  &lt;%= @post.text %&gt;
+&lt;/p&gt;</pre>
+<p>Еще раз попробуйте добавить новый пост <a href="http://localhost:3000/posts/new">http://localhost:3000/posts/new</a></p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-1378" title="Screenshot 2014-01-10 11.44.53" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-10-11.44.53.png" alt="" width="233" height="103" /></p>
+<p>Поработаем над выводом всех сообщений. Для этого отредактируем index шаблон (<em>app/views/posts/index.html.erb</em>):</p>
+<pre>&lt;h1&gt;Listing posts&lt;/h1&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Title&lt;/th&gt;
+    &lt;th&gt;Text&lt;/th&gt;
+  &lt;/tr&gt;
+
+  &lt;% @posts.each do |post| %&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;%= post.title %&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;%= post.text %&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;% end %&gt;
+&lt;/table&gt;</pre>
+<p>И добавим получение данных в экшен-метод:</p>
+<pre>  def index
+    @posts = Post.all
+  end</pre>
+</div>
+<div>Перейдя на <a href="http://localhost:3000/posts/">http://localhost:3000/posts/</a> мы должны увидеть все посты.</div>
+<div>Добавим ссылки: с главной странички(шаблон <em>app/views/welcome/index.html.erb</em>) на страничку постов:</div>
+<pre>&lt;%= link_to "My Blog", controller: "posts" %&gt;</pre>
+<p>со странички постов на создание нового:</p>
+<pre>&lt;%= link_to 'New post', new_post_path %&gt;</pre>
+<div>ссылку &#8220;Назад&#8221; для странички нового поста и просмотра поста:</div>
+<pre>&lt;%= link_to 'Back', posts_path %&gt;</pre>
+<div>Как вы уже могли обратить внимание мы использовали <strong>link_to</strong> вью-хелпер. Более подробно о нем <a title="Rails Api" href="http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html">RTFM</a>.</div>
+<h2>Обновление данных</h2>
+<div>Мы уже разобрали как создавать данные и выводить их. Теперь поговорим об обновлении даных модели.</div>
+<div>Добавляем edit экшен в наш контроллер:</div>
+<div>
+<pre>  def edit
+    @post = Post.find(params[:id])
+  end</pre>
+</div>
+<div>в котором будет только получение информации, и шаблон для него (app/views/posts/edit.html.erb):</div>
+<div>
+<pre>&lt;h1&gt;Editing post&lt;/h1&gt;
+
+&lt;%= form_for :post, url: post_path(@post), method: :patch do |f| %&gt;
+    &lt;% if @post.errors.any? %&gt;
+        &lt;div id="error_explanation"&gt;
+          &lt;h2&gt;&lt;%= pluralize(@post.errors.count, "error") %&gt; prohibited
+            this post from being saved:&lt;/h2&gt;
+          &lt;ul&gt;
+            &lt;% @post.errors.full_messages.each do |msg| %&gt;
+                &lt;li&gt;&lt;%= msg %&gt;&lt;/li&gt;
+            &lt;% end %&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;% end %&gt;
+    &lt;p&gt;
+      &lt;%= f.label :title %&gt;&lt;br&gt;
+      &lt;%= f.text_field :title %&gt;
+    &lt;/p&gt;
+
+    &lt;p&gt;
+      &lt;%= f.label :text %&gt;&lt;br&gt;
+      &lt;%= f.text_area :text %&gt;
+    &lt;/p&gt;
+
+    &lt;p&gt;
+      &lt;%= f.submit %&gt;
+    &lt;/p&gt;
+&lt;% end %&gt;
+
+&lt;%= link_to 'Back', posts_path %&gt;</pre>
+</div>
+<div>Теперь для сохранения информации добавим update экшн:</div>
+<div>
+<pre>  def update
+    @post = Post.find(params[:id])
+
+    if @post.update(params[:post])
+      redirect_to @post
+    else
+      render 'edit'
+    end
+  end</pre>
+</div>
+<div>и добавим ссылку на редактирование при выводе постов:</div>
+<div>
+<pre>   &lt;td&gt;&lt;%= link_to 'Show', post %&gt;&lt;/td&gt;
+   &lt;td&gt;&lt;%= link_to 'Edit', edit_post_path(post) %&gt;&lt;/td&gt;</pre>
+</div>
+<h2>Удаление данных</h2>
+<div>Добавим экшн-метод удаления поста:</div>
+<div>
+<pre>def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+
+    redirect_to posts_path
+  end</pre>
+</div>
+<div>и ссылочку для удаления на страницу вывода всех постов</div>
+<div>
+<pre>&lt;td&gt;&lt;%= link_to 'Destroy', post_path(post),
+           method: :delete, data: { confirm: 'Are you sure?' } %&gt;&lt;/td&gt;</pre>
+</div>
+<div>Обратите внимание что мы передаем данные методом DELETE, и запрашиваем подтверждение на выполнение действия (в нашем случае это удаление)</div>
+<div>Страничка теперь выглядит так:</div>
+<div><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-1379" title="posts page" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-10-13.47.59-300x207.png" alt="" width="300" height="207" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-10-13.47.59-300x207.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/01/Screenshot-2014-01-10-13.47.59.png 387w" sizes="(max-width: 300px) 100vw, 300px" /></div>
+<h2>Создание партиалов представления</h2>
+<div>Для уменьшения количества html-кода, общие фрагменты выносятся в так назвываемые вью-партиалы(partial). В нашем случае это формочка, которая используется для создания поста, а также для его редактирования. Вынесем ее в отдельный шаблон(<em>app/views/posts/_form.html.erb</em>):</div>
+<div>
+<pre>&lt;%= form_for @post do |f| %&gt;
+    &lt;% if @post.errors.any? %&gt;
+        &lt;div id="error_explanation"&gt;
+          &lt;h2&gt;&lt;%= pluralize(@post.errors.count, "error") %&gt; prohibited
+            this post from being saved:&lt;/h2&gt;
+          &lt;ul&gt;
+            &lt;% @post.errors.full_messages.each do |msg| %&gt;
+                &lt;li&gt;&lt;%= msg %&gt;&lt;/li&gt;
+            &lt;% end %&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;% end %&gt;
+    &lt;p&gt;
+      &lt;%= f.label :title %&gt;&lt;br&gt;
+      &lt;%= f.text_field :title %&gt;
+    &lt;/p&gt;
+
+    &lt;p&gt;
+      &lt;%= f.label :text %&gt;&lt;br&gt;
+      &lt;%= f.text_area :text %&gt;
+    &lt;/p&gt;
+
+    &lt;p&gt;
+      &lt;%= f.submit %&gt;
+    &lt;/p&gt;
+&lt;% end %&gt;</pre>
+</div>
+<div>Чтобы подключить наш вью-партиал необходимо добавить строчку:</div>
+<pre>&lt;%= render 'form' %&gt;</pre>
+<div>Так и сделаем с <em>new</em> и <em>edit</em> шаблонами.</div>
+<div>Для начала это все.</div>
+<div>Валидация, добавление комментариев к постам и авторизация во второй части.</div>
+<div>Пост является переосмыслением и компиляцией статьи <a href="http://guides.rubyonrails.org/getting_started.html">Getting Started with Rails</a> и ее <a href="http://rusrails.ru/getting-started-with-rails">русского перевода</a>.</div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/01/%d0%b1%d1%8b%d1%81%d1%82%d1%80%d1%8b%d0%b9-%d1%81%d1%82%d0%b0%d1%80%d1%82-%d1%81-rails/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Codewars service (with JavaScript, CoffeeScript, Ruby inside)</title>
+		<link>https://stepansuvorov.com/blog/2013/12/codewars-service-with-javascript-coffeescript-ruby-inside/</link>
+					<comments>https://stepansuvorov.com/blog/2013/12/codewars-service-with-javascript-coffeescript-ruby-inside/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 11 Dec 2013 21:07:12 +0000</pubDate>
+				<category><![CDATA[Рекомендую]]></category>
+		<category><![CDATA[codewars]]></category>
+		<category><![CDATA[coffeescript]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[online]]></category>
+		<category><![CDATA[ruby]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1320</guid>
+
+					<description><![CDATA[Extremely recommended to try codewars.com. It&#8217;s the place where you can check and train your skills. Also look and compare you results with other solutions.]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-1321" title="Screenshot 2013-12-11 21.55.06" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/12/Screenshot-2013-12-11-21.55.06-300x135.png" alt="" width="300" height="135" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2013/12/Screenshot-2013-12-11-21.55.06-300x135.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2013/12/Screenshot-2013-12-11-21.55.06-1024x462.png 1024w, https://stepansuvorov.com/blog/wp-content/uploads/2013/12/Screenshot-2013-12-11-21.55.06-500x225.png 500w, https://stepansuvorov.com/blog/wp-content/uploads/2013/12/Screenshot-2013-12-11-21.55.06.png 1127w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>Extremely recommended to try <a title="codewars" href="http://www.codewars.com/dashboard">codewars.com</a>. It&#8217;s the place where you can check and train your skills. Also look and compare you results with other solutions.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/12/codewars-service-with-javascript-coffeescript-ruby-inside/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

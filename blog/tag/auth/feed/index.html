@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>auth &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/auth/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 02 Mar 2017 20:22:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Авторизация AngularJS. Right way.</title>
+		<link>https://stepansuvorov.com/blog/2014/08/%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f-angularjs-right-way/</link>
+					<comments>https://stepansuvorov.com/blog/2014/08/%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f-angularjs-right-way/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 15 Aug 2014 18:47:29 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[auth]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[ui-router]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1622</guid>
+
+					<description><![CDATA[Изучив кучу инструкций по сборке различных моделей велосипедов я таки собрал свой. Будет хорошо, если пост поможет сэкономить кому-то время на конструирование. UPD: Статья обновлена и дополнена 2017-02-21 Отдельный модуль Так как я сторонник модульного подхода и считаю, что именно &#8230; <a href="https://stepansuvorov.com/blog/2014/08/%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f-angularjs-right-way/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" fetchpriority="high" class="alignnone size-full wp-image-1762" title="angular auth" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/06/imgres.png" alt="" width="218" height="231" /></p>
+<p>Изучив кучу инструкций по сборке различных моделей велосипедов я таки собрал свой. Будет хорошо, если пост поможет сэкономить кому-то время на конструирование.</p>
+<p><strong>UPD</strong>: Статья обновлена и дополнена <strong>2017-02-21</strong></p>
+<p><span id="more-1622"></span></p>
+<h1>Отдельный модуль</h1>
+<p>Так как я сторонник модульного подхода и считаю, что именно это правильный способ использования <strong>AngualrJS</strong>, то весь функционал связанный с авторизацией я сложил в отдельный модуль <strong>auth</strong>. К нему подключаю модуль управления <a href="https://docs.angularjs.org/api/ngCookies/service/$cookies">кукисами</a> и модуль организации удобной работы с <strong>REST</strong>(<a title="github.com/mgonto/restangular" href="https://github.com/mgonto/restangular">restangular</a>):</p>
+<p>[javascript]angular.module(&#8216;auth&#8217;, [&#8216;ngCookies&#8217;, &#8216;restangular&#8217;]);[/javascript]</p>
+<h2>Сервис авторизации</h2>
+<p>Понятное дело, что какой бы вы самокат не делали, без сервиса не обойтись. Что в нем должно находиться? Делаем REST/token вариант авторизации, поэтому в сервисе будет следующий функционал:</p>
+<ul>
+<li>авторизация по логину (асинхронная операция: POST запрос и получение/сохранения токена)</li>
+<li>авторизация по токену (асинхронная операция: GET запрос и получение информации по пользователю)</li>
+<li>проверка статуса (синхронная операция)</li>
+<li>логаут (зачистка данных авторизации &#8211; токена)</li>
+</ul>
+<p>Вот упрощенная версия кода(выкинул обработку ошибок):</p>
+<p>[javascript]angular.module(&#8216;auth&#8217;)<br />
+  .service(&#8216;AuthService&#8217;, function($cookies, $http, Restangular) {<br />
+    &#8216;use strict&#8217;;</p>
+<p>    var self = this;<br />
+    this.status = {<br />
+      authorized: false,<br />
+    };</p>
+<p>    this.loginByCredentials = function(username, password) {<br />
+      return Restangular.all(&#8216;sessions&#8217;).post({ email: username, password: password })<br />
+        .then(function(response) {<br />
+          return self.loginByToken(response.contents);<br />
+        });<br />
+    };</p>
+<p>    this.loginByToken = function(token) {<br />
+      $http.defaults.headers.common[&#8216;X-Token&#8217;] = token;</p>
+<p>      return Restangular.all(&#8216;sessions&#8217;).get(token)<br />
+        .then(function(response) {<br />
+          $cookies.accessToken = token;<br />
+          self.status.authorized = true;<br />
+          return response;<br />
+        });<br />
+    };</p>
+<p>    this.logout = function() {<br />
+      self.status.authorized = false;<br />
+      $cookies.accessToken = &#8221;;</p>
+<p>      Restangular.all(&#8216;sessions&#8217;).remove();<br />
+    };<br />
+  });[/javascript]</p>
+<p>Приходится подключать <strong>$http</strong> сервис для вот этого хака:</p>
+<p>[javascript]$http.defaults.headers.common[&#8216;X-Token&#8217;] = token;[/javascript]</p>
+<p>&#8211; по другому в <strong>Restangular</strong> не получается динамически задать хедер, в котором мы хотим отправлять токен авторизации.</p>
+<p>(если у вас есть другое решение данной ситуации &#8211; пожалуйста поделитесь)</p>
+<h2>Страница авторизации</h2>
+<p>Если вы используете стандартный ангуляровский роутер, тут может возникнуть вопрос: Как для авторизации показывать другой лэйаут?</p>
+<p>Решение подсказал <a title="olostan.name" href="http://olostan.name/">Валентин Шибанов</a>, который предложил завернуть все содержимое(в том числе <strong>ui-view</strong>) в <strong>ng-if</strong>, который бы в зависимости от того, авторизираван пользователь или нет, показывал бы либо содержимое с меню либо формочку авторизации.</p>
+<p>Итого имеем(опять очень упрощенная версия):</p>
+<p>[html]<br />
+&lt;div ng-if=&quot;isAutorized&quot;&gt;<br />
+    &lt;menu&gt;&lt;/menu&gt;<br />
+    &lt;ui-view&gt;&lt;/ui-vew&gt;<br />
+&lt;div ng-if=&quot;!isAutorized&quot;&gt;<br />
+    &lt;login&gt;&lt;/login&gt;<br />
+&lt;/div&gt;<br />
+[/html]</p>
+<h2></h2>
+<h2>Плюшки с интерсепторами</h2>
+<p>Если переодически пропадает сессия с сервером(таймаут), но клиент остается активным, и вы хотите восстановить сессию без привлечения пользователя, можно посмотреть в сторону <a href="https://stepansuvorov.com/blog/2014/04/angularjs-interceptors-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B/">интерсепторов</a>. Так же интерсепторы можно использовать для общей обработки ошибок авторизации.</p>
+<h2>Момент определения состояния авторизации и ограничение доступа</h2>
+<p>Давайте разберемся, в какой момент мы должны/можем проверять состояние авторизации. Все варианты можно условно разбить на 2:</p>
+<ul>
+<li>ответ API (мы узнали от сервера)</li>
+<li>изменение состояния (перешли на другую страничку)
+<ul>
+<li>событие изменение состояния</li>
+<li>резолв конкретного стейта</li>
+</ul>
+</li>
+</ul>
+<p>Давайте посмотрим на все случаи.</p>
+<h2>Ответ от API и интерсептор для обратки ошибки</h2>
+<p>Про интерсепторы можно более подробно почитать <a href="https://stepansuvorov.com/blog/2014/04/angularjs-interceptors-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B/">тут</a>. Мы с вами реализуем один из них интесептор ошибки ответа:</p>
+<p>[javascript]<br />
+app.service(&#8216;authRejector&#8217;, function($q) {<br />
+    this.responseError = (rejection) =&gt; {<br />
+      if (rejection.status === 401) {<br />
+        //делаем какие-то действия для пользователя без авторизации<br />
+      }</p>
+<p>      return $q.reject(rejection);<br />
+    };<br />
+  });<br />
+[/javascript]</p>
+<p>и потом подключаем наш интерсептор к остальным:</p>
+<p>[javascript]<br />
+  app.config(function($httpProvider) {<br />
+    $httpProvider.interceptors.push(&#8216;authRejector&#8217;);<br />
+  });<br />
+[/javascript]</p>
+<h2>Изменение стейта</h2>
+<p>Навесить хук в событие <strong>ui-router</strong> можно с помощью сервиса <strong>$transitions</strong>:</p>
+<p>[javascript]<br />
+$transitions.onEnter({ to: &#8216;stateName&#8217; }, function($state$, $transition$) {<br />
+  if(!AuthService.status.authorized){<br />
+    //делаем какие-то действия для пользователя без авторизации<br />
+    return $q.reject()<br />
+  }</p>
+<p>}<br />
+[/javascript]</p>
+<h2>Запрет доступа к страница с помощью резолв</h2>
+<p>Давайте предлополжим, что у нас есть стейт <strong>users</strong>:</p>
+<p>[javascript]<br />
+ .state(&#8216;users&#8217;, {})<br />
+[/javascript]</p>
+<p>к которому мы хотим ограничить доступ. Для этого добавим резолв с использованием все того же сервиса авторизации:</p>
+<p>[javascript]<br />
+        .state(&#8216;users&#8217;, {<br />
+          resolve: {<br />
+            auth: function($q, AuthService) {<br />
+              if(!AuthService.status.authorized) {<br />
+                $q.reject();<br />
+                alert(&#8216;Вы должны авторизироваться!&#8217;);<br />
+              }<br />
+            }<br />
+          }<br />
+        })<br />
+[/javascript]</p>
+<h2>Проверка авторизации при переходе на другую страницу</h2>
+<p>В<strong> ui-router</strong> мы можем навесить хук на событие перехода на какой либо стейт с помощью сервиса <strong>$transitions</strong>:</p>
+<p>[javascript]<br />
+$transitions.onEnter({ to: &#8216;stateName&#8217; }, function($state$, $transition$) {<br />
+  if(!AuthService.status.authorized){<br />
+    //делаем какие-то действия для пользователя без авторизации<br />
+    return $q.reject()<br />
+  }<br />
+}<br />
+[/javascript]</p>
+<p>Но у приведем сам логин компонент для полноты примера.</p>
+<h2>Пример логин компонента</h2>
+<p>[javascript]<br />
+app.component(&#8216;login&#8217;, {<br />
+  controller: function(AuthService){<br />
+    this.login = function(login, password)<br />
+    AuthService.loginByCredentials(login, password).catch(function(){<br />
+      //выводим ошибку авторизации<br />
+    });<br />
+  }<br />
+});<br />
+[/javascript]</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/08/%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f-angularjs-right-way/feed/</wfw:commentRss>
+			<slash:comments>20</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Автоматическая авторизация OpenVPN(не нужно вводить каждый раз пароль)</title>
+		<link>https://stepansuvorov.com/blog/2013/01/%d0%b0%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b0%d1%8f-%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f-openvpn%d0%bd%d0%b5-%d0%bd%d1%83%d0%b6%d0%bd/</link>
+					<comments>https://stepansuvorov.com/blog/2013/01/%d0%b0%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b0%d1%8f-%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f-openvpn%d0%bd%d0%b5-%d0%bd%d1%83%d0%b6%d0%bd/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 14 Jan 2013 07:03:42 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[auth]]></category>
+		<category><![CDATA[OpenVPN]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=884</guid>
+
+					<description><![CDATA[Как оказалось делается очень просто. Нужно дописать строчку в файл конфигурации (*.ovpn): auth-user-pass authfile.crd и потом создать сам файл authfile.crd со следующим содержанием: user password И все больше пароль вводить не нужно. Внимание! Должен напомнить о безопасности: при данной настройке( с &#8230; <a href="https://stepansuvorov.com/blog/2013/01/%d0%b0%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b0%d1%8f-%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f-openvpn%d0%bd%d0%b5-%d0%bd%d1%83%d0%b6%d0%bd/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Как оказалось делается очень просто. Нужно дописать строчку в файл конфигурации (<em>*.ovpn</em>):</p>
+<pre>auth-user-pass authfile.crd</pre>
+<p>и потом создать сам файл <em>authfile.crd</em> со следующим содержанием:</p>
+<pre>user
+password</pre>
+<p>И все больше пароль вводить не нужно.</p>
+<p>Внимание! Должен напомнить о безопасности: при данной настройке( с сохранением пароля в открытом виде в файл) вы должны быть <span style="text-decoration: underline;">более чем на 100%</span> уверены, что к нему не получит доступ другой человек.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/01/%d0%b0%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b0%d1%8f-%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f-openvpn%d0%bd%d0%b5-%d0%bd%d1%83%d0%b6%d0%bd/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Настройка авторизации SSH через ключевую пару.</title>
+		<link>https://stepansuvorov.com/blog/2012/08/%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d0%b8-ssh-%d1%87%d0%b5%d1%80%d0%b5%d0%b7-%d0%ba%d0%bb%d1%8e%d1%87%d0%b5%d0%b2%d1%83/</link>
+					<comments>https://stepansuvorov.com/blog/2012/08/%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d0%b8-ssh-%d1%87%d0%b5%d1%80%d0%b5%d0%b7-%d0%ba%d0%bb%d1%8e%d1%87%d0%b5%d0%b2%d1%83/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 04 Aug 2012 08:27:57 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[auth]]></category>
+		<category><![CDATA[ssh]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=382</guid>
+
+					<description><![CDATA[Столкнулся с необходимостью создания авторизации SSH основанной не на паролях, а на ключевой паре. Сюда выкладываю краткие заметки по процессу настройки(оказалось все довольно просто): 1. генерируем ключевую пару на стороне клиента: $: ssh-keygen причем в разных источниках предлагается использовать разные &#8230; <a href="https://stepansuvorov.com/blog/2012/08/%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d0%b8-ssh-%d1%87%d0%b5%d1%80%d0%b5%d0%b7-%d0%ba%d0%bb%d1%8e%d1%87%d0%b5%d0%b2%d1%83/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Столкнулся с необходимостью создания <strong>авторизации</strong> <strong>SSH</strong> основанной не на паролях, а на <strong>ключевой паре</strong>. Сюда выкладываю краткие заметки по процессу настройки(оказалось все довольно просто):</p>
+<p>1. генерируем ключевую пару на стороне клиента:</p>
+<pre>$: ssh-keygen</pre>
+<p><span id="more-382"></span>причем в разных источниках предлагается использовать разные параметры для этой команды. Чаще всего предлагают использовать опцию type( флажок <strong>-t</strong> ) и туда записывать: rsa, dsa&#8230;; плюс есть вариант изменить размерность ключа с помощью флага <strong>-b</strong> и еще много других вариантов. На сколько я понял: можно использовать команду по умолчанию и не париться.</p>
+<p>Мастер генерации ключевой пары еще задаст несколько вопросов, таких как: куда сгенерировать, нужен ли пароль на файл ключей. Тут тоже можно оставлять все по умолчанию.</p>
+<p>2. Следующим шагом необходим скопировать наш <strong>открытый</strong>(public) ключ на сервер, куда мы хотим удаленно подключаться. Это опять же можно сделать простой командой на клиенте:</p>
+<pre>$: ssh-copy-id serveruser@serverhost</pre>
+<p>и если все прошло хорошо &#8211; выдаст где-то следующее:</p>
+<pre>Now try logging into the machine, with "ssh 'serveruser@serverhost'", and check in:
+
+  .ssh/authorized_keys
+
+to make sure we haven't added extra keys that you weren't expecting.</pre>
+<p>&nbsp;</p>
+<p>Приятных настроек!</p>
+<p>&nbsp;</p>
+<p>P.S.: бывают случаи когда нет встроенной команды <strong>ssh-copy-id</strong>, тогда немного по другому:</p>
+<pre># через scp копируем с клиента
+$: scp ~/.ssh/id_rsa.pub serveruser@serverhost:/home/serveruse</pre>
+<pre># на сервере добавляем в список
+$: cat ~/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</pre>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/08/%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d0%b8-ssh-%d1%87%d0%b5%d1%80%d0%b5%d0%b7-%d0%ba%d0%bb%d1%8e%d1%87%d0%b5%d0%b2%d1%83/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

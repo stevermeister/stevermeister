@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>React &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/react/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Fri, 03 Jul 2015 13:17:46 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Пробуем React на вкус</title>
+		<link>https://stepansuvorov.com/blog/2015/05/%d0%bf%d1%80%d0%be%d0%b1%d1%83%d0%b5%d0%bc-react-%d0%bd%d0%b0-%d0%b2%d0%ba%d1%83%d1%81/</link>
+					<comments>https://stepansuvorov.com/blog/2015/05/%d0%bf%d1%80%d0%be%d0%b1%d1%83%d0%b5%d0%bc-react-%d0%bd%d0%b0-%d0%b2%d0%ba%d1%83%d1%81/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Thu, 14 May 2015 19:44:30 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[React]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1554</guid>
+
+					<description><![CDATA[Стыдно признаться, но на момент написания этого поста, я так и не разобрался с React.js, поэтому добро пожаловать всем начинающим реактовцам. Я просто прокомментирую свои действия, возможно они кому-то сэкономят время разбора на старте и поиска необходимых ресурсов. Ну что ж&#8230; зайдем, &#8230; <a href="https://stepansuvorov.com/blog/2015/05/%d0%bf%d1%80%d0%be%d0%b1%d1%83%d0%b5%d0%bc-react-%d0%bd%d0%b0-%d0%b2%d0%ba%d1%83%d1%81/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone  wp-image-1758" title="react logo" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/06/logo_og-300x300.png" alt="" width="203" height="203" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/06/logo_og-300x300.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/06/logo_og-150x150.png 150w, https://stepansuvorov.com/blog/wp-content/uploads/2014/06/logo_og.png 400w" sizes="(max-width: 203px) 100vw, 203px" /></p>
+<p>Стыдно признаться, но на момент написания этого поста, я так и не разобрался с <a href="http://facebook.github.io/react/">React.js</a>, поэтому добро пожаловать всем начинающим реактовцам.</p>
+<p><span id="more-1554"></span></p>
+<p>Я просто прокомментирую свои действия, возможно они кому-то сэкономят время разбора на старте и поиска необходимых ресурсов.</p>
+<p>Ну что ж&#8230; зайдем, конечно, на официальный сайт в раздел &#8220;<a href="http://facebook.github.io/react/docs/getting-started.html">Getting Started</a>&#8220;. Сразу же есть примеры на фидлере &#8211; это хорошо. Посмотрим на <a href="https://jsfiddle.net/reactjs/69z2wepo/">первый</a>. OMG! Что это за хрень?!</p>
+<p>[javascript]<br />
+return &lt;div&gt;Hello {this.props.name}&lt;/div&gt;;<br />
+[/javascript]</p>
+<p>Для тех, кто привык к &#8220;обычному&#8221; JavaScript такая форма записи покажется более чем странной. Благо дается <a href="https://jsfiddle.net/reactjs/5vjqabv3/">второй</a> пример, где сделано все тоже, только без черной магии.</p>
+<p>Пока мы все еще в шоке от этого синтаксиса, предлагаю посмотреть 18 минут примера работы с React.js:</p>
+<p><iframe width="584" height="329" src="https://www.youtube.com/embed/L-3kegPlQ_c?feature=oembed&#038;start=18" frameborder="0" allowfullscreen></iframe></p>
+<p>Попробуем по шагам пройти <a href="http://facebook.github.io/react/docs/getting-started.html#starter-kit">стартер кит</a>.</p>
+<p>Вроде бы основная идея понятна: для черной магии используем атрибут</p>
+<pre>script type="text/jsx"</pre>
+<p>и библиотеку, которая будет это парсить:</p>
+<pre>&lt;script src="build/JSXTransformer.js"&gt;&lt;/script&gt;</pre>
+<p>Переходим к <a href="http://facebook.github.io/react/docs/tutorial.html">туториалу</a>. Вам понадобится сервер, потому хорошо бы сразу скачать себе <a href="https://github.com/reactjs/react-tutorial/blob/master/server.js">server.js</a> и положить в корень, после чего выполнить команды:</p>
+<p>[shell]<br />
+$ npm install express body-parser<br />
+$ node server.js<br />
+[/shell]</p>
+<p>Что почерпнул из туториала:</p>
+<ul>
+<li><strong>componentDidMount</strong> &#8211; запускается по умолчанию после того как компонент примонтирован к DOM</li>
+<li><strong>ref=&#8221;author&#8221;  &#8211; this.refs.author</strong> &#8211; связь по ref-аттрибуту</li>
+<li><strong>onSubmit={this.handleSubmit}</strong> &#8211; Реакт работает с &#8220;кэмлКейсом&#8221; при определении обработчика события</li>
+</ul>
+<p>Я надеюсь у всех завелась эта простая формочка со списком комментариев. Если нет &#8211; пишите что не работает в комментариях &#8211; я с радостью помогу разобраться.</p>
+<p>Далее следуем к разделу &#8220;<a href="http://facebook.github.io/react/docs/thinking-in-react.html">Думаем Реакт сущностями</a>&#8221; (Thinking in React).</p>
+<p>Резюмируя: разрабатывая приложение на React.js должны действовать в следующеем направлении:</p>
+<ul>
+<li>разбить UI на компоненты</li>
+<li>реализовать эти компоненты статически</li>
+<li>определить минимальный набор стейтов</li>
+<li>определить где должны находится данные каждого стейта</li>
+<li>добавить данные</li>
+</ul>
+<p>Далее оф сайт предлагает посмотреть видео докладов с конференций. Можете пропустить этот шаг &#8211; сэкономите Х часов. Полезной информации для начала работы там практически нет. (<em>Ну так для позитива можно конечно глянуть <a href="https://www.youtube.com/watch?v=YJNUK0EA_Jo">видео</a> презентации Александра Соловьева</em>)</p>
+<p>Вместо этого я рекомендую посмотреть серию видео лекций <a href="https://egghead.io/series/react-fundamentals">React Fundamentals</a> на сайте яйцеголового.</p>
+<p>&#8230;</p>
+<p>Ok, думаю пришло время открыть редактор и что-то написать. Я взял пример из жизни &#8211; разработку приложения авторизации для нашего продукта. Так как <a href="https://www.studytube.com/">наш продукт</a> состоит из набора отдельных приложений, а каждое приложение требует авторизации, то здорово было бы вынести эту функциональность в отдельное приложение.</p>
+<p>Возьмем заготовку из туториала:</p>
+<p>[html]<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+  &lt;title&gt;Login Form&lt;/title&gt;<br />
+  &lt;script src=&quot;https://fb.me/react-0.13.3.js&quot;&gt;&lt;/script&gt;<br />
+  &lt;script src=&quot;https://fb.me/JSXTransformer-0.13.3.js&quot;&gt;&lt;/script&gt;<br />
+  &lt;script src=&quot;https://code.jquery.com/jquery-2.1.3.min.js&quot;&gt;&lt;/script&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&lt;div id=&quot;content&quot;&gt;&lt;/div&gt;<br />
+&lt;script type=&quot;text/jsx&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+[/html]</p>
+<p>Теперь посмотрим какие компоненты у нас есть:</p>
+<p><img decoding="async" fetchpriority="high" class="alignnone  wp-image-2630" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/05/Screenshot-2015-05-11-10.07.01.png" alt="studytube_login" width="252" height="329" /></p>
+<p>Пока что явно вырисовывается только один компонент &#8211; форма логина. Ок добавим для нее Реакт-класс и создадим статический элемент:</p>
+<p>[javascript]<br />
+var LoginForm = React.createClass({<br />
+  render: function() {<br />
+    return (<br />
+      &lt;form className=&quot;loginForm&quot;&gt;<br />
+        &lt;br/&gt;email:&lt;input type=&quot;text&quot; name=&quot;email&quot; ref=&quot;email&quot;/&gt;<br />
+        &lt;br/&gt;Password:&lt;input type=&quot;password&quot; name=&quot;password&quot; ref=&quot;password&quot;/&gt;<br />
+        &lt;br/&gt;&lt;input type=&quot;submit&quot; value=&quot;Login&quot;/&gt;<br />
+      &lt;/form&gt;<br />
+    );<br />
+  }<br />
+});</p>
+<p>React.render(&lt;LoginForm/&gt;, document.getElementById(&#8216;content&#8217;));<br />
+[/javascript]</p>
+<p>Не забываем про ref атрибут, чтобы потом можно было удобно получить доступ к данным.</p>
+<p>Вот что у нас получилось:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2631" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/05/Screenshot-2015-05-11-10.28.01.png" alt="login react" width="277" height="128" /></p>
+<p>пока не густо. Перенесем стили и маркап со старого приложения. Тут нужно не забыть, что в реакт-компонентах мы прописываем не class атрибут, а className. Плюс закрываем все теги, да, и input тоже, для JSX это важно. Получили статическую версию со стилями:</p>
+<p><img decoding="async" loading="lazy" class="alignnone  wp-image-2632" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/05/Screenshot-2015-05-11-10.54.14.png" alt="studytube react login" width="176" height="230" /></p>
+<p>Теперь добавим первое действие &#8211; сабмит формы:</p>
+<p>[javascript]<br />
+&lt;form className=&quot;form&quot; onSubmit={this.handleSubmit}&gt;<br />
+[/javascript]</p>
+<p>handleSubmit, как вы уже знаете из туториала, &#8211; наш хендлер сабмита, который будет отправлять данные:</p>
+<p>[javascript]<br />
+handleSubmit: function(e) {<br />
+    e.preventDefault();</p>
+<p>    var loginData = {};<br />
+    loginData.email = React.findDOMNode(this.refs.email).value.trim();<br />
+    loginData.password = React.findDOMNode(this.refs.password).value.trim();<br />
+    loginData.academyId = 1;</p>
+<p>    $.post(&#8216;http://localhost:3000/auth&#8217;, loginData,function(result){<br />
+      console.log(result);<br />
+    });<br />
+  }<br />
+[/javascript]</p>
+<p>На сервере пока просто заглушка:</p>
+<p>[javascript]<br />
+app.post(&#8216;/auth&#8217;, function(req, res) {<br />
+  if(req.body.email === &#8216;xxx&#8217; &amp;&amp; req.body.password === &#8216;xxx&#8217;){<br />
+    var data = true;<br />
+  } else {<br />
+    data = false;<br />
+  }<br />
+  res.send(JSON.stringify(data));<br />
+});<br />
+[/javascript]</p>
+<p>Время подумать о реакции UI на ответ сервера. Для начала разберем вариант не верных логина/пароля. Мы хотим подсветить поля формы красным и вывести сообщение.</p>
+<p>Опишем наш стейт и определим в нем свойство отвечающее за правильность данных формы:</p>
+<p>[javascript]<br />
+  getInitialState: function() {<br />
+    return {<br />
+      isValid: true<br />
+    };<br />
+  },<br />
+[/javascript]</p>
+<p>Теперь если запрос вернет ошибку:</p>
+<p>[javascript]<br />
+var self = this;<br />
+$.post(&#8216;http://localhost:3000/auth&#8217;, loginData,function(result){<br />
+      if(result !== &#8216;true&#8217;){ //очень грубо сделано только для примера<br />
+        self.setState({isValid: false});<br />
+      }<br />
+});<br />
+[/javascript]</p>
+<p>И пропишем в рендер-методе, что делать при разных значениях свойства стейта:</p>
+<p>[javascript]<br />
+var errorClass = this.state.isValid?&#8221;:&#8217;input&#8211;error&#8217;;<br />
+[/javascript]</p>
+<p>[html]<br />
+ &lt;input type=&quot;text&quot; className={&quot;input input&#8211;full &quot; + errorClass} name=&quot;email&quot; ref=&quot;email&quot;/&gt;<br />
+[/html]</p>
+<p>И еще круто было бы не только менять класс, чтобы как-то выделить поле с ошибкой, но еще и выводить сообщение:</p>
+<p>[html]<br />
+&lt;span className=&quot;input-decorator__errormsg&quot;&gt;Invalid email&#8230;&lt;/span&gt;<br />
+[/html]</p>
+<p>Сообщение об ошибке &#8211; это хороший кандидат, чтобы стать отдельным компонентом. Так и сделаем:</p>
+<p>[javascript]<br />
+var ErrorMessageInput = React.createClass({<br />
+  render: function(){<br />
+    return &lt;span className=&quot;input-decorator__errormsg&quot;&gt;{this.props.text}&lt;/span&gt;<br />
+  }<br />
+});<br />
+[/javascript]</p>
+<p>и теперь в нашем основном элементе:</p>
+<p>[javascript]<br />
+ {!this.state.isValid?&lt;ErrorMessageInput text=&quot;Invalid email&#8230;&quot;/&gt;:null}<br />
+[/javascript]</p>
+<p>Сделаем так, чтобы при изменении поля ошибки сбрасывались. Для этого повесим обработчики на поля ввода:</p>
+<p>[html]<br />
+&lt;input type=&quot;text&quot; className={&quot;input input&#8211;full &quot; + errorClass} ref=&quot;email&quot; onChange={this.handleChange}/&gt;<br />
+&#8230;<br />
+&lt;input type=&quot;text&quot; className={&quot;input input&#8211;full &quot; + errorClass} ref=&quot;password&quot; onChange={this.handleChange}/&gt;<br />
+[/html]</p>
+<p>и пропишем саму функцию обработчик:</p>
+<p>[javascript]<br />
+ handleChange: function() {<br />
+    this.setState({ isValid: true });<br />
+  },<br />
+[/javascript]</p>
+<p>Что еще можно улучшить? Давайте сделаем кнопку логин не активной, когда не все поля введены. Для этого добавим в стейт наши поля:</p>
+<p>[javascript]<br />
+  getInitialState: function() {<br />
+    return {<br />
+      email: &#8221;,<br />
+      password: &#8221;,<br />
+      isValid: true<br />
+    };<br />
+  },<br />
+[/javascript]</p>
+<p>и теперь при изменении поля мы должны обновить стейт, добавим в наш handleChange метод:</p>
+<p>[javascript]<br />
+  handleChange: function() {<br />
+    this.setState(<br />
+      {<br />
+        isValid: true,<br />
+        email: React.findDOMNode(this.refs.email).value,<br />
+        password: React.findDOMNode(this.refs.password).value<br />
+      });<br />
+  },<br />
+[/javascript]</p>
+<p>и добавить атрибут, который будет рендериться по условию:</p>
+<p>[html]<br />
+&lt;button disabled={!this.state.email || !this.state.password}&gt;Let me in&lt;/button&gt;<br />
+[/html]</p>
+<p>Итоговый код компонента:</p>
+<p>[javascript]<br />
+var LoginForm = React.createClass({<br />
+  getInitialState: function() {<br />
+    return {<br />
+      email: &#8221;,<br />
+      password: &#8221;,<br />
+      isValid: true<br />
+    };<br />
+  },<br />
+  handleChange: function() {<br />
+    this.setState(<br />
+      {<br />
+        isValid: true,<br />
+        email: React.findDOMNode(this.refs.email).value,<br />
+        password: React.findDOMNode(this.refs.password).value<br />
+      });<br />
+  },<br />
+  handleSubmit: function(e) {<br />
+    e.preventDefault();</p>
+<p>    //your code to communicate with server<br />
+    //&#8230;<br />
+    //just to test<br />
+    self.setState({ isValid: false });<br />
+  },<br />
+  render: function() {<br />
+    var errorClass = this.state.isValid ? &#8221; : &#8216;input&#8211;error&#8217;;</p>
+<p>    return (<br />
+      &lt;div className=&quot;loginForm solo-form solo-form__page&quot;&gt;<br />
+        &lt;div className=&quot;l-block&quot;&gt;<br />
+          &lt;div className=&quot;sf-header&quot;&gt;<br />
+            &lt;div className=&quot;sf-header__title&quot;&gt;Log in&lt;/div&gt;<br />
+          &lt;/div&gt;<br />
+        &lt;/div&gt;<br />
+        &lt;div className=&quot;solo-form__form&quot;&gt;<br />
+          &lt;form className=&quot;form&quot; onSubmit={this.handleSubmit}&gt;<br />
+            &lt;div className=&quot;l-block-small&quot;&gt;<br />
+              &lt;label className=&quot;input-decorator&quot;&gt;<br />
+                &lt;input type=&quot;text&quot; className={&quot;input input&#8211;full &quot; + errorClass} value={this.state.email} name=&quot;email&quot;<br />
+                       ref=&quot;email&quot; onChange={this.handleChange}/&gt;</p>
+<p>                &lt;div className=&quot;input-decorator__label&quot;&gt;Email address&lt;/div&gt;<br />
+                {!this.state.isValid ? &lt;ErrorMessageInput text=&quot;Invalid email&#8230;&quot;/&gt; : null}<br />
+              &lt;/label&gt;<br />
+            &lt;/div&gt;</p>
+<p>            &lt;div className=&quot;l-block-small&quot;&gt;<br />
+              &lt;label className=&quot;input-decorator&quot;&gt;<br />
+                &lt;input type=&quot;password&quot; className={&quot;input input&#8211;full &quot; + errorClass} value={this.state.password}<br />
+                       name=&quot;password&quot; ref=&quot;password&quot; onChange={this.handleChange}/&gt;</p>
+<p>                &lt;div className=&quot;input-decorator__label&quot;&gt;Password&lt;/div&gt;<br />
+                {!this.state.isValid ? &lt;ErrorMessageInput text=&quot;&#8230; or password&quot;/&gt; : null}<br />
+              &lt;/label&gt;<br />
+            &lt;/div&gt;</p>
+<p>            &lt;div className=&quot;l-block-med is-center-aligned&quot;&gt;<br />
+              &lt;a href=&quot;/restore-password&quot; className=&quot;form__action-secondary&quot;&gt;Forgot password?&lt;/a&gt;<br />
+            &lt;/div&gt;</p>
+<p>            &lt;div className=&quot;l-block-med&quot;&gt;<br />
+              &lt;button className=&quot;button button&#8211;primary button&#8211;full&quot;<br />
+                      disabled={!this.state.email || !this.state.password || !this.state.isValid}&gt;Let me in<br />
+              &lt;/button&gt;<br />
+            &lt;/div&gt;<br />
+          &lt;/form&gt;<br />
+        &lt;/div&gt;<br />
+      &lt;/div&gt;<br />
+    );<br />
+  }<br />
+});<br />
+[/javascript]</p>
+<p>&nbsp;</p>
+<p>Что еще полезного почитать?</p>
+<ul>
+<li>Building robust web apps with React (<a href="http://maketea.co.uk/2014/03/05/building-robust-web-apps-with-react-part-1.html">part1</a>, <a href="http://maketea.co.uk/2014/04/07/building-robust-web-apps-with-react-part-2.html">part2</a>, <a href="http://maketea.co.uk/2014/05/22/building-robust-web-apps-with-react-part-3.html">part3</a>, <a href="http://maketea.co.uk/2014/06/30/building-robust-web-apps-with-react-part-4.html">part4</a> )</li>
+<li><a href="http://calendar.perfplanet.com/2013/diff/">React’s diff algorithm</a> (и <a href="http://habrahabr.ru/post/217295/">перевод</a> на хабре)</li>
+</ul>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/05/%d0%bf%d1%80%d0%be%d0%b1%d1%83%d0%b5%d0%bc-react-%d0%bd%d0%b0-%d0%b2%d0%ba%d1%83%d1%81/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

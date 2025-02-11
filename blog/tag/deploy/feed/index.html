@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>deploy &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/deploy/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 22 Oct 2015 08:02:05 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Git pre-push hook</title>
+		<link>https://stepansuvorov.com/blog/2015/03/git-pre-push-hook/</link>
+					<comments>https://stepansuvorov.com/blog/2015/03/git-pre-push-hook/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 13 Mar 2015 19:40:07 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[deploy]]></category>
+		<category><![CDATA[git]]></category>
+		<category><![CDATA[git-hook]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[pre-push]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2166</guid>
+
+					<description><![CDATA[Я уже писал о том как можно использовать git хуки для запуска grunt команд и делать предварительную проверку перед заливкой кода в главный репозиторий. В этой заметке я покажу, как можно избежать проверки не закомиченных изменений. Git pre-push hook будет выглядеть вот &#8230; <a href="https://stepansuvorov.com/blog/2015/03/git-pre-push-hook/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Я уже писал о том <a title="git hook: Не пускаем в репозиторий ошибки" href="https://stepansuvorov.com/blog/2013/01/git-hook/">как можно использовать git хуки для запуска grunt команд</a> и делать предварительную проверку перед заливкой кода в главный репозиторий. В этой заметке я покажу, как можно избежать проверки не закомиченных изменений.</p>
+<p><span id="more-2166"></span></p>
+<p>Git pre-push hook будет выглядеть вот так:</p>
+<p>[shell]<br />
+#!/bin/sh<br />
+grunt test<br />
+RETVAL=$?<br />
+if [ $RETVAL -ne 0 ]<br />
+  then<br />
+    echo &quot;Grunt task failed, exiting&#8230;&quot;<br />
+    exit 1<br />
+fi</p>
+<p>echo &quot;Complete.&quot;<br />
+[/shell]</p>
+<p>Как видите ничего сложного. Теперь при каждом пуше будет вызываться &#8220;<strong>grunt test</strong>&#8220;. Важно не забыть сделать этот файл исполняемым (<strong>chmod +x pre-push</strong>)</p>
+<p>Есть еще один момент: когда вы попытались запушить поломанный код &#8211; тесты не прошли &#8211; вы починили код, но при этом забыли закоммитить &#8211; тесты прошли &#8211; и поломанный код попал на сервер (так как фикс не был закоммичен).</p>
+<p>Поэтому перед началом тестов прячем все незакоммиченные изменения (<strong>git stash</strong>), а потом возвращаем их назад:</p>
+<p>[shell]<br />
+#!/bin/sh<br />
+CHANGES=$(git diff &#8211;numstat | wc -l)<br />
+CHANGES_CACHED=$(git diff &#8211;cached &#8211;numstat | wc -l)<br />
+TOTAL_CHANGES=$(($CHANGES + $CHANGES_CACHED))</p>
+<p>git stash -k<br />
+grunt test</p>
+<p>RETVAL=$?</p>
+<p>if [ $TOTAL_CHANGES -ne &quot;0&quot; ]<br />
+then<br />
+  echo &quot;Popping&quot; $TOTAL_CHANGES &quot;changes off the stack&#8230;&quot;<br />
+  git stash pop -q<br />
+fi      </p>
+<p>if [ $RETVAL -ne 0 ]<br />
+then<br />
+  echo &quot;Grunt task failed, exiting&#8230;&quot;<br />
+  exit 1<br />
+fi</p>
+<p>echo &quot;Complete.&quot;<br />
+[/shell]</p>
+<p>Полный код <a title="gist" href="https://gist.github.com/stevermeister/e530409b19daac932ee2">тут</a>. Идея взята от <a title="http://old.briangonzalez.org/posts/run-grunt-task-pre-push-to-git-repo" href="http://old.briangonzalez.org/posts/run-grunt-task-pre-push-to-git-repo">сюда</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/03/git-pre-push-hook/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>В поисках сервиса для деплоя</title>
+		<link>https://stepansuvorov.com/blog/2015/03/deploy-service/</link>
+					<comments>https://stepansuvorov.com/blog/2015/03/deploy-service/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 03 Mar 2015 19:18:11 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[bitbucket]]></category>
+		<category><![CDATA[deploy]]></category>
+		<category><![CDATA[github]]></category>
+		<category><![CDATA[online]]></category>
+		<category><![CDATA[tool]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2143</guid>
+
+					<description><![CDATA[       На данным момент мы для своего проекта используем semaphore. Этот же сервис я использую и для своих личный проектов. Задача на него ставиться простая: при каждом пуше в мастер &#8211; выливаем код в продакшен, предварительно выполнив тесты и подготовив билд. &#8230; <a href="https://stepansuvorov.com/blog/2015/03/deploy-service/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><a title="https://semaphoreapp.com/" href="https://semaphoreapp.com/"><img decoding="async" class="alignnone  wp-image-2404" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/03/logo-661a8bb0455b3c85a019aa830dd1b109.png" alt="semaphore-logo" width="128" height="37" /></a>  <a title="http://dploy.io/" href="http://dploy.io/"><img decoding="async" class="alignnone  wp-image-2406" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/03/Screenshot-2015-03-03-13.40.59.png" alt="dploy-logo" width="95" height="43" /></a>  <a title="http://ftploy.com/" href="http://ftploy.com/"><img decoding="async" class="alignnone  wp-image-2407" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/03/Screenshot-2015-03-03-13.41.25.png" alt="ftploy-logo" width="91" height="30" /></a>  <a title="https://codeship.com/" href="https://codeship.com/"><img decoding="async" loading="lazy" class="alignnone  wp-image-2408" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/03/Screenshot-2015-03-03-13.43.17.png" alt="codeship-logo" width="132" height="46" /></a></p>
+<p>На данным момент мы для своего <a title="https://www.studytube.nl/" href="https://www.studytube.nl/">проекта</a> используем <a title="https://semaphoreapp.com/" href="https://semaphoreapp.com/">semaphore</a>. Этот же сервис я использую и для своих личный проектов. Задача на него ставиться простая: при каждом пуше в мастер &#8211; выливаем код в продакшен, предварительно выполнив тесты и подготовив билд.</p>
+<p><span id="more-2143"></span></p>
+<p>Из-за периодических тормозов, отсутствия возможности создания общей конфигурации для нескольких приложений (в нашем случае у нас 7 разных приложений, которые собираются и деплоятся одними и теме же командами, через один и тот же распределяющий сервер) и не совсем интуитивного интерфейса, задался вопросом: есть ли что-то более интересное, при этом по прежнему легкое и дружелюбное (читать бесплатное) по отношению к опенсорс.</p>
+<p>Попробовали как альтернативу использовать <a title="https://codeship.com/" href="https://codeship.com/">Codeship</a> &#8211; не понравилось.</p>
+<p>Потом еще наткнулся на <a title="http://dploy.io/" href="http://dploy.io/">dploy</a> и <a title="http://ftploy.com/" href="http://ftploy.com/">ftploy</a> &#8211; не впечатлило.</p>
+<p>Если у вас есть опыт успешного использования какого-либо подобного сервиса &#8211; поделитесь пожалуйста в комментариях.</p>
+<p>&nbsp;</p>
+<p><strong>UPD:</strong> после того как узнал, что в <strong>semaphore</strong> можно делать даже так:</p>
+<p>[shell]sudo apt-get install -yqq ftp[/shell]</p>
+<p>решил пока остаться на нем.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/03/deploy-service/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Разворачиваем базу проекта на JavaScript</title>
+		<link>https://stepansuvorov.com/blog/2014/04/%d1%80%d0%b0%d0%b7%d0%b2%d0%be%d1%80%d0%b0%d1%87%d0%b8%d0%b2%d0%b0%d0%b5%d0%bc-%d0%b1%d0%b0%d0%b7%d1%83-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b0-%d0%bd%d0%b0-javascript/</link>
+					<comments>https://stepansuvorov.com/blog/2014/04/%d1%80%d0%b0%d0%b7%d0%b2%d0%be%d1%80%d0%b0%d1%87%d0%b8%d0%b2%d0%b0%d0%b5%d0%bc-%d0%b1%d0%b0%d0%b7%d1%83-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b0-%d0%bd%d0%b0-javascript/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 09 Apr 2014 19:59:28 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[db]]></category>
+		<category><![CDATA[deploy]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[migrate]]></category>
+		<category><![CDATA[node.js]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1607</guid>
+
+					<description><![CDATA[Растут JavaScript проекты и соответственно становятся лучше инструменты сборки. Самое время задуматься о разворачивании базы своего проекта на JavaScript. А ведь и правда: если проект написан 100% на одной технологии (да, и сервер тоже), зачем думать о другой технологии для &#8230; <a href="https://stepansuvorov.com/blog/2014/04/%d1%80%d0%b0%d0%b7%d0%b2%d0%be%d1%80%d0%b0%d1%87%d0%b8%d0%b2%d0%b0%d0%b5%d0%bc-%d0%b1%d0%b0%d0%b7%d1%83-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b0-%d0%bd%d0%b0-javascript/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Растут <strong>JavaScript</strong> проекты и соответственно становятся лучше инструменты сборки. Самое время задуматься о разворачивании базы своего проекта на <strong>JavaScript</strong>. А ведь и правда: если проект написан 100% на одной технологии (да, и сервер тоже), зачем думать о другой технологии для разворачивания базы?</p>
+<p>Вот с такими мыслями я и начал исследовать данный вопрос с целью найти удобное решение для своего пэт-проектика (стек: <strong>JavaScript</strong>/<strong>AngularJs</strong> &#8211; <strong>JavaScript</strong>/<strong>Express</strong> &#8211; <strong>MySql</strong>). JavaScript сообщество (а точнее Андрей Листочкин), посоветовало обратить внимание на модуль для ноды <strong><a title="npmjs.org" href="https://www.npmjs.org/package/db-migrate">db-migrate</a></strong> и плагин для гранта <strong><a title="npmjs.org" href="https://www.npmjs.org/package/grunt-db-migrate">grunt-db-migrate</a></strong>. Пост является набором заметок по ходу внедрения модуля в проект.</p>
+<h2><span id="more-1607"></span></h2>
+<p>На данный момент db-migrate поддерживает <a title="node-mysql" href="https://github.com/felixge/node-mysql">Mysql</a>,  <a href="https://github.com/brianc/node-postgres">PostgreSQL</a>, <a href="https://github.com/developmentseed/node-sqlite3">sqlite3</a>. Поэтому, если вы хотите мигрировать другую базу &#8211; придется либо писать самому скрипт миграции либо использовать другое решение.</p>
+<h2>Установка</h2>
+<p>Устанавливаем модуль ноды и плагин гранта:</p>
+<pre>$ npm install db-migrate
+$ npm install grunt-db-migrate</pre>
+<h2>Настраиваем grunt</h2>
+<p>В <strong>grunt</strong> файле добавляем блок:</p>
+<p>[javascript]migrate:{<br />
+    options:{<br />
+        env: {<br />
+            DATABASE_URL: databaseUrl<br />
+        }<br />
+    }<br />
+}[/javascript]</p>
+<p>databaseUrl &#8211; строка подключения к базе, например:</p>
+<p>[javascript]<br />
+databaseUrl =  &#8216;mysql://root:@localhost/mypetdb&#8217;;<br />
+[/javascript]</p>
+<h2>Создаем файл миграции</h2>
+<p>Чтобы создать файл миграции(с шаблоном внутри) выполняем команду:</p>
+<pre>$ grunt migrate:create:migrate_name</pre>
+<p>После чего у нас в проекте появится директория &#8220;migrations&#8221;, и файл в ней с таким содержимым:</p>
+<p>[javascript]var dbm = require(&#8216;db-migrate&#8217;);<br />
+var type = dbm.dataType;</p>
+<p>exports.up = function(db, callback) {</p>
+<p>};</p>
+<p>exports.down = function(db, callback) {</p>
+<p>};[/javascript]</p>
+<p><strong>exports.up</strong> &#8211; инструкции для наката изменений, <strong>export.down</strong> &#8211; соответственно для отката сделанных изменений.</p>
+<p>Разберем пример предложенный на офсайте:</p>
+<p>[javascript]<br />
+exports.up = function (db, callback) {<br />
+  db.createTable(&#8216;pets&#8217;, {<br />
+    id: { type: &#8216;int&#8217;, primaryKey: true },<br />
+    name: &#8216;string&#8217;<br />
+  }, callback);<br />
+};</p>
+<p>exports.down = function (db, callback) {<br />
+  db.dropTable(&#8216;pets&#8217;, callback);<br />
+};<br />
+[/javascript]</p>
+<p>Вроде бы все просто: <strong>db.createTable()</strong> &#8211; добавляем таблицу, <strong>db.dropTable()</strong> &#8211; удаляем.</p>
+<p>Свойства, который можно определять для полей:</p>
+<ul>
+<li>type &#8211; тип данный, полный список поддерживаемых типов <a title="lib/data_type.js" href="https://github.com/kunklejr/node-db-migrate/blob/master/lib/data_type.js">тут</a></li>
+<li>length &#8211; размерность (там где поддерживается)</li>
+<li>primaryKey [true/false]</li>
+<li>autoIncrement [true/false]</li>
+<li>notNull [true/false]</li>
+<li>unique [true/false]</li>
+<li>defaultValue</li>
+</ul>
+<p>Список поддерживаемых методов:</p>
+<ul>
+<li>createTable(tableName, columnSpec, callback)</li>
+<li>dropTable(tableName, [options,] callback)</li>
+<li>renameTable(tableName, newTableName, callback)</li>
+<li>addColumn(tableName, columnName, columnSpec, callback)</li>
+<li>removeColumn(tableName, columnName, callback)</li>
+<li>renameColumn(tableName, oldColumnName, newColumnName, callback)</li>
+<li>changeColumn(tableName, columnName, columnSpec, callback)</li>
+<li>addIndex(tableName, indexName, columns, [unique], callback)</li>
+<li>insert(tableName, columnNameArray, valueArray, callback)</li>
+<li>removeIndex([tableName], indexName, callback)</li>
+<li>runSql(sql, [params,] callback)</li>
+<li>all(sql, [params,] callback)</li>
+</ul>
+<h2>Запуск</h2>
+<p>Теперь grunt может выполнить задачу:</p>
+<pre>$ grunt migrate:up</pre>
+<p>и чтобы откатить изменения:</p>
+<pre>$ grunt migrate:down</pre>
+<p>создать новый файл миграции:</p>
+<pre>$ grunt migrate:create:migration_name</pre>
+<h2>Дополнительно</h2>
+<p>Когда нам нужно создать несколько таблиц, удобно использовать модуль <strong>async</strong>:</p>
+<p>[javascript]<br />
+var async = require(&#8216;async&#8217;);</p>
+<p>exports.up = function (db, callback) {<br />
+  async.series([<br />
+    db.createTable.bind(db, &#8216;pets&#8217;, {<br />
+      id: { type: &#8216;int&#8217;, primaryKey: true },<br />
+      name: &#8216;string&#8217;<br />
+    }),<br />
+    db.createTable.bind(db, &#8216;owners&#8217;, {<br />
+      id: { type: &#8216;int&#8217;, primaryKey: true },<br />
+      name: &#8216;string&#8217;<br />
+    });<br />
+  ], callback);<br />
+};<br />
+[/javascript]</p>
+<p>метод <strong>async.series</strong> позволит избежать вложенности</p>
+<h2>Пример из реальной жизни</h2>
+<p>Вот файл миграции, который я создал для своего пет-проектика:</p>
+<p>[javascript]<br />
+var dbm = require(&#8216;db-migrate&#8217;);<br />
+var async = require(&#8216;async&#8217;);</p>
+<p>exports.up = function (db, callback) {<br />
+  async.series([<br />
+    db.createTable.bind(db, &#8216;marks&#8217;, {<br />
+      user_id: {<br />
+        type: &#8216;int&#8217;,<br />
+        notNull: true<br />
+      },<br />
+      release_id: {<br />
+        type: &#8216;int&#8217;,<br />
+        notNull: true<br />
+      },<br />
+      feed: {<br />
+        type:&#8217;string&#8217;,<br />
+        notNull: true<br />
+      }<br />
+    })<br />
+  ], function(){<br />
+      db.addIndex(&#8216;marks&#8217;, &#8216;usermark&#8217;, [&#8216;user_id&#8217;, &#8216;release_id&#8217;], true);<br />
+      callback();<br />
+  });<br />
+};</p>
+<p>exports.down = function (db, callback) {<br />
+  async.series([<br />
+    db.dropTable.bind(db, &#8216;marks&#8217;, {<br />
+      ifExists: true<br />
+    }),<br />
+    db.removeIndex(&#8216;marks&#8217;, &#8216;usermark&#8217;),<br />
+  ], callback);<br />
+};<br />
+[/javascript]</p>
+<p>Проект портировался с локальной <strong>mysql</strong> базы на <strong>postgress</strong>, которая стояла на сервере. Особых косяков модуля db-migrate замечено не было. Можно отметить только мелкие неудобства, которых характерны для любых универсальных (кросс-субд) систем миграции &#8211; отсутствие реализации специфических типов: у меня изначально был тип <strong>ENUM</strong>, который пришлось перевести в <strong>STRING</strong>. Для личного проекта это нормальная замена, но для продакшена пришлось бы писать отдельный дополнительный конвертер.</p>
+<p>Более подробно можно почитать на <a href="https://www.npmjs.org/package/db-migrate">офсайте</a> либо покопать <a href="https://github.com/kunklejr/node-db-migrate">код</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/04/%d1%80%d0%b0%d0%b7%d0%b2%d0%be%d1%80%d0%b0%d1%87%d0%b8%d0%b2%d0%b0%d0%b5%d0%bc-%d0%b1%d0%b0%d0%b7%d1%83-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b0-%d0%bd%d0%b0-javascript/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

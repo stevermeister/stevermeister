@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>ng &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/ng/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Wed, 22 Feb 2017 09:02:34 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>angular-cli + `ng eject` =&gt; webpack welcome back</title>
+		<link>https://stepansuvorov.com/blog/2017/02/angular-cli-ng-eject-webpack-welcome-back/</link>
+					<comments>https://stepansuvorov.com/blog/2017/02/angular-cli-ng-eject-webpack-welcome-back/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 22 Feb 2017 09:02:34 +0000</pubDate>
+				<category><![CDATA[Рекомендую]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[ng]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3270</guid>
+
+					<description><![CDATA[Наконец-то(начиная с 1.0.0-beta.32) разработчики angular-cli дали доступ к более тонким настройкам webpack и теперь не нужно выбирать между двумя инструментами. Выполнив команду: [shell] ng eject [/shell] у вас появится файл вебпак конфига в корне проекта, и теперь вместо команды ng вы &#8230; <a href="https://stepansuvorov.com/blog/2017/02/angular-cli-ng-eject-webpack-welcome-back/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Наконец-то(начиная с <a href="https://github.com/angular/angular-cli/blob/master/CHANGELOG.md#100-beta32-2017-02-17">1.0.0-beta.32</a>) разработчики <strong>angular-cli</strong> дали доступ к более тонким настройкам <strong>webpack</strong> и теперь не нужно выбирать между двумя инструментами. Выполнив команду:</p>
+<p>[shell]<br />
+ng eject<br />
+[/shell]</p>
+<p>у вас появится файл вебпак конфига в корне проекта, и теперь вместо команды <strong>ng</strong> вы запускаете старую добрую <strong>npm</strong>:</p>
+<p>[shell]<br />
+ng serve -&gt; npm start<br />
+ng build -&gt; npm run build<br />
+&#8230;<br />
+[/shell]</p>
+<p>&nbsp;</p>
+<p>P.S.: Уже наткнулся на проблему с поломанной подстановкой environment файла (<a href="https://github.com/angular/angular-cli/issues/4907">issue</a>).</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/02/angular-cli-ng-eject-webpack-welcome-back/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>ngDirective &#8211; директива для загрузки директив</title>
+		<link>https://stepansuvorov.com/blog/2014/02/ng-directive/</link>
+					<comments>https://stepansuvorov.com/blog/2014/02/ng-directive/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 10 Feb 2014 22:11:29 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[directive]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[ng]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1404</guid>
+
+					<description><![CDATA[Суть: директива типа &#8220;атрибут&#8221;, значением идет имя поддирективы, которую необходимо динамически подгрузить. Может быть удобно в случае, когда в зависиомти от условия мы должны выводить различные компоненты. Предистория: В проекте (на AngularJS) стала задача вывести список сущностей, каждая из которых &#8230; <a href="https://stepansuvorov.com/blog/2014/02/ng-directive/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<h2>Суть:</h2>
+<p><em> директива типа &#8220;атрибут&#8221;, значением идет имя поддирективы, которую необходимо динамически подгрузить. Может быть удобно в случае, когда в зависиомти от условия мы должны выводить различные компоненты</em>.</p>
+<p><span id="more-1404"></span></p>
+<h2>Предистория<strong>:</strong></h2>
+<p>В проекте (на <strong>AngularJS</strong>) стала задача вывести список сущностей, каждая из которых имеет свойства и представление (<em>директивы</em>). Но сложность заключается в том, что сущности могут буть разных типов, совершенно разных: с различным представлением и поведением. Вопрос: &#8220;что делать, если хочется все вывести через <strong>ng-repeat</strong>?&#8221;. Одну директиву в духе <a href="http://ru.wikipedia.org/wiki/%D0%91%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82">god-antipattern</a>, где будет сразу все возможные варианты поведения и отображения, лепить не хотелось. Хотелось использовать разные, чтобы потом еще можно было делать новые и они автоматически подхватывались. Но как их подгружать?</p>
+<h2>Решение:</h2>
+<p>Для динамической сборки директивы нам нужен сервис <strong><a title="angularjs docs" href="http://docs.angularjs.org/api/ng.$compile">$compile</a></strong>. В итоге получилось такое( выкладываю упрощенный вариант):</p>
+<p><span style="text-decoration: underline;">html</span>:</p>
+<pre>&lt;div ng-repeat="item in items"&gt;
+  &lt;itemDirective&gt;&lt;/itemDirective&gt;
+&lt;/div&gt;</pre>
+<p>а внутри директивы <span style="text-decoration: underline;">itemDirective</span>:</p>
+<pre>element.append($compile(angular.element('&lt;' + $scope.item.type + '/&gt;'))($scope));</pre>
+<p>После чего пришла мысль &#8220;<em>а почему бы это не оформить в виде директивы, которая будет подгружать в себя в зависимости от параметра другую директиву</em>&#8220;.</p>
+<p>И код преобразился следующим образом:</p>
+<pre>&lt;div ng-repeat="item in items"&gt;
+  &lt;itemDirective ng-directive="{{item.type}}"&gt;&lt;/itemDirective&gt;
+&lt;/div&gt;</pre>
+<p>А в директиве:</p>
+<pre>element.append($compile(angular.element('&lt;' +  attrs.ngDirective + '/&gt;'))($scope));</pre>
+<div id="LC10">Так же не помешает наблюдение за состояние атрибута, чтобы было в духе Ангуляра, поэтому добавим <strong>$observe</strong>:</div>
+<div>
+<pre>attrs.$observe('ngDirective', function(directive) {
+    element.html('');
+    element.append($compile(angular.element('&lt;' + directive + '/&gt;'))($scope));
+});</pre>
+</div>
+<p>&nbsp;</p>
+<p>Вот <a title="github" href="https://github.com/stevermeister/ngDirective">код</a> и <a href="http://jsbin.com/sewug/1/">демо</a>.</p>
+<p>Очень бы хотелось услышать конструктивную критику.</p>
+<p>Идея пришла под вдохновлением от прочтения <a href="http://onehungrymind.com/angularjs-dynamic-templates/">этой</a> статьи.</p>
+<p>&nbsp;</p>
+<p><strong>UPD:</strong> как подсказали в сообществе:</p>
+<ol>
+<li>лучше не <strong>смешивать логику с представлением</strong>(хранить имя директивы в контролере)</li>
+<li>следить за <strong>утечками памяти</strong>, ибо в данном случае новая директива создает много вотчеров, которые потом никто не зачищает</li>
+<li>использовать для данной задачи <strong>ngSwitch</strong></li>
+</ol>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/02/ng-directive/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

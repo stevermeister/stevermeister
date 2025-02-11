@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>angular2-decorators &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/angular2-decorators/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 28 Jan 2017 12:05:15 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Angular2: Changing default component properties.</title>
+		<link>https://stepansuvorov.com/blog/2017/01/angular2-changing-default-component-properties/</link>
+					<comments>https://stepansuvorov.com/blog/2017/01/angular2-changing-default-component-properties/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 28 Jan 2017 12:05:15 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular2]]></category>
+		<category><![CDATA[angular2-component]]></category>
+		<category><![CDATA[angular2-decorators]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3258</guid>
+
+					<description><![CDATA[Attention! Please keep in mind that this post is not manual, it&#8217;s research that helps you to understand Angular better and don&#8217;t try to apply code examples in your enterprise applications. If you look into all the angular exports you &#8230; <a href="https://stepansuvorov.com/blog/2017/01/angular2-changing-default-component-properties/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><em><strong>Attention!</strong> Please keep in mind that this post<span style="text-decoration: underline;"> is not manual</span>, it&#8217;s research that helps you to understand Angular better and don&#8217;t try to apply code examples in your enterprise applications.</em></p>
+<p><span id="more-3258"></span></p>
+<p>If you look into all the angular exports you could find specific super private(double low dash) property __core_private__ :</p>
+<p>[javascript]import { __core_private__ } from &#8216;@angular/core&#8217;;[/javascript]</p>
+<p>it provides us access to a method makeDecorator that is kind of internal factory to make all the decorators, so to create new decorator you just need to do:</p>
+<p>[javascript]__core_private__.makeDecorator(&#8216;myNewDecorator&#8217;, {});[/javascript]</p>
+<p>so if you wanna create your own Component decorator it&#8217;s just:</p>
+<p>[javascript]const MyComponent = __core_private__.makeDecorator(&#8216;MyComponent&#8217;, {});[/javascript]</p>
+<p>there is also <span style="text-decoration: underline;">3rd paramete</span>r that allows us to make <strong>inheritance</strong> from another decorator, so let&#8217;s use existing <strong>Component decorator</strong>:</p>
+<p>[javascript]<br />
+const MyComponent = __core_private__.makeDecorator(&#8216;MyComponent&#8217;, {}, Component);<br />
+[/javascript]</p>
+<p>we need to set required properties(it will not work without them):</p>
+<p>[javascript]<br />
+const MyComponent = __core_private__.makeDecorator(&#8216;myComponent&#8217;,{<br />
+selector: undefined,<br />
+template: &#8221;,<br />
+styleUrls: undefined},Component))<br />
+[/javascript]</p>
+<p>and you could also extend some extra, for example <strong>switch off encapsulation</strong>:</p>
+<p>[javascript]<br />
+const MyComponent = __core_private__.makeDecorator(&#8216;myComponent&#8217;,{<br />
+selector: undefined,<br />
+template: &#8221;,<br />
+styleUrls: undefined<br />
+encapsulation: ViewEncapsulation.None<br />
+},Component))<br />
+[/javascript]</p>
+<p>All code for module(mycomponent.ts):</p>
+<p>[javascript]<br />
+import {__core_private__, Component, ViewEncapsulation} from &#8216;@angular/core&#8217;;</p>
+<p>let MyComponent = __core_private__.makeDecorator(&#8216;myComponent&#8217;, {<br />
+ selector: undefined,<br />
+ template: &#8221;,<br />
+ styleUrls: undefined,<br />
+ encapsulation: ViewEncapsulation.None},<br />
+ Component);</p>
+<p>export {MyComponent as Component}<br />
+[/javascript]</p>
+<p><span style="font-weight: 300;">that can be use instead of core Component:</span></p>
+<p>[javascript]<br />
+import {Component} from &#8216;./mycomponent&#8217;;<br />
+[/javascript]</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/01/angular2-changing-default-component-properties/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>casperjs &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/casperjs/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Tue, 27 Nov 2012 13:01:47 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Утилита для тестирования CasperJS</title>
+		<link>https://stepansuvorov.com/blog/2012/10/%d1%83%d1%82%d0%b8%d0%bb%d0%b8%d1%82%d0%b0-%d0%b4%d0%bb%d1%8f-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-casperjs/</link>
+					<comments>https://stepansuvorov.com/blog/2012/10/%d1%83%d1%82%d0%b8%d0%bb%d0%b8%d1%82%d0%b0-%d0%b4%d0%bb%d1%8f-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-casperjs/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 21 Oct 2012 15:41:18 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[casperjs]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[phantomjs]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=704</guid>
+
+					<description><![CDATA[CasperJS &#8211; вспомогательный инструмент написанный на JavaScript как обертка PhantomJS. На официальном сайте перечислены следующие основные возможности: определение и порядок итераций браузера заполнение и отправка форм клик и переход по ссылкам создание скриншотов страницы и ее части удаленное тестирование DOM &#8230; <a href="https://stepansuvorov.com/blog/2012/10/%d1%83%d1%82%d0%b8%d0%bb%d0%b8%d1%82%d0%b0-%d0%b4%d0%bb%d1%8f-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-casperjs/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-full wp-image-705" title="casperJS_logo" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/10/casperJS_logo.png" alt="" width="171" height="275" /></p>
+<p><strong>CasperJS</strong> &#8211; вспомогательный инструмент написанный на JavaScript как обертка <a href="http://phantomjs.org/"><strong>PhantomJS</strong></a>. На официальном сайте перечислены следующие основные возможности:</p>
+<ul>
+<li>определение и порядок итераций браузера</li>
+<li>заполнение и отправка форм</li>
+<li>клик и переход по ссылкам</li>
+<li>создание скриншотов страницы и ее части</li>
+<li>удаленное тестирование DOM</li>
+<li>логирование событий</li>
+<li>загрузка ресурсов и подключение библиотек</li>
+<li>написание функциональных тестов и сохранение в формате JUnit XML</li>
+<li>Допиливание веб контента</li>
+</ul>
+<p>Все это или почти все можно сделать с помощью PhantomJS, погрузимся глубже в CasperJS, чтобы понять все плюшки.</p>
+<p><span id="more-704"></span></p>
+<p>Для начала немного о том, как нам установить CasperJS. Скачиваем архив с <a href="http://casperjs.org">офсайта</a> либо выкачиваем файлы с <a href="https://github.com/n1k0/casperjs">github</a>. Создаем ссылку на исполняемый файл в /usr/local/bin:</p>
+<pre>$ ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs</pre>
+<p>После чего можно проверить работоспособность фантома(который как бы уже должен быть установлен) и каспера:</p>
+<pre>$ phantomjs
+--version 1.7
+$ casperjs
+--version 1.0.0-RC2</pre>
+<p>* Еще плюс нужно проверить наличие Python на машине, так как исполняемый файл именно на нем.</p>
+<p>Сделаем простенький скриптик, чтобы проверить что модуль подключается:</p>
+<pre>var casper = require('casper').create();
+ casper.start('http://ya.ru/', function(){ console.log("ya.ru OK!"); });
+ casper.run();</pre>
+<p>Если все работает, то можно переходить к плюшкам.</p>
+<p>Первая вкусная плюшка &#8211; это удобный синтаксис для работы с <strong>асинхронными</strong> <strong>методами</strong>. Для того чтобы в фантоме открыть несколько страниц последовательно нужно было делать так:</p>
+<pre>var page = require('webpage').create();
+page.open(url1, function(status) {
+  if (status == "fail") phantom.exit();
+  page.open(url2, function(status) {
+    if (status == "fail") phantom.exit();
+    page.open(url3, function(status) {
+      if (status == "fail") phantom.exit();
+      page.open(url4, function(status) {
+        if (status == "fail") phantom.exit();
+        // И так далее...
+      });
+    });
+  });
+});</pre>
+<p>В свою очередь на <strong>CasperJS</strong> это выглядит так:</p>
+<pre>var casper = require('casper').create();
+casper.start(url1);
+casper.thenOpen(url2);
+casper.thenOpen(url3);
+casper.thenOpen(url4);
+casper.run();</pre>
+<p>Согласитесь, что намного приятнее?</p>
+<p>Следующая плюшка &#8211; это <strong>клики по DOM элементам</strong>, т.е. имитация пользовательских действий:</p>
+<pre>var casper = require("casper").create()
+
+casper.start('https://stepansuvorov.com/blog/');
+casper.thenClick('#site-title');
+casper.thenClick('.page-item-2');
+casper.then(function() {
+    this.echo('Page url is ' + this.getCurrentUrl());
+    this.echo('Page title is ' + this.getTitle());
+});
+
+casper.run();</pre>
+<p>Идем дальше. Плюшка номер три &#8211; это удобный интерфейс для <strong>заполнения форм</strong>:</p>
+<pre>var casper = require("casper").create()
+
+casper.start('http://ya.ru/', function() {
+  this.fill('form[action="http://yandex.ru/yandsearch"]', { text: 'casperjs' }, true);
+});
+
+casper.then(function() {
+    this.echo('Page url is ' + this.getCurrentUrl());
+    this.echo('Page title is ' + this.getTitle());
+});
+
+casper.run();</pre>
+<p>Четвертая плюшка &#8211; <strong>скрин определенного участка</strong> страницы, напомню: фантом умел только делать снимок всей страницы:</p>
+<pre>var casper = require("casper").create()
+
+casper.start('https://www.google.com', function() {
+    this.captureSelector('capture.png', '#hplogo');
+});
+
+casper.run();</pre>
+<p>Пятая плюшка &#8211; <strong>функциональные тесты</strong> &#8211; как объединение имитации действий пользователя и проверки соответствий состояний страницы:</p>
+<pre>var url = 'http://ya.ru/';
+var casper = require('casper').create();
+casper.start(url, function() {
+  this.test.assert(this.getCurrentUrl() === url, 'url is the one expected');
+});
+casper.run();</pre>
+<p>И в завершение еще плюшка отслеживания подгрузки контента(в случае когда он грузится асинхронно)</p>
+<pre>var casper = require("casper").create();
+
+casper.start('http://foo.bar/', function() {
+  this.waitForResource("foobar.png");
+}); 
+
+casper.then(function() {
+  this.echo('foobar.png has been loaded.');
+}); 
+
+casper.run();</pre>
+<p>Аналогичные методы:  <code>wait</code>,<code> waitFor</code>,<code> waitForSelector</code>,<code> waitWhileSelector,</code><code> waitForResource</code>,<code> waitUntilVisible</code>,<code> waitWhileVisible. </code></p>
+<p>Можно сделать вывод что плюшки у CasperJS есть, и им в целом можно пользоваться.</p>
+<p>Материалы, которые помогали трудится над статьей:</p>
+<p><a href="http://casperjs.org/api.html">API документация с офсайта</a></p>
+<p><a href="https://nicolas.perriault.net/code/2012/introducing-casperjs-toolkit-phantomjs/">CasperJS, a toolkit on top of PhantomJS</a> &#8211; прекрасная статья от Nicolas Perriault, которая по сути послужила фундаментом для моей.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/10/%d1%83%d1%82%d0%b8%d0%bb%d0%b8%d1%82%d0%b0-%d0%b4%d0%bb%d1%8f-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-casperjs/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

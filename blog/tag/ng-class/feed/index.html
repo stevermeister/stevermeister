@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>ng-class &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/ng-class/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Wed, 26 Aug 2015 15:40:52 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>AngularJs: intersting syntax for complex ng-class conditions</title>
+		<link>https://stepansuvorov.com/blog/2015/08/angularjs-intersting-syntax-for-complex-ng-class-conditions/</link>
+					<comments>https://stepansuvorov.com/blog/2015/08/angularjs-intersting-syntax-for-complex-ng-class-conditions/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 26 Aug 2015 15:39:37 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[ng-class]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2824</guid>
+
+					<description><![CDATA[Just now I got known quite interesting condition syntax for ng-class (from stackoverflow answer): [javascript gutter=&#8221;0&#8243;] ng-class=&#34;{admin:&#8217;enabled&#8217;, moderator:&#8217;disabled&#8217;, &#8221;:&#8217;hidden&#8217;}[user.role]&#34; [/javascript] it seems that there is not good explanation for such case in documentation. being inspired by this possibility I decided &#8230; <a href="https://stepansuvorov.com/blog/2015/08/angularjs-intersting-syntax-for-complex-ng-class-conditions/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Just now I got known quite interesting condition syntax for <a href="https://docs.angularjs.org/api/ng/directive/ngClass">ng-class</a> (from <a href="http://stackoverflow.com/a/8309832/274500">stackoverflow answer</a>):</p>
+<p>[javascript gutter=&#8221;0&#8243;]<br />
+ng-class=&quot;{admin:&#8217;enabled&#8217;, moderator:&#8217;disabled&#8217;, &#8221;:&#8217;hidden&#8217;}[user.role]&quot;<br />
+[/javascript]</p>
+<p>it seems that there is not good explanation for such case in documentation.<br />
+being inspired by this possibility I decided to create even more complex condition:<br />
+[javascript gutter=&#8221;0&#8243;]<br />
+ng-class=&quot;connections.length &amp;&amp; ({true:&#8217;open&#8217;, false:&#8217;close&#8217;}[!!manager.showConnections])&quot;<br />
+[/javascript]</p>
+<p>(<em>flag open/close will be shown only if there are some connections for current manager</em>)</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/08/angularjs-intersting-syntax-for-complex-ng-class-conditions/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>MockBackend &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/mockbackend/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Fri, 20 Jan 2017 08:57:46 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Angular2: Синхронная асинхронность MockBackend</title>
+		<link>https://stepansuvorov.com/blog/2017/01/angular2-%d1%81%d0%b8%d0%bd%d1%85%d1%80%d0%be%d0%bd%d0%bd%d0%b0%d1%8f-%d0%b0%d1%81%d0%b8%d0%bd%d1%85%d1%80%d0%be%d0%bd%d0%bd%d0%be%d1%81%d1%82%d1%8c-mockbackend/</link>
+					<comments>https://stepansuvorov.com/blog/2017/01/angular2-%d1%81%d0%b8%d0%bd%d1%85%d1%80%d0%be%d0%bd%d0%bd%d0%b0%d1%8f-%d0%b0%d1%81%d0%b8%d0%bd%d1%85%d1%80%d0%be%d0%bd%d0%bd%d0%be%d1%81%d1%82%d1%8c-mockbackend/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 20 Jan 2017 08:57:46 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular2]]></category>
+		<category><![CDATA[MockBackend]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3230</guid>
+
+					<description><![CDATA[Решил сделать заметку по не очевидному моменту юнит-тестирования Angular2, а именно: когда вы мокаете Http сервис, заменяя XHRBackend на MockBackend: [javascript] TestBed.configureTestingModule({ imports: [HttpModule], providers: [{provide: XHRBackend, useClass: MockBackend}] }); [/javascript] а потом с помощью mockBackend подменяете ответ от сервера: [javascript] &#8230; <a href="https://stepansuvorov.com/blog/2017/01/angular2-%d1%81%d0%b8%d0%bd%d1%85%d1%80%d0%be%d0%bd%d0%bd%d0%b0%d1%8f-%d0%b0%d1%81%d0%b8%d0%bd%d1%85%d1%80%d0%be%d0%bd%d0%bd%d0%be%d1%81%d1%82%d1%8c-mockbackend/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Решил сделать заметку по не очевидному моменту юнит-тестирования <strong>Angular2</strong>, а именно: когда вы мокаете <strong>Http</strong> сервис, заменяя <strong>XHRBackend</strong> на <strong>MockBackend</strong>:</p>
+<p>[javascript]<br />
+  TestBed.configureTestingModule({<br />
+      imports: [HttpModule],<br />
+      providers: [{provide: XHRBackend, useClass: MockBackend}]<br />
+  });<br />
+[/javascript]</p>
+<p>а потом с помощью <strong>mockBackend</strong> подменяете ответ от сервера:</p>
+<p>[javascript]<br />
+    mockBackend.connections.subscribe((connection: MockConnection) =&gt; {<br />
+      connection.mockRespond(new Response(new ResponseOptions({body: JSON.stringify(mockUser)})));<br />
+    })<br />
+[/javascript]</p>
+<p><strong>subscribe</strong> на http Observable <span style="text-decoration: underline;">становится внезапно <strong>синхронным</strong></span>:</p>
+<p>[javascript]<br />
+console.log(1);<br />
+this._http.get(&#8216;/&#8217;).subscribe((data) =&gt; {<br />
+      console.log(2);<br />
+    });<br />
+console.log(3);<br />
+[/javascript]</p>
+<p>соотвественно выведет: 1 2 3.</p>
+<p>Подробно вопрсос освещен на <a href="http://stackoverflow.com/questions/41273244/angular-testing-http-with-mockbackend-is-async-really-required">стеке</a>.</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/01/angular2-%d1%81%d0%b8%d0%bd%d1%85%d1%80%d0%be%d0%bd%d0%bd%d0%b0%d1%8f-%d0%b0%d1%81%d0%b8%d0%bd%d1%85%d1%80%d0%be%d0%bd%d0%bd%d0%be%d1%81%d1%82%d1%8c-mockbackend/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

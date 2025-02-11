@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>AMD &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/amd/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sun, 22 Jan 2017 08:54:56 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Загрузчик модулей RequireJS</title>
+		<link>https://stepansuvorov.com/blog/2012/10/%d0%b7%d0%b0%d0%b3%d1%80%d1%83%d0%b7%d1%87%d0%b8%d0%ba-%d0%bc%d0%be%d0%b4%d1%83%d0%bb%d0%b5%d0%b9-requirejs/</link>
+					<comments>https://stepansuvorov.com/blog/2012/10/%d0%b7%d0%b0%d0%b3%d1%80%d1%83%d0%b7%d1%87%d0%b8%d0%ba-%d0%bc%d0%be%d0%b4%d1%83%d0%bb%d0%b5%d0%b9-requirejs/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 19 Oct 2012 05:35:00 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AMD]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[RequireJS]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=673</guid>
+
+					<description><![CDATA[RequireJS &#8211; если не самый популярный, то один из самых популярных файловых/модульных загрузчиков. При создании крупных компонентных проектов без него (или его аналогов) не обойтись, т.к. он решает основные проблемы таких приложений: &#8211; зависимости между модулями &#8211; засорение глобальной области &#8230; <a href="https://stepansuvorov.com/blog/2012/10/%d0%b7%d0%b0%d0%b3%d1%80%d1%83%d0%b7%d1%87%d0%b8%d0%ba-%d0%bc%d0%be%d0%b4%d1%83%d0%bb%d0%b5%d0%b9-requirejs/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-full wp-image-674" title="require-js_logo" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/10/require-js_logo.png" alt="" width="220" height="138" /></p>
+<p><strong>RequireJS</strong> &#8211; если не самый популярный, то один из самых популярных файловых/модульных загрузчиков. При создании крупных компонентных проектов без него (или его аналогов) не обойтись, т.к. он решает основные проблемы таких приложений:</p>
+<p>&#8211; зависимости между модулями</p>
+<p>&#8211; засорение глобальной области</p>
+<p><strong>RequireJS</strong> использует <a title="Asynchronous Module Definition" href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a> концепцию. Создан для использования в браузере, но возможно использование и с node.js. Поддерживается всеми современными и не только веб браузерами: RequireJS works in IE 6+, Firefox 2+, Safari 3.2+, Chrome 3+, and Opera 10+. Имеет сравнительно небольшой размер(5.5k в сжатом виде). Поддерживает несколько плагинов: <a href="http://requirejs.org/docs/download.html#text">text</a>, <a href="http://requirejs.org/docs/download.html#domReady">domReady</a>, <a href="http://requirejs.org/docs/download.html#cs">cs (CoffeeScript)</a>, <a href="http://requirejs.org/docs/download.html#i18n">i18n </a>.</p>
+<p><span id="more-673"></span>Разберем более подробно, как можно использовать <a href="http://requirejs.org"><strong>RequireJS</strong></a> для нашего проекта. Вот <a title="requireJS download" href="http://requirejs.org/docs/download.html">тут</a> берем свеженькую версию(Для ознакомления желательно использовать несжатый вариант &#8220;<em>With Comments</em>&#8220;).</p>
+<p>Теперь создаем заготовку HTML страницы, где будем экспериментировать с нашим загрузчиком:</p>
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;script data-main="scripts/main" src="scripts/require.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>Тут хочу обратить ваше внимание на особенность использования дата-атрибута, из которого <strong>RequireJS</strong> получает информацию о главном файле с инструкциями по загрузке(в нашем случае это будет /scripts/main.js)</p>
+<p>Создаем <em>main.js</em> со следующим содержанием:</p>
+<pre>require(["util"], function(util) {
+  alert("это выполнится только тогда, когда файл util.js будет загружен");
+});</pre>
+<p>Создадим пустой util.js файл и проверим работу. На данный момент у вас должна получится такая структура директорий:</p>
+<ul>
+<li>index.html</li>
+<li>scripts/
+<ul>
+<li>main.js</li>
+<li>require.js</li>
+<li>util.js</li>
+</ul>
+</li>
+</ul>
+<p>По сути работа с RequireJS заключается в использовании 2х методов <strong>define</strong> и <strong>require</strong>.</p>
+<p>Метод <strong>define</strong> служит для описания модулей и имеет следующий синтаксис:</p>
+<pre>define( [moduleName,] dependencies, callback)
+moduleName - имя модуля (необязательный параметр)
+dependencies - массив зависимостей(с другими модулями)
+callback - тело модуля, в которое передаются dependencies</pre>
+<p>Для нашего случая будет выглядеть так(модуль содержит только одну зависимость):</p>
+<pre>define( "unit",
+        ['jQuery'],
+        function( jQuery ){
+          return { foo : "bar" };
+        }
+);</pre>
+<p>Но если бы модуль содержал больше зависимостей, мы бы могли добавить их:</p>
+<pre>['jQuery', 'jQueryUI', 'AnotherModule']</pre>
+<p>и соответственно в функцию бы добавилось больше параметров:</p>
+<pre>function( jQuery, jQueryUI, AnotherModule ){</pre>
+<p>Метод<strong> require</strong> фактически должен вызываться только один раз в главном файле(но в проекте может быть не один главный/корневой файл) имеет схожий синтаксис с define, но не имеет параметра названия модуля:</p>
+<pre>require( requiredModules, callback)</pre>
+<p>Мы уже поместили вызов метода в main.js:</p>
+<pre>require(["util"], function(util) {
+  //важно то, что util будет доступно только тут
+  //и его не будет в глобальной области видимости
+});</pre>
+<p>Настроить опции RequireJS можно через метод <strong>require.config</strong>(), например:</p>
+<pre>  require.config({
+baseUrl: "/another/path",
+paths: { "some": "some/v1.0" },
+waitSeconds: 15
+  });</pre>
+<p>Возможные параметры:</p>
+<pre>baseUrl - базовый путь, где лежат все модули
+paths - пути для модулей, которые находятся не в baseUrl
+waitSeconds - таймаут, который загрузчик будет ждать скрипта
+shim - для поддержки модулей сторонних модулей описанных не через define
+map - позволяет ссылаться через алиас на разные файлы для разных сборок
+config - для дополнительных настроек, которые будут доступны в модулях
+packages - указание директорий/пакетов, для множественной загрузки модулей
+context - указание контекста(например: <code>version1, <code>version2</code></code>)
+deps - массив зависимостей
+callback - вызовется, когда будут загружены зависимости указынные в параметре deps
+enforceDefine - true/false. вызовет ошибку, припопытке загрузки скрипта без define
+xhtml - true/false. использование <a href="https://developer.mozilla.org/en-US/docs/DOM/document.createElementNS">createElementNS</a> для создания скрипт тегов
+urlArgs - дополнительные параметры при запросе скрипта(удобно использовать решая вопрос кеширования)
+scriptType - тип скрипта, по умолчанию "text/javascript" (можно также "text/javascript;version=1.8")</pre>
+<p>Более подробно рассмотрим некоторые из них.</p>
+<p>Параметр <strong>shim</strong> позволяет добавить сторонние модули(которые определены не в AMD стиле, или проще говоря: без метода define) к общей схеме.</p>
+<pre>requirejs.config({
+    paths:{
+        'jquery': 'https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery'
+    },
+    shim: {
+        'jquery': {
+            exports: 'jQuery',
+        }
+    }
+});
+
+require(["util", "jquery"], function(util, $) {
+    console.log($(document));
+})</pre>
+<p>Внимание! Я специально в примере подключил старую(1.4.4) версию <strong>jQuery</strong>, т.к. новая(&gt;1.7.1) уже умная &#8211; совместима с AMD: если обнаруживает метод define, то автоматически прописывает себя. Т.е. мы можем использовать модуль &#8220;<strong>jquery</strong>&#8221; без объявления его через <strong>shim</strong>.</p>
+<p>С помощью параметра <strong>map</strong> мы можем сделать более гибкими связи между модулями, например новый модуль зависит от более новой версии библиотеки, а старый модуль, но который все равно нужно поддерживать, &#8211; использует древнюю версию. Так вот для обоих модулей мы можем прописать одну зависимость на библиотеку, а через <strong>map</strong> реализовать версионность:</p>
+<pre>requirejs.config({
+  map: {
+     'some/newmodule': { 'foo': 'foo1.2' },
+     'some/oldmodule': { 'foo': 'foo1.0' }
+  }
+});</pre>
+<p>Структура файлов при этом:</p>
+<ul>
+<li>foo1.0.js</li>
+<li>foo1.2.js</li>
+<li>some/
+<ul>
+<li>newmodule.js</li>
+<li>oldmodule.js</li>
+</ul>
+</li>
+</ul>
+<p>Т.е., в случае чего мы не будем менять по файлам все зависимости, а просто отредактируем <strong>map</strong> параметр в конфиге.</p>
+<p>Из основного это все. Есть еще <strong>RequireJS optimizer</strong>, но это тема для отдельной статьи. Буду рад уточнениями и дополнениям в комментариях.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/10/%d0%b7%d0%b0%d0%b3%d1%80%d1%83%d0%b7%d1%87%d0%b8%d0%ba-%d0%bc%d0%be%d0%b4%d1%83%d0%bb%d0%b5%d0%b9-requirejs/feed/</wfw:commentRss>
+			<slash:comments>24</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

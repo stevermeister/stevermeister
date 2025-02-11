@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>angular-componentFactory &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/angular-componentfactory/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 23 May 2019 15:07:25 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Запускаем Angular виджет в приложение без Angular</title>
+		<link>https://stepansuvorov.com/blog/2017/06/angular-for-non-angular-apps/</link>
+					<comments>https://stepansuvorov.com/blog/2017/06/angular-for-non-angular-apps/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 25 Jun 2017 16:02:11 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[angular-componentFactory]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3378</guid>
+
+					<description><![CDATA[Очень маловероятно, что вы захотите добавлять Angular в приложение только для того, чтобы завести один компонент. Рекомендую смотреть на этот пост, не как на практическое руководство к действию, а как на работу по исследованию возможностей фреймворка. Предположим что у нас &#8230; <a href="https://stepansuvorov.com/blog/2017/06/angular-for-non-angular-apps/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone wp-image-3379" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/06/web-design-2-512.png" alt="" width="205" height="205" /></p>
+<p><em>Очень маловероятно, что вы захотите добавлять Angular в приложение только для того, чтобы завести один компонент. Рекомендую смотреть на этот пост, не как на практическое руководство к действию, а как на работу по исследованию возможностей фреймворка.</em></p>
+<p><span id="more-3378"></span></p>
+<p>Предположим что у нас уже есть какой-то компонент, который мы хотим вывести на странице не <strong>Angular</strong> приложения:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/0fa603b4a2d98eaf71263b3f7b181e22">Gist</a>.</p>
+<p>Для запуска <strong>Angular</strong> нам нужно также создать модуль, объявить наш компонент в нем и указать на то, что он будет инициирован <strong>динамически</strong>:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/0408b48d28a22638c0711821636aa6d3">Gist</a>.</p>
+<p>Создав модуль, мы можем его бустрапить:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/773a866d6912fb08f2af9b8bcf098606">Gist</a>.</p>
+<h2>Использование фабрики компонентов</h2>
+<p>Чтобы инициировать динамически компонент, нам нужен <strong>componentFactoryResolver</strong>, который мы можем получить из сущности нашего модуля:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/0256fd2a45cebdb4f207e5dc84908be7">Gist</a>.</p>
+<p>теперь можем получить фабрику для нашего конкретного компонента:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/1c90c8d4383efb3d34ca96e193c2ec0b">Gist</a>.</p>
+<p>и с помощью полученной фабрики создать компонент:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/f6f89631dfd9d5cde07e11f557aef562">Gist</a>.</p>
+<p>обратите внимание, что мы произвели создание компонента прям на самом элементе (<strong><span class="pl-c1">querySelector</span>(<span class="pl-s"><span class="pl-pds">&#8216;</span>hello<span class="pl-pds">&#8216;</span></span>)</strong>), но это не обязательно, мы бы также могли инициализировать контейнер, который содержит наш hello-элемент (например <strong>body</strong>).</p>
+<p>Мы вывели компонент на страницу.</p>
+<p><img decoding="async" class="alignnone size-full wp-image-3380" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/06/Screen-Shot-2017-06-25-at-17.40.12.png" alt="" width="284" height="121" /></p>
+<p>Но еще не все.</p>
+<h2>Подключаем механизм обнаружения изменений (Change Detection)</h2>
+<p>Чтобы представление нашего компонента реагировало на изменение состояния приложения, нам необходимо добавить <a href="https://angular.io/api/core/ComponentRef#hostView"><strong>hostView</strong></a> компонента в приложение (<strong>ApplicationRef</strong>). Для этого используем метод <a href="https://angular.io/api/core/ApplicationRef#attachView">attachView</a>:</p>
+<pre> ngModuleRef.injector.get(ApplicationRef).attachView(componentRef.hostView);</pre>
+<p>Получим:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/a43f1fbf4f6174c7f70281aa998ae63b">Gist</a>.</p>
+<p>Также мы можем сделать отложенную инициализацию по таймеру (например: через 5 секунд):</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/98820b3cd5c5ece59dabc963a172ec73">Gist</a>.</p>
+<p>Вот <a href="https://github.com/javascriptru/angular-for-non-angular-apps">тут</a> полный пример.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/06/angular-for-non-angular-apps/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

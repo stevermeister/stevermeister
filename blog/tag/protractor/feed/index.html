@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>protractor &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/protractor/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 23 May 2019 15:10:57 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Elementor делает тестирование с Protractor приятнее</title>
+		<link>https://stepansuvorov.com/blog/2015/01/elementor-%d0%b4%d0%b5%d0%bb%d0%b0%d0%b5%d1%82-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d1%81-protractor-%d0%bf%d1%80%d0%b8%d1%8f%d1%82%d0%bd%d0%b5%d0%b5/</link>
+					<comments>https://stepansuvorov.com/blog/2015/01/elementor-%d0%b4%d0%b5%d0%bb%d0%b0%d0%b5%d1%82-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d1%81-protractor-%d0%bf%d1%80%d0%b8%d1%8f%d1%82%d0%bd%d0%b5%d0%b5/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Thu, 29 Jan 2015 21:13:32 +0000</pubDate>
+				<category><![CDATA[Рекомендую]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[elementor]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[npm]]></category>
+		<category><![CDATA[protractor]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2250</guid>
+
+					<description><![CDATA[Недавно для себя открыл интересный npm модуль elementor. Крайне странно, что я не слышал о нем ничего от &#8220;избранных&#8221; мира JS. Он представляет из себя что-то на подобие оболочки для Protractor для удобной работы с локаторами. Думаю даже ничего рассказывать не &#8230; <a href="https://stepansuvorov.com/blog/2015/01/elementor-%d0%b4%d0%b5%d0%bb%d0%b0%d0%b5%d1%82-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d1%81-protractor-%d0%bf%d1%80%d0%b8%d1%8f%d1%82%d0%bd%d0%b5%d0%b5/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><a title="npmjs.com" href="https://www.npmjs.com/package/elementor"><img decoding="async" fetchpriority="high" class="alignnone size-full wp-image-2253" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/01/protractor-logo.png" alt="elementor-protractor" width="958" height="216" /></a></p>
+<p>Недавно для себя открыл интересный <strong>npm</strong> модуль <strong><a title="npmjs.com" href="https://www.npmjs.com/package/elementor">elementor</a></strong>. Крайне странно, что я не слышал о нем ничего от &#8220;избранных&#8221; мира JS. Он представляет из себя что-то на подобие оболочки для <strong><a title="angular/protractor" href="https://github.com/angular/protractor">Protractor</a> </strong>для удобной работы с локаторами.</p>
+<p><span id="more-2250"></span></p>
+<p>Думаю даже ничего рассказывать не нужно все показано в этом 4х минутном ролике:</p>
+<p><iframe src="https://www.youtube.com/embed/kC0JYp79tdo" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p>
+<p>Кому лень смотреть 4 минуты (<span style="text-decoration: underline;">хотя я крайне рекомендую</span>), вот основные моменты:</p>
+<ul>
+<li>Удобное <strong>тестирование локаторов</strong> в браузере:</li>
+</ul>
+<p><img decoding="async" class="alignnone size-full wp-image-2255" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/01/popup-screen.png" alt="elementor-chrome-extention" width="500" height="301" /></p>
+<ul>
+<li>Дополнительная вкладка в WebDeveloper Tools, которая показывает <strong>возможные локаторы</strong> для выбранного элемента:</li>
+</ul>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2257" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/01/dev-tools2.png" alt="elementor-dev-tools" width="800" height="303" /></p>
+<ul>
+<li>Плагины для <a title="github.com" href="https://github.com/andresdominguez/elementor-idea"><strong>WebStorm</strong></a> и <a title="github.com" href="https://github.com/andresdominguez/elementor-sublime"><strong>Sublime</strong></a>, которые позволяют сразу <strong>выполнять локаторы</strong> в коде:</li>
+</ul>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2258" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/01/elementor-idea.png" alt="elementor-idea" width="813" height="196" /></p>
+<h2>Установка и запуск</h2>
+<p>Так как это npm модуль, то для установки достаточно выполнить команду:</p>
+<p>[shell]<br />
+npm install elementor -g<br />
+[/shell]</p>
+<p>А потом чтобы запустить:</p>
+<p>[shell]<br />
+elementor https://angularjs.org<br />
+[/shell]</p>
+<p>* При этом конечно у вас уже должны быть установлены <strong>protractor</strong> и запущен <strong>веб-драйвер</strong> ( об этом можно почитать <a title="Тестируем AngularJS используя Protractor" href="https://stepansuvorov.com/blog/2014/02/angularjs-protractor/">тут</a> и <a title="Автоматизируем тестирование AngularJS с Protractor" href="https://stepansuvorov.com/blog/2014/11/protractor/">тут</a>).</p>
+<p>&nbsp;</p>
+<p><strong>UPD</strong>: с новым релизом появилась возможность тестировать сайты без AngularJS, для этого запускаем командой:</p>
+<p>[shell]elementor https://google.com &#8211;nonAngular[/shell]</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/01/elementor-%d0%b4%d0%b5%d0%bb%d0%b0%d0%b5%d1%82-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d1%81-protractor-%d0%bf%d1%80%d0%b8%d1%8f%d1%82%d0%bd%d0%b5%d0%b5/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Запукаем Protractor на Browserstack</title>
+		<link>https://stepansuvorov.com/blog/2015/01/%d0%b7%d0%b0%d0%bf%d1%83%d0%ba%d0%b0%d0%b5%d0%bc-protractor-%d0%bd%d0%b0-browserstack/</link>
+					<comments>https://stepansuvorov.com/blog/2015/01/%d0%b7%d0%b0%d0%bf%d1%83%d0%ba%d0%b0%d0%b5%d0%bc-protractor-%d0%bd%d0%b0-browserstack/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 19 Jan 2015 20:40:20 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[BrowserStack]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[protractor]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2185</guid>
+
+					<description><![CDATA[Небольшая заметка о том, как запустить protractor тесты на разных браузерах используя сервис Browserstack. Подробно о protractor можно почитать тут и тут. Настройка конфига Ключевые опции это capabilities и seleniumAddress: [javascript] capabilities: { //эти параметры можно получить на странице &#8211; https://www.browserstack.com/automate &#8216;browserstack.user&#8217; : &#8230; <a href="https://stepansuvorov.com/blog/2015/01/%d0%b7%d0%b0%d0%bf%d1%83%d0%ba%d0%b0%d0%b5%d0%bc-protractor-%d0%bd%d0%b0-browserstack/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Небольшая заметка о том, как запустить <strong>protractor</strong> тесты на разных браузерах используя сервис <strong>Browserstack</strong>.</p>
+<p><span id="more-2185"></span></p>
+<p>Подробно о <strong>protractor</strong> можно почитать <a title="Тестируем AngularJS используя Protractor" href="https://stepansuvorov.com/blog/2014/02/angularjs-protractor/">тут</a> и <a title="Автоматизируем тестирование AngularJS с Protractor" href="https://stepansuvorov.com/blog/2014/11/protractor/">тут</a>.</p>
+<h2>Настройка конфига</h2>
+<p>Ключевые опции это <strong>capabilities</strong> и <strong>seleniumAddress</strong>:</p>
+<p>[javascript]<br />
+  capabilities: {<br />
+    //эти параметры можно получить на странице &#8211; https://www.browserstack.com/automate<br />
+    &#8216;browserstack.user&#8217; : &#8216;my_user_name&#8217;,<br />
+    &#8216;browserstack.key&#8217; : &#8216;my_secret_key&#8217;,</p>
+<p>    &#8216;browserstack.local&#8217; : &#8216;true&#8217;,</p>
+<p>    &#8216;browser&#8217; : &#8216;Chrome&#8217;,<br />
+    &#8216;browser_version&#8217; : &#8216;36.0&#8217;,<br />
+    &#8216;os&#8217; : &#8216;OS X&#8217;,<br />
+    &#8216;os_version&#8217; : &#8216;Mavericks&#8217;,<br />
+    &#8216;resolution&#8217; : &#8216;1024&#215;768&#8217;<br />
+  },</p>
+<p>  seleniumAddress: &#8216;http://hub.browserstack.com/wd/hub&#8217;<br />
+[/javascript]</p>
+<p>Более подробно о возможных параметрах <a title="browserstack.com" href="http://www.browserstack.com/automate/capabilities">тут</a>.</p>
+<p>Подробный лог (например: для отладки) можно включить следующей опцией:</p>
+<p>[javascript]<br />
+  capabilities: {<br />
+      //&#8230;<br />
+      &#8216;browserstack.debug&#8217; : &#8216;true&#8217;,<br />
+      //&#8230;<br />
+  },<br />
+[/javascript]</p>
+<h2>Настройка Browserstack для локального запуска</h2>
+<p>Достаточно скачать(<a title="browserstack.com" href="http://www.browserstack.com/automate/node#setting-local-tunnel">тут</a>) и запустить файл:</p>
+<p>[bash]<br />
+./BrowserStackLocal my_secret_key localhost,3000,0<br />
+[/bash]</p>
+<p>3000 &#8211; номер порта, на котором локально проект (только для случая локального тестирования)</p>
+<h2>Запуск протрактора</h2>
+<p>Тут ничего нового, так же команда с указанием конфиг-файла:</p>
+<p>[bash]<br />
+protractor protractor-browserstack.config.js<br />
+[/bash]</p>
+<p>&nbsp;</p>
+<p><strong>UPD:</strong> Если вы тестируете реальный сайт (не локальное окружение), то <strong>BrowserStackLocal</strong> запускать не нужно. Но в любом случае его лучше иметь для локальной отладки.</p>
+<p><strong>UPD2</strong>: Если вы хотите использовать несколько браузеров (и запускать тесты параллельно) используйте опцию <strong>multiCapabilities</strong> вместо <strong>capabilities</strong>.</p>
+<p><em>* Если что, автоматические тесты &#8211; это платная услуга, но ее можно попробовать бесплатно (на данный момент предоставляется 100 минут бесплатно)</em></p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/01/%d0%b7%d0%b0%d0%bf%d1%83%d0%ba%d0%b0%d0%b5%d0%bc-protractor-%d0%bd%d0%b0-browserstack/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Автоматизируем тестирование AngularJS с Protractor</title>
+		<link>https://stepansuvorov.com/blog/2014/11/protractor/</link>
+					<comments>https://stepansuvorov.com/blog/2014/11/protractor/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 18 Nov 2014 19:02:58 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[grunt]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[protractor]]></category>
+		<category><![CDATA[tests]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2011</guid>
+
+					<description><![CDATA[О том как установить и запустить Protractor уже было в этом посте &#8211; Тестируем AngularJS используя Protractor. А сейчас мы сделаем фокус  на том, как мы можем интегрировать Protractor в нашу систему и подкючить к Grunt. Подключаем Protractor к Grunt &#8230; <a href="https://stepansuvorov.com/blog/2014/11/protractor/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-2012" title="grunt+angular+protractor" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/falgg2jybmhgk16y62lr-300x300.png" alt="" width="300" height="300" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/falgg2jybmhgk16y62lr-300x300.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/10/falgg2jybmhgk16y62lr-150x150.png 150w, https://stepansuvorov.com/blog/wp-content/uploads/2014/10/falgg2jybmhgk16y62lr.png 500w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>О том как установить и запустить <strong><a title="angular.github.io/protractor" href="http://angular.github.io/protractor/#/">Protractor</a></strong> уже было в этом посте &#8211; <a title="angularjs-protractor" href="https://stepansuvorov.com/blog/2014/02/angularjs-protractor/">Тестируем AngularJS используя Protractor</a>. А сейчас мы сделаем фокус  на том, как мы можем интегрировать <strong>Protractor</strong> в нашу систему и подкючить к <strong><a title="gruntjs" href="http://gruntjs.com/">Grunt</a></strong>.</p>
+<p><span id="more-2011"></span></p>
+<h2>Подключаем Protractor к Grunt</h2>
+<p>Для подключение нам необходимо поставить специальный таск-плагин <a title="npmjs.org" href="https://www.npmjs.org/package/grunt-protractor-runner">grunt-protractor-runner</a> к grunt путем выполнения следующей команды:</p>
+<pre>$ npm install grunt-protractor-runner</pre>
+<p>После чего можем дополнить наш конфигурационный файл секцией для него:</p>
+<p>[javascript]<br />
+protractor: {<br />
+  options: {<br />
+    configFile: &quot;protractor.conf.js&quot;<br />
+  },<br />
+  all: {}<br />
+}<br />
+[/javascript]</p>
+<p><strong>protractor.conf.js</strong> &#8211; конфигурационный файл, который уже у нас есть (создание подробно описано в <a href="https://stepansuvorov.com/blog/2014/02/angularjs-protractor/">предыдущем посте</a>)</p>
+<p><strong>all: {}</strong> &#8211; grunt требует как минимум один &#8220;target&#8221;, поэтому, если все параметры уже указаны в конфиге протрактора, то можем просто добавить пустую сецию.</p>
+<p>Проверим что мы все правильно настроили и команда выполняется без ошибок:</p>
+<p>[bash]<br />
+$ grunt protractor:all<br />
+[/bash]</p>
+<h2>PhantomJS и Protractor</h2>
+<p>В случае, когда мы хотим запускать наши тесты не только локально, но и на сервере, где нет возможности использовать браузер на помощь спешит <a title="phantomjs.org" href="http://phantomjs.org/">PhantomJS</a>. Ознакомиться с <strong>PhantomJS</strong> вы можете в посте &#8211; <a href="https://stepansuvorov.com/blog/2012/09/%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%B5%D0%BC-%D1%8E%D0%BD%D0%B8%D1%82-%D1%82%D0%B5%D1%81%D1%82%D1%8B-%D1%81-phantomjs/">Создаем юнит-тесты с phantomjs</a>, а сейчас мы поговорим о том как его встроить в Protractor.</p>
+<p>Теперь вместо вебдрайвера мы должны запустить фантом-сервер:</p>
+<pre>$ phantomjs --webdriver=4444</pre>
+<p>а наша секция grunt конфига преобразиться следующим образом:</p>
+<p>[javascript]<br />
+protractor: {<br />
+  options: {<br />
+    configFile: &quot;protractor.conf.js&quot;<br />
+  },<br />
+  all: {<br />
+        options: {<br />
+          args:{<br />
+            seleniumAddress: &#8216;http://localhost:4444&#8217;,<br />
+            capabilities: {<br />
+              browserName: &#8216;phantomjs&#8217;<br />
+            }<br />
+          }<br />
+        }<br />
+      }<br />
+}<br />
+[/javascript]</p>
+<p>иногда бывает необходимо специфицировать конкретную версию/путь к phantomjs, тогда добавляем еще одну опцию &#8211; <strong>phantomjs.binary.path</strong>, а аргументы к фантому можем передавать через опцию <strong>phantomjs.cli.args</strong>; итого получим:</p>
+<p>[javascript]<br />
+protractor: {<br />
+  options: {<br />
+    configFile: &quot;protractor.conf.js&quot;<br />
+  },<br />
+  all: {<br />
+        options: {<br />
+          args:{<br />
+            seleniumAddress: &#8216;http://localhost:4444&#8217;,<br />
+            capabilities: {<br />
+              browserName: &#8216;phantomjs&#8217;,<br />
+              &#8216;phantomjs.binary.path&#8217;:&#8217;./node_modules/.bin/phantomjs&#8217;,<br />
+              &#8216;phantomjs.cli.args&#8217;: [&#8216;&#8211;ignore-ssl-errors=true&#8217;,  &#8216;&#8211;web-security=false&#8217;]<br />
+            }<br />
+          }<br />
+        }<br />
+      }<br />
+}<br />
+[/javascript]</p>
+<p>Если мы хотим, чтобы вебдрайвер запустил фантом за нас, то просто не указываем параметр <strong>seleniumAddress</strong>.</p>
+<h2>Отладка тест-сценариев в WebStorm</h2>
+<p>Пару слов о том как можно дебажить тесты в WebStorm. Что для этого нужно сделать:</p>
+<p>Открываем настройки Run/Debug:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2029" title="webstorm edit run configuration" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-17.51.44.png" alt="" width="119" height="42" /></p>
+<p>Добравляем новую конфигурацию для Node.js:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-2030" title="webstorm node.js config" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-17.57.17-263x300.png" alt="" width="263" height="300" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-17.57.17-263x300.png 263w, https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-17.57.17.png 326w" sizes="(max-width: 263px) 100vw, 263px" /></p>
+<p>Прописываем следующие ключевые настройки:</p>
+<ul>
+<li><strong>Working directory</strong>: корневой путь вашего проекта (например: ‘<em>/Users/stevermeister/workspace/academy-js</em>’)</li>
+<li><strong>JavaScript file</strong>: путь к cli.js файлу протрактора (как правило это <em>node_modules\protractor\lib\cli.js</em>)</li>
+<li><strong>Application parameters</strong>: путь к файлу конфиг файлу протрактора(например: <em>protractor.conf.js</em>)</li>
+</ul>
+<div><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2032" title="webstorm protractor config" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-18.09.011.png" alt="" width="710" height="379" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-18.09.011.png 710w, https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-18.09.011-300x160.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-18.09.011-500x266.png 500w" sizes="(max-width: 710px) 100vw, 710px" /></div>
+<p>Сохраняем. Готово:</p>
+<p><a href="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-18.11.27.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2033" title="webstorm protractor debug" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-18.11.27.png" alt="" width="169" height="39" /></a></p>
+<p>Теперь можно проставлять бреймпоинты и дебажить.</p>
+<h2>Подключение вспомогательных файлов</h2>
+<p>Иногда возникает необходимость подключить файлы, которые не являются тест сценариями, но, в которых содержится вспомогательный функционал(например логин). Для этого необходимо подключаем файл сделать формата модуля <strong>node.js </strong>(<a title="Node-Require-and-Exports" href="http://openmymind.net/2012/2/3/Node-Require-and-Exports/">module.exports</a>), то есть(helpers.js):</p>
+<p>[javascript]<br />
+function login(){<br />
+//&#8230;<br />
+}<br />
+function logout(){<br />
+//&#8230;<br />
+}<br />
+var Helper = {};<br />
+Helper.login = login;<br />
+Helper.logout = logout;<br />
+[/javascript]</p>
+<p>и потом подключить в файле сценария:</p>
+<p>[javascript]<br />
+var helpers = require(&#8216;./helpers&#8217;);<br />
+helpers.login();<br />
+[/javascript]</p>
+<p>Для тех, кто ранее не работал с таким синтаксисом, подчеркну: расширение &#8220;<em>.js</em>&#8221; в данном случае не пишется.</p>
+<p><span style="color: #000000; font-weight: bold;">Примеры тест сценариев</span></p>
+<h2>Авторизация пользователя в приложении:</h2>
+<p>[javascript]<br />
+describe(&#8216;Auth Module&#8217;, function() {<br />
+  var ptor = protractor.getInstance();</p>
+<p>  it(&#8216;should login user&#8217;, function() {<br />
+    browser.get(&#8216;/login&#8217;);<br />
+    browser.waitForAngular();</p>
+<p>    element(by.model(&#8216;username&#8217;)).sendKeys(browser.params.login.user);<br />
+    element(by.model(&#8216;password&#8217;)).sendKeys(browser.params.login.password);<br />
+    element.all(by.css(&#8216;.button&#8211;primary&#8217;)).first().click();</p>
+<p>    element(by.binding(&#8216;user.name&#8217;)).getText().then(function(username) {<br />
+      expect(username).equal(browser.params.login.username);<br />
+    });<br />
+    ptor.getCurrentUrl().then(function(url) {<br />
+      expect(url.slice(-10)).equal(&#8216;/dashboard&#8217;);<br />
+    });<br />
+  });<br />
+});<br />
+[/javascript]</p>
+<p>Параметры типа пароля в тестах, понятное дело лучше не держать. Здесь они вынесены в отдельную секцию конфига протрактора (да, согласен, тоже не комильфо, но всеравно лучше, чем прям в тестах):</p>
+<p>[javascript]<br />
+params: {<br />
+  login: {<br />
+    user: &#8216;stepan@mail.com&#8217;,<br />
+    password: &#8216;XXXXXXXXX&#8217;,<br />
+    username: &#8216;Stepan Suvorov&#8217;<br />
+  }<br />
+}<br />
+[/javascript]</p>
+<h2>Покупка продукта</h2>
+<p>[javascript]<br />
+describe(&#8216;Purchase item&#8217;, function() {<br />
+  var ptor = protractor.getInstance();</p>
+<p>  beforeEach(function() {<br />
+    helpers.logout();<br />
+    helpers.login();<br />
+    browser.sleep(3000);<br />
+  });</p>
+<p>  it(&#8216;should purchase an item&#8217;, function() {</p>
+<p>    browser.get(&#8216;/items/552/buy&#8217;);<br />
+    browser.sleep(3000);<br />
+    element(by.css(&#8216;.modal-window__block .button&#8211;primary&#8217;)).click();</p>
+<p>    ptor.ignoreSynchronization = true;</p>
+<p>    element(by.css(&#8216;#mainSubmit&#8217;)).click();<br />
+    element(by.css(&#8216;input[type=&quot;submit&quot;]&#8217;)).click();</p>
+<p>    ptor.ignoreSynchronization = false;<br />
+  });<br />
+});<br />
+[/javascript]</p>
+<p>хотел бы отметить очень важный момент в этом куске кода:</p>
+<p>[javascript]<br />
+ptor.ignoreSynchronization = true;<br />
+[/javascript]</p>
+<p>этим мы говорим протрактору, что мы покидаем приложение и переходим на страницу без AngularJS.</p>
+<h2>Поиск по каталогу</h2>
+<p>[javascript]<br />
+describe(&#8216;Search&#8217;, function() {<br />
+  it(&#8216;should do search&#8217;, function() {</p>
+<p>    browser.get(&#8216;/items&#8217;);<br />
+    element(by.model(&#8216;itemsSearch.query&#8217;)).sendKeys(&#8216;iBrick&#8217;, protractor.Key.ENTER);</p>
+<p>    element.all(by.repeater(&#8216;item in items&#8217;)).then(function(rows) {<br />
+      var itemTitleElement = rows[0].element(by.className(&#8216;item-tile__name&#8217;));<br />
+      itemTitleElement.getText().then(function(itemTitle) {<br />
+        expect(itemTitle).equal(&#8216;iBrick Plus&#8217;);<br />
+      })</p>
+<p>    });<br />
+  });<br />
+});<br />
+[/javascript]</p>
+<p>&nbsp;</p>
+<h2>Дополнительно</h2>
+<ul>
+<li><a title="egghead.io" href="https://egghead.io/lessons/angularjs-protractor-interactive">Protractor Interactive (видео от Egghead)</a></li>
+<li><a title="stackoverflow.com" href="http://stackoverflow.com/a/25008031/274500">Развернутый ответ на стеке по поводу возможных ошибок</a></li>
+</ul>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/11/protractor/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Тестируем AngularJS используя Protractor</title>
+		<link>https://stepansuvorov.com/blog/2014/02/angularjs-protractor/</link>
+					<comments>https://stepansuvorov.com/blog/2014/02/angularjs-protractor/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 24 Feb 2014 11:28:27 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[protractor]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1175</guid>
+
+					<description><![CDATA[Protractor &#8211; e2e тест-фреймворк сделанный на основе WebDriverJS, который приходит на смену первоначальным e2e тестам AngularJS. Запускает тесты в реальном браузере. Может быть запущен как самостоятельный бинарник либо включен в тесты как библиотека. Установка Для установки достаточно установить npm-пакет: $ &#8230; <a href="https://stepansuvorov.com/blog/2014/02/angularjs-protractor/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-1471" title="angularjs protractor" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/02/protractor-300x166.png" alt="" width="300" height="166" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/02/protractor-300x166.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/02/protractor-500x277.png 500w, https://stepansuvorov.com/blog/wp-content/uploads/2014/02/protractor.png 600w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p><strong><a href="https://github.com/angular/protractor">Protractor</a></strong> &#8211; <strong>e2e</strong> тест-фреймворк сделанный на основе <a href="https://code.google.com/p/selenium/wiki/WebDriverJs">WebDriverJS</a>, который приходит на смену первоначальным e2e тестам <strong>AngularJS</strong>. Запускает тесты в <span style="text-decoration: underline;">реальном</span> браузере. Может быть запущен как самостоятельный бинарник либо включен в тесты как библиотека.</p>
+<p><span id="more-1175"></span></p>
+<h2>Установка</h2>
+<p>Для установки достаточно установить npm-пакет:</p>
+<pre>$ npm install -g protractor</pre>
+<p>проверим все ли прошло успешно:</p>
+<pre>$ protractor --version
+Version 0.18.1</pre>
+<p>чтобы установить и запустить <strong>Selenium</strong>, который будет выполнять тесты для нас делаем:</p>
+<pre>$ webdriver-manager update</pre>
+<p>а потом</p>
+<pre>$ webdriver-manager start</pre>
+<h2>Запуск</h2>
+<p>Для запуска <strong>протрактора</strong> делаем:</p>
+<pre>$ protractor protractor.js</pre>
+<p>где <em>protractor.js</em> &#8211; предварительно созданный нами файл конфигурации.</p>
+<p>Для старта можно использовать конфиг из <a title="protractor example config" href="https://raw.github.com/angular/protractor/master/example/conf.js">примера</a>:</p>
+<pre>// An example configuration file.
+exports.config = {
+  // The address of a running selenium server.
+  seleniumAddress: 'http://localhost:4444/wd/hub',
+
+  // Capabilities to be passed to the webdriver instance.
+  capabilities: {
+    'browserName': 'chrome'
+  },
+
+  // Spec patterns are relative to the current working directly when
+  // protractor is called.
+  specs: ['example_spec.js'],
+
+  // Options to be passed to Jasmine-node.
+  jasmineNodeOpts: {
+    showColors: true,
+    defaultTimeoutInterval: 30000
+  }
+};</pre>
+<p>Единственно что вам нужно изменить это опцию <em>specs</em>(по умолчанию [&#8216;example_spec.js&#8217;]). В ней мы укажем путь к файлу(либо группе файлов) тест-сценария. Давайте создадим его также по <a href="https://github.com/angular/protractor/blob/master/example/example_spec.js">примеру</a>:</p>
+<pre>describe('angularjs homepage', function() {
+  it('should greet the named user', function() {
+    browser.get('http://www.angularjs.org');
+    element(by.model('yourName')).sendKeys('Julie');
+    var greeting = element(by.binding('yourName'));
+    expect(greeting.getText()).toEqual('Hello Julie!');
+  });
+});</pre>
+<p>Из описания видно что наш тест:</p>
+<ul>
+<li>зайдет на страницу <span style="font-style: normal; background-color: #f4f4f4; font-family: 'Courier 10 Pitch', Courier, monospace; font-size: 13px; line-height: 1.5;">http://www.angularjs.org</span></li>
+<li>выберет елемент связанный с моделью <em>yourName</em> и установит значение <em>&#8216;Julie&#8217;</em></li>
+<li>выберет элемент по связке(bind) с моделью <em>yourName</em></li>
+<li>проверит что текст приветствия равен<em> &#8216;Hello Julie!&#8217;</em></li>
+</ul>
+<p>Теперь запустим:</p>
+<pre>$ protractor protractor.js
+Using the selenium server at http://localhost:4444/wd/hub
+.
+
+Finished in 5.629 seconds
+1 test, 1 assertion, 0 failures</pre>
+<h2>Настройка</h2>
+<p>Все возможный варианты параметров конфигурации описаны в <a href="https://github.com/angular/protractor/blob/master/example/conf.js">этом</a> примере.</p>
+<p>Разберем некоторые</p>
+<table>
+<tbody>
+<tr>
+<th>Опция</th>
+<th>Описание</th>
+<th>Значение по умолчанию</th>
+</tr>
+<tr>
+<td>seleniumAddress</td>
+<td>адрес запущенного селениум сервера (обычно http://localhost:4444/wd/hub)</td>
+<td>null</td>
+</tr>
+<tr>
+<td>allScriptsTimeout</td>
+<td>таймаут для выполнения всех сценариев</td>
+<td>11000</td>
+</tr>
+<tr>
+<td>specs</td>
+<td>пути к файлам сценариев тестов (относительно конфига)</td>
+<td>[&#8216;spec/*_spec.js&#8217;]</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td>исключения для предыдущего пункта</td>
+<td>[]</td>
+</tr>
+<tr>
+<td>capabilities</td>
+<td>выбор браузера с параметрами. Более подробно <a href="https://code.google.com/p/selenium/wiki/DesiredCapabilities">тут</a></td>
+<td>{&#8216;browserName&#8217;: &#8216;chrome&#8217;}</td>
+</tr>
+<tr>
+<td>multiCapabilities</td>
+<td>предыдущая опция для запуска тестов в нескольких браузерах</td>
+<td>[]</td>
+</tr>
+<tr>
+<td>baseUrl</td>
+<td>стартовая страница приложения</td>
+<td>http://localhost:8000</td>
+</tr>
+<tr>
+<td>rootElement</td>
+<td>элемент на котором иницилизированно приложение (ng-app)</td>
+<td>body</td>
+</tr>
+<tr>
+<td>onPrepare</td>
+<td>колбэк который будет выполнен, когда протрактор готов к работе, но тесты еще не начали выполняться</td>
+<td>function() {}</td>
+</tr>
+<tr>
+<td>params</td>
+<td>параметры, которые будут внедрены в среду выполнения тестов (но не сами тесты)</td>
+<td>{login: { user: &#8216;Jane&#8217;, password: &#8216;1234&#8217;}},</td>
+</tr>
+<tr>
+<td>framework</td>
+<td>фреймворк для тестов. возможные варианты: jasmine, cucumber, mocha</td>
+<td>jasmine</td>
+</tr>
+<tr>
+<td>onCleanUp</td>
+<td>колбэк, когда тесты завершены</td>
+<td>function(){}</td>
+</tr>
+</tbody>
+</table>
+<h2>Написание тестов</h2>
+<p>По умолчанию используется <a href="http://pivotal.github.io/jasmine/">Jasmine</a> фреймворк, но при желании его можно поменять на <a href="http://mochajs.org/">mocha</a>(инструкции <a title="angular.github.io/protractor" href="http://angular.github.io/protractor/#/frameworks">тут</a> ).</p>
+<p>Глобальные переменные, которые добавляет <strong>протрактор</strong>:</p>
+<ul>
+<li><strong>protractor</strong> &#8211; нэймспэйс-оболочка протрактора, которая содержит статические вспомогательные переменный и классы</li>
+<li><strong>browser</strong> &#8211; оболочка вебдрайвера, используется для навигации и получение информации о странице</li>
+<li><strong>element</strong> &#8211; вспомогательная функция для нахождения и взаимодействия с элементами</li>
+<li><strong>by</strong> &#8211; коллекция стратегий поиска элементов (ccs selector, id, binding attribute)</li>
+</ul>
+<p>Основные методы-помошники:</p>
+<ul>
+<li>browser.<strong>get</strong>(targetUrl) &#8211; переход на указанный URL</li>
+<li>element(<strong>by.css</strong>(&#8216;.error&#8217;)) &#8211; выбор элемента по css</li>
+<li>element(<strong>by.model</strong>(&#8216;modelName&#8217;)) &#8211; выбор элемента по модели</li>
+<li>element(<strong>by.binding</strong>(&#8216;variableName&#8217;)) &#8211; выбор элемента по баиндингу (<em>ng-bind</em> или <em>{{variableName}}</em>)</li>
+<li>element.<strong>all</strong>(<strong>by.repeater</strong>(&#8216;item in items&#8217;)); &#8211; выбор списка элементов из ngRepeat</li>
+<li>element(by.model(&#8216;modelName&#8217;)).<strong>getText</strong>() &#8211; получение текстового значения</li>
+<li>element(by.model(&#8216;modelName&#8217;)).<strong>getAttribute</strong>(&#8216;id&#8217;) &#8211; получение значение аттрибута</li>
+<li>element(by.model(&#8216;modelName&#8217;)).<strong>sendKeys</strong>(&#8216;Some text&#8217;) &#8211; задание значения</li>
+<li>element.all(by.repeater(&#8216;item in items&#8217;)).<strong>count</strong>() &#8211; получение количества элементов в списке</li>
+<li>element.all(by.repeater(&#8216;item in items&#8217;)).<strong>get</strong>(1) &#8211; получение одного элемента из списка</li>
+<li>element.all(by.repeater(&#8216;item in items&#8217;)).<strong>first</strong>() &#8211; получение первого элемента из списка</li>
+<li>element.all(by.repeater(&#8216;item in items&#8217;)).<strong>last</strong>() &#8211; получение последнего элемента из списка</li>
+<li>element.all(by.repeater(&#8216;item in items&#8217;)).<strong>row</strong>(1).<strong>column</strong>(&#8216;title&#8217;) &#8211; получение значение title из 2й строки</li>
+<li><strong>browser</strong>.<strong>isElementPresent</strong>(by.model(&#8216;modelName&#8217;)) &#8211; проверка наличия элемента</li>
+<li><strong>$</strong>(&#8216;.info&#8217;) &#8211; короткий алиас к <strong>element</strong>(<strong>by.css</strong>(&#8216;.info&#8217;))   !Внимание: не путать с <strong>jQuery</strong>.</li>
+<li><strong>$$</strong>(&#8216;option&#8217;) &#8211; короткий алиас к <strong>element.all</strong>(<strong>by.css</strong>(&#8216;option&#8217;))</li>
+</ul>
+<h2>Тестирование асинхронных операций</h2>
+<p>Учитавая что ваше приложение скорее всего подгружает большое количество контента асинхронно, то повозится со спецификой прийдется прилично.</p>
+<p>Воздержусь от подробного разбора данного пункта, так как в зависимости от выбранной библиотеки подходы в написании тестов могут отличатся. Единственное что скажу: сразу для себя настроил <strong><a title="mocha test framework" href="http://mochajs.org/">mocha</a></strong>-фреймворк, с ним намного удобнее работать с асинхронными операциями.</p>
+<h2>Создание снимков экрана</h2>
+<p>Вебдрайвер позволяет делать скриншоты с помощью метода <strong>browser.takeScreenshot()</strong>, который возвращает промис, который в свою очередь вернет <strong>PNG</strong>  снимок экрана в формате <strong>base64</strong>:</p>
+<pre>browser.takeScreenshot().then(function (png) {
+ //...
+}</pre>
+<p>Для записи файла на диск можно написат свою вспомогательную функцию:</p>
+<pre>var fs = require('fs');
+function writeScreenShot(data, filename) {
+  var stream = fs.createWriteStream(filename);
+  stream.write(new Buffer(data, 'base64'));
+  stream.end();
+}</pre>
+<p>и потом ее вызвать:</p>
+<pre>browser.takeScreenshot().then(function (png) {
+    writeScreenShot(png, 'test_screen.png');
+}</pre>
+<p><strong>!Внимание:</strong> в некоторых случаях необходимо дождаться полной загрузки страницы (или отдельного компонента) чтобы не получить частичный снимой недогруженного контента.</p>
+<h2>Отладка(debugging) сценариев Protractor</h2>
+<p>Функциональные(end to end) тесты крайне сложно дебажить, потому что они зависят от системы в целом, также могут зависеть от предыдущих действий (например логин), и могут изменять состояние приложения, которое тестируют. В частности отладку тестов на вебдрайвере(webdriver) усложняют длинные соообщения об ошибках и разделение процессов: на тот, который выполняется в браузере, и тот, который выполняет сам тест сценарий.</p>
+<p>Возможные причины остановки:</p>
+<ul>
+<li>вебдрайвер выдает ошибку, когда команда не может быть завершена, например: элемент не найден</li>
+<li><strong>protractor</strong> останавливается, когда не может найти <strong>AngularJs</strong>. Если необходимо проверять так же страницы без AngularJs, тогда используйте вебдрайвер напрямую через browser.driver</li>
+</ul>
+<p>Чтобы поставить точку остановки (<strong>debug point</strong>) необходимо в коде теста вызвать следующий метод:</p>
+<pre>browser.debugger();</pre>
+<p>и запустить <strong>protractor</strong> в режиме отладки(с флагом <strong>debug</strong>):</p>
+<pre>$ protractor debug protractor.js</pre>
+<p>И после чего вы сможете насладиться радостью дебага из консоли</p>
+<pre>debug&gt; help
+Commands: run (r), cont (c), next (n), step (s), out (o), backtrace (bt), setBreakpoint (sb), clearBreakpoint (cb),
+watch, unwatch, watchers, repl, restart, kill, list, scripts, breakOnException, breakpoints, version
+debug&gt;</pre>
+<p>Используется <a href="http://nodejs.org/api/debugger.html">node-debugger</a>, только точка остановки задается методом <em>browser.debugger()</em>; вмето<em> debugger;</em></p>
+<h2>Интерактивный запуск</h2>
+<p>Альтернативный способ отладки &#8211; интерактивный запуск, когда вы можете сами выполнить команды сценария из консоли и обнаружить ошибку.</p>
+<p>Для запуска <strong>protractor</strong> в режиме консоли необходимо выполнить следующую команду в директории программы:</p>
+<pre>$ node ./bin/elementexplorer.js</pre>
+<p>(в зависимости от ОС и типа установки путь к директории программы может отличаться. В моем случае это было <em>/usr/local/lib/node_modules/protractor/</em>)</p>
+<p>Теперь можно  выполнить что-то типа такого:</p>
+<pre>&gt; browser.get('http://www.angularjs.org')</pre>
+<p>или просто</p>
+<pre>&gt; browser</pre>
+<h2>Дополнительно</h2>
+<p>Что можно еще интересного почитать в тему:</p>
+<ul>
+<li><a href="http://www.yearofmoo.com/2013/09/advanced-testing-and-debugging-in-angularjs.html">Advanced Testing and Debugging in AngularJS</a></li>
+<li><a href="http://eitanp461.blogspot.nl/2014/01/advanced-protractor-features.html">Advanced Protractor features</a></li>
+</ul>
+<p>Приятных вам тестов с <strong>Protractor</strong>!</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/02/angularjs-protractor/feed/</wfw:commentRss>
+			<slash:comments>12</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

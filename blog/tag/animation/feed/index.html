@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>animation &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/animation/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Fri, 13 Mar 2015 10:53:46 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Анимация stateChange AngularJS</title>
+		<link>https://stepansuvorov.com/blog/2015/03/%d0%b0%d0%bd%d0%b8%d0%bc%d0%b0%d1%86%d0%b8%d1%8f-statechange-angularjs/</link>
+					<comments>https://stepansuvorov.com/blog/2015/03/%d0%b0%d0%bd%d0%b8%d0%bc%d0%b0%d1%86%d0%b8%d1%8f-statechange-angularjs/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 14 Mar 2015 09:02:24 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[animation]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1506</guid>
+
+					<description><![CDATA[Вдохновленный примером анимации от яйцеголового решил реализовать такой же подход у себя на проекте, а именно: при навигации по разным вью делать не &#8220;дерганую&#8221; резкую подгрузку, а плавную. Пишем простую анимацию на css-transitions и пользуемся angular-animate. Для начала убедимся что angular-animate модуль &#8230; <a href="https://stepansuvorov.com/blog/2015/03/%d0%b0%d0%bd%d0%b8%d0%bc%d0%b0%d1%86%d0%b8%d1%8f-statechange-angularjs/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" fetchpriority="high" class="alignnone  wp-image-2448" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/03/Screenshot-2015-03-13-11.37.12.png" alt="angular-animation-example" width="381" height="256" /><br />
+Вдохновленный примером анимации от <a title="https://egghead.io/" href="https://egghead.io/">яйцеголового</a> решил реализовать такой же подход у себя на проекте, а именно: при навигации по разным вью делать не &#8220;дерганую&#8221; резкую подгрузку, а плавную. Пишем простую анимацию на <strong>css-transitions</strong> и пользуемся <strong>angular-animate</strong>.</p>
+<p><span id="more-1506"></span></p>
+<p>Для начала убедимся что <strong>angular-animate</strong> модуль подключен к проекту:</p>
+<ol>
+<li>подключен сам файл <strong>angular-animate.js</strong></li>
+<li>мы заинжектили <strong>ngAnimate</strong> модуль в наш проект</li>
+</ol>
+<p>Теперь можем написать нашу анимацию:</p>
+<p>[css]<br />
+[ui-view].ng-enter, [ui-view].ng-leave {<br />
+    left: 0;<br />
+    right: 0;<br />
+    -webkit-transition:all .5s ease-in-out;<br />
+    transition:all .5s ease-in-out;<br />
+}</p>
+<p>[ui-view].ng-enter {<br />
+    opacity: 0;<br />
+}</p>
+<p>[ui-view].ng-enter-active {<br />
+    opacity: 1;<br />
+}</p>
+<p>[ui-view].ng-leave {<br />
+    opacity: 1;<br />
+}</p>
+<p>[ui-view].ng-leave-active {<br />
+    opacity: 0;<br />
+}<br />
+[/css]</p>
+<p>И все, наслаждаемся анимацией при переходе.  Это работает с <strong>ui-router</strong>, с <strong>ngRoute</strong> вероятно тоже будет работать, если подправить селекторы.</p>
+<p><a title="https://www.studytube.nl/instructors/categories/15/persoonlijke-effectiviteit" href="https://www.studytube.nl/instructors/categories/15/persoonlijke-effectiviteit">Вот тут</a> можно посмотреть живой пример. При выборе категории будет анимирована подгрузка контента.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/03/%d0%b0%d0%bd%d0%b8%d0%bc%d0%b0%d1%86%d0%b8%d1%8f-statechange-angularjs/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Rich Famo.us animations in AngularJS directives</title>
+		<link>https://stepansuvorov.com/blog/2015/01/famo-us-animations-in-angularjs/</link>
+					<comments>https://stepansuvorov.com/blog/2015/01/famo-us-animations-in-angularjs/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 27 Jan 2015 18:08:15 +0000</pubDate>
+				<category><![CDATA[Рекомендую]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[animation]]></category>
+		<category><![CDATA[Famo.us]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2245</guid>
+
+					<description><![CDATA[Famo.us &#8211; not sure that I&#8217;ll use it for my project, but it looks really fancy.]]></description>
+										<content:encoded><![CDATA[<p><a title="https://famo.us/integrations/angular" href="https://famo.us/integrations/angular/#/intro"><img decoding="async" class="alignnone size-full wp-image-2246" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/01/Screenshot-2015-01-27-12.09.45.png" alt="Famo.us + AngularJS" width="398" height="157" /></a></p>
+<p><strong><a title="https://famo.us/integrations/angular/#/intro" href="https://famo.us/integrations/angular/#/intro">Famo.us</a></strong> &#8211; not sure that I&#8217;ll use it for my project, but it looks really fancy.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/01/famo-us-animations-in-angularjs/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

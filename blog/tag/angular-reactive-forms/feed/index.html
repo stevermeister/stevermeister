@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>angular-reactive-forms &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/angular-reactive-forms/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 23 May 2019 15:06:25 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Формы и валидация данных в Angular</title>
+		<link>https://stepansuvorov.com/blog/2017/07/angular-forms-and-validation/</link>
+					<comments>https://stepansuvorov.com/blog/2017/07/angular-forms-and-validation/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 01 Jul 2017 14:27:40 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[angular-formControl]]></category>
+		<category><![CDATA[angular-forms]]></category>
+		<category><![CDATA[angular-reactive-forms]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3382</guid>
+
+					<description><![CDATA[В отличии от AngularJS в Angular сделали целый модуль, который помогает в обработке форм. Angular предлагает 2 подхода работы с формами: основанный на шаблонах (template-driven) реактивный (reactive) Шаблонный более традиционный для декларативного подхода фреймворка. Реактивный появился позже и считается более &#8230; <a href="https://stepansuvorov.com/blog/2017/07/angular-forms-and-validation/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>В отличии от <strong>AngularJS</strong> в <strong>Angular</strong> сделали целый модуль, который помогает в обработке форм.</p>
+<p>Angular предлагает 2 подхода работы с формами:</p>
+<ul>
+<li>основанный на шаблонах (<strong>template-driven</strong>)</li>
+<li>реактивный (<strong>reactive</strong>)</li>
+</ul>
+<p>Шаблонный более традиционный для декларативного подхода фреймворка. Реактивный появился позже и считается более прогрессивным и гибким. Мы разберем оба подхода.</p>
+<p><span id="more-3382"></span></p>
+<h2>Подключение модуля форм</h2>
+<p>Для начала работы с формами необходимо подключить модуль форм(<strong>FormsModule</strong>):</p>
+<pre>import { FormsModule } from '@angular/forms';</pre>
+<p>если мы хотим работать в реактивном подходе, то подключаем модуль <strong>ReactiveFormsModule</strong>:</p>
+<pre>import { ReactiveFormsModule } from '@angular/forms';</pre>
+<p>И конечно импортируем их в наш основной модуль:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/2949d235a73f5c6c56cd45bad416b199">Gist</a>.</p>
+<h2>Шаблоно-ориентированный подход (template-driven)</h2>
+<p>В шаблонно ориентированном подходе мы по большей части оперируем 3мя сущностями: <a href="https://angular.io/api/forms/NgModel"><strong>ngModel</strong></a>, <strong><a href="https://angular.io/api/forms/NgModelGroup">ngModelGroup</a></strong> и <a href="https://angular.io/api/forms/NgForm"><strong>ngForm</strong></a>.</p>
+<h2>ngModel</h2>
+<p>Чтобы привязать данные к элементу формы мы можем поставить директиву <strong>ngModel</strong>:</p>
+<pre>&lt;input type="text" [ngModel]="name"&gt;</pre>
+<p>Есть 3 способа как получить введенные данные:</p>
+<ul>
+<li>двухстороннее связывание</li>
+<li>обработку события изменения</li>
+<li>ссылку на элемент (либо ngModel)</li>
+</ul>
+<h2>ngModel и двухстороннее связывание (two way binding)</h2>
+<p>Способ, который пришел из <strong>AngularJs</strong> и в <strong>Angular</strong> практически не используется, но тем не менее, его хорошо знать:</p>
+<pre>&lt;input type="text" [(ngModel)]="name"&gt;</pre>
+<p>то есть вы используете специальный синтаксис двойных скобок: сначала прямоугольные, затем круглые ( чтобы было проще запомнить последовательность используется подсказка &#8220;<em>коробка с бананами</em>&#8221; )</p>
+<p>Теперь при вводе данных в элемент формы у нас будет обновляться и свойство контроллера <strong>name</strong>.</p>
+<h2>ngModel и обработка события</h2>
+<p>Вы можете использовать как родное событие поля ввода, например: для <em>type text</em> это будет <strong>input</strong>:</p>
+<pre>&lt;input type="checkbox" [ngModel]="name" (input)="name = $event.target.value"&gt;</pre>
+<p>так и использовать специальное событие <strong>ngModelChange</strong>:</p>
+<div>
+<pre>&lt;input type="text" [ngModel]="name" (ngModelChange)="name = $event"&gt;</pre>
+<div></div>
+</div>
+<h2>ngModel и обращение по ссылке</h2>
+<p>Чтобы поставить ссылку на <strong>ngModel</strong>, мы делаем следующее:</p>
+<pre>&lt;input type="text" [ngModel]="name" #name&gt;</pre>
+<p>теперь мы можем обратиться в шаблоне к значению свойства элемента:</p>
+<pre>{{name.value}}</pre>
+<p>либо в контроллере компонента через специальный декоратор <strong>ViewChild</strong>:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/076ddd493b8f87f39a851ffa9c8ce817">Gist</a>.</p>
+<p>Также мы можем сделать ссылку не только на элемент, но и на сам контроллер ngModel:</p>
+<pre>&lt;input type="text" [ngModel]="name" #nameModel="ngModel"&gt;</pre>
+<p>Теперь в <strong>nameModel</strong> нам доступно не только значение модели, но и все дополнительные свойства и методы контроллера модели:</p>
+<pre>nameModel.valid</pre>
+<h2>Валидация данных в шаблонном подходе</h2>
+<p>Полностью(<em>или почти полностью</em>) поддерживаются HTML5 валидация. То есть, например, если проставить полю атрибут <strong>require</strong>, то Angular его подхватит.</p>
+<h2>Свои валидаторы в шаблонном подходе</h2>
+<p>Не самый очевидный способ предлагают нам разработчики ангуляра для того, чтобы расширить валидаторы в шаблонном подходе. Мы должны создать директиву, в которой переопределить набор стантартных валидаторов <strong>NG_VALIDATORS</strong>, точнее дополнить своим(своими) с помощью флага <a href="https://stepansuvorov.com/blog/2017/01/angular2-opaque-%D1%82%D0%BE%D0%BA%D0%B5%D0%BD%D1%8B-%D0%B8-%D0%BC%D1%83%D0%BB%D1%8C%D1%82%D0%B8%D0%BF%D1%80%D0%BE%D0%B2%D0%B0%D0%B9%D0%B4%D0%B5%D1%80%D1%8B/">multi</a>:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/0eb1129e32beda5405f73f4f87d2db49">Gist</a>.</p>
+<p>таким образом мы создали свой валидатор, который проверит не является ли значение равным &#8216;3&#8217;. Плюс попрошу обратить ваше внимание на селектор для директивы мы указали не только сам атрибут имени директивы, но также что на элементе будет присутствовать <strong>ngModel</strong>.</p>
+<h2>Свои асинхронные валидаторы в шаблонном подходе</h2>
+<p>Полностью идентичны синхронным, отличие только в том что ваш метод валидации возвращает Promise либо Observable, а прописывается не в NG_VALIDATORS, в а <strong>NG_ASYNC_VALIDATORS</strong>:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/871c190a3554b24cdbdf5fa7dc07205e">Gist</a>.</p>
+<h2>Вывод ошибок</h2>
+<p>Чтобы вывести ошибки также можем обратиться к контроллеру <strong>ngModel</strong> по ссылке и получить его свойство <strong>errors</strong>:</p>
+<pre>{{nameModel.errors | json}}</pre>
+<p>.</p>
+<p><em>&#8230;и теперь&#8230;</em></p>
+<p>.</p>
+<p><span style="color: #000000; font-weight: bold;">Реактивный (reactive) подход</span></p>
+<p>Реактивном подходе мы настраиваем элементы формы не в шаблоне, а в контроллере, оперируя при этом следующими понятиями: <a href="https://angular.io/api/forms/FormControl"><strong>FormControl</strong></a>, <a href="https://angular.io/api/forms/FormGroup"><strong>FormGroup</strong></a>, <a href="https://angular.io/api/forms/FormArray"><strong>FormArray</strong></a>, <a href="https://angular.io/api/forms/FormBuilder"><strong>FormBuilder</strong></a>.</p>
+<p>На каждый элемент формы создается(вручную или автоматически) свой <strong>FormControl</strong>.</p>
+<h2>FormControl</h2>
+<p>Чтобы создать <strong>FormControl</strong> мы определяем свойство в контроллере компонента:</p>
+<pre>name: FormControl = new FormControl('Alice');</pre>
+<p>и привязываем его к конкретному элементу в шаблоне:</p>
+<pre>&lt;input type="text" [formControl]="name"&gt;</pre>
+<p>После чего в контроллере мы можем подписаться на изменения:</p>
+<pre>this.name.valueChanges.subscribe(console.log)</pre>
+<p>Либо на изменения статуса(валидности):</p>
+<div>
+<pre>this.name.statusChanges.subscribe(console.log)</pre>
+</div>
+<div>Также можно получать статические значения (не подписываясь):</div>
+<pre>this.name.value
+this.name.valid</pre>
+<div> Полный список свойств можно посмотреть в описании <a href="https://angular.io/api/forms/AbstractControl#abstractcontrol"><strong>AbstractControl</strong></a> (от которого наследуется <strong>FromControl</strong>)</div>
+<div></div>
+<h2>FormGroup</h2>
+<p><strong>FormGroup</strong> помогает удобно группировать контролы. Например: если мы хотим задавать не просто имя, а полное имя, содержащее само имя и фамилию:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/11e44590851ee2e364b8dc66ac3fdc8a">Gist</a>.</p>
+<p>и подключаем в шаблоне:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/a81b6ad729e5852c1d31d599a301c49b">Gist</a>.</p>
+<p>Обратите внимание, что для контролов обернутых в <strong>formGroup</strong> мы уже ставим <strong>formControlName</strong> свойство (а не [formControl]), которое будет указывать на то, где брать контрол в группе.</p>
+<h2>FormArray</h2>
+<p><strong>FormArray</strong> прекрасно подойдет тогда, когда в форме у вас используется список, в который вы можете добавлять элементы. Давайте сделаем форму &#8220;учасников&#8221;, которая содержит список участников:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/81467104fd1e620ec74b2e6187288e0e">Gist</a>.</p>
+<p>и в шаблоне это будет выглядеть так:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/15dac6ddd7d924d0f525fa78792901fb">Gist</a>.</p>
+<p>как видите мы выводим список контролов используя итератор(<strong>index</strong>) как имя контрола(<strong>formControlName</strong>) в списке.</p>
+<p>Давайте добавим возможность добавления участников:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/34cbf2a857699fc044344d4f226358a9">Gist</a>.</p>
+<p>и для этого в контроллере компонента определим 2 дополнительных метода <strong>removeUser</strong> и <strong>addUser</strong>:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/5d87582ba4029fca95d711de0eab7efe">Gist</a>.</p>
+<p>В итоге получим:</p>
+<p><img decoding="async" fetchpriority="high" class="alignnone wp-image-3386" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/06/angular-fromArray.gif" alt="" width="362" height="251" /></p>
+<h2>FormBuilder</h2>
+<p>Упростить процесс создания новых форм нам помогает сервис <strong>FormBuilder</strong>. Который мы можем инжектировать в контроллер:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/3401d4f27ac0197a56eed5e8390f53f4">Gist</a>.</p>
+<p>После чего создать туже форму (&#8220;учасники&#8221;), только теперь с помощью сервиса:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/a536a894e6554efc59859e35346a1d6f">Gist</a>.</p>
+<p>вы можете сказать, что кода не стало меньше. Да, это так. <strong>FormBuilder</strong> имеет смысл использовать только для сложных форм с большим динамическим количеством контролов.</p>
+<h2>Валидация данных в реактивном подходе</h2>
+<p>Чтобы добавить валидатор на контрол мы всего лишь добавляем второй параметр, который может быть как одним валидатором, так и массивом(применяем разные проверки):</p>
+<pre>name: FormControl = new FormControl('Alice', [Validators.required]);</pre>
+<p>предварительно импортировав коллекцию валидаторов:</p>
+<p>import { Validators } from &#8220;@angular/forms&#8221;;</p>
+<p>Мы можем задавать один и больше валидатор. На данный момент в <a href="https://github.com/angular/angular/blob/master/packages/forms/src/validators.ts">коллекции</a> есть следующие валидаторы:</p>
+<ul>
+<li>min</li>
+<li>max</li>
+<li>required</li>
+<li>requiredTrue</li>
+<li>email</li>
+<li>minLength</li>
+<li>maxLength</li>
+<li>pattern</li>
+</ul>
+<h2>Создание своих валидаторов</h2>
+<p>Валидатор представляет из себя простую функцию, которая возвращает либо объект ошибки либо null:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/85c3c4bcbb08ffa832ae5f419a9b00bd">Gist</a>.</p>
+<p>добавляется вторым параметром в контрол( вместе со стандартными валидаторами):</p>
+<pre>name: FormControl = new FormControl('Alice', [Validators.required, myNameValidator]);</pre>
+<p>В реальных проектах валидаторы собирают в группы заворачивают в классы и делают статическими методами классов.</p>
+<h2>Валидаторы с параметрами</h2>
+<p>Для создания валидаторов с параметрамми нам всего лишь необходимо завернуть нашу функцию валидатор в еще одну функцию, которая создаст замыкание для хранения параметров:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/4015dce6441d413b9d781dfd67c499a5">Gist</a>.</p>
+<p>Асинхронные валидаторы</p>
+<p>Асинхронные валидаторы отличаются от синхронных только тем, что возвращают не статические данные, а <strong>Observable</strong> либо <strong>Promise</strong>:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/d1d7b8d95267ba0fe504a50d8ce93369">Gist</a>.</p>
+<p>и также определяются 3-м параметром в конструкторе контрола:</p>
+<pre>name: FormControl = new FormControl('Alice', [myNameValidator], [myAsyncNameValidator]);</pre>
+<h2>Вывод ошибок</h2>
+<p>Ошибки контрола хранятся в свойстве <strong>errors</strong>:</p>
+<pre>this.name.errors</pre>
+<p>Чтобы сделать какие-то действия в случае появления ошибок, можем написать так: добавив фильтры на изменение состояния и собственно валидность данных:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/9eb766ea93950ae844155e85adf2b62a">Gist</a>.</p>
+<p>Свойство есть не только у обычного контрола, но так же и у FormGroup, поэтому вы можете получить объект со всеми ошибками формы:</p>
+<pre>this.participantsForm.errors</pre>
+<h2>Создание кастомных контроллов</h2>
+<p>Решил вынести эту главу в отдельный пост.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/07/angular-forms-and-validation/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

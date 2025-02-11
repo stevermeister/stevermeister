@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>migrate &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/migrate/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Wed, 09 Apr 2014 20:02:04 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Разворачиваем базу проекта на JavaScript</title>
+		<link>https://stepansuvorov.com/blog/2014/04/%d1%80%d0%b0%d0%b7%d0%b2%d0%be%d1%80%d0%b0%d1%87%d0%b8%d0%b2%d0%b0%d0%b5%d0%bc-%d0%b1%d0%b0%d0%b7%d1%83-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b0-%d0%bd%d0%b0-javascript/</link>
+					<comments>https://stepansuvorov.com/blog/2014/04/%d1%80%d0%b0%d0%b7%d0%b2%d0%be%d1%80%d0%b0%d1%87%d0%b8%d0%b2%d0%b0%d0%b5%d0%bc-%d0%b1%d0%b0%d0%b7%d1%83-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b0-%d0%bd%d0%b0-javascript/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 09 Apr 2014 19:59:28 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[db]]></category>
+		<category><![CDATA[deploy]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[migrate]]></category>
+		<category><![CDATA[node.js]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1607</guid>
+
+					<description><![CDATA[Растут JavaScript проекты и соответственно становятся лучше инструменты сборки. Самое время задуматься о разворачивании базы своего проекта на JavaScript. А ведь и правда: если проект написан 100% на одной технологии (да, и сервер тоже), зачем думать о другой технологии для &#8230; <a href="https://stepansuvorov.com/blog/2014/04/%d1%80%d0%b0%d0%b7%d0%b2%d0%be%d1%80%d0%b0%d1%87%d0%b8%d0%b2%d0%b0%d0%b5%d0%bc-%d0%b1%d0%b0%d0%b7%d1%83-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b0-%d0%bd%d0%b0-javascript/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Растут <strong>JavaScript</strong> проекты и соответственно становятся лучше инструменты сборки. Самое время задуматься о разворачивании базы своего проекта на <strong>JavaScript</strong>. А ведь и правда: если проект написан 100% на одной технологии (да, и сервер тоже), зачем думать о другой технологии для разворачивания базы?</p>
+<p>Вот с такими мыслями я и начал исследовать данный вопрос с целью найти удобное решение для своего пэт-проектика (стек: <strong>JavaScript</strong>/<strong>AngularJs</strong> &#8211; <strong>JavaScript</strong>/<strong>Express</strong> &#8211; <strong>MySql</strong>). JavaScript сообщество (а точнее Андрей Листочкин), посоветовало обратить внимание на модуль для ноды <strong><a title="npmjs.org" href="https://www.npmjs.org/package/db-migrate">db-migrate</a></strong> и плагин для гранта <strong><a title="npmjs.org" href="https://www.npmjs.org/package/grunt-db-migrate">grunt-db-migrate</a></strong>. Пост является набором заметок по ходу внедрения модуля в проект.</p>
+<h2><span id="more-1607"></span></h2>
+<p>На данный момент db-migrate поддерживает <a title="node-mysql" href="https://github.com/felixge/node-mysql">Mysql</a>,  <a href="https://github.com/brianc/node-postgres">PostgreSQL</a>, <a href="https://github.com/developmentseed/node-sqlite3">sqlite3</a>. Поэтому, если вы хотите мигрировать другую базу &#8211; придется либо писать самому скрипт миграции либо использовать другое решение.</p>
+<h2>Установка</h2>
+<p>Устанавливаем модуль ноды и плагин гранта:</p>
+<pre>$ npm install db-migrate
+$ npm install grunt-db-migrate</pre>
+<h2>Настраиваем grunt</h2>
+<p>В <strong>grunt</strong> файле добавляем блок:</p>
+<p>[javascript]migrate:{<br />
+    options:{<br />
+        env: {<br />
+            DATABASE_URL: databaseUrl<br />
+        }<br />
+    }<br />
+}[/javascript]</p>
+<p>databaseUrl &#8211; строка подключения к базе, например:</p>
+<p>[javascript]<br />
+databaseUrl =  &#8216;mysql://root:@localhost/mypetdb&#8217;;<br />
+[/javascript]</p>
+<h2>Создаем файл миграции</h2>
+<p>Чтобы создать файл миграции(с шаблоном внутри) выполняем команду:</p>
+<pre>$ grunt migrate:create:migrate_name</pre>
+<p>После чего у нас в проекте появится директория &#8220;migrations&#8221;, и файл в ней с таким содержимым:</p>
+<p>[javascript]var dbm = require(&#8216;db-migrate&#8217;);<br />
+var type = dbm.dataType;</p>
+<p>exports.up = function(db, callback) {</p>
+<p>};</p>
+<p>exports.down = function(db, callback) {</p>
+<p>};[/javascript]</p>
+<p><strong>exports.up</strong> &#8211; инструкции для наката изменений, <strong>export.down</strong> &#8211; соответственно для отката сделанных изменений.</p>
+<p>Разберем пример предложенный на офсайте:</p>
+<p>[javascript]<br />
+exports.up = function (db, callback) {<br />
+  db.createTable(&#8216;pets&#8217;, {<br />
+    id: { type: &#8216;int&#8217;, primaryKey: true },<br />
+    name: &#8216;string&#8217;<br />
+  }, callback);<br />
+};</p>
+<p>exports.down = function (db, callback) {<br />
+  db.dropTable(&#8216;pets&#8217;, callback);<br />
+};<br />
+[/javascript]</p>
+<p>Вроде бы все просто: <strong>db.createTable()</strong> &#8211; добавляем таблицу, <strong>db.dropTable()</strong> &#8211; удаляем.</p>
+<p>Свойства, который можно определять для полей:</p>
+<ul>
+<li>type &#8211; тип данный, полный список поддерживаемых типов <a title="lib/data_type.js" href="https://github.com/kunklejr/node-db-migrate/blob/master/lib/data_type.js">тут</a></li>
+<li>length &#8211; размерность (там где поддерживается)</li>
+<li>primaryKey [true/false]</li>
+<li>autoIncrement [true/false]</li>
+<li>notNull [true/false]</li>
+<li>unique [true/false]</li>
+<li>defaultValue</li>
+</ul>
+<p>Список поддерживаемых методов:</p>
+<ul>
+<li>createTable(tableName, columnSpec, callback)</li>
+<li>dropTable(tableName, [options,] callback)</li>
+<li>renameTable(tableName, newTableName, callback)</li>
+<li>addColumn(tableName, columnName, columnSpec, callback)</li>
+<li>removeColumn(tableName, columnName, callback)</li>
+<li>renameColumn(tableName, oldColumnName, newColumnName, callback)</li>
+<li>changeColumn(tableName, columnName, columnSpec, callback)</li>
+<li>addIndex(tableName, indexName, columns, [unique], callback)</li>
+<li>insert(tableName, columnNameArray, valueArray, callback)</li>
+<li>removeIndex([tableName], indexName, callback)</li>
+<li>runSql(sql, [params,] callback)</li>
+<li>all(sql, [params,] callback)</li>
+</ul>
+<h2>Запуск</h2>
+<p>Теперь grunt может выполнить задачу:</p>
+<pre>$ grunt migrate:up</pre>
+<p>и чтобы откатить изменения:</p>
+<pre>$ grunt migrate:down</pre>
+<p>создать новый файл миграции:</p>
+<pre>$ grunt migrate:create:migration_name</pre>
+<h2>Дополнительно</h2>
+<p>Когда нам нужно создать несколько таблиц, удобно использовать модуль <strong>async</strong>:</p>
+<p>[javascript]<br />
+var async = require(&#8216;async&#8217;);</p>
+<p>exports.up = function (db, callback) {<br />
+  async.series([<br />
+    db.createTable.bind(db, &#8216;pets&#8217;, {<br />
+      id: { type: &#8216;int&#8217;, primaryKey: true },<br />
+      name: &#8216;string&#8217;<br />
+    }),<br />
+    db.createTable.bind(db, &#8216;owners&#8217;, {<br />
+      id: { type: &#8216;int&#8217;, primaryKey: true },<br />
+      name: &#8216;string&#8217;<br />
+    });<br />
+  ], callback);<br />
+};<br />
+[/javascript]</p>
+<p>метод <strong>async.series</strong> позволит избежать вложенности</p>
+<h2>Пример из реальной жизни</h2>
+<p>Вот файл миграции, который я создал для своего пет-проектика:</p>
+<p>[javascript]<br />
+var dbm = require(&#8216;db-migrate&#8217;);<br />
+var async = require(&#8216;async&#8217;);</p>
+<p>exports.up = function (db, callback) {<br />
+  async.series([<br />
+    db.createTable.bind(db, &#8216;marks&#8217;, {<br />
+      user_id: {<br />
+        type: &#8216;int&#8217;,<br />
+        notNull: true<br />
+      },<br />
+      release_id: {<br />
+        type: &#8216;int&#8217;,<br />
+        notNull: true<br />
+      },<br />
+      feed: {<br />
+        type:&#8217;string&#8217;,<br />
+        notNull: true<br />
+      }<br />
+    })<br />
+  ], function(){<br />
+      db.addIndex(&#8216;marks&#8217;, &#8216;usermark&#8217;, [&#8216;user_id&#8217;, &#8216;release_id&#8217;], true);<br />
+      callback();<br />
+  });<br />
+};</p>
+<p>exports.down = function (db, callback) {<br />
+  async.series([<br />
+    db.dropTable.bind(db, &#8216;marks&#8217;, {<br />
+      ifExists: true<br />
+    }),<br />
+    db.removeIndex(&#8216;marks&#8217;, &#8216;usermark&#8217;),<br />
+  ], callback);<br />
+};<br />
+[/javascript]</p>
+<p>Проект портировался с локальной <strong>mysql</strong> базы на <strong>postgress</strong>, которая стояла на сервере. Особых косяков модуля db-migrate замечено не было. Можно отметить только мелкие неудобства, которых характерны для любых универсальных (кросс-субд) систем миграции &#8211; отсутствие реализации специфических типов: у меня изначально был тип <strong>ENUM</strong>, который пришлось перевести в <strong>STRING</strong>. Для личного проекта это нормальная замена, но для продакшена пришлось бы писать отдельный дополнительный конвертер.</p>
+<p>Более подробно можно почитать на <a href="https://www.npmjs.org/package/db-migrate">офсайте</a> либо покопать <a href="https://github.com/kunklejr/node-db-migrate">код</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/04/%d1%80%d0%b0%d0%b7%d0%b2%d0%be%d1%80%d0%b0%d1%87%d0%b8%d0%b2%d0%b0%d0%b5%d0%bc-%d0%b1%d0%b0%d0%b7%d1%83-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b0-%d0%bd%d0%b0-javascript/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

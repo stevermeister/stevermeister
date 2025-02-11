@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>angular-forwardRef &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/angular-forwardref/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 15 Jul 2017 18:13:12 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Angular: Что такое forwardRef?</title>
+		<link>https://stepansuvorov.com/blog/2017/07/angular-%d1%87%d1%82%d0%be-%d1%82%d0%b0%d0%ba%d0%be%d0%b5-forwardref/</link>
+					<comments>https://stepansuvorov.com/blog/2017/07/angular-%d1%87%d1%82%d0%be-%d1%82%d0%b0%d0%ba%d0%be%d0%b5-forwardref/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 15 Jul 2017 18:13:12 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[angular-forwardRef]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3416</guid>
+
+					<description><![CDATA[Мы иногда встречаем в коде: View the code on Gist. и сразу не понятно, что это магическая функция forwardRef. На самом деле все просто: forwardRef &#8211; это функция-обертка. Зачем она нужна? Чтобы мы могли задавать значением свойства сущности, которые объявлены ниже &#8230; <a href="https://stepansuvorov.com/blog/2017/07/angular-%d1%87%d1%82%d0%be-%d1%82%d0%b0%d0%ba%d0%be%d0%b5-forwardref/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Мы иногда встречаем в коде:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/7144b320098c3afcd1a71879a7eb75ae">Gist</a>.</p>
+<p>и сразу не понятно, что это магическая функция <strong>forwardRef</strong>. На самом деле все просто: <a href="https://angular.io/api/core/forwardRef"><strong>forwardRef</strong></a> &#8211; это функция-обертка. Зачем она нужна? Чтобы мы могли задавать значением свойства сущности, которые объявлены ниже (иначе будет ошибка):</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/d7a18d6196d78080642830bac0321c66">Gist</a>.</p>
+<p>Также можно глянуть в <a href="https://github.com/angular/angular/blob/master/packages/core/src/di/forward_ref.ts#L36">исходники</a>, и убедиться что это просто метод-обертка:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/950e8095689d5c470c75f0ca87acc0b8">Gist</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/07/angular-%d1%87%d1%82%d0%be-%d1%82%d0%b0%d0%ba%d0%be%d0%b5-forwardref/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

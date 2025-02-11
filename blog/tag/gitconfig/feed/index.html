@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>.gitconfig &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/gitconfig/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Tue, 25 Feb 2014 20:05:05 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Полезности для .gitconfig</title>
+		<link>https://stepansuvorov.com/blog/2014/02/gitconfig/</link>
+					<comments>https://stepansuvorov.com/blog/2014/02/gitconfig/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 25 Feb 2014 15:10:59 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[.gitconfig]]></category>
+		<category><![CDATA[git]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1131</guid>
+
+					<description><![CDATA[Небольшой набор инструкции по настройке git через .gitconfig, которые использую сам Прописываем информацию о себе Если вы еще этого не сделали, то крайне рекомендую &#8211; серьезно повышает читабельность логов: [user] name = Ivanov Ivan email = ivan.ivanov@gmail.com Алиасы команд [alias] co &#8230; <a href="https://stepansuvorov.com/blog/2014/02/gitconfig/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Небольшой набор инструкции по настройке <strong>git</strong> через <strong>.gitconfig</strong>, которые использую сам</p>
+<p><span id="more-1131"></span><span style="color: #000000; font-weight: bold;">Прописываем информацию о себе</span></p>
+<p>Если вы еще этого не сделали, то крайне рекомендую &#8211; серьезно повышает читабельность логов:</p>
+<pre>[user]
+name = Ivanov Ivan
+email = ivan.ivanov@gmail.com</pre>
+<h2>Алиасы команд</h2>
+<pre>[alias]
+co = checkout
+ci = commit
+br = branch
+st = status --short
+clean = branch -D
+hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short</pre>
+<p>подбирается индивидуально по предпочтениям и частоте использования полных команд</p>
+<h2>Добавляем цветов</h2>
+<pre>[color]
+ui = true</pre>
+<h2>Прописываем gitignore глобально</h2>
+<p>Вместо того, чтобы каждый раз прописывать какие-то файлы настроек, которые создает IDE(например <em>.idea</em> для продуктов JetBrains), в <strong>.gitignore</strong>, можно вынести их один раз в глобальные настройки.</p>
+<pre>[core]
+excludesfile = ~/.gitexcludes</pre>
+<h2>Задаем редактор</h2>
+<p>Командой (она добавит несколько параметров в конфиг)</p>
+<pre>$ git config --global core.editor sourcetree</pre>
+<p>в моем случае это <a href="http://www.sourcetreeapp.com/">sourcetree</a>. Теперь все конфликты и дифы будет обрабатываться в нем.</p>
+<p><span style="color: #000000; font-weight: bold;">commit-сообщения по умолчанию</span></p>
+<p>тоже вероятно упростит жизнь для мелких коммитов и коммитов, которые должны следовать определенному шаблону</p>
+<pre>[commit]
+template = ~/.commit-template</pre>
+<p>&nbsp;</p>
+<p>Если вдохновило &#8211; полный ман <a href="http://git-scm.com/book/ru/%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-Git-%D0%9A%D0%BE%D0%BD%D1%84%D0%B8%D0%B3%D1%83%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-Git">тут</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/02/gitconfig/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

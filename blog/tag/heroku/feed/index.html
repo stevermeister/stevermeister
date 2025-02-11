@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>heroku &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/heroku/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Tue, 07 Apr 2015 13:46:43 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>oyao.ru &#8211; О Я Ору!</title>
+		<link>https://stepansuvorov.com/blog/2015/03/oyao-ru-%d0%be-%d1%8f-%d0%be%d1%80%d1%83/</link>
+					<comments>https://stepansuvorov.com/blog/2015/03/oyao-ru-%d0%be-%d1%8f-%d0%be%d1%80%d1%83/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 04 Mar 2015 19:43:37 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[heroku]]></category>
+		<category><![CDATA[MongoDB]]></category>
+		<category><![CDATA[online]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1688</guid>
+
+					<description><![CDATA[Позвольте представить вашему вниманию мой проектик &#8220;О Я Ору&#8220;. Идея появилась еще 5 лет назад , когда не было демотиваторов (таких, которые мы знаем сейчас) да и никто не понимал, зачем постить текст нарисованный на картинке, когда можно запостить просто &#8230; <a href="https://stepansuvorov.com/blog/2015/03/oyao-ru-%d0%be-%d1%8f-%d0%be%d1%80%d1%83/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><a title="http://oyao.ru/" href="http://oyao.ru/"><img decoding="async" class="alignnone size-full wp-image-2415" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/03/Screenshot-2015-03-03-21.03.55.png" alt="oyao.ru logo" width="195" height="64" /></a></p>
+<p>Позвольте представить вашему вниманию мой проектик &#8220;<a title="http://oyao.ru/" href="http://oyao.ru/">О Я Ору</a>&#8220;. Идея появилась еще 5 лет назад , когда не было демотиваторов (таких, которые мы знаем сейчас) да и никто не понимал, зачем постить текст нарисованный на картинке, когда можно запостить просто текст. Думаю, я был вдохновлен идеей nah.ru и просто решил ее расширить. Нет, не ругательства расширить &#8211; саму идею расширить: это может быть доброе приветливое сообщение. Но смысл: не написать это текстом, смысл кинуть ссылку (ну либо запостить в соц сети) на рисунок с этим текстом, чтобы придать ей больший эмоциональный оттенок.</p>
+<p><span id="more-1688"></span></p>
+<p>Сообщения могли бы быть начиная от &#8220;не забудь купить молоко&#8221;, &#8220;просыпайся&#8221; и заканчивая понравившимися цитатами древних философов.</p>
+<p>Сейчас уже существует много подобных сайтов и я не претендую на новизну и оригинальность. Приложение было создано скорее для того, чтобы разобраться как работает сервис <strong><a href="https://www.heroku.com/">heroku</a></strong> на каком-то более не менее реальном примере. Действительно очень удобно: просто создаем удаленный репозиторий <strong>heroku</strong> и делаем туда <strong>git push</strong>. Инструкции по установке и запуску сервера прописываем в <strong>package.json</strong>.</p>
+<p>Еще поигрался с <strong>canvas</strong> и заставил его конвертировать кусок <strong>HTML</strong> в <strong>png</strong> файл, а потом этот png файл декодить и сохранять в <strong>mongodb</strong> (кстати она тоже предоставляется <strong>heroku</strong> либо партнерским сервисов).</p>
+<p>Так же пришлось разобрать <a href="https://stepansuvorov.com/blog/2014/07/the-open-graph-og-protocol/">OG протокол</a>, чтобы фейсбук правильно понимал картинку, которую нужно отображать в превью. Но, так как подлый фейсбук все равно отображал не очень правильно &#8211; я пошел дальше и распарсил хедер его бота и скармливаю ему картинку, вместо html.</p>
+<p>Весь стек использованных технологий: <strong>AngularJS</strong>, <strong>Restangular</strong>, <strong>node.js</strong>, <strong>express</strong>, <strong>mongodb</strong>.</p>
+<p>Так как и база и сам хостинг бесплатны &#8211; они прилично протормаживают. Это большой минус бесплатного <strong>heroku</strong>.</p>
+<p>Большая часть цитат, которые вы можете видеть были тщательно отобраны и записаны мной в процессе тестирования приложения.</p>
+<p>Приятного использования.</p>
+<p><a title="http://oyao.ru/4eepxc" href="http://oyao.ru/4eepxc"><img decoding="async" fetchpriority="high" class="alignnone  wp-image-2416" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/03/4eepxc.png" alt="oyao.ru example" width="476" height="172" /></a></p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/03/oyao-ru-%d0%be-%d1%8f-%d0%be%d1%80%d1%83/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

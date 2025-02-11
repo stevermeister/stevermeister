@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	Comments on: Паттерны в JavaScript. Singleton	</title>
+	<atom:link href="https://stepansuvorov.com/blog/2014/02/%d0%bf%d0%b0%d1%82%d1%82%d0%b5%d1%80%d0%bd%d1%8b-%d0%b2-javascript-singleton/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog/2014/02/%d0%bf%d0%b0%d1%82%d1%82%d0%b5%d1%80%d0%bd%d1%8b-%d0%b2-javascript-singleton/</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Tue, 22 Apr 2014 08:22:31 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>
+		By: admin		</title>
+		<link>https://stepansuvorov.com/blog/2014/02/%d0%bf%d0%b0%d1%82%d1%82%d0%b5%d1%80%d0%bd%d1%8b-%d0%b2-javascript-singleton/#comment-11590</link>
+
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<pubDate>Tue, 22 Apr 2014 08:22:31 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1336#comment-11590</guid>
+
+					<description><![CDATA[In reply to &lt;a href=&quot;https://stepansuvorov.com/blog/2014/02/%d0%bf%d0%b0%d1%82%d1%82%d0%b5%d1%80%d0%bd%d1%8b-%d0%b2-javascript-singleton/#comment-11270&quot;&gt;Stepan Stepanov&lt;/a&gt;.
+
+да, возможно и усложняем. :) для простого случая, который приведен в примере так извращаться точно не стоит,
+но если у нас возникнет более сложная задача, там где например объект мы должны получать используя функцию конструктор, чтобы в зависимости от входных параметров можно было бы возвращать разные объекты.]]></description>
+			<content:encoded><![CDATA[<p>In reply to <a href="https://stepansuvorov.com/blog/2014/02/%d0%bf%d0%b0%d1%82%d1%82%d0%b5%d1%80%d0%bd%d1%8b-%d0%b2-javascript-singleton/#comment-11270">Stepan Stepanov</a>.</p>
+<p>да, возможно и усложняем. :) для простого случая, который приведен в примере так извращаться точно не стоит,<br />
+но если у нас возникнет более сложная задача, там где например объект мы должны получать используя функцию конструктор, чтобы в зависимости от входных параметров можно было бы возвращать разные объекты.</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Stepan Stepanov		</title>
+		<link>https://stepansuvorov.com/blog/2014/02/%d0%bf%d0%b0%d1%82%d1%82%d0%b5%d1%80%d0%bd%d1%8b-%d0%b2-javascript-singleton/#comment-11270</link>
+
+		<dc:creator><![CDATA[Stepan Stepanov]]></dc:creator>
+		<pubDate>Sun, 13 Apr 2014 19:28:11 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1336#comment-11270</guid>
+
+					<description><![CDATA[А мы ничего не усложняем ? )) Ведь по сути если мы так и так создаем объект а не класс, объект же по определению всегда единственный и не неповторимый ))
+
+var mySingleton = {
+x:Math.random(),
+publicMethod1: function(){ ... }
+};
+
+var object1 = mySingleton;
+var object2 = mySingleton;]]></description>
+			<content:encoded><![CDATA[<p>А мы ничего не усложняем ? )) Ведь по сути если мы так и так создаем объект а не класс, объект же по определению всегда единственный и не неповторимый ))</p>
+<p>var mySingleton = {<br />
+x:Math.random(),<br />
+publicMethod1: function(){ &#8230; }<br />
+};</p>
+<p>var object1 = mySingleton;<br />
+var object2 = mySingleton;</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

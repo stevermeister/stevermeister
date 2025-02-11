@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>ng-bind &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/ng-bind/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sun, 01 Nov 2015 18:13:34 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>AngularJS: {{ }} vs ng-bind</title>
+		<link>https://stepansuvorov.com/blog/2015/11/angularjs-vs-ng-bind/</link>
+					<comments>https://stepansuvorov.com/blog/2015/11/angularjs-vs-ng-bind/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 01 Nov 2015 18:13:34 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[ng-bind]]></category>
+		<category><![CDATA[performance]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2905</guid>
+
+					<description><![CDATA[I was just curious about this discussion on stackoverflow and decided to do own test: [javascript] for(var i = 0; i &#38;lt; 100000; i++){ randomKey = randomString(); bigScope1[randomKey] = randomString(); bigScope2[randomKey] = randomString(); bigNgBindTempalte += &#8216;&#60;div class=&#34;&#8217; + randomString() + &#8230; <a href="https://stepansuvorov.com/blog/2015/11/angularjs-vs-ng-bind/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>I was just curious about <a href="http://stackoverflow.com/q/16125872/274500">this</a> discussion on stackoverflow and decided to do own test:</p>
+<p>[javascript]<br />
+for(var i = 0; i &amp;lt; 100000; i++){<br />
+    randomKey = randomString();<br />
+    bigScope1[randomKey] = randomString();<br />
+    bigScope2[randomKey] = randomString();<br />
+    bigNgBindTempalte += &#8216;&lt;div class=&quot;&#8217; + randomString() + &#8216;&quot; ng-bind=&quot;&#8217;+ randomKey + &#8216;&quot;&gt;&lt;/div&gt;&#8217;;<br />
+    bigExpressionTemplate += &#8216;&lt;div class=&quot;&#8217; + randomString() + &#8216;&quot;&gt;{{&#8216; + randomKey + &#8216;}}&lt;/div&gt;&#8217;;<br />
+  }</p>
+<p>  // console.time(&#8216;ngBind&#8217;);<br />
+  // $compile(&#8216;&lt;div&gt;&#8217; + bigNgBindTempalte + &#8216;&lt;/div&gt;&#8217;)(bigScope1);<br />
+  // console.timeEnd(&#8216;ngBind&#8217;);</p>
+<p>  console.time(&#8216;expression&#8217;);<br />
+  $compile(&#8216;&lt;div&gt;&#8217; + bigExpressionTemplate + &#8216;&lt;/div&gt;&#8217;)(bigScope2);<br />
+  console.timeEnd(&#8216;expression&#8217;);<br />
+[/javascript]</p>
+<p><a href="http://plnkr.co/edit/dlL7tpHG2OzstYMxGZWS?p=preview">code</a>.</p>
+<p>and indeed <strong>ngBind</strong> is faster,my machine for 100000 iterations shows:</p>
+<pre>ngBind: 46984.981ms
+expression: 51107.555ms</pre>
+<p>It&#8217;s still not clear why the result are so weird when you run it together (one by one). But it&#8217;s another question.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/11/angularjs-vs-ng-bind/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>$compile &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/compile/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 24 Jan 2015 20:17:07 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Компилируем AngularJS шаблоны в консоли</title>
+		<link>https://stepansuvorov.com/blog/2015/01/angularjs-console-compile/</link>
+					<comments>https://stepansuvorov.com/blog/2015/01/angularjs-console-compile/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 24 Jan 2015 20:17:07 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[$compile]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[console]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2209</guid>
+
+					<description><![CDATA[В дополнение к этой заметке еще одна о том, как можно проверить работу шаблона/директивы/фильтра в консоли. Для того, чтобы скомпилировать шаблон нам необходим $compile сервис, который можно получить с помощью инжектора: [javascript] $injector = angular.element(document).injector(); $compile = $injector.get(&#8216;$compile&#8217;); [/javascript] также &#8230; <a href="https://stepansuvorov.com/blog/2015/01/angularjs-console-compile/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>В дополнение к <a title="AngularJS: получаем scope/injector/controller из DOM" href="https://stepansuvorov.com/blog/2013/03/angularjs-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B0%D0%B5%D0%BC-scopeinjectorcontroller-%D0%B8%D0%B7-dom/">этой заметке</a> еще одна о том, как можно проверить работу шаблона/директивы/фильтра в консоли.</p>
+<p><span id="more-2209"></span></p>
+<p>Для того, чтобы скомпилировать шаблон нам необходим <strong>$compile</strong> сервис, который можно получить с помощью инжектора:</p>
+<p>[javascript]<br />
+$injector = angular.element(document).injector();<br />
+$compile = $injector.get(&#8216;$compile&#8217;);<br />
+[/javascript]</p>
+<p>также для компиляции нам нужен конкретный $scope:</p>
+<p>[javascript]<br />
+$scope = angular.element(document).scope();<br />
+[/javascript]</p>
+<p>на вот теперь можно компилировать:</p>
+<p>[javascript]<br />
+var template = &#8216;{{price|currency}}&#8217;;<br />
+var element = angular.element(&#8216;&lt;div&gt;&#8217;).append(template); //контейнер для шаблона<br />
+$scope.price = 999999; //просто для теста<br />
+$compile(element)($scope);<br />
+[/javascript]</p>
+<p>и конечно же не забудем обновить дайджест:</p>
+<p>[javascript]<br />
+$scope.$apply();<br />
+[/javascript]</p>
+<p>после чего можно доставать результат:</p>
+<p>[javascript]<br />
+element.html();<br />
+[/javascript]</p>
+<p>Теперь все вместе и более в сжатой форме:</p>
+<p>[javascript]<br />
+(function(template){<br />
+	var $ = angular.element, $0, $scope, $compile, $element;<br />
+	if(!$0) $0 = document;<br />
+	$scope = $($0).scope();<br />
+	$compile = $(document).injector().get(&#8216;$compile&#8217;);<br />
+	$element = $(&#8216;&lt;div/&gt;&#8217;).append(template);<br />
+	$compile($element)($scope);<br />
+	$scope.$apply();<br />
+	return $element.html();<br />
+})(&#8216;{{1000000|currency}}&#8217;);<br />
+[/javascript]</p>
+<p>&nbsp;</p>
+<p>Ну и при желании можно даже <a title="jsbin.com" href="http://jsbin.com/kepeji/1/watch?html,output">кнопочку для браузера</a> сделать (просто перетащите кнопку в панель закладок и можете пользоваться везде).</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/01/angularjs-console-compile/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

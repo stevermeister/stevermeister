@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>redux &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/redux/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sun, 21 May 2017 16:03:20 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Изучаем Redux и пишем свой Mini-Redux</title>
+		<link>https://stepansuvorov.com/blog/2017/05/learn-redux/</link>
+					<comments>https://stepansuvorov.com/blog/2017/05/learn-redux/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 21 May 2017 16:03:20 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[redux]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3344</guid>
+
+					<description><![CDATA[Предлагаю вам перевод статьи Learn Redux by coding a Mini-Redux. Существует множество ресурсов по изучению Redux: официальная документация, примеры, учебники, статьи, видео уроки&#8230; Имея такое большое количество информации многие начинающие Redux разработчики порой просто теряются в ней. Другой подход изучения &#8211; это &#8230; <a href="https://stepansuvorov.com/blog/2017/05/learn-redux/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Предлагаю вам перевод статьи <a href="http://blog.jakoblind.no/2017/03/13/learn-redux-by-coding-a-mini-redux/">Learn Redux by coding a Mini-Redux</a>.</p>
+<p>Существует множество ресурсов по изучению <strong>Redux</strong>: официальная документация, примеры, учебники, статьи, видео уроки&#8230; Имея такое большое количество информации многие начинающие <strong>Redux</strong> разработчики порой просто теряются в ней.</p>
+<p>Другой подход изучения &#8211; это самостоятельно написать прототип <strong>Redux</strong>, чтобы понять основы библиотеки. Для меня это был реальный прорыв.</p>
+<p><strong>Не беспокойтесь, это совсем не сложно.</strong> Ядро Redux, как вы убедитесь, достаточно просто.</p>
+<p>Для начала нам необходимо общее понимание что делает <strong>Redux</strong>.</p>
+<p><span id="more-3344"></span></p>
+<h2>Что конкретно делает Redux?</h2>
+<p>Основная идея <strong>Redux</strong> &#8211; всегда иметь единственное состояние приложения. Это состояние представляет из себя Javascript объект &#8211; Redux <strong>Store</strong>, который доступен только для чтения. Если вы хотите изменить состояние, то вам нужно породить <strong>Action</strong>, что тоже является Javascript объектом.</p>
+<p>Элементы вашего приложения могут подписываться на изменение состояния <strong>Store</strong>. Если мы посмотрим на примере с React, то компоненты React получают уведомление о изменении состояния и могут изменить отображение базируясь на новых данных.</p>
+<p><img decoding="async" fetchpriority="high" class="alignnone size-full wp-image-3353" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/05/redux.png" alt="" width="488" height="324" /></p>
+<p>Чтобы обновить <strong>Store</strong>, когда приходит <strong>Action</strong>, используется <strong>Reducer</strong> &#8211; обычная Javascript функция.</p>
+<h2>Давайте начнем писать код!</h2>
+<p>Обобщая, мы должны сделать 3 вещи:</p>
+<ol>
+<li>Получать состояние приложение из <strong>Store</strong></li>
+<li>Разобрать событие <strong>Action</strong>, которое будет передано на <strong>Reducer</strong>, который изменит состояние <strong>Store</strong>.</li>
+<li>Следить за изменениями <strong>Store</strong></li>
+</ol>
+<p>Так же мы должны определить начальные значения для <strong>Store</strong> и <strong>Reducer</strong>, давайте с этого начнем:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/f081b321b521e2bce69733da42aa6190">Gist</a>.</p>
+<p>&nbsp;</p>
+<h2>1. Получение состояния (state)</h2>
+<p>Мы создали функцию, которая просто сохраняет начальное состояние и редьюсер локально. Теперь давайте реализуем возможность получения этого состояния с помощью специального метода :</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/8501a3223d5d6bd70bb42ce2a088a3b4">Gist</a>.</p>
+<h2>2. Отправка события (dispatch an action)</h2>
+<p>Следующий шаг &#8211; отправка события:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/264750ace5e45bd4ee041d9656b49ab8">Gist</a>.</p>
+<p>Функция <strong>dispatch</strong> используя текущее состояние отправляет событие на редьюсер, который мы определили при инициализации. А он в свою очередь перезаписывает объект currentState новым значением.</p>
+<h2>3. Подписка на изменения</h2>
+<p>Теперь мы можем получать и обновлять состояние! Оставшийся шаг &#8211; сделать возможность подписаться на изменения:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/b9315d65a8cfdee8589f0a9da17ba61a">Gist</a>.</p>
+<p>Теперь мы можем вызывать <strong>subscribe</strong> с коллбэк-параметром, который будет вызван в случае получения события на изменнеие состояния.</p>
+<h2>Все готово.</h2>
+<p>Это все что нам нужно было сделать для создания mini-Redux.</p>
+<p>На официальной <a href="https://github.com/reactjs/redux">github странице</a> есть пример как использовать <strong>Redux</strong>. Мы можем скопировать пример, чтобы протестировать нашу собственную реализацию <strong>Redux</strong>:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/4b515d5246ca90b66f0c701560a3c80a">Gist</a>.</p>
+<p>Поиграться с кодом можно <a href="https://plnkr.co/edit/OX7hNMlFXtEA2d7aSU1Y?p=preview">тут</a>.</p>
+<h2>Выводы</h2>
+<p>Мы разработали рабочую версию аналога <strong>Redux</strong>, которая уместилась в 18 строчках кода. Впечатляет, правда?</p>
+<p>Конечно, этот код не для продакшена. Сравнивая с реальной библиотекой мы выкинули отлов ошибок, не поддерживаем множественные подписки и другие возможности.</p>
+<p>Теперь вы знаете основные принципы того как работает Redux, что поможет вам лучше ориентироваться в потоке информации.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/05/learn-redux/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

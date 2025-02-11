@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>angular2-component &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/angular2-component/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 28 Jan 2017 12:05:15 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Angular2: Changing default component properties.</title>
+		<link>https://stepansuvorov.com/blog/2017/01/angular2-changing-default-component-properties/</link>
+					<comments>https://stepansuvorov.com/blog/2017/01/angular2-changing-default-component-properties/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 28 Jan 2017 12:05:15 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular2]]></category>
+		<category><![CDATA[angular2-component]]></category>
+		<category><![CDATA[angular2-decorators]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3258</guid>
+
+					<description><![CDATA[Attention! Please keep in mind that this post is not manual, it&#8217;s research that helps you to understand Angular better and don&#8217;t try to apply code examples in your enterprise applications. If you look into all the angular exports you &#8230; <a href="https://stepansuvorov.com/blog/2017/01/angular2-changing-default-component-properties/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><em><strong>Attention!</strong> Please keep in mind that this post<span style="text-decoration: underline;"> is not manual</span>, it&#8217;s research that helps you to understand Angular better and don&#8217;t try to apply code examples in your enterprise applications.</em></p>
+<p><span id="more-3258"></span></p>
+<p>If you look into all the angular exports you could find specific super private(double low dash) property __core_private__ :</p>
+<p>[javascript]import { __core_private__ } from &#8216;@angular/core&#8217;;[/javascript]</p>
+<p>it provides us access to a method makeDecorator that is kind of internal factory to make all the decorators, so to create new decorator you just need to do:</p>
+<p>[javascript]__core_private__.makeDecorator(&#8216;myNewDecorator&#8217;, {});[/javascript]</p>
+<p>so if you wanna create your own Component decorator it&#8217;s just:</p>
+<p>[javascript]const MyComponent = __core_private__.makeDecorator(&#8216;MyComponent&#8217;, {});[/javascript]</p>
+<p>there is also <span style="text-decoration: underline;">3rd paramete</span>r that allows us to make <strong>inheritance</strong> from another decorator, so let&#8217;s use existing <strong>Component decorator</strong>:</p>
+<p>[javascript]<br />
+const MyComponent = __core_private__.makeDecorator(&#8216;MyComponent&#8217;, {}, Component);<br />
+[/javascript]</p>
+<p>we need to set required properties(it will not work without them):</p>
+<p>[javascript]<br />
+const MyComponent = __core_private__.makeDecorator(&#8216;myComponent&#8217;,{<br />
+selector: undefined,<br />
+template: &#8221;,<br />
+styleUrls: undefined},Component))<br />
+[/javascript]</p>
+<p>and you could also extend some extra, for example <strong>switch off encapsulation</strong>:</p>
+<p>[javascript]<br />
+const MyComponent = __core_private__.makeDecorator(&#8216;myComponent&#8217;,{<br />
+selector: undefined,<br />
+template: &#8221;,<br />
+styleUrls: undefined<br />
+encapsulation: ViewEncapsulation.None<br />
+},Component))<br />
+[/javascript]</p>
+<p>All code for module(mycomponent.ts):</p>
+<p>[javascript]<br />
+import {__core_private__, Component, ViewEncapsulation} from &#8216;@angular/core&#8217;;</p>
+<p>let MyComponent = __core_private__.makeDecorator(&#8216;myComponent&#8217;, {<br />
+ selector: undefined,<br />
+ template: &#8221;,<br />
+ styleUrls: undefined,<br />
+ encapsulation: ViewEncapsulation.None},<br />
+ Component);</p>
+<p>export {MyComponent as Component}<br />
+[/javascript]</p>
+<p><span style="font-weight: 300;">that can be use instead of core Component:</span></p>
+<p>[javascript]<br />
+import {Component} from &#8216;./mycomponent&#8217;;<br />
+[/javascript]</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/01/angular2-changing-default-component-properties/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Жизненный цикл Angular2 компонента</title>
+		<link>https://stepansuvorov.com/blog/2016/11/angular2-component-life-cycle/</link>
+					<comments>https://stepansuvorov.com/blog/2016/11/angular2-component-life-cycle/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 21 Nov 2016 16:21:31 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular2]]></category>
+		<category><![CDATA[angular2-component]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3155</guid>
+
+					<description><![CDATA[Angular полностью управляет процессами происходящими в компоненте и над ним: создание, рендеринг, связывание данных и удаление. Мы в свою очередь можем вклиниться в процесс с помощью хуков/триггеров (lifecycle hooks) для каждого из событий. Какие существуют хуки? ngOnChanges &#8211; при изменении &#8230; <a href="https://stepansuvorov.com/blog/2016/11/angular2-component-life-cycle/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone wp-image-3157" src="https://stepansuvorov.com/blog/wp-content/uploads/2016/11/hooks-in-sequence-1.png" alt="hooks-in-sequence" width="198" height="248" /></p>
+<p><strong>Angular</strong> полностью управляет процессами происходящими в компоненте и над ним: создание, рендеринг, связывание данных и удаление. Мы в свою очередь можем вклиниться в процесс с помощью хуков/триггеров (<strong>lifecycle hooks</strong>) для каждого из событий.</p>
+<p>Какие существуют хуки?</p>
+<ul>
+<li><strong><span class="b">ngOnChanges</span></strong><span class="b"> &#8211; при изменении входных значений</span></li>
+<li><strong><span class="b">ngOnInit</span></strong><span class="b"> &#8211; при инициализации компонента (один раз)</span></li>
+<li><strong>ngDoCheck</strong> &#8211; при вызове механизма обнаружения изменения (<strong>change detection</strong>)</li>
+<li><strong>ngAfterContentInit</strong> &#8211; после вставки компонента в страницу (один раз)</li>
+<li><strong>ngAfterContentChecked</strong> &#8211; один раз при инициализациии контента и каждый раз при изменении входящих параметров</li>
+<li><strong>ngAfterViewInit</strong> &#8211; аналогичен ngAfterContentInit, только для представления</li>
+<li><strong>ngAfterViewChecked</strong> &#8211; аналогичен ngAfterContentChecked, только для представления</li>
+<li><strong>ngOnDestroy</strong> &#8211; перед тем, как Angular удалит компонент со страницы</li>
+</ul>
+<p><span id="more-3155"></span></p>
+<p>Все хуки реализуются с помощью соотвествующего интерфейса в классе компонента(либо директивы), соотвественно: OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy.</p>
+<p>Например для реализации <strong><span class="b">ngOnInit</span></strong><span class="b"> мы реализуем интерейс OnInit:</span></p>
+<p>[javascript]<br />
+import { Component, OnInit, OnDestroy } from &#8216;@angular/core&#8217;;<br />
+@Component({<br />
+  selector: &#8216;my&#8217;,<br />
+  template: &#8216;My Component!&#8217;<br />
+})<br />
+export class MyComponent implements OnInit {<br />
+  ngOnInit() {<br />
+      console.log(&#8216;onInit&#8217;);<br />
+  }<br />
+}<br />
+[/javascript]</p>
+<p>Используется <strong><span class="b">ngOnInit </span></strong>обычно в 2х случаях:</p>
+<ul>
+<li>чтобы выполнить сложную инициализацию после создания</li>
+<li>чтобы настроить компонент в зависимости от входных параметров</li>
+</ul>
+<h2><span class="b">ngOnChanges</span></h2>
+<p>Хук-метод <strong>ngOnChanges</strong> вызывается при обновлении параметров компонента. Первый вызов метода идет до <strong><span class="b">ngOnInit</span></strong>, что позволяет задать изначальные настройки и использовать их в инициализации.</p>
+<h2><span class="b">ngOnDestroy</span></h2>
+<p>вызывается перед тем, как фреймворк удалит компонент. Хорошее место для отписки от слушателей и отвязки обработчиков событий.</p>
+<p>Далее рассмотрим методы, время вызова которых не сразу можно понять из названия.</p>
+<h2>ngDoCheck</h2>
+<p><span class="b">Мне очень нравится сравнение этого метода <strong>ngDoCheck</strong> с <strong>$watch</strong> в <strong>Angular1</strong>. Другими словами: он будет запускаться всегда, когда выполняется механизм обнаружения изменений (change detection). </span></p>
+<h2>ngAfterContent &amp;&amp; ngAfterView</h2>
+<p>Тут у нас сразу 4 хука: <strong>ngAfterContentInit</strong>, <strong>ngAfterContentChecked</strong>, <strong>ngAfterViewInit</strong> и <strong>ngAfterViewChecked</strong>.</p>
+<p>Для понимания отличия давайте сначала разберемся &#8211; что такое <strong>View</strong>, а что такое <strong>Content</strong>. View &#8211; это представление компонента включающее в себя представления всех дочерних компонентов. А Content &#8211; внутреннее содержимое тега компонента, то есть если у вас есть компонент &#8216;my&#8217;, и он представлен на странице как:</p>
+<p>[html]<br />
+&lt;my&gt;<br />
+&lt;div&gt;hello world&lt;/div&gt;<br />
+&lt;/my&gt;<br />
+[/html]</p>
+<p>так вот</p>
+<p>[html]<br />
+&lt;div&gt;hello world&lt;/div&gt;<br />
+[/html]</p>
+<p>тут и будет <strong>Content</strong>.</p>
+<p>Теперь должно стать более понятно что такое  <strong>ngAfterContentInit</strong> и <strong>ngAfterViewInit</strong>. Так же нужно обязательно понимать, что <span style="text-decoration: underline;">Content инициализируется до View</span>, а View ребенка инициализируется до View родителя. Например у вас есть 2 компонента (один вложенный в другой): сначала отработает метод ngAfterContentInit на родителе, потом ngAfterContentInit на ребенке, потом сработает ngAfterViewInit ребенка и только потом ngAfterViewInit родителя. Подробно проиллюстрированно в консоле на <a href="http://plnkr.co/edit/UkQ9FVkCPBZCQ22uEzSa?p=preview">планкере</a>.</p>
+<p><strong>ngAfterContentChecked</strong> и <strong>ngAfterViewChecked</strong> выполняются при любых изменениях входящих параметров.</p>
+<p>Реализацию всех хуков можно посмотреть на вот <a href="http://plnkr.co/edit/gx4JMNaolU1jqoDgS5lT?p=preview">этом примере</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2016/11/angular2-component-life-cycle/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

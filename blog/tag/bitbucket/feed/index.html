@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>bitbucket &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/bitbucket/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Tue, 03 Mar 2015 13:01:00 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>В поисках сервиса для деплоя</title>
+		<link>https://stepansuvorov.com/blog/2015/03/deploy-service/</link>
+					<comments>https://stepansuvorov.com/blog/2015/03/deploy-service/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 03 Mar 2015 19:18:11 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[bitbucket]]></category>
+		<category><![CDATA[deploy]]></category>
+		<category><![CDATA[github]]></category>
+		<category><![CDATA[online]]></category>
+		<category><![CDATA[tool]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2143</guid>
+
+					<description><![CDATA[       На данным момент мы для своего проекта используем semaphore. Этот же сервис я использую и для своих личный проектов. Задача на него ставиться простая: при каждом пуше в мастер &#8211; выливаем код в продакшен, предварительно выполнив тесты и подготовив билд. &#8230; <a href="https://stepansuvorov.com/blog/2015/03/deploy-service/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><a title="https://semaphoreapp.com/" href="https://semaphoreapp.com/"><img decoding="async" class="alignnone  wp-image-2404" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/03/logo-661a8bb0455b3c85a019aa830dd1b109.png" alt="semaphore-logo" width="128" height="37" /></a>  <a title="http://dploy.io/" href="http://dploy.io/"><img decoding="async" class="alignnone  wp-image-2406" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/03/Screenshot-2015-03-03-13.40.59.png" alt="dploy-logo" width="95" height="43" /></a>  <a title="http://ftploy.com/" href="http://ftploy.com/"><img decoding="async" class="alignnone  wp-image-2407" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/03/Screenshot-2015-03-03-13.41.25.png" alt="ftploy-logo" width="91" height="30" /></a>  <a title="https://codeship.com/" href="https://codeship.com/"><img decoding="async" loading="lazy" class="alignnone  wp-image-2408" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/03/Screenshot-2015-03-03-13.43.17.png" alt="codeship-logo" width="132" height="46" /></a></p>
+<p>На данным момент мы для своего <a title="https://www.studytube.nl/" href="https://www.studytube.nl/">проекта</a> используем <a title="https://semaphoreapp.com/" href="https://semaphoreapp.com/">semaphore</a>. Этот же сервис я использую и для своих личный проектов. Задача на него ставиться простая: при каждом пуше в мастер &#8211; выливаем код в продакшен, предварительно выполнив тесты и подготовив билд.</p>
+<p><span id="more-2143"></span></p>
+<p>Из-за периодических тормозов, отсутствия возможности создания общей конфигурации для нескольких приложений (в нашем случае у нас 7 разных приложений, которые собираются и деплоятся одними и теме же командами, через один и тот же распределяющий сервер) и не совсем интуитивного интерфейса, задался вопросом: есть ли что-то более интересное, при этом по прежнему легкое и дружелюбное (читать бесплатное) по отношению к опенсорс.</p>
+<p>Попробовали как альтернативу использовать <a title="https://codeship.com/" href="https://codeship.com/">Codeship</a> &#8211; не понравилось.</p>
+<p>Потом еще наткнулся на <a title="http://dploy.io/" href="http://dploy.io/">dploy</a> и <a title="http://ftploy.com/" href="http://ftploy.com/">ftploy</a> &#8211; не впечатлило.</p>
+<p>Если у вас есть опыт успешного использования какого-либо подобного сервиса &#8211; поделитесь пожалуйста в комментариях.</p>
+<p>&nbsp;</p>
+<p><strong>UPD:</strong> после того как узнал, что в <strong>semaphore</strong> можно делать даже так:</p>
+<p>[shell]sudo apt-get install -yqq ftp[/shell]</p>
+<p>решил пока остаться на нем.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/03/deploy-service/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Автоматический деплой проекта из bitbucket с помощью javascript</title>
+		<link>https://stepansuvorov.com/blog/2012/09/%d0%b0%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b8%d0%b9-%d0%b4%d0%b5%d0%bf%d0%bb%d0%be%d0%b9-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b0-%d0%b8%d0%b7-bitbucket-%d1%81/</link>
+					<comments>https://stepansuvorov.com/blog/2012/09/%d0%b0%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b8%d0%b9-%d0%b4%d0%b5%d0%bf%d0%bb%d0%be%d0%b9-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b0-%d0%b8%d0%b7-bitbucket-%d1%81/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 25 Sep 2012 09:01:19 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[bitbucket]]></category>
+		<category><![CDATA[git]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[node.js]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=620</guid>
+
+					<description><![CDATA[Наш текущий проект мы держим на bitbucket и вот стал вопрос о автоматической выгрузке кода при каждом пуше в репозиторий. Попробуем сделать это на JavaScript. Для начала составим общий план что нам нужно: 1. Настроить bitbucket, чтобы он оповещал как-то &#8230; <a href="https://stepansuvorov.com/blog/2012/09/%d0%b0%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b8%d0%b9-%d0%b4%d0%b5%d0%bf%d0%bb%d0%be%d0%b9-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b0-%d0%b8%d0%b7-bitbucket-%d1%81/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-621" title="bitbucket" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/09/bitbucket.png" alt="" width="230" height="230" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2012/09/bitbucket.png 230w, https://stepansuvorov.com/blog/wp-content/uploads/2012/09/bitbucket-150x150.png 150w" sizes="(max-width: 230px) 100vw, 230px" /></p>
+<p>Наш текущий проект мы держим на bitbucket и вот стал вопрос о автоматической выгрузке кода при каждом пуше в репозиторий. Попробуем сделать это на JavaScript.</p>
+<p><span id="more-620"></span></p>
+<p>Для начала составим общий план что нам нужно:</p>
+<p>1. Настроить <strong>bitbucket</strong>, чтобы он оповещал как-то наш сервер о том, что в репозиторий добавлена новая версия.</p>
+<p>2. Выполнить необходимые настройке на стороне <strong>нашего сервера</strong>, чтобы мы смогли принимать информацию от <strong>bitbucket.</strong></p>
+<p>3. Создать <strong>скрипт</strong> разворачивания системы.</p>
+<p>&nbsp;</p>
+<p>Настройка <strong>bitbucket</strong>.</p>
+<p>Изучение мануала <strong>bitbucket</strong> сервиса показало что он имеет множество всевозможных способов оповещения: AgileZen, AppHarbor, Bamboo, Basecamp, Campfire, CIA.vc, Cube, Datadog, Donedone ,Email, Email Diff, Flowdock, Fogbugz, FriendFeed, Geocommit, Grove, HipChat, Issues, Jenkins, Lighthouse, Masterbranch, Pivotal Tracker, POST, Read the Docs, Rietveld, Superfeedr, Twitter. В этом списке есть обычный <strong>POST</strong>, который мы можем послать себе на сервер.</p>
+<p>Для настройки нам необходимо зайти в закладочку <strong>Admin</strong> нашего репозитория(если у вас нет такой закладочки &#8211; вероятно вы не админ):</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-623" title="bitbucket_rep_admin_tab" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/09/bitbucket_rep_admin_tab.png" alt="" width="341" height="101" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2012/09/bitbucket_rep_admin_tab.png 341w, https://stepansuvorov.com/blog/wp-content/uploads/2012/09/bitbucket_rep_admin_tab-300x88.png 300w" sizes="(max-width: 341px) 100vw, 341px" /></p>
+<p>Далее выбираем пункт из меню <strong>Services</strong>:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-624" title="bitbucket_services" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/09/bitbucket_services.png" alt="" width="879" height="284" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2012/09/bitbucket_services.png 879w, https://stepansuvorov.com/blog/wp-content/uploads/2012/09/bitbucket_services-300x96.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2012/09/bitbucket_services-500x161.png 500w" sizes="(max-width: 879px) 100vw, 879px" /></p>
+<p>И тут добавляем новый сервис <strong>POST</strong>, в который прописываем путь к нашему серверу. По настройке это <strong>bitbucket </strong>все.</p>
+<p>&nbsp;</p>
+<p>Настройка <strong>нашей стороны</strong>.</p>
+<p>Так как мы выбрали JavaScript, то логично было бы взять вебсервер node.js. Для более удобной работы поставим сразу на него express фреймворк.</p>
+<p>Создаем файл deploy.js со следующим содержанием:</p>
+<pre>var express = require('express');
+var app = express();
+app.listen(8888);</pre>
+<p>Порт выбираем произвольный, но в любом случае лучше брать отличный от 80 и других занятых &#8211; во избежание конфликтов. Чтобы убедится в том что сервер работает, добавим еще вывод какой-то произвольной текстовой информации, и получим:</p>
+<pre>var express = require('express');
+var app = express();
+
+app.get('/', function(req, res){
+    res.send( 'Server is working, time: ' + (new Date));
+});
+
+app.listen(8888);</pre>
+<p>Теперь запустим наш скрипт с помощью node.js командой в консоли:</p>
+<pre>$: node todom_deploy.js</pre>
+<p>Убедимся что ошибок не выдало и перейдем в браузере на адрес <em>http://localhost:8888/</em> . Работает? Отлично. Идем дальше. Организуем прием пост данных. Для этого добавляем следующую строчку вверху:</p>
+<pre>app.use(express.bodyParser());</pre>
+<p>и потом определяем роутер для post запроса:</p>
+<pre>app.post('/bitbucket-push', function(req, res){
+    res.send(req.body);
+    //скрипт разворачивания проекта будет тут
+});</pre>
+<p>Второй шаг выполнен мы получили адрес, который необходимо прописать в настройки bitbucket &#8211; <em>http://localhost:8888/bitbucket-push</em>. (вместо localhost указываем свой хост)</p>
+<p>&nbsp;</p>
+<p>Написание <strong>скрипта</strong> деплоймента.</p>
+<p>Тут можно много всякого разного написать, у кого на сколько фантазии хватит, но мы ограничимся пока только выливанием кода. Для этого нам нужно:</p>
+<p>задаем необходимую директорию:</p>
+<pre>process.chdir(directory);</pre>
+<p>откатываем изменения, если они были:</p>
+<pre>exec('git reset --hard HEAD', commandLog);</pre>
+<p>делаем пулл свеженького кода:</p>
+<pre>exec('git pull ', commandLog);</pre>
+<p>exec  &#8211; это такой модуль для выполнения shell команд, который можно получить следующим путем:</p>
+<pre>var exec = require('child_process').exec;</pre>
+<p>commandLog &#8211; колбэк функция, которая может быть реализована вот так:</p>
+<pre>function commandLog(error, stdout, stderr) {
+    console.log('stdout: ' + stdout);
+    //console.log('stderr: ' + stderr);
+    if (error !== null) { console.log('exec error: ' + error); }
+}</pre>
+<p>&nbsp;</p>
+<p>Ну и теперь весь код максимально сжато:</p>
+<pre>var os = require("os");
+var express = require('express');
+var app = express();
+app.use(express.bodyParser());
+
+var PROJECT_DIRECTORY = "/var/www/ourproject";
+
+app.get("/", function(req, res){
+    res.send( "Server is working, time: " + (new Date));
+});
+
+app.post("/push", function(req, res){
+    if(req.body.payload){
+        var deploy = new Deploy(PROJECT_DIRECTORY, JSON.parse(req.body.payload));
+        deploy.execute();
+    }else{
+        res.send("incorrect params");
+    }
+});
+
+app.listen(8888);</pre>
+<p>И сам класс, который в принципе можно разместить в отдельном файле:</p>
+<pre>function Deploy( directory, options )
+{
+    this.directory = directory;
+    this.git_options = {};
+    this.git_options.branch = options.commits[0].branch;
+    this.git_options.message = options.commits[0].message;
+}
+
+Deploy.prototype.execute = function(){
+    var exec = require("child_process").exec;
+
+    try{
+        process.chdir(this.directory);
+        exec('git reset --hard HEAD', commandLog);
+        exec('git pull ', commandLog);
+    }catch(e){
+        console.log(e);
+    }
+}</pre>
+<p>&nbsp;</p>
+<p>Тут еще можно добавить проверку ветки, т.е. выливать код только из главной ветки; что-то придумать с сообщением или автором, в общем дальше уже на сколько фантазии хватит, а по основному это все.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/09/%d0%b0%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b8%d0%b9-%d0%b4%d0%b5%d0%bf%d0%bb%d0%be%d0%b9-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b0-%d0%b8%d0%b7-bitbucket-%d1%81/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

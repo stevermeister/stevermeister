@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>concept diagram &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/concept-diagram/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Mon, 20 Apr 2015 21:10:15 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>AngularJS Concept Diagram</title>
+		<link>https://stepansuvorov.com/blog/2015/04/angularjs-concept-diagram/</link>
+					<comments>https://stepansuvorov.com/blog/2015/04/angularjs-concept-diagram/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 21 Apr 2015 04:05:02 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[concept diagram]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2482</guid>
+
+					<description><![CDATA[2 years ago you Sergey asked me to create AngularJs Concept Diagram, and finally I have enough knowledge and time to do this task. Better late than never. After many hours of going back and forth in source code of AngularJS &#8230; <a href="https://stepansuvorov.com/blog/2015/04/angularjs-concept-diagram/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" fetchpriority="high" class="alignnone  wp-image-2497" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/03/8A1копирование.png" alt="Angular concepts" width="279" height="279" /></p>
+<p>2 years ago you <a title="http://www.ilinsky.com/" href="http://www.ilinsky.com/">Sergey</a> asked me to create <strong>AngularJs Concept Diagram</strong>, and finally I have enough knowledge and time to do this task. Better late than never.</p>
+<p><span id="more-2482"></span></p>
+<p>After many hours of going back and forth in source code of AngularJS I think I came to understanding all the concepts of framework and their interactions. So the simplified diagram is not complex at all:</p>
+<p><img decoding="async" class="alignnone size-full wp-image-2537" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/04/page11.png" alt="Angular concepts simplified" width="729" height="413" /></p>
+<p>All based on <a title="wiki" href="http://en.wikipedia.org/wiki/Dependency_injection">Dependency Injection</a>(DI) approach and the instances of DI are AngularJS Services. The main 3 of them: <strong>Scope</strong>, <strong>Directive</strong>, <strong>Compile</strong>. <strong>Compile</strong> is a service, it&#8217;s obvious. Yes, <strong>Scope</strong> <a title="github" href="https://github.com/angular/angular.js/blob/master/src/ng/rootScope.js#L70">is also service</a>. <strong>Directive</strong> constructor itself is just method of <strong>Compile</strong> service(that is linked to <strong>yourModule.directive</strong>), but when you create new directive instance it will be <a title="github" href="https://github.com/angular/angular.js/blob/master/src/ng/compile.js#L829">still a service</a>, just with specific suffix. And <strong>controller</strong> (which is <strong>ngController</strong>) is <a title="github.com" href="https://github.com/angular/angular.js/blob/master/src/ng/directive/ngController.js#L229">just a directive</a>, one from the set that AngularJS provided from the box.</p>
+<p>Lets have a look on concepts list from <a href="https://docs.angularjs.org/guide/concepts">official tutorial</a>:</p>
+<table class="ng-scope table table-bordered table-striped code-table">
+<thead>
+<tr>
+<th>Concept</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.angularjs.org/guide/concepts#template">Template</a></td>
+<td>HTML with additional markup</td>
+</tr>
+<tr>
+<td><a href="https://docs.angularjs.org/guide/concepts#directive">Directives</a></td>
+<td>extend HTML with custom attributes and elements</td>
+</tr>
+<tr>
+<td><a href="https://docs.angularjs.org/guide/concepts#model">Model</a></td>
+<td>the data shown to the user in the view and with which the user interacts</td>
+</tr>
+<tr>
+<td><a href="https://docs.angularjs.org/guide/concepts#scope">Scope</a></td>
+<td>context where the model is stored so that controllers, directives and expressions can access it</td>
+</tr>
+<tr>
+<td><a href="https://docs.angularjs.org/guide/concepts#expression">Expressions</a></td>
+<td>access variables and functions from the scope</td>
+</tr>
+<tr>
+<td><a href="https://docs.angularjs.org/guide/concepts#compiler">Compiler</a></td>
+<td>parses the template and instantiates directives and expressions</td>
+</tr>
+<tr>
+<td><a href="https://docs.angularjs.org/guide/concepts#filter">Filter</a></td>
+<td>formats the value of an expression for display to the user</td>
+</tr>
+<tr>
+<td><a href="https://docs.angularjs.org/guide/concepts#view">View</a></td>
+<td>what the user sees (the DOM)</td>
+</tr>
+<tr>
+<td><a href="https://docs.angularjs.org/guide/concepts#databinding">Data Binding</a></td>
+<td>sync data between the model and the view</td>
+</tr>
+<tr>
+<td><a href="https://docs.angularjs.org/guide/concepts#controller">Controller</a></td>
+<td>the business logic behind views</td>
+</tr>
+<tr>
+<td><a href="https://docs.angularjs.org/guide/concepts#di">Dependency Injection</a></td>
+<td>Creates and wires objects and functions</td>
+</tr>
+<tr>
+<td><a href="https://docs.angularjs.org/guide/concepts#injector">Injector</a></td>
+<td>dependency injection container</td>
+</tr>
+<tr>
+<td><a href="https://docs.angularjs.org/guide/concepts#module">Module</a></td>
+<td>a container for the different parts of an app including controllers, services, filters, directives which configures the Injector</td>
+</tr>
+<tr>
+<td><a href="https://docs.angularjs.org/guide/concepts#service">Service</a></td>
+<td>reusable business logic independent of views</td>
+</tr>
+</tbody>
+</table>
+<p>We already have <strong>DI</strong>, <strong>Compiler</strong>, <strong>Directives</strong>, <strong>Scope</strong>, <strong>Service</strong>. Let&#8217;s extend our diagram little bit:</p>
+<p><img decoding="async" class="alignnone size-full wp-image-2511" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/04/page1_extended1.png" alt="angular_concepts_extended" width="756" height="566" /></p>
+<p>Here I specify that <strong>DI</strong> concept is made by <strong>Injector</strong> entity. Services are grouped in <strong>modules</strong>. Base module of Angular is <strong><a title="github" href="https://github.com/angular/angular.js/tree/master/src/ng">ng</a></strong>, where you could find all the &#8220;native&#8221; services and directives(I call it ngModule on diagram to make more clear). Examples of another modules provided by AngularJS are ngRoute, ngAnimate, ngSanitize, ngCookies and others.</p>
+<p>I marked out that <strong>Scope</strong> is kind of <strong>Model</strong> in AngularJS.</p>
+<p><strong>View</strong> is presented like extended <strong>HTML</strong>(extended by expressions and directives). Html is analysed and compiled back with <strong>Scope</strong> data by <strong>Compile</strong> service: <a title="github" href="https://github.com/angular/angular.js/blob/master/src/Angular.js#L1515">starting from the app root element</a> recursively to each nested directive. Directives can use <strong>Templates</strong> which are also in extended HTML format.</p>
+<p>I think that the concepts like <strong>digest</strong> and <strong>watchers</strong> are unfairly skipped in the main list. Let&#8217;s look at Scope concept in detail:</p>
+<p><img decoding="async" loading="lazy" class="alignnone  wp-image-2520" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/04/scope.png" alt="scope concept" width="252" height="217" /></p>
+<p>Each <strong>Scope</strong> instance (<strong>$scope</strong> on diagram) has array of <strong>watchers</strong>, <strong>$watch()</strong> method to add new watcher and <strong>$digest()</strong> method to control the watchers.</p>
+<p>We have array of watchers, but what is watcher itself?</p>
+<p><img decoding="async" loading="lazy" class="alignnone  wp-image-2521" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/04/watcher.png" alt="watcher concept" width="390" height="190" /></p>
+<p>Watcher is just an object with 3 basic properties:</p>
+<ul>
+<li>listener &#8211; observable entity (could be object property, expression(string) or function)</li>
+<li>old value &#8211; stored value to compare with new one</li>
+<li>callback &#8211; function to call in case if output of listener and old value do not match</li>
+</ul>
+<p>So <strong>watcher</strong> is just an object with special properties. All operations over watchers are executed by <strong>$digest</strong> method. It goes threw all the watchers, compare values: stored and listener actual and execute callbacks if the values are not equal.</p>
+<p>And now we come back to general diagram:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2538" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/04/page1_extended22.png" alt="Angular Concept Diagram" width="844" height="557" /></p>
+<p>I&#8217;ve added last concept from the list &#8211; <strong>Data Binding</strong>. It&#8217;s made on watchers. Each view binding with a scope &#8211; it&#8217;s just one more watcher to the watchers list of this scope(or two watchers in case of <strong>Two Way Binding</strong>). When some of scope properties have been changed it will make corresponding watchers &#8220;<em>dirty</em>&#8221; &#8211; it means that listener value and old value are not equal now. And with new <strong>digest cycle</strong> ($digest method call) dirty watchers will be updated(and their callbacks will be executed). Digest cycle will last till all the watchers are clean. That why it has well known name &#8220;dirty checking&#8221;.</p>
+<p>I tried to put all the concepts with their dependencies on diagram and keep it as clear as possible. Hope it will be helpful for you.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/04/angularjs-concept-diagram/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

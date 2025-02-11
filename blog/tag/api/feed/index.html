@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>API &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/api/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Wed, 26 Jul 2017 12:20:03 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Mocky &#8211; nice HTTP mocking service</title>
+		<link>https://stepansuvorov.com/blog/2017/07/mocky-nice-http-mocking-service/</link>
+					<comments>https://stepansuvorov.com/blog/2017/07/mocky-nice-http-mocking-service/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 26 Jul 2017 12:20:03 +0000</pubDate>
+				<category><![CDATA[Рекомендую]]></category>
+		<category><![CDATA[API]]></category>
+		<category><![CDATA[mock]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3422</guid>
+
+					<description><![CDATA[I found easy to use mocking service &#8211; Mocky &#8211; that allows you to check not only with fixed response for GET/POST&#8230;, but also to emit any HTTP error and setup custom header.]]></description>
+										<content:encoded><![CDATA[<p>I found easy to use mocking service &#8211; <strong><a href="http://www.mocky.io/">Mocky</a></strong> &#8211; that allows you to check not only with fixed response for GET/POST&#8230;, but also to emit any HTTP error and setup custom header.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/07/mocky-nice-http-mocking-service/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Minimal set for Github OAuth with AngularJS and Node.js</title>
+		<link>https://stepansuvorov.com/blog/2015/03/minimal-set-for-github-oauth-with-angularjs-and-node-js/</link>
+					<comments>https://stepansuvorov.com/blog/2015/03/minimal-set-for-github-oauth-with-angularjs-and-node-js/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Thu, 12 Mar 2015 19:41:26 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[API]]></category>
+		<category><![CDATA[github]]></category>
+		<category><![CDATA[OAuth]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2437</guid>
+
+					<description><![CDATA[I so many times had returned back to this topic that decided to create kind of hint/note for myself and probably it also could be useful for the audience. Applications on Github To make possible github OAuth on your app you &#8230; <a href="https://stepansuvorov.com/blog/2015/03/minimal-set-for-github-oauth-with-angularjs-and-node-js/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>I so many times had returned back to this topic that decided to create kind of hint/note for myself and probably it also could be useful for the audience.</p>
+<p><span id="more-2437"></span></p>
+<h2>Applications on Github</h2>
+<p>To make possible github OAuth on your app you first should to register your application <a title="https://github.com/settings/applications" href="https://github.com/settings/applications">there</a>. And get set of necessary params:</p>
+<ul>
+<li><strong>Client ID</strong></li>
+<li><strong>Client Secret</strong></li>
+</ul>
+<h2>Algorithm</h2>
+<p>I&#8217;ll not go in all the details, because there are a lot of manuals in internet. Only resume. In 7 steps:</p>
+<ol>
+<li><strong>web application</strong> provides user <strong>authorisation link</strong> to <strong>github</strong></li>
+<li><strong>user</strong> follows this link and <strong>confirms authorisation</strong></li>
+<li><strong>github</strong> redirects user back to our site with special <strong>code parameter</strong> in url</li>
+<li>our <strong>web application</strong> gets this <strong>code parameter</strong> and sends it to the <strong>server </strong></li>
+<li><strong>server</strong> creates <strong>OAuth request</strong> based on this code and our api secret and sends it to <strong>github</strong></li>
+<li><strong>github</strong> responses to our <strong>server</strong> with <strong>OAuth token</strong></li>
+<li><strong>server</strong> provide <strong>token</strong> to the <strong>web application</strong></li>
+</ol>
+<h2>Authorisation link</h2>
+<p>it&#8217;s just a link of such format:</p>
+<pre>https://github.com/login/oauth/authorize?client_id=%YOUR_APP_ID%</pre>
+<h2>Web Application part</h2>
+<p>I&#8217;ve created simple example of <strong>Angular service</strong> that will send <strong>code</strong> parameter to the server:</p>
+<p>[javascript]<br />
+angular.module(&#8216;config-builder&#8217;)<br />
+  .service(&#8216;Github&#8217;, function($http) {</p>
+<p>    var token = null;</p>
+<p>    this.getTokenPromise = function(code) {<br />
+      return $http.get(&#8216;/api/github/token/&#8217; + code).then(function(result){<br />
+        token = result.data.access_token;<br />
+      });<br />
+    };<br />
+  });<br />
+[/javascript]</p>
+<h2>Server side</h2>
+<p>And server side part to send OAuth token request:</p>
+<p>[javascript]<br />
+app.get(&#8216;/api/github/token/:code&#8217;, function(req, res) {<br />
+  request.post({<br />
+    uri: &#8216;https://github.com/login/oauth/access_token&#8217;,<br />
+    form: {<br />
+      client_id: &#8216;%YOUR_APP_ID%&#8217;,<br />
+      client_secret: &#8216;%YOUR_APP_SECRET%&#8217;,<br />
+      code: req.params.code<br />
+    },<br />
+    json: true<br />
+  }, function(err, httpResponse, body) {<br />
+    if (err) {<br />
+      res.send(500, { error: err });<br />
+      return;<br />
+    }<br />
+    res.send(body);<br />
+  });<br />
+});<br />
+[/javascript]</p>
+<p><strong>app</strong> &#8211; is an instance of <a title="http://expressjs.com/" href="http://expressjs.com/">express</a> framework in this case.</p>
+<p>That&#8217;s all!</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/03/minimal-set-for-github-oauth-with-angularjs-and-node-js/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>userscripts &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/userscripts/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 25 Jul 2015 20:35:20 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Load remote script from your userscript extension</title>
+		<link>https://stepansuvorov.com/blog/2015/07/load-remote-script-for-your-userscript-extension/</link>
+					<comments>https://stepansuvorov.com/blog/2015/07/load-remote-script-for-your-userscript-extension/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 25 Jul 2015 20:35:08 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[userscripts]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2766</guid>
+
+					<description><![CDATA[Just not to lose snippet/solution that I&#8217;d been looking for quite some time paste it here: [javascript] var load,execute,loadAndExecute;load=function(a,b,c){var d;d=document.createElement(&#34;script&#34;),d.setAttribute(&#34;src&#34;,a),b!=null&#38;&#38;d.addEventListener(&#34;load&#34;,b),c!=null&#38;&#38;d.addEventListener(&#34;error&#34;,c),document.body.appendChild(d);return d},execute=function(a){var b,c;typeof a==&#34;function&#34;?b=&#34;(&#34;+a+&#34;)();&#34;:b=a,c=document.createElement(&#34;script&#34;),c.textContent=b,document.body.appendChild(c);return c},loadAndExecute=function(a,b){return load(a,function(){return execute(b)})}; [/javascript] and example (loading jQuery): [javascript] loadAndExecute(&#34;//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js&#34;, function() { $(&#34;#answer-6825715&#34;).css(&#34;border&#34;, &#34;.5em solid black&#34;); }); &#8230; <a href="https://stepansuvorov.com/blog/2015/07/load-remote-script-for-your-userscript-extension/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Just not to lose snippet/solution that I&#8217;d been looking for quite some time paste it here:</p>
+<p>[javascript]<br />
+var load,execute,loadAndExecute;load=function(a,b,c){var d;d=document.createElement(&quot;script&quot;),d.setAttribute(&quot;src&quot;,a),b!=null&amp;&amp;d.addEventListener(&quot;load&quot;,b),c!=null&amp;&amp;d.addEventListener(&quot;error&quot;,c),document.body.appendChild(d);return d},execute=function(a){var b,c;typeof a==&quot;function&quot;?b=&quot;(&quot;+a+&quot;)();&quot;:b=a,c=document.createElement(&quot;script&quot;),c.textContent=b,document.body.appendChild(c);return c},loadAndExecute=function(a,b){return load(a,function(){return execute(b)})};<br />
+[/javascript]</p>
+<p>and example (loading jQuery):</p>
+<p>[javascript]<br />
+loadAndExecute(&quot;//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js&quot;, function() {<br />
+    $(&quot;#answer-6825715&quot;).css(&quot;border&quot;, &quot;.5em solid black&quot;);<br />
+});<br />
+[/javascript]</p>
+<p>taken from <a href="http://stackoverflow.com/a/6825715/274500">stackoverflow</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/07/load-remote-script-for-your-userscript-extension/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Making Jira better</title>
+		<link>https://stepansuvorov.com/blog/2014/11/making-jira-better/</link>
+					<comments>https://stepansuvorov.com/blog/2014/11/making-jira-better/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 15 Nov 2014 21:08:09 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[jira]]></category>
+		<category><![CDATA[scrum]]></category>
+		<category><![CDATA[userscripts]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2065</guid>
+
+					<description><![CDATA[Our team found that it was not so convenient to have avatars for assigned developers only for Plan mode and not for Work (Rapid board of Jira Agile). I&#8217;d create a question about that issue on Atlassian Answers, but unfortunately &#8230; <a href="https://stepansuvorov.com/blog/2014/11/making-jira-better/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Our team found that it was not so convenient to have avatars for assigned developers only for <strong>Plan</strong> mode and not for <strong>Work</strong> (<strong>Rapid</strong> board of <strong>Jira Agile</strong>).</p>
+<p>I&#8217;d create a <a title="Unwatch Share [Jira][Agile] assigned users Avatars for User Stories (not only for tasks)" href="https://answers.atlassian.com/questions/9877397/jiraagile-assigned-users-avatars-for-user-stories-not-only-for-tasks">question</a> about that issue on <strong>Atlassian Answers</strong>, but unfortunately the answer was &#8220;<em>Unfortunately this is not possible due to the way User Stories are displayed in the system.</em>&#8221;</p>
+<p>I had a thought &#8220;why not to tweak it with userscript?&#8221; and solution came after:</p>
+<p><strong><a title="github.com" href="https://github.com/stevermeister/jira-userscripts/blob/master/jira-agile-avatars.user.js">jira-agile-avatars.user.js</a></strong></p>
+<p>You are welcome with criticism and suggestions.</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/11/making-jira-better/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

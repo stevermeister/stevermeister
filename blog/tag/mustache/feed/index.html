@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>mustache &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/mustache/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Fri, 16 Nov 2012 08:29:55 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Mustache шаблонизатор</title>
+		<link>https://stepansuvorov.com/blog/2012/11/mustache-%d1%88%d0%b0%d0%b1%d0%bb%d0%be%d0%bd%d0%b8%d0%b7%d0%b0%d1%82%d0%be%d1%80/</link>
+					<comments>https://stepansuvorov.com/blog/2012/11/mustache-%d1%88%d0%b0%d0%b1%d0%bb%d0%be%d0%bd%d0%b8%d0%b7%d0%b0%d1%82%d0%be%d1%80/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 16 Nov 2012 08:29:55 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[mustache]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=738</guid>
+
+					<description><![CDATA[Mustache &#8211; простой шаблонизатор с минимумом логики, но набирающий все большую популярность и добавляющий в свои ряды новые языки, которые его поддерживают(Ruby, JavaScript, Python, Erlang, PHP, Perl, Objective-C, Java, .NET, Android, C++, Go, Lua, ooc, ActionScript, ColdFusion, Scala, Clojure, Fantom, &#8230; <a href="https://stepansuvorov.com/blog/2012/11/mustache-%d1%88%d0%b0%d0%b1%d0%bb%d0%be%d0%bd%d0%b8%d0%b7%d0%b0%d1%82%d0%be%d1%80/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-full wp-image-739" title="mustache_js" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/11/mustache_js.png" alt="" width="257" height="121" /></p>
+<p><a href="http://mustache.github.com">Mustache</a> &#8211; простой шаблонизатор с минимумом логики, но набирающий все большую популярность и добавляющий в свои ряды новые языки, которые его поддерживают(<a href="http://github.com/defunkt/mustache">Ruby</a>, <a href="https://github.com/janl/mustache.js">JavaScript</a>, <a href="https://github.com/defunkt/pystache">Python</a>, <a href="https://github.com/mojombo/mustache.erl">Erlang</a>, <a href="https://github.com/bobthecow/mustache.php">PHP</a>, <a href="https://github.com/pvande/Template-Mustache">Perl</a>, <a href="https://github.com/groue/GRMustache">Objective-C</a>, <a href="https://github.com/spullara/mustache.java">Java</a>, <a href="https://github.com/jdiamond/Nustache">.NET</a>, <a href="https://github.com/samskivert/jmustache">Android</a>, <a href="https://github.com/mrtazz/plustache">C++</a>, <a href="https://github.com/hoisie/mustache.go/">Go</a>, <a href="https://github.com/nrk/hige">Lua</a>, <a href="https://github.com/joshthecoder/mustang">ooc</a>, <a href="https://github.com/hyakugei/mustache.as">ActionScript</a>, <a href="https://github.com/pmcelhaney/Mustache.cfc">ColdFusion</a>, <a href="https://github.com/scalate/scalate">Scala</a>, <a href="https://github.com/fhd/clostache">Clojure</a>, <a href="https://github.com/vspy/mustache">Fantom</a>, <a href="https://github.com/pvande/Milk">CoffeeScript</a>, <a href="https://github.com/repeatedly/mustache4d">D</a>, <a>node.js</a>.)</p>
+<p>Я приведу пример как можно использовать <strong>Mustache</strong> вместе с JavaScript.</p>
+<p><span id="more-738"></span>Для старта нам необходимо выкачать <a href="http://github.com/janl/mustache.js/raw/master/mustache.js" target="_blank">Mustache</a>, и создать себе html-файл для экспериментов, в который подключить библиотеку.</p>
+<p>Разберем пример с офсайта. Структура данных:</p>
+<pre>var  data = {
+        "header": "Colors",
+        "items": [
+            {"name": "red", "first": true, "url": "#Red"},
+            {"name": "green", "link": true, "url": "#Green"},
+            {"name": "blue", "link": true, "url": "#Blue"}
+        ],
+        "empty": false
+    };</pre>
+<p>(добавим его в javascript тег к нашей html страничке)</p>
+<p>и сам шаблон <strong>Mustache</strong>:</p>
+<pre>&lt;h1&gt;{{header}}&lt;/h1&gt;
+{{#bug}}
+{{/bug}}
+
+{{#items}}
+  {{#first}}
+    &lt;li&gt;&lt;strong&gt;{{name}}&lt;/strong&gt;&lt;/li&gt;
+  {{/first}}
+  {{#link}}
+    &lt;li&gt;&lt;a href="{{url}}"&gt;{{name}}&lt;/a&gt;&lt;/li&gt;
+  {{/link}}
+{{/items}}
+
+{{#empty}}
+  &lt;p&gt;The list is empty.&lt;/p&gt;
+{{/empty}}</pre>
+<p>Для простоты первого примера поместим весь этот шаблон в строковую переменную <em>template</em>.</p>
+<p>осталось применить метод <strong>Mustache.to_html</strong>():</p>
+<pre>console.log(Mustache.to_html(template, data));</pre>
+<p>Вот <a href="http://jsfiddle.net/STEVER/nvxe3/1/" target="_blank">тут</a> можно поиграть с исходным кодом.</p>
+<p>Расширим этот вариант и сделаем его полным аналогом офсайта: т.е. чтобы можно было подавать данные и шаблон через textarea, <a href="http://jsfiddle.net/STEVER/nvxe3/2/" target="_blank">вот так</a>.</p>
+<p>С песочницей разобрались, переходим рассмотрению самой библиотеки. Мы уже опробовали основной метод <em>Mustache.to_html</em>, который имеет следующий синтаксис:</p>
+<pre>to_html(template, data, partials, send)</pre>
+<p>Но! Этот метод, как оказалось, уже является <span style="text-decoration: underline;">deprecated</span> и вместо него стоит использовать render():</p>
+<pre>render(template, data, partials)</pre>
+<pre>template - шаблон (string)
+data - данные подставляемые в шаблон (object)
+partials - массив подшаблонов, также динамически собираемых</pre>
+<p>Остальные методы, которые не так реже используются это:</p>
+<pre>clearCache() - для очистки кеша
+compile(template, tags) - компилирует шаблон в выполняемую функцию
+compilePartial(name, template, tags) - тоже для подшаблонов</pre>
+<p>Как видим: методов у <strong>mustache.js</strong> совсем не много. Поэтому продолжим разбирать структуру шаблонов.</p>
+<p>Возможны следующие встраивания в html:</p>
+<h3>переменная(variable)</h3>
+<p>{{variable}} &#8211; экранированный вывод переменной</p>
+<p>{{{variable}}} &#8211; не экранированный вывод переменной</p>
+<p>{{variable.property}} &#8211; обращение к свойству объекта</p>
+<h3>СекЦИЯ(SECtion)</h3>
+<p>Секция представляет из себя блок заключенные между тегами {{#sectionname}} и {{/sectionname}}</p>
+<p>Поведение секции зависит от переданного в нее значения:</p>
+<ul>
+<li>true/false &#8211; ведет себя как оператор if: отображает блок только в случае, когда было передано true.</li>
+<li>список значений &#8211; аналог цикла с поставлением значений</li>
+<li>функция &#8211; получает 2 значения: текст блока и рендер метод, и заменяет блок своим результатом</li>
+</ul>
+<h3>подшаблон(partial)</h3>
+<p>имеют синтаксис {{&gt; partialname}} и подставляют не переменную, а целый шаблон.</p>
+<h3>комментарий(comment)</h3>
+<p>{{! comment}} &#8211; вывод комментария</p>
+<p>&nbsp;</p>
+<p>Более подробно можно почитать:</p>
+<ul>
+<li><a href="http://mustache.github.com/mustache.5.html" target="_blank">официальная документация</a></li>
+<li><a href="https://github.com/janl/mustache.js" target="_blank">документация mustache.js </a></li>
+</ul>
+<p>Относительно субъективные сравнительные тесты с другими шаблонизаторами можно посмотреть <a href="http://akdubya.github.com/dustjs/benchmark/index.html" target="_blank">тут</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/11/mustache-%d1%88%d0%b0%d0%b1%d0%bb%d0%be%d0%bd%d0%b8%d0%b7%d0%b0%d1%82%d0%be%d1%80/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

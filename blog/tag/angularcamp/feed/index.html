@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>AngularCamp &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/angularcamp/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 11 Nov 2017 08:06:22 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>AngularCamp 2017, notes</title>
+		<link>https://stepansuvorov.com/blog/2017/07/angularcamp-2017-notes/</link>
+					<comments>https://stepansuvorov.com/blog/2017/07/angularcamp-2017-notes/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 07 Jul 2017 17:50:24 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[AngularCamp]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3399</guid>
+
+					<description><![CDATA[I had I chance to visit AngularCamp these days and would like to share some thoughts/notes with you. Todd Motto &#38; James Henry &#8211; From imperative to reactive thinking (slides) Todd showed 2 great examples of streams of real world. Bulbs that subscribed &#8230; <a href="https://stepansuvorov.com/blog/2017/07/angularcamp-2017-notes/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" fetchpriority="high" class="alignnone size-full wp-image-3406" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/07/IMG-4c24743ce80cbbd8723a28eec0a6c01c-V.jpg" alt="" width="1210" height="680" /></p>
+<p>I had I chance to visit <strong><a href="https://angularcamp.org">AngularCamp</a></strong> these days and would like to share some thoughts/notes with you.</p>
+<p><span id="more-3399"></span></p>
+<h2>Todd Motto &amp; James Henry &#8211; From imperative to reactive thinking (<a href="https://speakerdeck.com/toddmotto/from-imperative-to-reactive-thinking">slides</a>)</h2>
+<p>Todd showed 2 great examples of streams of real world.</p>
+<p>Bulbs that subscribed to one switch:</p>
+<p><img decoding="async" class="alignnone wp-image-3408" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-10-at-22.01.25.png" alt="" width="173" height="186" /></p>
+<p>and coffee machine that makes different sorts of coffee out of water:</p>
+<p><img decoding="async" class="alignnone wp-image-3409" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-10-at-22.02.57.png" alt="" width="236" height="160" /></p>
+<p>Next part was about comparing <strong>Imperative</strong> and <strong>Reactive</strong> approaches base on &#8220;game of throwing the ball&#8221; implementation.</p>
+<p><em>Well&#8230; IMHO</em></p>
+<p><strong>Imperative</strong>: too much code, really difficult to follow</p>
+<p><strong>Reactive</strong>: got lost even knowing how to work with Rxjs</p>
+<p>&nbsp;</p>
+<h2>Dmitriy Shekhovtsov &#8211; Unleash The Power Of Angular With Knowledge of Patterns</h2>
+<p>Dmitriy started naming the patterns that everybody knows: <a href="https://en.wikipedia.org/wiki/Singleton_pattern">singleton</a>, <a href="https://en.wikipedia.org/wiki/Factory_(object-oriented_programming)">factory</a>, <a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">pub/sub</a>, <a href="https://en.wikipedia.org/wiki/Adapter_pattern">adapter</a> to warmup audience, after continued with: <a href="https://en.wikipedia.org/wiki/Dependency_injection">DI</a>, <a href="https://en.wikipedia.org/wiki/Module_pattern">module</a>, <a href="https://en.wikipedia.org/wiki/Inversion_of_control">IoC</a>,  <a href="https://en.wikipedia.org/wiki/Command%E2%80%93query_separation">CQRS</a> to make some JS developers exited about new words.</p>
+<p>Then he presented <strong>Dependancy injection</strong> pattern and provided 2 examples: with a fridge where parents &#8220;inject&#8221; food for the child and with carbonara that you don&#8217;t need to take care about ingredients. Frankly speaking, both examples highlighted an encapsulation principle more than DI. After he should how Angular code would look like without DI. I think it would be better to highlight the power of flexibility that DI provides you, instead of showing that</p>
+<p><strong>Module pattern</strong> was next one. Dmitriy highlighted that even with EcmaScript2015+ with native modules we still have to compile it to an old school function wrapper. Some good reasons why to use this pattern:</p>
+<ul>
+<li>namespaces</li>
+<li>encapsulation</li>
+<li>structured code</li>
+<li>manage dependancy</li>
+</ul>
+<p>and after he compared it to <strong>ngModules</strong>: import, export, providers.</p>
+<p>Also Dmitriy provided interesting idea to split you <strong>SharedModule</strong> into 2: to put all you services separately. In this case you would not need <strong>forRoot</strong>/<strong>forChild</strong> approach.</p>
+<p>Next one was a <strong>Change Detection</strong> pattern. Some explanation about Javascript types and memory allocation, and &#8220;<em>why the code worked in AngularJs and doesn&#8217;t work in Angular</em>&#8220;. The answer is <strong>strict equality</strong>.</p>
+<p>Several more words about immutability, pure functions and single responsibility.</p>
+<h2>Simona Cotin &amp; Artur Daschevici &#8211; From Angular to React and back again</h2>
+<p>Simona and Artur provided kind of comparison for <strong>Angular</strong> and <strong>React</strong>(yes, yet another comparison ;) )</p>
+<p>Simona started with Angular history, and told us what things had pushed AngularJs to be Angular:</p>
+<ul>
+<li>ES6</li>
+<li>Web components</li>
+<li>React</li>
+<li>RxJS</li>
+<li>Typescript</li>
+<li>EmberCli</li>
+</ul>
+<p>and also, of course, it was a time for performance changes. so now we have:</p>
+<ul>
+<li>lazy loading</li>
+<li>AoT</li>
+<li>tree shaking</li>
+</ul>
+<p>Then Artur took the floor and told us some parts of React:</p>
+<ul>
+<li>component based</li>
+<li>predictable state management</li>
+<li>ES6</li>
+<li>Flow</li>
+<li>Virtual DOM</li>
+</ul>
+<p>Then they compared CLI tools and component declaration and tools for each framework.</p>
+<p>Issues Angular:</p>
+<ul>
+<li>migration
+<ul>
+<li>Angular Style Guide</li>
+<li>TypeScript</li>
+<li>UpgradeModule</li>
+<li>Upgrade cheatsheet</li>
+</ul>
+</li>
+</ul>
+<p>issues React:</p>
+<ul>
+<li>unmanageble large app</li>
+<li>state management</li>
+<li>no unified way of doing things</li>
+</ul>
+<p>&nbsp;</p>
+<h2>Victor Savkin &#8211; State Management Patterns and Best Practices with NgRxb</h2>
+<p>too much code for 4th talk without break&#8230; it looked like Viktor wanted to put 4 hours talk in 40 minutes&#8230;.</p>
+<p>* I&#8217;ll rewatch video one more time and will return back to you with more information about this topic.</p>
+<p>Also Victor several times during the talk recommended this book:</p>
+<p><a href="https://books.google.nl/books/about/Enterprise_Integration_Patterns.html?id=bUlsAQAAQBAJ&amp;printsec=frontcover&amp;source=kp_read_button&amp;redir_esc=y#v=onepage&amp;q&amp;f=false"><img decoding="async" loading="lazy" class="alignnone wp-image-3411" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/07/images.jpg" alt="" width="184" height="238" /></a></p>
+<p>&nbsp;</p>
+<h2>Martin Splitt &#8211; Virtual Reality with A-Frame</h2>
+<p>Quite inspiring talk: Martin not only showed how to make VR in Javascript with help of simple library but also make all audience laugh.</p>
+<p>He started with some examples of VR</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=TckqNdrdbgk">Tilt Brush: Painting from a new perspective</a></li>
+<li><a href="https://www.youtube.com/watch?v=SCrkZOx5Q1M">Google Earth VR — Bringing the whole wide world to virtual reality</a></li>
+</ul>
+<p>Compared different modern VR devices.</p>
+<p>Explained How VR works.</p>
+<p>I a bit of VR live coding with <a href="https://aframe.io"><strong>a-frame</strong></a> library.</p>
+<p>&nbsp;</p>
+<p><strong>Filip Bech-Larsen &#8211; Building dynamic SPA website</strong></p>
+<p>Filip showed results of his research how to build Angular over existing CMS: to use all management tools for content creation and editing and same time present it like SPA.</p>
+<h1>Pascal Precht &#8211; Angular and Service Workers</h1>
+<p>Progressive web apps (<a href="https://developers.google.com/web/tools/lighthouse/">lighthouse</a> &#8211; to check whether you app is progressive enough)</p>
+<p>Service workers</p>
+<p>Angular Service Worker</p>
+<ul>
+<li>install @angular/serviceworker</li>
+<li>angular-cli  serverWorker: true</li>
+<li>sw-register</li>
+<li>ngsw-manifest</li>
+<li>dynamic routing</li>
+</ul>
+<h1>Carmen Popoviciu &#8211; A moment&#8217;s reflection</h1>
+<p>Deep psychological talk about developer beings from Carmen that was nicely combined with Martin Splitt jokes.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/07/angularcamp-2017-notes/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

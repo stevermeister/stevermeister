@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>mongoose &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/mongoose/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sun, 22 Jan 2017 08:52:46 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Mongoose для MongoDb</title>
+		<link>https://stepansuvorov.com/blog/2012/11/mongoose-%d0%b4%d0%bb%d1%8f-mongodb/</link>
+					<comments>https://stepansuvorov.com/blog/2012/11/mongoose-%d0%b4%d0%bb%d1%8f-mongodb/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 27 Nov 2012 20:14:01 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[MongoDB]]></category>
+		<category><![CDATA[mongoose]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=761</guid>
+
+					<description><![CDATA[Mongoose &#8211; это ORM для MongoDb сделанная под node.js. Традиционно начнем разбор с создания песочницы. Mongoose устанавливается как модуль к node.js: $ npm install mongoose После установки проверяем подключается ли модуль, пишем в test.js файлик следующий код: var mongoose = &#8230; <a href="https://stepansuvorov.com/blog/2012/11/mongoose-%d0%b4%d0%bb%d1%8f-mongodb/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-full wp-image-762" title="mongoose" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/11/mongoose.jpg" alt="" width="158" height="194" /></p>
+<p><strong>Mongoose</strong> &#8211; это <strong>ORM</strong> для <strong>MongoDb</strong> сделанная под <strong>node.js</strong>.</p>
+<p>Традиционно начнем разбор с создания песочницы.</p>
+<p>Mongoose устанавливается как модуль к node.js:</p>
+<pre>$ npm install mongoose</pre>
+<p><span id="more-761"></span></p>
+<p>После установки проверяем подключается ли модуль, пишем в <a href="https://stepansuvorov.com/blog/2012/11/%D0%BF%D0%B5%D1%81%D0%BE%D1%87%D0%BD%D0%B8%D1%86%D0%B0-%D0%B4%D0%BB%D1%8F-mongodb/">test.js</a> файлик следующий код:</p>
+<pre>var mongoose = require('mongoose');
+console.log(mongoose.version);</pre>
+<p>и если все прошло успешно, то должно выдать текущую версию <strong>mongoose</strong>.</p>
+<p>Чтобы подключится к базе, создаем соединение:</p>
+<pre>var db = mongoose.createConnection('mongodb://localhost/test');
+//общий синтаксис метода <em>createConnection</em> выглядит слудеющим образом:
+//mongoose.connect('mongodb://username:password@host:port/database').</pre>
+<p>и открываем его:</p>
+<pre>db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function callback () {
+    console.log("Connected!")
+});</pre>
+<p>В mongoose все завязано на 2х ключевых понятиях Схема(<a href="http://mongoosejs.com/docs/guide.html">Schema</a>) &#8211; описание сущности и Модель &#8211; сама сущность.</p>
+<p>Создадим схему для комментариев:</p>
+<pre>var UserSchema = new mongoose.Schema( {
+    name: { type: String, default: "hahaha" },
+    age: { type: Number, min: 18, index: true },
+    bio: { type: String, match: /[a-z]/ },
+    date: { type: Date },
+    buff: Buffer
+} );</pre>
+<p>Каждое поле карактеризуется типом <strong>SchemaTypes</strong> и может иметь дополнительные характеристики: default, min и max(для Number), match и enum(для String), index и unique(для индексов).</p>
+<p>Подробнее о типах можно почитать <a href="http://mongoosejs.com/docs/schematypes.html">тут</a>.</p>
+<p>Теперь создадим модель по схеме:</p>
+<pre>var User = db.model("User",UserSchema)</pre>
+<p>и экземпляр для данной модели:</p>
+<pre>var newUser = new User({ name: "Alice", age: 21})</pre>
+<p>мы можем расширить схему методами:</p>
+<pre>UserSchema.methods.speak = function () {
+    var greeting = this.name
+        ? "My name is " + this.name
+        : "I don't have a name"
+    console.log(greeting);
+}
+
+var User = db.model("User",UserSchema)
+var newUser = new User({ name: "Alice", age: 21})
+newUser.speak();</pre>
+<p>Чтобы сохранить нашего пользователя в базу, мы должны вызвать метод <em>save</em>:</p>
+<pre>newUser.save(function (err, newUser) {
+    if (err){
+        console.log("Something goes wrong with user " + newUser.name);
+    }else{
+        newUser.speak();
+    }
+});</pre>
+<p>Посмотреть что мы насохраняли в базу и вывести записи для конкретной коллекции(модели) можно так:</p>
+<pre>User.find(function (err, users) {
+        console.log(users)
+    })</pre>
+<p>если нам необходимо добавить условие для выборки, тогда так:</p>
+<pre>User.find({ name: /^Al/ }, function (err, users) {
+        console.log(users)
+    })</pre>
+<pre>// также существует метод findById</pre>
+<p>Кроме обычных методов схема позволяет добавлять сеттеры и геттеры (магические методы):</p>
+<pre>UserSchema.path("name").set(
+    function( name ) {
+        //capitalize
+        return name.charAt(0).toUpperCase() + name.slice(1);
+});</pre>
+<pre>var newUser = new User({ name: "alice"})  //  name will be capitalize</pre>
+<p>Кроме <em>set</em> мы еще можем задать <em>get</em> и <em>default</em> магические методы.</p>
+<p>Также схема позволяет на каждый метод повесить триггер с колбэком, который будет выполнен до выполенения самого метода. Такой удобный механизм, который позволяет избежать большой вложенности, в MongoDb называется Middleware.</p>
+<p>Реализуется следующим образом:</p>
+<pre>someSchema.pre(methodName,
+    function (next, methodArg1, methodArg2, ...) { 
+        // ...
+    })</pre>
+<p>как пример возмем метод save:</p>
+<pre>UserSchema.pre( "save",
+    function( next ) {
+        // do stuff
+        next();
+    } );</pre>
+<p>по <em>next()</em> запускается следующий триггер.</p>
+<p>Используя данный подход мы можем организовать механизм вызова и передачи ошибок:</p>
+<pre>UserSchema.pre('save',
+         function (next) {
+             // something goes wrong
+             next(new Error('something went wrong'));
+});</pre>
+<pre>// later...
+newUser.save(function (err) {
+    // err can come from a middleware
+});</pre>
+<p>Также с помощью Middleware можно делать:</p>
+<ul>
+<li>сложную валидацию</li>
+<li>удаление документов по зависимостям</li>
+<li>вызов кастомизированых событий</li>
+<li>нотификейшены</li>
+</ul>
+<div><span style="color: #808080;">*Вероятно статья будет дополнена псевдоджоинами и parallel middleware</span></div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/11/mongoose-%d0%b4%d0%bb%d1%8f-mongodb/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

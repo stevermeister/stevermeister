@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>install &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/install/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 31 Mar 2012 11:56:39 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Node.js быстрый старт.</title>
+		<link>https://stepansuvorov.com/blog/2012/03/node-js-%d0%b1%d1%8b%d1%81%d1%82%d1%80%d1%8b%d0%b9-%d1%81%d1%82%d0%b0%d1%80%d1%82/</link>
+					<comments>https://stepansuvorov.com/blog/2012/03/node-js-%d0%b1%d1%8b%d1%81%d1%82%d1%80%d1%8b%d0%b9-%d1%81%d1%82%d0%b0%d1%80%d1%82/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 31 Mar 2012 11:56:39 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[install]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[node.js]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=181</guid>
+
+					<description><![CDATA[Если вы хотите быстро понять специфику работы Node.js не тратя много времени на изучение толстых учебников, то это статья для вас &#8211; максимально просто и доступно( Но учитывает то, что вы понимаете что такое сервер и работали уже с javascript). &#8230; <a href="https://stepansuvorov.com/blog/2012/03/node-js-%d0%b1%d1%8b%d1%81%d1%82%d1%80%d1%8b%d0%b9-%d1%81%d1%82%d0%b0%d1%80%d1%82/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Если вы хотите быстро понять специфику работы Node.js не тратя много времени на изучение толстых учебников, то это статья для вас &#8211; максимально просто и доступно( Но учитывает то, что вы понимаете что такое сервер и работали уже с javascript).</p>
+<p>Сразу скажу что статья основана на учебнике http://nodebeginner.ru/, в котором все разжевано максимально подробно. У нас будут только основные моменты плюс некоторая специфика установки для Ubuntu.</p>
+<p>Ставится node.js в Ubuntu командой:</p>
+<pre>sudo apt-get install <strong>nodejs</strong></pre>
+<p><span id="more-181"></span>Далее мы можем приступить к написанию своего &#8220;Hello world&#8221; примера. Создадим директорию в которой будут находится все наши скрипты для node.js и в ней создадим файл <em>helloworld.js</em>. Содержание файла будет следующим:</p>
+<pre>console.log("Hello World");</pre>
+<p>Пример готов, мы можем запустить наш скрипт командой</p>
+<pre>node helloworld.js</pre>
+<p>В консоли нам должно вывести <em>Hello World</em>.</p>
+<p>Итак, мы научились запускать скрипты с помощью node.js. Теперь давайте попробуем сделать сервер, который сможет обрабатывать запросы. Создадим новый файл, пускай это будет <em>server.js</em> со следующим содержимым:</p>
+<pre>var http = require("http");
+
+http.createServer(function(request, response) {
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.write("Hello World");
+  response.end();
+}).listen(8888);</pre>
+<p>Запускаем скрипт сервера:</p>
+<pre>node server.js</pre>
+<p>У теперь в браузере можем набрать: http://127.0.0.1:8888.</p>
+<p>Ну вот, для начала хватит.</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/03/node-js-%d0%b1%d1%8b%d1%81%d1%82%d1%80%d1%8b%d0%b9-%d1%81%d1%82%d0%b0%d1%80%d1%82/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Ubuntu погружение</title>
+		<link>https://stepansuvorov.com/blog/2012/02/ubuntu-%d0%bf%d0%be%d0%b3%d1%80%d1%83%d0%b6%d0%b5%d0%bd%d0%b8%d0%b5/</link>
+					<comments>https://stepansuvorov.com/blog/2012/02/ubuntu-%d0%bf%d0%be%d0%b3%d1%80%d1%83%d0%b6%d0%b5%d0%bd%d0%b8%d0%b5/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 11 Feb 2012 18:00:47 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[install]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=30</guid>
+
+					<description><![CDATA[Несколько раз очень много раз переставив операционную систему, я понял что полезно записать некоторые моменты по настройке, чтобы в следующий раз пользуясь подсказками быстрее вспомнить что и как допилить. Новичку, который устанавливают Ubuntu первый раз должно быть тоже полезно. Итак, выкладываю &#8230; <a href="https://stepansuvorov.com/blog/2012/02/ubuntu-%d0%bf%d0%be%d0%b3%d1%80%d1%83%d0%b6%d0%b5%d0%bd%d0%b8%d0%b5/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<blockquote><p><del>Несколько раз</del> очень много раз переставив операционную систему, я понял что полезно записать некоторые моменты по настройке, чтобы в следующий раз пользуясь подсказками быстрее вспомнить что и как допилить. Новичку, который устанавливают <strong>Ubuntu</strong> первый раз должно быть тоже полезно.</p>
+<p>Итак, выкладываю сухой лог действий, которые вел прям в блокноте при установке. (* version 11.04)</p></blockquote>
+<p><span id="more-30"></span></p>
+<p>1) First of all add russian keyboard ;)<br />
+System-&gt;Preferences-&gt;Keyboard<br />
+Tab &#8220;Layouts&#8221;<br />
+2) Так, отлично: русский уже есть. Теперь еще для удобства поставим переключение языков на Caps.<br />
+Кнопка &#8220;Options&#8221;<br />
+3) Установим удобную консоль<br />
+Applications-&gt;Ubuntu Software Center<br />
+guakeTerminal<br />
+Запустим ее, поиграемся с настройками. И установим появление на Ф1(чисто индивидуально, т.к. у меня по умолчанию Ф12 конфликтует с firebug).<br />
+4) Теперь сделаем так чтобы иконки окна (свернуть, закрыть) были привычно справа. В консоле вызываем gconf-editor.<br />
+Дальше &#8211;set &#8220;/apps/metacity/general/button_layout&#8221; &#8211;type string &#8220;menu:minimize,maximize,close&#8221;<br />
+5) Сделаем так чтобы неделя в календаре начиналась с понедельника.<br />
+Для этого подкорректируем локаль следующим образом:<br />
+открываем gedit /usr/share/i18n/locales/en_US<br />
+и ставим значение first_weekday 2. Сохраняем закрываем. Дальше в консоле locale-gen<br />
+6) Ставим Skype. Настраиваем чтобы скайп появлялся в системной панели. ( Для этого в автозапуске необходимо выполнить следующую команду             &#8220;gnome-panel &#8211;replace&#8221;)<br />
+7) Ставим Chromium (Applications-&gt;Ubuntu Software Center).<br />
+8) Ставим Pidgin. Добавляем к нему плагинчик TooBars(крайне рекомендую).<br />
+9) Ставим Thunderbird для почты.<br />
+10) Ставим Dropbox <a title="http://db.tt/GSVdMCy" href="http://db.tt/GSVdMCy">http://db.tt/GSVdMCy</a>.<br />
+11) Ставим Filezilla(FTP клиент).<br />
+12) Добавляем нужные приложения в автозапуск         System-&gt;Preferences-&gt;Startup Applications<br />
+13) Первая перезагрузка. И проверяем чтобы все загрузилось.<br />
+14) Клеим красивые обои на рабочий стол.<br />
+15) Настаиваем меню убирая лишние пункты.<br />
+System-&gt;Preferences-&gt;Main Menu<br />
+16) Ставим vim(консольный текстовый редактор).<br />
+17) Ставим apache2 (test http://localhost/ )<br />
+18) Ставим mysql-server<br />
+19) Ставим php5<br />
+20) Ставим phpmyadmin. Добавляем ссылку на конфиг phpmyadmin в конфиг apache<br />
+21) Ставим VirtualBox<br />
+22) Настраиваем горячие клавиши. Например                                                         Ctrl+Esc =&gt; gnome-system-monitor                                                                                  23) Ставим VCL плеер для IPTV<br />
+24) Ставим NetBeans7 (скачиваем с сайта). Внимание! Для нормальной работы 7 версии нужна java 1.7.<br />
+25) Ставим Pinta (аля MSPaint)<br />
+26) Ставим антибот для пиджина pidgin-privacy-please ( и для него intltool)<br />
+27) Ставим Picasa 3.0 for Linux (beta). Скачиваем установочный пакет. К сожалению, только для 32битной системы.<br />
+28) Ставим Google Earth (и для него ttf-mscorefonts-installer)<br />
+29) Ставим ffmpeg и winFF(+ необходимые кодеки).<br />
+30) Ставим rar архиватор.<br />
+31) Ставим libdvdcss2, чтобы проигрывать DVD. http://packages.medibuntu.org/pool/free/libd/libdvdcss/libdvdcss2_1.2.9-2medibuntu4_i386.deb<br />
+32)&#8230;</p>
+<blockquote><p>Готов выслушать все пожелания в комментариях</p></blockquote>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/02/ubuntu-%d0%bf%d0%be%d0%b3%d1%80%d1%83%d0%b6%d0%b5%d0%bd%d0%b8%d0%b5/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

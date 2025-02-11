@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>html5 &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/html5/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 22 Oct 2015 08:06:23 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>AngularJS и проверка данных формы</title>
+		<link>https://stepansuvorov.com/blog/2015/06/angularjs-%d0%b8-%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b0-%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85-%d1%84%d0%be%d1%80%d0%bc%d1%8b/</link>
+					<comments>https://stepansuvorov.com/blog/2015/06/angularjs-%d0%b8-%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b0-%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85-%d1%84%d0%be%d1%80%d0%bc%d1%8b/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 14 Jun 2015 15:15:52 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[form]]></category>
+		<category><![CDATA[html5]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[validation]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2001</guid>
+
+					<description><![CDATA[Пост состоит из следующих частей: Проверка данных в HTML5 AngularJS расширения для валидации Свои кастомные проверки данных на AngularJS Вывод сообщений об ошибках и ng-messages &#160; HTML5 валидация данных В первую очередь следует отметить, что у тега &#60;form&#62; в HTML5 появился &#8230; <a href="https://stepansuvorov.com/blog/2015/06/angularjs-%d0%b8-%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b0-%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85-%d1%84%d0%be%d1%80%d0%bc%d1%8b/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone wp-image-2686" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/06/AngularJS-Shield-large.png" alt="AngularJS Validation" width="211" height="223" /></p>
+<p>Пост состоит из следующих частей:</p>
+<ul>
+<li>Проверка данных в HTML5</li>
+<li>AngularJS расширения для валидации</li>
+<li>Свои кастомные проверки данных на AngularJS</li>
+<li>Вывод сообщений об ошибках и ng-messages</li>
+</ul>
+<p>&nbsp;</p>
+<p><span id="more-2001"></span></p>
+<h2>HTML5 валидация данных</h2>
+<p>В первую очередь следует отметить, что у тега <code>&lt;form&gt;</code> в HTML5 появился атрибут <code>novalidate</code>, который говорит браузеру, что форму валидировать не нужно.</p>
+<p>Вспомогательные атрибуты проверки данных:</p>
+<ul>
+<li><strong>require</strong> &#8211; говорит о том, что поле обязательно и должно быть заполнено</li>
+<li><strong>min/max</strong> &#8211; характерно для элемента <code>input</code> и указывает граничные значения</li>
+<li><strong>maxlength</strong> &#8211; для <code>input</code> и <code>textarea</code>, задает максимальное количество символов</li>
+<li><strong>type</strong> &#8211; в поле типа мы можем указывать не только <code>text</code>, но так же такие значения как <code>email</code>, <code>url</code>, которые будут провалидированы стандартными правилами. Болле подробно о стандартах <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation">тут</a>.</li>
+<li><strong>pattern</strong> &#8211; позволяет задать регулярное выражение для проверки поля.</li>
+</ul>
+<p>API для проверки данных:</p>
+<ul>
+<li><strong>checkValidity()</strong> &#8211; метод, который есть, как у всей формы, так и у каждого элемента. Возвращает true/false.</li>
+<li><strong>willValidate</strong> &#8211; свойство, false, когда элемент содержит невалидные данные</li>
+<li><strong>validity</strong> &#8211; свойство, содержит объект экземпляр <code><a title="DOM/ValidityState Interface" href="https://developer.mozilla.org/en-US/docs/DOM/ValidityState">ValidityState</a></code></li>
+<li><strong>validationMessage</strong> &#8211; содержит сообщение ошибки</li>
+<li><strong>setCustomValidity(message)</strong> &#8211; позволяет задать сообщение ошибки</li>
+</ul>
+<p>Поиграться с атрибутами проверки и API можно <a href="http://jsfiddle.net/STEVER/o6q4tp53/">тут</a>.</p>
+<h2>AngularJS расширения для валидации</h2>
+<p>Ангуляр автоматически применяется к элементу формы, в текущий <strong>$scope</strong> будет добавлена ссылка на <strong><a href="https://docs.angularjs.org/api/ng/type/form.FormController">formCotroller</a></strong>, ключом будет являться значение атрибута <strong>name</strong>. В нем мы можем найти ссылки на <strong><a href="https://docs.angularjs.org/api/ng/type/ngModel.NgModelController">ngModelController</a></strong> для всех элементов формы ( так же по  name). То есть, мы добавили в наше Ангуляр приложение форму:</p>
+<p>[html]<br />
+&lt;form name=login&gt;<br />
+  &lt;input name=&quot;username&quot;&gt;<br />
+  &lt;input name=&quot;password&quot;&gt;<br />
+&lt;/form&gt;<br />
+[/html]</p>
+<p>После чего в нашем скоуп будут:</p>
+<p>[javascript]<br />
+$scope.login  // formController<br />
+$scope.login.username //ngModelController<br />
+$scope.login.password //ngModelController<br />
+[/javascript]</p>
+<p>И при этом каждый объект <strong>formController</strong> и <strong>ngModelController</strong> содержит следующие свойства (касательно валидации):</p>
+<ul>
+<li><strong>$valid</strong> &#8211; true/false &#8211; валидности введенных данных относительно заданных правил</li>
+<li><strong>$invalid</strong> &#8211; false/true &#8211; обратный к предыдущему</li>
+<li><strong>$pristine</strong> &#8211; true, если форма/элемент еще не использовались</li>
+<li><strong>$dirty</strong> &#8211; обратные к предыдущему</li>
+<li><strong>$touched</strong> &#8211; на элементе произошло событие blur</li>
+<li><strong>$error</strong> &#8211; объект ошибки</li>
+<li><strong>$isEmpty(value)</strong> &#8211; вспомогательный метод, который проверяет является ли значение undefined, &#8221;, null или NaN</li>
+<li><strong>$validate()</strong> &#8211; true/false &#8211; запускает все валидаторы зарегистрированные на модели</li>
+<li><strong>$setValidity(validationErrorKey, isValid)</strong> &#8211; задание значения валидности для одного из критериев</li>
+<li><strong>$setPristine()</strong>/<strong>$setDirty()</strong> &#8211; сеттеры для $pristine/$dirty</li>
+<li><strong>$setUntouched()</strong>/<strong>$setTouched()</strong> &#8211; сеттеры для $touched</li>
+</ul>
+<p>Так же ngModelController содержит свойство <strong>$validators</strong>, в котором мы можем определять наши методы для проверки данных, то есть:</p>
+<p>[javascript]<br />
+ngModel.$validators.validCharacters = function(modelValue, viewValue) {<br />
+  var value = modelValue || viewValue;<br />
+  return /[0-9]+/.test(value) &amp;&amp;<br />
+         /[a-z]+/.test(value) &amp;&amp;<br />
+         /[A-Z]+/.test(value) &amp;&amp;<br />
+         /\W+/.test(value);<br />
+};<br />
+[/javascript]</p>
+<p>Вот тут можно посмотреть как изменяются свойства в зависимости от изменения значений полей:</p>
+<p><iframe style="width: 100%;" src="//codepen.io/sevilayha/embed/xFcdI/?height=332&amp;theme-id=0&amp;default-tab=result" width="300" height="332" frameborder="no" scrolling="no" allowfullscreen="allowfullscreen">See the Pen <a href="http://codepen.io/sevilayha/pen/xFcdI/">AngularJS Form Validation</a> by Chris Sevilleja (<a href="http://codepen.io/sevilayha">@sevilayha</a>) on <a href="http://codepen.io">CodePen</a>.<br />
+</iframe></p>
+<p>Ангуляр полностью дублирует атрибуты валидации HTML5, причем в некоторых случаях оставляя их без изменения (как required), а в некоторых изменяет названия атрибута (ng-maxlength); плюс использует свои дополнительные:</p>
+<ul>
+<li><strong>required</strong> &#8211; просто парсит HTML5 атрибут</li>
+<li><strong>ng-minlength</strong>/<strong>ng-maxlength</strong> &#8211; ограничения по количеству символово (как и maxlength)</li>
+<li><strong>type</strong> &#8211; использует атрибут HTML5</li>
+<li><strong>ng-pattern</strong> &#8211; отличие в том что мы можем подставлять паттерн динамически и ошибка по умолчанию не тригерится наверх (<a href="http://plnkr.co/edit/O3RDTSi06iVNEj9jfLx4?p=preview">сравнить</a>)</li>
+</ul>
+<p><strong><span style="text-decoration: underline;">!Внимание</span></strong>:</p>
+<ul>
+<li>все валидируемые елементы должны содержать директиву <strong>ng-model</strong>, именно благодаря ней мы имеем доступ к ngModelController</li>
+<li>если у вас в <strong>scope</strong> свойство, которая не соответствует критериям, &#8211; оно выведено не будет.</li>
+</ul>
+<h2>Свои кастомные проверки данных на AngularJS</h2>
+<p>Для дополнительных проверок можно создать директиву, которая будет навешиваться на элемент.</p>
+<p>C директивой все понятно. Но вот то, как мы вернем потом значение, не так однозначно, особенно в случае асинхронных операций.</p>
+<p>Вот пример проверки уникальности записи от <a href="http://www.ng-newsletter.com/posts/validations.html">ng-newsletter</a>, атрибут-директива для элемента формы, которая следит за изменением значения:</p>
+<p>[javascript]<br />
+app.directive(&#8216;ensureUnique&#8217;, [&#8216;$http&#8217;, function($http) {<br />
+  return {<br />
+    require: &#8216;ngModel&#8217;,<br />
+    link: function(scope, ele, attrs, c) {<br />
+      scope.$watch(attrs.ngModel, function() {<br />
+        $http({<br />
+          method: &#8216;POST&#8217;,<br />
+          url: &#8216;/api/check/&#8217; + attrs.ensureUnique,<br />
+          data: {&#8216;field&#8217;: attrs.ensureUnique}<br />
+        }).success(function(data, status, headers, cfg) {<br />
+          c.$setValidity(&#8216;unique&#8217;, data.isUnique);<br />
+        }).error(function(data, status, headers, cfg) {<br />
+          c.$setValidity(&#8216;unique&#8217;, false);<br />
+        });<br />
+      });<br />
+    }<br />
+  }<br />
+}]);<br />
+[/javascript]</p>
+<p>А вот так (взято из <a href="https://docs.angularjs.org/guide/forms">оф доки</a>) мы можем переопределить стандартную проверку:</p>
+<p>[javascript]<br />
+app.directive(&#8216;overwriteEmail&#8217;, function() {<br />
+  var EMAIL_REGEXP = /^[a-z0-9!#$%&amp;&#8217;*+/=?^_`{|}~.-]+@example\.com$/i;</p>
+<p>  return {<br />
+    require: &#8216;ngModel&#8217;,<br />
+    restrict: &#8221;,<br />
+    link: function(scope, elm, attrs, ctrl) {<br />
+      if (ctrl &amp;&amp; ctrl.$validators.email) {</p>
+<p>        ctrl.$validators.email = function(modelValue) {<br />
+          return ctrl.$isEmpty(modelValue) || EMAIL_REGEXP.test(modelValue);<br />
+        };<br />
+      }<br />
+    }<br />
+  };<br />
+});<br />
+[/javascript]</p>
+<p>И есть еще один интересный <a href="http://habrahabr.ru/post/167793/">пример</a> с хабра и использованием свойств котроллера модели $parsers и $formatters:</p>
+<p>[javascript]<br />
+  mod.directive(&#8216;strongPassRequired&#8217;, function () {<br />
+        var isValid = function(s) {<br />
+            return s &amp;&amp; s.length &gt; 5 &amp;&amp; /\D/.test(s) &amp;&amp; /\d/.test(s);<br />
+        };</p>
+<p>        return {<br />
+            require:&#8217;ngModel&#8217;,<br />
+            link:function (scope, elm, attrs, ngModelCtrl) {</p>
+<p>                ngModelCtrl.$parsers.unshift(function (viewValue) {<br />
+                    ngModelCtrl.$setValidity(&#8216;strongPass&#8217;, isValid(viewValue));<br />
+                    return viewValue;<br />
+                });</p>
+<p>                ngModelCtrl.$formatters.unshift(function (modelValue) {<br />
+                    ngModelCtrl.$setValidity(&#8216;strongPass&#8217;, isValid(modelValue));<br />
+                    return modelValue;<br />
+                });<br />
+            }<br />
+        };<br />
+    });<br />
+[/javascript]</p>
+<p>хотя думаю можно было ограничится просто использованием свойства $validators.</p>
+<p>&nbsp;</p>
+<h2>Вывод сообщений об ошибках и ng-messages</h2>
+<p>Начиная с Angular 1.3 появилась возможность подключить прекрасный модуль <a href="https://docs.angularjs.org/api/ngMessages/directive/ngMessages">ngMessages</a>, который серьезно упрощает работу по выводу ошибок. В старых версиях нам приходилось выдумывать что-то с ng-if/ng-show, а теперь все можно сделать так:</p>
+<p>[html]<br />
+&lt;form name=&quot;demoForm&quot;&gt;<br />
+  &lt;input name=&quot;amount&quot; type=&quot;number&quot; ng-model=&quot;amount&quot; max=&quot;100&quot;&gt;<br />
+  &lt;div ng-messages=&quot;demoForm.amount.$error&quot;&gt;<br />
+    &lt;div ng-message=&quot;number&quot;&gt;Should be a number&lt;/div&gt;<br />
+    &lt;div ng-message=&quot;max&quot;&gt;The number is too large.&lt;/div&gt;<br />
+  &lt;/div&gt;<br />
+&lt;/form&gt;<br />
+[/html]</p>
+<p>Поиграться с кодом можно <a href="http://jsfiddle.net/STEVER/n7uzrets/">тут</a>.</p>
+<p><span style="text-decoration: underline;">!Внимание</span>: при этом не забудьте подключить в зависимости ваш модуль:</p>
+<p>[javascript]<br />
+angular.module(&#8216;app&#8217;, [&#8216;ngMessages&#8217;]);<br />
+[/javascript]</p>
+<p>ну и конечно подключить .js файл.</p>
+<h2>Стилизация валидируемых полей</h2>
+<p>Для каждого состояния Ангуляр добавляет специальный класс:</p>
+<ul>
+<li><strong>ng-valid</strong>/<strong>ng-invalid</strong></li>
+<li><strong>ng-valid-[key]</strong> / <strong>ng-invalid-[key]</strong> &#8211; отдельный для каждого ключа заданного через  <strong>$setValidity</strong></li>
+<li><strong>ng-pristine</strong>/<strong>ng-dirty</strong></li>
+<li><strong>ng-touched</strong>/<strong>ng-untouched</strong></li>
+<li><strong>ng-pending</strong> &#8211; ждет асинронной валидации от <strong>$asyncValidators</strong></li>
+</ul>
+<p>&nbsp;</p>
+<p>Сейчас вот задался вопросом: &#8220;Почему до сих пор нет никакого готового (и популярного) модуля для валидации данных?&#8221; Чтобы можно было на всю форму (например) навесить директиву и передать ей конфиг заполняемых полей. Если что-то знаете в тему &#8211; подскажите пожалуйста в комментариях. Иначе прийдется делать свой велосипед.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/06/angularjs-%d0%b8-%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b0-%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85-%d1%84%d0%be%d1%80%d0%bc%d1%8b/feed/</wfw:commentRss>
+			<slash:comments>10</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Что нового в HTML5 и CSS3</title>
+		<link>https://stepansuvorov.com/blog/2014/09/%d1%87%d1%82%d0%be-%d0%bd%d0%be%d0%b2%d0%be%d0%b3%d0%be-%d0%b2-html5-%d0%b8-css3/</link>
+					<comments>https://stepansuvorov.com/blog/2014/09/%d1%87%d1%82%d0%be-%d0%bd%d0%be%d0%b2%d0%be%d0%b3%d0%be-%d0%b2-html5-%d0%b8-css3/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 09 Sep 2014 23:40:47 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[css3]]></category>
+		<category><![CDATA[html5]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1308</guid>
+
+					<description><![CDATA[Сразу оговорюсь: цель этого поста &#8211; упорядочить для себя инфомрацию, которая накопилась с 2009 года. Возможно это будет полезно тому, кто только пытается проникнуться последними веяниями HTML и CSS. HTML5 Обновление тегов (сокращенная форма) &#60;!DOCTYPE html&#62; &#60;meta charset=&#8221;UTF-8&#8243;&#62; &#60;script src=&#8221;script.js&#8221;&#62;&#60;/script&#62; &#8230; <a href="https://stepansuvorov.com/blog/2014/09/%d1%87%d1%82%d0%be-%d0%bd%d0%be%d0%b2%d0%be%d0%b3%d0%be-%d0%b2-html5-%d0%b8-css3/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" fetchpriority="high" class="alignnone size-medium wp-image-1345" title="html5-css3" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/12/html5-css3-300x221.png" alt="" width="300" height="221" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2013/12/html5-css3-300x221.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2013/12/html5-css3-405x300.png 405w, https://stepansuvorov.com/blog/wp-content/uploads/2013/12/html5-css3.png 426w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>Сразу оговорюсь: цель этого поста &#8211; <span style="text-decoration: underline;">упорядочить для себя инфомрацию</span>, которая накопилась с 2009 года. Возможно это будет полезно тому, кто только пытается проникнуться последними веяниями <strong>HTML</strong> и <strong>CSS</strong>.</p>
+<p><span id="more-1308"></span></p>
+<h1>HTML5</h1>
+<h2>Обновление тегов (сокращенная форма)</h2>
+<ul>
+<li>&lt;!DOCTYPE html&gt;</li>
+<li>&lt;meta charset=&#8221;UTF-8&#8243;&gt;</li>
+<li>&lt;script src=&#8221;script.js&#8221;&gt;&lt;/script&gt;</li>
+<li>&lt;link rel=&#8221;stylesheet&#8221; href=&#8221;styles.css&#8221;&gt;</li>
+</ul>
+<h2>Новые семантические элементы</h2>
+<ul>
+<li>section</li>
+<li>header/footer</li>
+<li>aside</li>
+<li>nav</li>
+<li>article</li>
+<li>main</li>
+<li>figure/figurcaption</li>
+</ul>
+<h2>Новые атрибуты формы</h2>
+<ul>
+<li>placeholder</li>
+<li>autofocus</li>
+<li>autocomplete</li>
+<li>required</li>
+<li>pattern</li>
+<li>list</li>
+<li>multiple</li>
+<li>novalidate</li>
+<li>formnovalidate</li>
+<li>form</li>
+<li>formaction</li>
+<li>formenctype</li>
+<li>formmethod</li>
+<li>formtarget</li>
+</ul>
+<h2>Поддержка аудио и видео</h2>
+<ul>
+<li><a title="developer.mozilla.org" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio">&lt;audio&gt; элемент</a></li>
+<li><a title="developer.mozilla.org" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video">&lt;video&gt; элемент</a></li>
+</ul>
+<h2>Рисование используя элемент canvas</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Canvas_tutorial">&lt;canvas&gt; элемент</a> , <a href="http://www.html5canvastutorials.com/">много примеров</a></li>
+</ul>
+<h2>Локальное хранилище</h2>
+<ul>
+<li>WebStorage</li>
+<ul>
+<li><a href="https://developer.mozilla.org/en/docs/Web/Guide/API/DOM/Storage#Storage">Storage</a></li>
+<li><a href="https://developer.mozilla.org/en/docs/Web/Guide/API/DOM/Storage#sessionStorage">sessionStorage</a></li>
+<li><a href="https://developer.mozilla.org/en/docs/Web/Guide/API/DOM/Storage#localStorage">localStorage</a></li>
+</ul>
+<li><a title="developer.mozilla.org" href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API">IndexedDB</a></li>
+</ul>
+<h1>CSS3</h1>
+<h2>Скруглённые рамки</h2>
+<ul>
+<li><a title="developer.mozilla.or" href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius">border-radius</a></li>
+</ul>
+<h2>Тени блоков и тени текста</h2>
+<ul>
+<li><a title="developer.mozilla.org" href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow">text-shadow</a></li>
+<li><a title="developer.mozilla.org" href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow">box-shadow</a></li>
+</ul>
+<h2>Анимация</h2>
+<ul>
+<li><a title="developer.mozilla.org" href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Using_CSS_transitions">transitions</a></li>
+<li><a title="developer.mozilla.org" href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform">transforms</a></li>
+</ul>
+<h2>Градиенты</h2>
+<ul>
+<li><a title="developer.mozilla.org" href="https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient">linear-gradient</a></li>
+<li><a title="developer.mozilla.org" href="https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient">radial-gradient</a></li>
+<li><a title="developer.mozilla.org" href="https://developer.mozilla.org/en-US/docs/Web/CSS/repeating-linear-gradient">repeating-linear-gradient</a></li>
+<li><a title="developer.mozilla.org" href="https://developer.mozilla.org/en-US/docs/Web/CSS/repeating-radial-gradient">repeating-radial-gradient</a></li>
+</ul>
+<h2>Множественные бекграунды</h2>
+<ul>
+<li><a title="developer.mozilla.org" href="https://developer.mozilla.org/en/docs/Web/CSS/background#Specifications">background</a></li>
+</ul>
+<h2>Шрифты</h2>
+<ul>
+<li><a title="developer.mozilla.org" href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face">@font-face</a></li>
+</ul>
+<h1>Литература</h1>
+<ul>
+<li><a title="w3.org" href="http://www.w3.org/TR/html5-diff/">Differences from HTML4</a></li>
+<li><a title="diveintohtml5.info" href="http://diveintohtml5.info/">Dive Into HTML5</a></li>
+<li><a title="html5demos.com" href="http://html5demos.com/">HTML 5 Demos and Examples</a></li>
+</ul>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/09/%d1%87%d1%82%d0%be-%d0%bd%d0%be%d0%b2%d0%be%d0%b3%d0%be-%d0%b2-html5-%d0%b8-css3/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Многопоточность в JavaScript</title>
+		<link>https://stepansuvorov.com/blog/2013/12/webworkers/</link>
+					<comments>https://stepansuvorov.com/blog/2013/12/webworkers/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 04 Dec 2013 09:52:38 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[html5]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[web workers]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=932</guid>
+
+					<description><![CDATA[Да, в JavaScript тоже есть многопоточность(либо подобие) и реализована по средством инструмента Web Workers, о использовании которого и поговорим в данном посте. Идея реализации: &#8220;тяжелые&#8221; операции, которые можно выполнять асинхронно(не блокирую работу браузера), выносятся в отдельные модули-файлы; это может быть: &#8230; <a href="https://stepansuvorov.com/blog/2013/12/webworkers/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-1286" title="crash-of-rhino" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/11/crash-of-rhino-300x114.png" alt="" width="300" height="114" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2013/11/crash-of-rhino-300x114.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2013/11/crash-of-rhino-500x191.png 500w, https://stepansuvorov.com/blog/wp-content/uploads/2013/11/crash-of-rhino.png 594w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>Да, в <strong>JavaScript</strong> тоже есть многопоточность(либо подобие) и реализована по средством инструмента <strong><a title="w3" href="http://www.w3.org/TR/workers/">Web Workers</a></strong>, о использовании которого и поговорим в данном посте.</p>
+<p><span id="more-932"></span></p>
+<p>Идея реализации: &#8220;тяжелые&#8221; операции, которые можно выполнять асинхронно(не блокирую работу браузера), выносятся в отдельные модули-файлы; это может быть: обработка большого количества данных, кеширование, проверка правописания, фильтрация изображений на canvas. В браузере для каждого такого файла создается объект <strong>Worker</strong>, по средством которого и осуществляется коммуникация.</p>
+<p>Другими словами: используя технологию <strong>Web Workers</strong> можно избежать появления вот этого сообщения</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-1294" title="unresponsive_script" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/12/unresponsive_script1.gif" alt="" width="450" height="100" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2013/12/unresponsive_script1.gif 450w, https://stepansuvorov.com/blog/wp-content/uploads/2013/12/unresponsive_script1-300x66.gif 300w" sizes="(max-width: 450px) 100vw, 450px" /></p>
+<h2></h2>
+<h2>Проверка поддержки браузером</h2>
+<p>Для проверки поддерживает ли браузер технологию <strong>Web Workers</strong> достаточно проверить наличие объекта<strong> window.Worker</strong>:</p>
+<pre>if (!!window.Worker)
+{
+    //поддерживается
+}</pre>
+<h2></h2>
+<h2> Простой пример</h2>
+<p>На сайте <a href="http://www.w3.org/TR/workers/">w3</a> дали довольно наглядный пример, который я немного модифицировал расширив передачу данных в обе стороны. Итак, у нас есть 2 файла: основной(для простоты пишем внутри хтмл файла) <strong>test.html</strong> и файл воркера <strong>worker.js</strong>. Мы задались целью выводить на экран <a href="http://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D1%81%D1%82%D0%BE%D0%B5_%D1%87%D0%B8%D1%81%D0%BB%D0%BE">простые числа</a> в заданном диапозоне, но, так как операция по определению является ли число простым довольно ресурсоемкая, особенно для больших чисел, мы вынесем ее в отдельный фоновый поток (<strong>worker</strong>). Код этой функции и будет находиться в файле <strong>worker.js</strong>.</p>
+<p>Итого, <strong>test.html</strong>:</p>
+<pre>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;output id="result"&gt;&lt;/output&gt;
+&lt;script&gt;
+    var worker = new Worker('worker.js');
+    worker.onmessage = function (event) {
+        document.getElementById('result').textContent += ', ' + event.data;
+    };
+    worker.postMessage({from:17,to:50});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>и файл <strong>worker.js</strong>:</p>
+<pre>onmessage = function(event)
+{
+    var n = event.data.from;
+    while (n &lt; event.data.to) {
+        n += 1;
+        if(isPrime(n)){
+            // found a prime!
+            postMessage(n);
+        }
+    }
+};
+
+function isPrime(number){
+    for (var i = 2; i &lt;= Math.sqrt(number); i += 1){
+        if (number % i == 0){
+            return false;
+        }
+    }
+    return true;
+}</pre>
+<p>Для тех,  кто хочет поиграться с примером, &#8211; пожалуйста <a href="http://learn.javascript.ru/play/DJ8n1b">сюда</a>.</p>
+<p>Теперь немного комментариев.</p>
+<pre>var worker = new Worker('worker.js');</pre>
+<p>создаем объект Worker. Объект не запускается до полной загрузки и выполнения файла. Если путь к объекту Worker возвращает ошибку 404, его выполнение прекращается без уведомлений.</p>
+<pre>worker.onmessage = function (event) {</pre>
+<p>прописываем колбэк, который выполнится при вызове метода <strong>postMessage</strong> внутри воркера</p>
+<pre>worker.postMessage({from:17,to:50});</pre>
+<p>отправляем в воркер сообщение с параметрами диапазона ( мы хотим получить все простые числа в диапозоне с 17 до 50 )</p>
+<p>Перейдем к коду воркера:</p>
+<pre>onmessage = function(event){</pre>
+<p>функция будет вызвана, при обращении к метод <strong>worker.postMessage() </strong>в основном скрипте</p>
+<pre> var n = event.data.from;</pre>
+<p>доступ к данным внутри метода можно получить через <strong>event.data</strong></p>
+<p>&nbsp;</p>
+<h2>Взаимодействие  с объектами Worker</h2>
+<p>Как уже было показано на примере, взаимодействие с воркерами осуществляется путем потоковой передачи сообщений (метод <strong>postMessage</strong> &#8211; для отправки и колбэк <strong>onmessage</strong> &#8211; для приема).</p>
+<p>Колбэк на получение сообщения можно также навешивать следующим способом:</p>
+<pre>addEventListener('message', function(e) {</pre>
+<p>именно он является рекомендуемым для использования.</p>
+<p>&nbsp;</p>
+<h2>Ограничения Web Worker</h2>
+<p>К чему <strong>можно</strong> обращаться внутри <strong>worker</strong>-скрипта:</p>
+<ul>
+<li>Объект <code>navigator</code></li>
+<li>Объект <code>location</code> (только чтение)</li>
+<li><code>XMLHttpRequest</code></li>
+<li><code>setTimeout()/clearTimeout()</code> и <code>setInterval()/clearInterval()</code></li>
+<li><a href="http://www.html5rocks.com/tutorials/appcache/beginner/">Кэш приложений</a></li>
+<li>Импорт внешних скриптов с использованием метода <code>importScripts()</code></li>
+<li><a href="http://www.html5rocks.com/ru/tutorials/workers/basics/#toc-enviornment-subworkers">Создание других объектов Web Worker</a></li>
+</ul>
+<p>У <strong>worker</strong>-скрипта <strong>нет доступа</strong> к:</p>
+<ul>
+<li>Модель DOM (она не ориентирована на многопоточное исполнение)</li>
+<li>Объект <code>window</code></li>
+<li>Объект <code>document</code></li>
+<li>Объект <code>parent</code></li>
+</ul>
+<p>Методы <strong>postMessage</strong> и <strong>onmessage</strong> являются глобальными для ворвера, и к ним можно обратиться как на прямую, так и через <strong>this</strong> и <strong>self</strong>.</p>
+<p>Максимальное количество workerов &#8211; <strong>256</strong>, после чего стек переполняется и пишет ошибку:</p>
+<pre><code>Maximum number of Web Worker instances(256) exceeded for this window.</code></pre>
+<p>&nbsp;</p>
+<h2>Отлов ошибок</h2>
+<p>Также, как и с сообщениями, мы можем подписаться на получение ошибок:</p>
+<pre> worker.addEventListener('error', onError, false);</pre>
+<p>&nbsp;</p>
+<h2>Динамическое создание worker-скриптов</h2>
+<p>Иногда возникает необходимо создать <strong>worker</strong>-скрипт динамически(<span style="text-decoration: underline;">!внимание</span> именно <strong>worker</strong>-скрипт, а не сам <strong>worker</strong>), в зависимости от различных условий. В таком случае создание <strong>worker</strong> из отдельного файла нас не устраивает и мы должны воспользоваться вторым способом &#8211; через подготовленный объект <a href="http://dev.w3.org/2009/dap/file-system/file-writer.html#the-blobbuilder-interface">Blob</a>, а точнее &#8211; ссылки на него.</p>
+<p>Вот так это будет выглядеть в коде</p>
+<pre>var script = "onmessage = function(e) { postMessage('msg from worker'); }";
+var blob = new Blob([script]);
+var blobURL = window.URL.createObjectURL(blob);
+var worker = new Worker(blobURL);</pre>
+<p>Для удобства скрипт изначально пожно записать в script тег:</p>
+<pre>&lt;script id="worker1" type="javascript/worker"&gt;
+    //...код вашего воркера
+&lt;/script&gt;</pre>
+<p>а потом получить содержимое:</p>
+<pre>var script = document.querySelector('#worker1').textContent;</pre>
+<p><span style="text-decoration: underline;">!Внимание</span>: не забудьте поставить тип <strong>javascript/worker</strong>, это предотвратит разбор кода js-движком браузера.</p>
+<p>&nbsp;</p>
+<h2>Литература</h2>
+<ul>
+<li><a title="MDN" href="https://developer.mozilla.org/en-US/docs/Web/Guide/Performance/Using_web_workers">Using web workers</a></li>
+<li><a href="http://www.html5rocks.com/en/tutorials/workers/basics/">The Basics of Web Workers</a> ( и <a href="http://www.html5rocks.com/ru/tutorials/workers/basics/">русский перевод</a>, который, к сожалению, не обновляется)</li>
+<li><a title="msdn" href="http://msdn.microsoft.com/en-us/hh549259.aspx">Introduction to HTML5 Web Workers: The JavaScript Multi-threading Approach</a></li>
+<li><a title="Internet Explorer Dev Center" href="http://msdn.microsoft.com/en-us/library/ie/hh673568(v=vs.85).aspx">Web Workers </a></li>
+</ul>
+<p><em>К сожалению, примеров, которые бы показались мне интересными, не нашел. Сам сейчас работаю над более продвинутой версией получения больших простых чисел.</em></p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/12/webworkers/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Получаем координаты используя HTML5 Geolocation API</title>
+		<link>https://stepansuvorov.com/blog/2013/08/html5-geolocation-api/</link>
+					<comments>https://stepansuvorov.com/blog/2013/08/html5-geolocation-api/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 16 Aug 2013 09:46:58 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[geolocation]]></category>
+		<category><![CDATA[html5]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1177</guid>
+
+					<description><![CDATA[Небольшая заметка с примерами использования возможностей геолокации современных браузеров. Все что нас интересует происходит с объекте navigator.geolocation, поэтому чтобы проверить поддерживает ли браузер данную возможность можно выполнить следующий код: if ("geolocation" in navigator) { /* geolocation поддерживается */ } else { &#8230; <a href="https://stepansuvorov.com/blog/2013/08/html5-geolocation-api/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Небольшая заметка с примерами использования возможностей геолокации современных браузеров.</p>
+<p><span id="more-1177"></span></p>
+<p>Все что нас интересует происходит с объекте <strong>navigator.geolocation</strong>, поэтому чтобы проверить поддерживает ли браузер данную возможность можно выполнить следующий код:</p>
+<pre>if ("geolocation" in navigator) {
+  /* geolocation поддерживается */
+} else {
+  /* geolocation НЕ поддерживается */
+}</pre>
+<p>Для получения текущего местоположения используется метод <strong>navigator.geolocation.getCurrentPosition()</strong> имеющий следующий синтаксис:</p>
+<pre>getCurrentPosition(success, error, options)</pre>
+<p>где</p>
+<pre>success - колбэк на успешное получение координат
+error - колбэк обработки ошибки
+options - опции</pre>
+<p>Самый простой пример получения координат:</p>
+<pre>navigator.geolocation.getCurrentPosition(function(position) {
+  console.log(position.coords.latitude, position.coords.longitude);
+});</pre>
+<p>Пример на <a href="http://jsfiddle.net/STEVER/372Rc/">jsfiddle</a>.</p>
+<p>Также объект <strong>geolocation</strong> содержит метод <strong>watchPosition()</strong>, который устанавливает хэндлер на событие изменения локации. Принимает параметры аналогичные параметрам метода <strong>getCurrentPosition()</strong>.</p>
+<p><a title="jsfiddle" href="http://jsfiddle.net/STEVER/372Rc/1/">Еще один</a> пример с использованием google maps.</p>
+<p>&nbsp;</p>
+<p>Полезные ссылки:</p>
+<p><a href="http://www.slideshare.net/dpeua/html5-geolocation-api">HTML5 Geolocation API(Presentation from HTML5 Camp)</a></p>
+<p><a title="developer.mozilla.org" href="https://developer.mozilla.org/en-US/docs/WebAPI/Using_geolocation">Using geolocation</a></p>
+<p><a title="diveintohtml5.info" href="http://diveintohtml5.info/geolocation.html">The Geolocation API</a></p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/08/html5-geolocation-api/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Canvas &#8211; это просто!</title>
+		<link>https://stepansuvorov.com/blog/2012/08/canvas-%d1%8d%d1%82%d0%be-%d0%bf%d1%80%d0%be%d1%81%d1%82%d0%be/</link>
+					<comments>https://stepansuvorov.com/blog/2012/08/canvas-%d1%8d%d1%82%d0%be-%d0%bf%d1%80%d0%be%d1%81%d1%82%d0%be/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 21 Aug 2012 07:45:49 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[canvas]]></category>
+		<category><![CDATA[html5]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=467</guid>
+
+					<description><![CDATA[Наконец-то появилось время разобрать принципы анимации с использованием HTML canvas элемента. Вот что получилось: Подробности под катом. Итак поехали: &#60;canvas id="tutorial" width="150" height="150"&#62;&#60;/canvas&#62; &#8211; добавляем HTML элемент в страницу. Для рисования необходимо обратиться к нему на javascript и получить контекст: &#8230; <a href="https://stepansuvorov.com/blog/2012/08/canvas-%d1%8d%d1%82%d0%be-%d0%bf%d1%80%d0%be%d1%81%d1%82%d0%be/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Наконец-то появилось время разобрать принципы анимации с использованием HTML canvas элемента.</p>
+<p>Вот что получилось:<br />
+<canvas id="tutorial" width="300" height="75"></canvas><br />
+<script type="text/javascript">// <![CDATA[
+      var ctx = document.getElementById('tutorial').getContext("2d"); animate(); function animate(){var x = 37;pacmanGo(x);} function pacmanGo(x){     setTimeout(function(){         ctx.clearRect(0,0,300,75);         drawBlocksLine(75, 35, 5, x);         drawPacman(x, 37);         x += 5;         if(x > 250)return;
+        pacmanGo(x);
+    }, 250);
+}function drawPacman(x, y){
+    ctx.beginPath();
+    ctx.fillStyle = "rgb(225,225,0)";
+    ctx.arc(x,y,13,Math.PI/7,-Math.PI/7,false);
+    ctx.lineTo(x-3,y);
+    ctx.fill();
+}function drawBlocksLine(x, y, number, pacman_step_x){
+    ctx.fillStyle = "rgb(0,200,0)";
+    for(i=0;i<number;i++){         if(x+i*30 > pacman_step_x){
+            ctx.fillRect(x+i*30,y,4,4);
+        }}}
+// ]]&gt;</script><br />
+Подробности под катом.</p>
+<p><span id="more-467"></span> Итак поехали:</p>
+<pre>&lt;canvas id="tutorial" width="150" height="150"&gt;&lt;/canvas&gt;</pre>
+<p>&#8211; добавляем HTML элемент в страницу. Для рисования необходимо обратиться к нему на javascript и получить контекст:</p>
+<pre>var canvas = document.getElementById('tutorial');
+var ctx = canvas.getContext('2d');</pre>
+<p>На данный момент 2д &#8211; единственный возможный контекст, поэтому с этим тоже не заморачиваемся.</p>
+<p>Вот мы и перешли к самой интересной части &#8211; нанесение изображения. Объект контекста содержит много различных методов, например:</p>
+<pre>ctx.fillRect (5, 5, 55, 50); // рисуем прямоугольник</pre>
+<p>Мы можем задать стиль для нашего прямоугольника:</p>
+<pre>ctx.fillStyle = "rgb(35, 200, 35)"; // сначала задаем стиль
+ctx.fillRect (5, 5, 55, 50); // потом рисуем прямоугольник</pre>
+<p>Вроде бы все просто. Все методы, понятное дело, разбирать не будем. Вот есть схемка, которая поможет:</p>
+<p><a href="https://stepansuvorov.com/blog/wp-content/uploads/2012/08/HTML5_Canvas_Cheat_Sheet.png"><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-468" title="HTML5_Canvas_Cheat_Sheet" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/08/HTML5_Canvas_Cheat_Sheet-300x221.png" alt="canvas" width="300" height="221" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2012/08/HTML5_Canvas_Cheat_Sheet-300x221.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2012/08/HTML5_Canvas_Cheat_Sheet-1024x757.png 1024w, https://stepansuvorov.com/blog/wp-content/uploads/2012/08/HTML5_Canvas_Cheat_Sheet-405x300.png 405w, https://stepansuvorov.com/blog/wp-content/uploads/2012/08/HTML5_Canvas_Cheat_Sheet.png 1388w" sizes="(max-width: 300px) 100vw, 300px" /></a></p>
+<p>А в чем заключается анимация? В том что мы по времени перерисовываем картинку, или другими словами &#8211; меняем координаты/параметры движимых объектов.</p>
+<p>Как видите ничего сложного нет. Нужны только фантазия и справочник по методам.</p>
+<p>С кодом примера можно поиграться вот тут: http://learn.javascript.ru/play/lZqarb</p>
+<p>Добавлю еще две иллюстрации, которые я нашел в сети, о том как рисовать дуги:</p>
+<pre>arc(x, y, radius, startAngle, endAngle, anticlockwise);</pre>
+<p>О принципе отсчета угла:<br />
+<a href="https://stepansuvorov.com/blog/wp-content/uploads/2012/08/canvas_arc.jpg"><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-501" title="canvas_arc" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/08/canvas_arc-300x242.jpg" alt="" width="300" height="242" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2012/08/canvas_arc-300x242.jpg 300w, https://stepansuvorov.com/blog/wp-content/uploads/2012/08/canvas_arc-371x300.jpg 371w, https://stepansuvorov.com/blog/wp-content/uploads/2012/08/canvas_arc.jpg 550w" sizes="(max-width: 300px) 100vw, 300px" /></a></p>
+<p>О радианах:</p>
+<p><a href="https://stepansuvorov.com/blog/wp-content/uploads/2012/08/canvas_arc2.jpg"><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-502" title="canvas_arc2" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/08/canvas_arc2-300x277.jpg" alt="" width="300" height="277" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2012/08/canvas_arc2-300x277.jpg 300w, https://stepansuvorov.com/blog/wp-content/uploads/2012/08/canvas_arc2-324x300.jpg 324w, https://stepansuvorov.com/blog/wp-content/uploads/2012/08/canvas_arc2.jpg 550w" sizes="(max-width: 300px) 100vw, 300px" /></a></p>
+<p><a href="http://net.tutsplus.com/tutorials/javascript-ajax/canvas-from-scratch-advanced-drawing/">Источник</a> этих прекрасных эскизов.</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/08/canvas-%d1%8d%d1%82%d0%be-%d0%bf%d1%80%d0%be%d1%81%d1%82%d0%be/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Поиграемся с HTML5 history API</title>
+		<link>https://stepansuvorov.com/blog/2012/08/%d0%bf%d0%be%d0%b8%d0%b3%d1%80%d0%b0%d0%b5%d0%bc%d1%81%d1%8f-%d1%81-html5-history-api/</link>
+					<comments>https://stepansuvorov.com/blog/2012/08/%d0%bf%d0%be%d0%b8%d0%b3%d1%80%d0%b0%d0%b5%d0%bc%d1%81%d1%8f-%d1%81-html5-history-api/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 12 Aug 2012 17:49:11 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[historyAPI]]></category>
+		<category><![CDATA[html5]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=435</guid>
+
+					<description><![CDATA[Никакой военной тайны в статье не открою, но открою глаза для тех, кто не работал с history API. Чтобы понять нужно вам или нет, просто кликните сюда и понаблюдайте за адресной стройкой браузера. Если эта возможность не удивила &#8211; можете &#8230; <a href="https://stepansuvorov.com/blog/2012/08/%d0%bf%d0%be%d0%b8%d0%b3%d1%80%d0%b0%d0%b5%d0%bc%d1%81%d1%8f-%d1%81-html5-history-api/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><script type="text/javascript">// <![CDATA[
+        function playHistory(count) {   var string = location.pathname + location.search;   var i = 0;   var state = '';   function draw(){       if(i == string.length){         state ='';i = 0;         count--;       }       if(!count){          return false;       }       state = state + string[i];       i++;       history.pushState({}, '', state);       setTimeout(draw, 100);   }   draw(); }
+// ]]&gt;</script><br />
+Никакой военной тайны в статье не открою, но открою глаза для тех, кто не работал с <strong>history API</strong>. Чтобы понять нужно вам или нет, просто кликните <a onclick="javascript:playHistory(3); return false;">сюда</a> и понаблюдайте за адресной стройкой браузера. Если эта возможность не удивила &#8211; можете дальше не читать статью. (Прошу обратить внимание: мы меняем содержание адресной строки без перезагрузки страницы, это важно)</p>
+<p><span id="more-435"></span>Ну а для тех, кто дошел до этого места, попробуем разобрать магию: мы работаем с объектом window.history с помощью javascript. Почитать подробно можно <a href="http://dev.w3.org/html5/spec/history.html">тут</a>. Разбирать очевидные методы типа: go(), back(), forward() мы не будем. Остановимся более подробно на<code> pushState(<var title="">data</var>, <var title="">title</var>, <var title="">url</var>)</code>, где</p>
+<ul>
+<li>data &#8211; это данные передаваемые странице(можно пустой объект)</li>
+<li>title &#8211; название конкретного состояния(тоже можно оставить пустым)</li>
+<li>url &#8211; то что мы хотим записать сразу после домена</li>
+</ul>
+<p>Вот пример с конкретными данными:</p>
+<pre>history.pushState({}, '', '/someurl/that/you/want/to/see/in/location')</pre>
+<p>Как видите  &#8211; ничего сложного.</p>
+<p>Где это необходимо использовать? В сервисах, где большая часть логики на стороне клиента, а обращения к серверу идут аяксом: при этом хотелось держать в браузере <a title="т.е. чтобы правильно отрабатывали кнопочки back и forward" href="javascript:return false;">валидную</a> историю переходов.</p>
+<p>На всякий случай проверяем <a href="http://caniuse.com/#search=history">табличку совместимости</a> с вашими поддерживаемыми браузерами.</p>
+<p>Вот полный код того, что происходило вначале: http://learn.javascript.ru/play/S60sJ (в песочнице работать не будет, так как она открывается во фрейме)</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/08/%d0%bf%d0%be%d0%b8%d0%b3%d1%80%d0%b0%d0%b5%d0%bc%d1%81%d1%8f-%d1%81-html5-history-api/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

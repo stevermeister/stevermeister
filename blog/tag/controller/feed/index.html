@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>controller &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/controller/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 27 Feb 2014 13:16:27 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>AngularJs: альтернативный синтаксис регистрации директив</title>
+		<link>https://stepansuvorov.com/blog/2014/02/angularjs-%d0%b0%d0%bb%d1%8c%d1%82%d0%b5%d1%80%d0%bd%d0%b0%d1%82%d0%b8%d0%b2%d0%bd%d1%8b%d0%b9-%d1%81%d0%b8%d0%bd%d1%82%d0%b0%d0%ba%d1%81%d0%b8%d1%81/</link>
+					<comments>https://stepansuvorov.com/blog/2014/02/angularjs-%d0%b0%d0%bb%d1%8c%d1%82%d0%b5%d1%80%d0%bd%d0%b0%d1%82%d0%b8%d0%b2%d0%bd%d1%8b%d0%b9-%d1%81%d0%b8%d0%bd%d1%82%d0%b0%d0%ba%d1%81%d0%b8%d1%81/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 16 Feb 2014 20:07:18 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[controller]]></category>
+		<category><![CDATA[directive]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1462</guid>
+
+					<description><![CDATA[Вместо привычного нам: app.directive('directiveName', function() { ... можно использовать групповой синтаксис: app.directive(directives) где directives &#8211; объект содержащий в себе директивы (ключ &#8211; название директивы, значение &#8211; функция конструктор). Может быть удобно для использования пространства имен (namespaces): User.directives = {}; User.directives.myDirective &#8230; <a href="https://stepansuvorov.com/blog/2014/02/angularjs-%d0%b0%d0%bb%d1%8c%d1%82%d0%b5%d1%80%d0%bd%d0%b0%d1%82%d0%b8%d0%b2%d0%bd%d1%8b%d0%b9-%d1%81%d0%b8%d0%bd%d1%82%d0%b0%d0%ba%d1%81%d0%b8%d1%81/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Вместо привычного нам:</p>
+<pre>app.directive('directiveName', function() { ...</pre>
+<p>можно использовать групповой синтаксис:</p>
+<pre>app.directive(directives)</pre>
+<p>где <strong>directives</strong> &#8211; объект содержащий в себе директивы (ключ &#8211; название директивы, значение &#8211; функция конструктор).</p>
+<p>Может быть удобно для использования пространства имен (namespaces):</p>
+<pre>User.directives = {};
+User.directives.myDirective = function () { ...
+angular.directive(User.directives);</pre>
+<p>данный синтаксис работает также и для контроллеров.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/02/angularjs-%d0%b0%d0%bb%d1%8c%d1%82%d0%b5%d1%80%d0%bd%d0%b0%d1%82%d0%b8%d0%b2%d0%bd%d1%8b%d0%b9-%d1%81%d0%b8%d0%bd%d1%82%d0%b0%d0%ba%d1%81%d0%b8%d1%81/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>AngularJS: Использование контроллера директивы в другой директиве</title>
+		<link>https://stepansuvorov.com/blog/2014/02/angularjs-directive-controller-reuse/</link>
+					<comments>https://stepansuvorov.com/blog/2014/02/angularjs-directive-controller-reuse/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 14 Feb 2014 08:59:26 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[controller]]></category>
+		<category><![CDATA[directive]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1448</guid>
+
+					<description><![CDATA[Опция require в описании директивы дает нам возможность использовать контроллер другой директивы. Мы также можем указать массив контроллеров. Объяснение можно посмотреть на egghead.io, код можно взять тут. Важно: если поставить в начале значения символ &#8216;^&#8217;,  то интерпретатор будет пытаться найти контроллер &#8230; <a href="https://stepansuvorov.com/blog/2014/02/angularjs-directive-controller-reuse/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Опция <strong>require</strong> в описании <strong>директивы</strong> дает нам возможность использовать <strong>контроллер</strong> другой директивы. Мы также можем указать массив контроллеров.</p>
+<p>Объяснение можно посмотреть на <a href="https://egghead.io/lessons/angularjs-directive-to-directive-communication">egghead.io</a>, код можно взять <a title="github" href="https://github.com/msfrisbie/egghead-angularjs/blob/master/app/lessons/15/main.js">тут</a>.</p>
+<p><strong>Важно</strong>: если поставить в начале значения символ &#8216;^&#8217;,  то интерпретатор будет пытаться найти контроллер директивы в <strong>родительских</strong> элементах. Если не поставить &#8211; только на <strong>текущем</strong> елементе(<em>как это было в примере на egghead.io</em>).</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/02/angularjs-directive-controller-reuse/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

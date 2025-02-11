@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>web workers &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/web-workers/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Wed, 04 Dec 2013 10:05:18 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Многопоточность в JavaScript</title>
+		<link>https://stepansuvorov.com/blog/2013/12/webworkers/</link>
+					<comments>https://stepansuvorov.com/blog/2013/12/webworkers/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 04 Dec 2013 09:52:38 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[html5]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[web workers]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=932</guid>
+
+					<description><![CDATA[Да, в JavaScript тоже есть многопоточность(либо подобие) и реализована по средством инструмента Web Workers, о использовании которого и поговорим в данном посте. Идея реализации: &#8220;тяжелые&#8221; операции, которые можно выполнять асинхронно(не блокирую работу браузера), выносятся в отдельные модули-файлы; это может быть: &#8230; <a href="https://stepansuvorov.com/blog/2013/12/webworkers/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-medium wp-image-1286" title="crash-of-rhino" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/11/crash-of-rhino-300x114.png" alt="" width="300" height="114" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2013/11/crash-of-rhino-300x114.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2013/11/crash-of-rhino-500x191.png 500w, https://stepansuvorov.com/blog/wp-content/uploads/2013/11/crash-of-rhino.png 594w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>Да, в <strong>JavaScript</strong> тоже есть многопоточность(либо подобие) и реализована по средством инструмента <strong><a title="w3" href="http://www.w3.org/TR/workers/">Web Workers</a></strong>, о использовании которого и поговорим в данном посте.</p>
+<p><span id="more-932"></span></p>
+<p>Идея реализации: &#8220;тяжелые&#8221; операции, которые можно выполнять асинхронно(не блокирую работу браузера), выносятся в отдельные модули-файлы; это может быть: обработка большого количества данных, кеширование, проверка правописания, фильтрация изображений на canvas. В браузере для каждого такого файла создается объект <strong>Worker</strong>, по средством которого и осуществляется коммуникация.</p>
+<p>Другими словами: используя технологию <strong>Web Workers</strong> можно избежать появления вот этого сообщения</p>
+<p><img decoding="async" class="alignnone size-full wp-image-1294" title="unresponsive_script" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/12/unresponsive_script1.gif" alt="" width="450" height="100" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2013/12/unresponsive_script1.gif 450w, https://stepansuvorov.com/blog/wp-content/uploads/2013/12/unresponsive_script1-300x66.gif 300w" sizes="(max-width: 450px) 100vw, 450px" /></p>
+<h2></h2>
+<h2>Проверка поддержки браузером</h2>
+<p>Для проверки поддерживает ли браузер технологию <strong>Web Workers</strong> достаточно проверить наличие объекта<strong> window.Worker</strong>:</p>
+<pre>if (!!window.Worker)
+{
+    //поддерживается
+}</pre>
+<h2></h2>
+<h2> Простой пример</h2>
+<p>На сайте <a href="http://www.w3.org/TR/workers/">w3</a> дали довольно наглядный пример, который я немного модифицировал расширив передачу данных в обе стороны. Итак, у нас есть 2 файла: основной(для простоты пишем внутри хтмл файла) <strong>test.html</strong> и файл воркера <strong>worker.js</strong>. Мы задались целью выводить на экран <a href="http://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D1%81%D1%82%D0%BE%D0%B5_%D1%87%D0%B8%D1%81%D0%BB%D0%BE">простые числа</a> в заданном диапозоне, но, так как операция по определению является ли число простым довольно ресурсоемкая, особенно для больших чисел, мы вынесем ее в отдельный фоновый поток (<strong>worker</strong>). Код этой функции и будет находиться в файле <strong>worker.js</strong>.</p>
+<p>Итого, <strong>test.html</strong>:</p>
+<pre>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;output id="result"&gt;&lt;/output&gt;
+&lt;script&gt;
+    var worker = new Worker('worker.js');
+    worker.onmessage = function (event) {
+        document.getElementById('result').textContent += ', ' + event.data;
+    };
+    worker.postMessage({from:17,to:50});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>и файл <strong>worker.js</strong>:</p>
+<pre>onmessage = function(event)
+{
+    var n = event.data.from;
+    while (n &lt; event.data.to) {
+        n += 1;
+        if(isPrime(n)){
+            // found a prime!
+            postMessage(n);
+        }
+    }
+};
+
+function isPrime(number){
+    for (var i = 2; i &lt;= Math.sqrt(number); i += 1){
+        if (number % i == 0){
+            return false;
+        }
+    }
+    return true;
+}</pre>
+<p>Для тех,  кто хочет поиграться с примером, &#8211; пожалуйста <a href="http://learn.javascript.ru/play/DJ8n1b">сюда</a>.</p>
+<p>Теперь немного комментариев.</p>
+<pre>var worker = new Worker('worker.js');</pre>
+<p>создаем объект Worker. Объект не запускается до полной загрузки и выполнения файла. Если путь к объекту Worker возвращает ошибку 404, его выполнение прекращается без уведомлений.</p>
+<pre>worker.onmessage = function (event) {</pre>
+<p>прописываем колбэк, который выполнится при вызове метода <strong>postMessage</strong> внутри воркера</p>
+<pre>worker.postMessage({from:17,to:50});</pre>
+<p>отправляем в воркер сообщение с параметрами диапазона ( мы хотим получить все простые числа в диапозоне с 17 до 50 )</p>
+<p>Перейдем к коду воркера:</p>
+<pre>onmessage = function(event){</pre>
+<p>функция будет вызвана, при обращении к метод <strong>worker.postMessage() </strong>в основном скрипте</p>
+<pre> var n = event.data.from;</pre>
+<p>доступ к данным внутри метода можно получить через <strong>event.data</strong></p>
+<p>&nbsp;</p>
+<h2>Взаимодействие  с объектами Worker</h2>
+<p>Как уже было показано на примере, взаимодействие с воркерами осуществляется путем потоковой передачи сообщений (метод <strong>postMessage</strong> &#8211; для отправки и колбэк <strong>onmessage</strong> &#8211; для приема).</p>
+<p>Колбэк на получение сообщения можно также навешивать следующим способом:</p>
+<pre>addEventListener('message', function(e) {</pre>
+<p>именно он является рекомендуемым для использования.</p>
+<p>&nbsp;</p>
+<h2>Ограничения Web Worker</h2>
+<p>К чему <strong>можно</strong> обращаться внутри <strong>worker</strong>-скрипта:</p>
+<ul>
+<li>Объект <code>navigator</code></li>
+<li>Объект <code>location</code> (только чтение)</li>
+<li><code>XMLHttpRequest</code></li>
+<li><code>setTimeout()/clearTimeout()</code> и <code>setInterval()/clearInterval()</code></li>
+<li><a href="http://www.html5rocks.com/tutorials/appcache/beginner/">Кэш приложений</a></li>
+<li>Импорт внешних скриптов с использованием метода <code>importScripts()</code></li>
+<li><a href="http://www.html5rocks.com/ru/tutorials/workers/basics/#toc-enviornment-subworkers">Создание других объектов Web Worker</a></li>
+</ul>
+<p>У <strong>worker</strong>-скрипта <strong>нет доступа</strong> к:</p>
+<ul>
+<li>Модель DOM (она не ориентирована на многопоточное исполнение)</li>
+<li>Объект <code>window</code></li>
+<li>Объект <code>document</code></li>
+<li>Объект <code>parent</code></li>
+</ul>
+<p>Методы <strong>postMessage</strong> и <strong>onmessage</strong> являются глобальными для ворвера, и к ним можно обратиться как на прямую, так и через <strong>this</strong> и <strong>self</strong>.</p>
+<p>Максимальное количество workerов &#8211; <strong>256</strong>, после чего стек переполняется и пишет ошибку:</p>
+<pre><code>Maximum number of Web Worker instances(256) exceeded for this window.</code></pre>
+<p>&nbsp;</p>
+<h2>Отлов ошибок</h2>
+<p>Также, как и с сообщениями, мы можем подписаться на получение ошибок:</p>
+<pre> worker.addEventListener('error', onError, false);</pre>
+<p>&nbsp;</p>
+<h2>Динамическое создание worker-скриптов</h2>
+<p>Иногда возникает необходимо создать <strong>worker</strong>-скрипт динамически(<span style="text-decoration: underline;">!внимание</span> именно <strong>worker</strong>-скрипт, а не сам <strong>worker</strong>), в зависимости от различных условий. В таком случае создание <strong>worker</strong> из отдельного файла нас не устраивает и мы должны воспользоваться вторым способом &#8211; через подготовленный объект <a href="http://dev.w3.org/2009/dap/file-system/file-writer.html#the-blobbuilder-interface">Blob</a>, а точнее &#8211; ссылки на него.</p>
+<p>Вот так это будет выглядеть в коде</p>
+<pre>var script = "onmessage = function(e) { postMessage('msg from worker'); }";
+var blob = new Blob([script]);
+var blobURL = window.URL.createObjectURL(blob);
+var worker = new Worker(blobURL);</pre>
+<p>Для удобства скрипт изначально пожно записать в script тег:</p>
+<pre>&lt;script id="worker1" type="javascript/worker"&gt;
+    //...код вашего воркера
+&lt;/script&gt;</pre>
+<p>а потом получить содержимое:</p>
+<pre>var script = document.querySelector('#worker1').textContent;</pre>
+<p><span style="text-decoration: underline;">!Внимание</span>: не забудьте поставить тип <strong>javascript/worker</strong>, это предотвратит разбор кода js-движком браузера.</p>
+<p>&nbsp;</p>
+<h2>Литература</h2>
+<ul>
+<li><a title="MDN" href="https://developer.mozilla.org/en-US/docs/Web/Guide/Performance/Using_web_workers">Using web workers</a></li>
+<li><a href="http://www.html5rocks.com/en/tutorials/workers/basics/">The Basics of Web Workers</a> ( и <a href="http://www.html5rocks.com/ru/tutorials/workers/basics/">русский перевод</a>, который, к сожалению, не обновляется)</li>
+<li><a title="msdn" href="http://msdn.microsoft.com/en-us/hh549259.aspx">Introduction to HTML5 Web Workers: The JavaScript Multi-threading Approach</a></li>
+<li><a title="Internet Explorer Dev Center" href="http://msdn.microsoft.com/en-us/library/ie/hh673568(v=vs.85).aspx">Web Workers </a></li>
+</ul>
+<p><em>К сожалению, примеров, которые бы показались мне интересными, не нашел. Сам сейчас работаю над более продвинутой версией получения больших простых чисел.</em></p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/12/webworkers/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

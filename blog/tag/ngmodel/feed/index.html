@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>ngModel &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/ngmodel/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Wed, 04 Nov 2015 10:17:42 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>AngularJS: Зачем котроллеру ngModel нужны $formatters и $parsers</title>
+		<link>https://stepansuvorov.com/blog/2015/11/angularjs-%d0%b7%d0%b0%d1%87%d0%b5%d0%bc-%d0%ba%d0%be%d1%82%d1%80%d0%be%d0%bb%d0%bb%d0%b5%d1%80%d1%83-ngmodel-%d0%bd%d1%83%d0%b6%d0%bd%d1%8b-formatters-%d0%b8-parsers/</link>
+					<comments>https://stepansuvorov.com/blog/2015/11/angularjs-%d0%b7%d0%b0%d1%87%d0%b5%d0%bc-%d0%ba%d0%be%d1%82%d1%80%d0%be%d0%bb%d0%bb%d0%b5%d1%80%d1%83-ngmodel-%d0%bd%d1%83%d0%b6%d0%bd%d1%8b-formatters-%d0%b8-parsers/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 04 Nov 2015 17:50:36 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[$formatters]]></category>
+		<category><![CDATA[$parsers]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[ngModel]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2893</guid>
+
+					<description><![CDATA[Небольшая заметка о том, для чего нужны $formatters и $parsers в контроллере ngModel директивы и когда их можно применять. Вкратце: $formatters определяют как модель будет представлена во вью $parsers определяют как значения из вью будет записаны в модель Сразу же пример &#8230; <a href="https://stepansuvorov.com/blog/2015/11/angularjs-%d0%b7%d0%b0%d1%87%d0%b5%d0%bc-%d0%ba%d0%be%d1%82%d1%80%d0%be%d0%bb%d0%bb%d0%b5%d1%80%d1%83-ngmodel-%d0%bd%d1%83%d0%b6%d0%bd%d1%8b-formatters-%d0%b8-parsers/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Небольшая заметка о том, для чего нужны <strong>$formatters</strong> и <strong>$parsers</strong> в контроллере <strong>ngModel</strong> директивы и когда их можно применять.</p>
+<p>Вкратце:</p>
+<ul>
+<li><strong>$formatters</strong> определяют как модель будет представлена во вью</li>
+<li><strong>$parsers</strong> определяют как значения из вью будет записаны в модель</li>
+</ul>
+<p><span id="more-2893"></span></p>
+<p>Сразу же пример кода:</p>
+<p>[javascript]<br />
+//model -&gt; view<br />
+ngModel.$formatters.push(function(modelValue) {<br />
+  return modelValue.toUpperCase();<br />
+});</p>
+<p>//view -&gt; model<br />
+ngModel.$parsers.push(function(viewValue) {<br />
+  return viewValue.toLowerCase();<br />
+});<br />
+[/javascript]</p>
+<p>Полный пример кода <a href="http://plnkr.co/edit/ZmlGQtag494IYuorGsgS?p=preview">тут</a>.</p>
+<p>Можете обратить внимание что при попытке задать модели через поле ввода оно всегда будет в нижнем регистре, и наоборот: при выводе значения модели в инпуте оно будет в верхнем регистре.</p>
+<p>Кроме форматирования ввода/вывода мы можем использовать парсер-форматеры также для проверки данных:</p>
+<p>[javascript]<br />
+ngModel.$parsers.unshift(function checkForEven(viewValue){<br />
+  if (parseInt(viewValue)%2 === 0) {<br />
+    ngModel.$setValidity(&#8216;evenNumber&#8217;,true);<br />
+  }<br />
+  else{<br />
+    ngModel.$setValidity(&#8216;evenNumber&#8217;, false);<br />
+  }<br />
+  return viewValue;<br />
+});<br />
+[/javascript]</p>
+<p>в данном случае мы разрешаем использовать только четные числа.</p>
+<p>Если нужно валидировать не только данные вводимые в инпут, но и данные передаваемые во вью из модели, то эту же проверку необходимо добавить и в форматеры. Оба случая можно посмотреть <a href="http://plnkr.co/edit/jwjHL4WWmbHEvHGrXIxG?p=preview">тут</a>.</p>
+<p>Мы можем задавать как один парсер/форматер, так и не сколько, и они будут выполнены в порядке, в котором они указаны в массиве, именно поэтому, если вы хотите чтобы валидаторы выполнились первыми мы делаем не <strong>push()</strong>, а <strong>unshift()</strong>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/11/angularjs-%d0%b7%d0%b0%d1%87%d0%b5%d0%bc-%d0%ba%d0%be%d1%82%d1%80%d0%be%d0%bb%d0%bb%d0%b5%d1%80%d1%83-ngmodel-%d0%bd%d1%83%d0%b6%d0%bd%d1%8b-formatters-%d0%b8-parsers/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>angular-universal &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/angular-universal/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 23 May 2019 15:10:16 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Серверный рендеринг с Angular4</title>
+		<link>https://stepansuvorov.com/blog/2017/03/server-side-rendering-angular4/</link>
+					<comments>https://stepansuvorov.com/blog/2017/03/server-side-rendering-angular4/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 13 Mar 2017 01:17:22 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[angular-universal]]></category>
+		<category><![CDATA[Angular2]]></category>
+		<category><![CDATA[angular4]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3291</guid>
+
+					<description><![CDATA[UPD: Статься обновлена 2017-04-24 Статья написана на основе перевода/переработки Server Side Rendering With Angular 4. Что нам дает серверный рендеринг? более быструю загрузку &#8220;первого экрана&#8221; поисковая оптимизация (предоставление статики для поисковых ботов) социальные превью для страничек С первых же дней &#8230; <a href="https://stepansuvorov.com/blog/2017/03/server-side-rendering-angular4/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><strong>UPD</strong>: Статься обновлена 2017-04-24</p>
+<p>Статья написана на основе перевода/переработки <a href="https://www.softwarearchitekt.at/post/2017/03/07/server-side-rendering-with-angular-4.aspx">Server Side Rendering With Angular 4</a>.</p>
+<p>Что нам дает серверный рендеринг?</p>
+<ul>
+<li>более быструю загрузку &#8220;первого экрана&#8221;</li>
+<li>поисковая оптимизация (предоставление статики для поисковых ботов)</li>
+<li>социальные превью для страничек</li>
+</ul>
+<p>С первых же дней <del>Angular2</del> <strong>Angular</strong> включал поддержку этой опции в виде отдельного проекта <a href="https://universal.angular.io/">Angular Universal</a>. Так как <strong>серверный пререндеринг</strong> одна из ключевых киллер-фич, то начиная с <strong>Angular 4</strong> было принято решение включить доработанную версию непосредственно во фремворк.</p>
+<p><span id="more-3291"></span></p>
+<p>В этой статье мы описываем необходимые шаги чтобы расширить существующее Angular 4 приложение добавив серверный рендеринг. Мы будем использовать конфигурацию <a href="https://github.com/webpack/webpack">webpack</a> сгенерированную с помощью <a href="https://cli.angular.io/">Angular CLI</a>, полный пример можно найти <a href="https://github.com/stevermeister/angular-ssr">тут</a>.</p>
+<h2></h2>
+<h2>Достаем Webpack конфиг из Angular CLI</h2>
+<p>Если вы используете Angular CLI, то вам необходимо извлечь webpack конфиг для возможной дальнейшей настройки:</p>
+<pre><code>ng eject</code></pre>
+<p><span style="text-decoration: underline;"><strong>Внимание</strong></span><strong>!</strong> Убедитесь в том, что вы понимаете что делает команда <strong><a href="https://github.com/angular/angular-cli/wiki/eject">ng eject</a></strong>.</p>
+<p>Вариант конфигурации(<strong>webpack.config.js</strong>) предложенный CLI не включает <strong>Uglify</strong> плагина, а <strong>AOT</strong> компиляция отключена, давайте включим обе опции:</p>
+<pre>[javascript]
+[...]
+&quot;plugins&quot;: [
+	[...],
+	new AotPlugin({
+          [...]
+	  // влючаем AOT
+	  &quot;skipCodeGeneration&quot;: false
+	}),
+
+	// добавляем UglifyJsPlugin
+	new webpack.optimize.UglifyJsPlugin()
+]
+[...]
+[/javascript]</pre>
+<p>В то время как <strong>AOT</strong> совсем не обязательно для серверного рендеринга, комбинируя эти опции мы можем добиться прекрасного результата в плане скорости загрузки.</p>
+<h2>Необходимые пакеты</h2>
+<p>Все необходимое для Angular уже подключено с помощью angular-cli, кроме пакета @angular/animations, который поставим вручную:</p>
+<pre>npm install --save @angular/animations</pre>
+<p>теперь подумаем о сервере.  В представленном решении используются <a href="https://nodejs.org/en/">node.js</a> вместе с <a href="http://expressjs.com/">express</a>. Поэтому мы установим express c его типами вместе с <strong>@angular/platform-server</strong>:</p>
+<pre><code>npm i @angular/platform-server@next --save
+npm i express @types/express --save
+</code></pre>
+<h2>Создание корневого модуля для серверного рендеринга</h2>
+<p>Для использования серверного рендеринга нам нужен корневой модуль, который включает ServerModule. Согласно <a href="https://github.com/robwormald/ng-universal-demo/">примеру от Rob Wormald</a>, мы также включаем корневой модуль нашего основного приложения (тот что отрисовывается в браузере):</p>
+<pre>[javascript]
+// app.server.module.ts
+
+import { NgModule } from '@angular/core';
+import { ServerModule } from '@angular/platform-server';
+import { AppModule } from './app.module';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  imports: [
+	  ServerModule,
+	  AppModule
+  ],
+  bootstrap: [
+	  AppComponent
+  ],
+  providers: [ ]
+})
+export class AppServerModule {}
+[/javascript]</pre>
+<p>Далее мы должны расширить <strong>BrowserModule</strong> основного приложения указав идентификатор приложения (просто строка):</p>
+<pre>[javascript]// app.module.ts
+
+@NgModule({
+    imports: [
+        BrowserModule.withServerTransition({
+            appId: 'demo-app'
+        }),
+        HttpModule,
+        FormsModule,
+	    [...]
+    ],
+    [...]
+})
+export class AppModule {}[/javascript]</pre>
+<h2>AOT для сервера</h2>
+<p>Так как <strong>AotPlugin</strong> не поддерживает серверный AOT, мы используем компилятор Angular напрямую, для этого создадим <strong>tsconfig.server.json</strong> (копию <strong>tsconfig.json</strong>) со следующими настройками <strong>angularCompilerOptions</strong>:</p>
+<pre><code>"compilerOptions": {
+    [...]
+},
+[...]
+"angularCompilerOptions": {
+  "genDir": "src/aot",
+  "entryModule": "./src/app.server.module#AppServerModule"
+}</code></pre>
+<p>Настроим алиас команду в <strong>package.json</strong>:</p>
+<pre><code>[...]
+"scripts": {
+    [...]
+    "ngc:server": "ngc -p tsconfig.server.json"
+}
+[...]</code></pre>
+<p>После вызова</p>
+<pre><code>npm run ngc:server</code></pre>
+<p>компилятор создаст дополнительные TypeScript файлы для проекта.</p>
+<p>Внимание! До выполнения команды если вы используете структуру файлов сгенерированную Angular CLI (&lt;1.0.0-rc.1), то вам еще прийдется стереть содержимое файла <strong>./src/typings.d.ts</strong>:</p>
+<p><img decoding="async" class="alignnone wp-image-3293" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/03/Screen-Shot-2017-03-13-at-00.02.05.png" alt="" width="465" height="107" /></p>
+<p>Иначе получите следующую ошибку: <em>Error at ./src/typings.d.ts:2:13: Subsequent variable declarations must have the same type. Variable &#8216;module&#8217; must be of type &#8216;NodeModule&#8217;, but here has type &#8216;{ id: string; }&#8217;.</em></p>
+<p>Теперь можем создать главный файл для сервера &#8211; <strong>main.server.ts</strong>, в котором используем сгенерированный <strong>AppServerModuleNgFactory</strong>:</p>
+<pre>[javascript]
+//main.server.ts
+import 'zone.js/dist/zone-node';
+import { renderModuleFactory } from '@angular/platform-server';
+import { enableProdMode } from '@angular/core';
+import { AppServerModuleNgFactory } from './aot/src/app/app.server.module.ngfactory';
+import * as express from 'express';
+import * as fs from 'fs';
+
+function ngExpressEngine() {
+  return function (filePath, options, callback) {
+    renderModuleFactory(AppServerModuleNgFactory, {
+      document: fs.readFileSync(filePath).toString(),
+      url: options.req.url
+    }).then(string =&amp;amp;gt; {
+        callback(null, string);
+      });
+  };
+}
+
+enableProdMode();
+
+const app = express();
+app.engine('html', ngExpressEngine());
+
+app.set('view engine', 'html');
+app.set('views', '.');
+
+app.get('/', (req, res) =&amp;amp;gt; {
+  res.render('index', { req });
+});
+
+app.get('/page2*', (req, res) =&amp;amp;gt; {
+  res.render('index', { req });
+});
+
+app.use(express.static('.'));
+
+app.listen(8000, () =&amp;amp;gt; console.log('listening...'));
+[/javascript]</pre>
+<p>Убедимся что в роутере основного модуля также есть данные стейты:</p>
+<pre>[javascript]
+//app.module.ts
+    RouterModule.forRoot([
+      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'page2', component: Page2Component }
+    ])
+[/javascript]</pre>
+<h2>Webpack для серверного рендеринга</h2>
+<p>Давайте создадим отдельный webpack конфиг(<strong>webpack.server.config.js</strong>) для сборки бандла серверного рендеринга, отличием будут следующие строчки:</p>
+<pre><code>  // main.server.ts
+  
+  [...]
+  target: 'node',
+  [...]
+  "entry": {
+    "main": [
+      "./src/main.server.ts"
+    ]
+  },</code></pre>
+<p>Так как подход использует всего один бандл, то <strong>CommonsChunkPlugin</strong> можно вырезать, также можно убрать <strong>NoEmitOnErrorsPlugin</strong>.</p>
+<p>Чтобы один бандл не перетирал другой, мы сделаем вывод в другой файл:</p>
+<pre><code>  "output": {
+    "path": path.join(process.cwd(), "dist"),
+    "filename": "[name].server.bundle.js",
+    "chunkFilename": "[id].server.chunk.js"
+  },</code></pre>
+<p>и сконфигурируем специальным образом <strong>AotPlugin</strong>:</p>
+<pre><code>new AotPlugin({
+  "entryModule": __dirname + "/src/app/app.server.module.ts#AppServerModule",
+  "hostReplacementPaths": {
+    "environments\\environment.ts": "environments\\environment.ts"
+  },
+  "exclude": [],
+  "tsConfigPath": "./tsconfig.server.json",
+  "skipCodeGeneration": false
+}),</code></pre>
+<h2>Итого</h2>
+<p>Компилируем клиент:</p>
+<pre><code>webpack</code></pre>
+<p>Компилируем сервер:</p>
+<pre><code>ngc -p tsconfig.server.json &amp;&amp; webpack --config webpack.server.config.js</code></pre>
+<p>Запускаем</p>
+<pre><code>cd dist
+node main.server.bundle.js</code></pre>
+<h2><strong>UPD: </strong>Кеширование ngExpressEngine</h2>
+<p>Чтобы не перегружать файловую систему, мы можем кешировать результат чтения файла:</p>
+<pre>[javascript]
+let templateCache = {};
+function ngExpressEngine() {
+  return function (filePath, options, callback) {
+    if (!templateCache[filePath]) {
+      let file = fs.readFileSync(filePath);
+      templateCache[filePath] = file.toString();
+    }
+    renderModuleFactory(AppServerModuleNgFactory, {
+      document: fs.readFileSync(filePath).toString(),
+      url: options.req.url
+    }).then(string =&amp;amp;gt; {
+      callback(null, string);
+    });
+  };
+}
+[/javascript]</pre>
+<h2><strong>UPD2: Удобные команды для запуска</strong></h2>
+<p>Мы можем прописать следующие алиас-команды в package.json:</p>
+<pre><code>"scripts": {
+	[...]
+	"build": "npm run build:client",
+	"build:client": "webpack",
+	"build:server": "ngc -p tsconfig.server.json &amp;&amp; webpack --progress --config webpack.server.config.js",
+	"build:all": "npm run build:client &amp;&amp; npm run build:server",
+	[...]
+}</code></pre>
+<h2>UPD3: Проблемы с APP_BASE_HREF</h2>
+<p>Для серверного модуля(app.server.module) необходимо указать <strong>APP_BASE_HREF</strong>:</p>
+<pre>providers: [{provide: APP_BASE_HREF, useValue : '/' }]</pre>
+<p>иначе будет следующая ошибка:</p>
+<pre>Error: No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.</pre>
+<h2>UPD4: 2 модуля в одной папке ломают Angular CLI</h2>
+<p>И вы получаете следующую ошибку:</p>
+<pre>Error locating module for declaration
+ SilentError: Multiple module files found:</pre>
+<p>Чтобы починить пришлось во всех местах переименовать <strong>app.server.module.ts</strong> в <strong>app.server-module.ts</strong></p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/03/server-side-rendering-angular4/feed/</wfw:commentRss>
+			<slash:comments>25</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

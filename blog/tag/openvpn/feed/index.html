@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>OpenVPN &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/openvpn/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Mon, 14 Jan 2013 07:03:42 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Автоматическая авторизация OpenVPN(не нужно вводить каждый раз пароль)</title>
+		<link>https://stepansuvorov.com/blog/2013/01/%d0%b0%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b0%d1%8f-%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f-openvpn%d0%bd%d0%b5-%d0%bd%d1%83%d0%b6%d0%bd/</link>
+					<comments>https://stepansuvorov.com/blog/2013/01/%d0%b0%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b0%d1%8f-%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f-openvpn%d0%bd%d0%b5-%d0%bd%d1%83%d0%b6%d0%bd/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 14 Jan 2013 07:03:42 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[auth]]></category>
+		<category><![CDATA[OpenVPN]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=884</guid>
+
+					<description><![CDATA[Как оказалось делается очень просто. Нужно дописать строчку в файл конфигурации (*.ovpn): auth-user-pass authfile.crd и потом создать сам файл authfile.crd со следующим содержанием: user password И все больше пароль вводить не нужно. Внимание! Должен напомнить о безопасности: при данной настройке( с &#8230; <a href="https://stepansuvorov.com/blog/2013/01/%d0%b0%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b0%d1%8f-%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f-openvpn%d0%bd%d0%b5-%d0%bd%d1%83%d0%b6%d0%bd/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Как оказалось делается очень просто. Нужно дописать строчку в файл конфигурации (<em>*.ovpn</em>):</p>
+<pre>auth-user-pass authfile.crd</pre>
+<p>и потом создать сам файл <em>authfile.crd</em> со следующим содержанием:</p>
+<pre>user
+password</pre>
+<p>И все больше пароль вводить не нужно.</p>
+<p>Внимание! Должен напомнить о безопасности: при данной настройке( с сохранением пароля в открытом виде в файл) вы должны быть <span style="text-decoration: underline;">более чем на 100%</span> уверены, что к нему не получит доступ другой человек.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/01/%d0%b0%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b0%d1%8f-%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f-openvpn%d0%bd%d0%b5-%d0%bd%d1%83%d0%b6%d0%bd/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>OpenVPN и проблема с DNS на Ubuntu</title>
+		<link>https://stepansuvorov.com/blog/2013/01/openvpn-%d0%b8-%d0%bf%d1%80%d0%be%d0%b1%d0%bb%d0%b5%d0%bc%d0%b0-%d1%81-dns-%d0%bd%d0%b0-ubuntu/</link>
+					<comments>https://stepansuvorov.com/blog/2013/01/openvpn-%d0%b8-%d0%bf%d1%80%d0%be%d0%b1%d0%bb%d0%b5%d0%bc%d0%b0-%d1%81-dns-%d0%bd%d0%b0-ubuntu/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 02 Jan 2013 18:29:42 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[DNS]]></category>
+		<category><![CDATA[OpenVPN]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=862</guid>
+
+					<description><![CDATA[В Ubuntu сразу не подхватывается DNS из OpenVPN подключения. Решается следующим образом &#8211; в конфигурационный файл &#8216;*.ovpn&#8216; в конец дописывается: up /etc/openvpn/update-resolv-conf down /etc/openvpn/update-resolv-conf а openvpn запускается со следующими флагами: openvpn --script-security 2 --config config.ovpn]]></description>
+										<content:encoded><![CDATA[<p>В <strong>Ubuntu</strong> сразу не подхватывается <strong>DNS</strong> из <strong>OpenVPN</strong> подключения. Решается следующим образом &#8211; в конфигурационный файл &#8216;<em>*.ovpn</em>&#8216; в конец дописывается:</p>
+<pre>up /etc/openvpn/update-resolv-conf
+down /etc/openvpn/update-resolv-conf</pre>
+<p>а openvpn запускается со следующими флагами:</p>
+<pre>openvpn --script-security 2 --config config.ovpn</pre>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/01/openvpn-%d0%b8-%d0%bf%d1%80%d0%be%d0%b1%d0%bb%d0%b5%d0%bc%d0%b0-%d1%81-dns-%d0%bd%d0%b0-ubuntu/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

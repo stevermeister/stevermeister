@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>historyAPI &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/historyapi/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sun, 12 Aug 2012 17:49:11 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Поиграемся с HTML5 history API</title>
+		<link>https://stepansuvorov.com/blog/2012/08/%d0%bf%d0%be%d0%b8%d0%b3%d1%80%d0%b0%d0%b5%d0%bc%d1%81%d1%8f-%d1%81-html5-history-api/</link>
+					<comments>https://stepansuvorov.com/blog/2012/08/%d0%bf%d0%be%d0%b8%d0%b3%d1%80%d0%b0%d0%b5%d0%bc%d1%81%d1%8f-%d1%81-html5-history-api/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 12 Aug 2012 17:49:11 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[historyAPI]]></category>
+		<category><![CDATA[html5]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=435</guid>
+
+					<description><![CDATA[Никакой военной тайны в статье не открою, но открою глаза для тех, кто не работал с history API. Чтобы понять нужно вам или нет, просто кликните сюда и понаблюдайте за адресной стройкой браузера. Если эта возможность не удивила &#8211; можете &#8230; <a href="https://stepansuvorov.com/blog/2012/08/%d0%bf%d0%be%d0%b8%d0%b3%d1%80%d0%b0%d0%b5%d0%bc%d1%81%d1%8f-%d1%81-html5-history-api/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><script type="text/javascript">// <![CDATA[
+        function playHistory(count) {   var string = location.pathname + location.search;   var i = 0;   var state = '';   function draw(){       if(i == string.length){         state ='';i = 0;         count--;       }       if(!count){          return false;       }       state = state + string[i];       i++;       history.pushState({}, '', state);       setTimeout(draw, 100);   }   draw(); }
+// ]]&gt;</script><br />
+Никакой военной тайны в статье не открою, но открою глаза для тех, кто не работал с <strong>history API</strong>. Чтобы понять нужно вам или нет, просто кликните <a onclick="javascript:playHistory(3); return false;">сюда</a> и понаблюдайте за адресной стройкой браузера. Если эта возможность не удивила &#8211; можете дальше не читать статью. (Прошу обратить внимание: мы меняем содержание адресной строки без перезагрузки страницы, это важно)</p>
+<p><span id="more-435"></span>Ну а для тех, кто дошел до этого места, попробуем разобрать магию: мы работаем с объектом window.history с помощью javascript. Почитать подробно можно <a href="http://dev.w3.org/html5/spec/history.html">тут</a>. Разбирать очевидные методы типа: go(), back(), forward() мы не будем. Остановимся более подробно на<code> pushState(<var title="">data</var>, <var title="">title</var>, <var title="">url</var>)</code>, где</p>
+<ul>
+<li>data &#8211; это данные передаваемые странице(можно пустой объект)</li>
+<li>title &#8211; название конкретного состояния(тоже можно оставить пустым)</li>
+<li>url &#8211; то что мы хотим записать сразу после домена</li>
+</ul>
+<p>Вот пример с конкретными данными:</p>
+<pre>history.pushState({}, '', '/someurl/that/you/want/to/see/in/location')</pre>
+<p>Как видите  &#8211; ничего сложного.</p>
+<p>Где это необходимо использовать? В сервисах, где большая часть логики на стороне клиента, а обращения к серверу идут аяксом: при этом хотелось держать в браузере <a title="т.е. чтобы правильно отрабатывали кнопочки back и forward" href="javascript:return false;">валидную</a> историю переходов.</p>
+<p>На всякий случай проверяем <a href="http://caniuse.com/#search=history">табличку совместимости</a> с вашими поддерживаемыми браузерами.</p>
+<p>Вот полный код того, что происходило вначале: http://learn.javascript.ru/play/S60sJ (в песочнице работать не будет, так как она открывается во фрейме)</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/08/%d0%bf%d0%be%d0%b8%d0%b3%d1%80%d0%b0%d0%b5%d0%bc%d1%81%d1%8f-%d1%81-html5-history-api/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

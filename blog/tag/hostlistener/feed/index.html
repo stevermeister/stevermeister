@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>HostListener &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/hostlistener/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 14 Jan 2017 21:16:53 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Angular2: Possible parameters for @HostBinding and @HostListener decorators</title>
+		<link>https://stepansuvorov.com/blog/2017/01/angular2-possible-parameters-for-hostbinding-and-hostlistener-decorators/</link>
+					<comments>https://stepansuvorov.com/blog/2017/01/angular2-possible-parameters-for-hostbinding-and-hostlistener-decorators/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 14 Jan 2017 21:16:53 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular2]]></category>
+		<category><![CDATA[HostBinding]]></category>
+		<category><![CDATA[HostListener]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3214</guid>
+
+					<description><![CDATA[@HostBinding(?) propertyName: references a property of the host with the propertyName name. attr.attributeName: references an attribute of the host with the attributeName name. The initial value is set to the associated directive property. Setting a value in the property updates &#8230; <a href="https://stepansuvorov.com/blog/2017/01/angular2-possible-parameters-for-hostbinding-and-hostlistener-decorators/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<h2>@HostBinding(?)</h2>
+<ul>
+<li id="a726" class="graf graf--li graf-after--p"><strong class="markup--strong markup--li-strong">propertyName</strong>: references a property of the host with the <strong class="markup--strong markup--li-strong">propertyName</strong> name.</li>
+<li id="fe6e" class="graf graf--li graf-after--li"><strong class="markup--strong markup--li-strong">attr.attributeName</strong>: references an attribute of the host with the <strong class="markup--strong markup--li-strong">attributeName</strong> name. The initial value is set to the associated directive property. Setting a value in the property updates the attribute on the corresponding HTML element. Using the null value at this level removes the attribute on the HTML element.</li>
+<li id="5508" class="graf graf--li graf-after--li"><strong class="markup--strong markup--li-strong">style.styleName</strong>: links a directive property to a style of the HTML element.</li>
+<li id="3732" class="graf graf--li graf-after--li"><strong class="markup--strong markup--li-strong">class.className</strong>: links a directive property to a class name of the HTML element. If the value is true, the class is added otherwise removed.</li>
+</ul>
+<h2>@HostListener(?)</h2>
+<ul class="postList">
+<li id="3894" class="graf graf--li graf-after--p"><strong class="markup--strong markup--li-strong">eventName</strong>: the name of the event to register a method callback on.</li>
+</ul>
+<p><span id="more-3214"></span></p>
+<p>Example for all the cases:</p>
+<p>[javascript]<br />
+@Directive({<br />
+  selector: &#8216;mydir&#8217;<br />
+})<br />
+export class SomeDirective {<br />
+  @HostBinding(&#8216;value&#8217;) value:string;<br />
+  @HostBinding(&#8216;attr.role&#8217;) role:string;<br />
+  @HostBinding(&#8216;style.width.px&#8217;) width:number;<br />
+  @HostBinding(&#8216;class.someClass&#8217;) condition:boolean;<br />
+  @HostListener(&#8216;input&#8217;) onInput() {<br />
+    console.log(&#8216;on input in directive&#8217;);<br />
+  }<br />
+}<br />
+[/javascript]</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/01/angular2-possible-parameters-for-hostbinding-and-hostlistener-decorators/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

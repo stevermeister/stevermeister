@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	Comments on: Пишем jQuery c нуля. Часть3 – DOMContentLoaded shortcut	</title>
+	<atom:link href="https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Mon, 11 May 2015 11:12:36 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>
+		By: Kostya Begunets		</title>
+		<link>https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/#comment-44997</link>
+
+		<dc:creator><![CDATA[Kostya Begunets]]></dc:creator>
+		<pubDate>Mon, 11 May 2015 11:12:36 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2472#comment-44997</guid>
+
+					<description><![CDATA[лучше уже тут https://github.com/KosBeg/facker_js
+а то в предыдущем коменте убило форматировку]]></description>
+			<content:encoded><![CDATA[<p>лучше уже тут <a href="https://github.com/KosBeg/facker_js" rel="nofollow ugc">https://github.com/KosBeg/facker_js</a><br />
+а то в предыдущем коменте убило форматировку</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Kostya Begunets		</title>
+		<link>https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/#comment-44994</link>
+
+		<dc:creator><![CDATA[Kostya Begunets]]></dc:creator>
+		<pubDate>Mon, 11 May 2015 11:02:22 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2472#comment-44994</guid>
+
+					<description><![CDATA[вот собственно &quot;кусок&quot; ядра
+
+[javascript]
+(function(w) {
+  var facker = function(selector, context) {
+    return new facker.func.init(selector, context);
+  };
+
+  facker.func = {
+    init: function(selector) {
+      selector = typeof selector == &#039;string&#039; ? document.querySelectorAll(selector) : selector;
+      this[0] = selector;
+      return this;
+  },
+
+  getNodeName: function() {
+    return this[0][0].nodeName.toUpperCase();
+  }
+}
+
+  facker.func.init.prototype = facker.func;
+  w.facker = w.$ = facker;
+})(window);
+
+
+  
+  
+    console.log($(&#039;#test&#039;).getNodeName());
+[/javascript]
+
+
+ничего особо тут такого как у вас нету, разве что проверка
+elector = typeof selector == &#039;string&#039; ? document.querySelectorAll(selector) : selector;]]></description>
+			<content:encoded><![CDATA[<p>вот собственно &#8220;кусок&#8221; ядра</p>
+<p>[javascript]<br />
+(function(w) {<br />
+  var facker = function(selector, context) {<br />
+    return new facker.func.init(selector, context);<br />
+  };</p>
+<p>  facker.func = {<br />
+    init: function(selector) {<br />
+      selector = typeof selector == &#8216;string&#8217; ? document.querySelectorAll(selector) : selector;<br />
+      this[0] = selector;<br />
+      return this;<br />
+  },</p>
+<p>  getNodeName: function() {<br />
+    return this[0][0].nodeName.toUpperCase();<br />
+  }<br />
+}</p>
+<p>  facker.func.init.prototype = facker.func;<br />
+  w.facker = w.$ = facker;<br />
+})(window);</p>
+<p>    console.log($(&#8216;#test&#8217;).getNodeName());<br />
+[/javascript]</p>
+<p>ничего особо тут такого как у вас нету, разве что проверка<br />
+elector = typeof selector == &#8216;string&#8217; ? document.querySelectorAll(selector) : selector;</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Kostya Begunets		</title>
+		<link>https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/#comment-44990</link>
+
+		<dc:creator><![CDATA[Kostya Begunets]]></dc:creator>
+		<pubDate>Mon, 11 May 2015 10:40:43 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2472#comment-44990</guid>
+
+					<description><![CDATA[а когда будет 4 часть?]]></description>
+			<content:encoded><![CDATA[<p>а когда будет 4 часть?</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Kostya Begunets		</title>
+		<link>https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/#comment-44989</link>
+
+		<dc:creator><![CDATA[Kostya Begunets]]></dc:creator>
+		<pubDate>Mon, 11 May 2015 10:39:24 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2472#comment-44989</guid>
+
+					<description><![CDATA[In reply to &lt;a href=&quot;https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/#comment-44982&quot;&gt;Stepan&lt;/a&gt;.
+
+Можно и на &quot;ТЫ&quot;
+PS: мне 14 лет,
+Только не офигевайте и не говорите что я говнокодер)))]]></description>
+			<content:encoded><![CDATA[<p>In reply to <a href="https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/#comment-44982">Stepan</a>.</p>
+<p>Можно и на &#8220;ТЫ&#8221;<br />
+PS: мне 14 лет,<br />
+Только не офигевайте и не говорите что я говнокодер)))</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Kostya Begunets		</title>
+		<link>https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/#comment-44988</link>
+
+		<dc:creator><![CDATA[Kostya Begunets]]></dc:creator>
+		<pubDate>Mon, 11 May 2015 10:37:33 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2472#comment-44988</guid>
+
+					<description><![CDATA[In reply to &lt;a href=&quot;https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/#comment-44982&quot;&gt;Stepan&lt;/a&gt;.
+
+неа, нельзя ;)
+у меня проект с закрытым исходным кодом который используется только мной ;)
+получилось немножко коряво, но работает намного быстрее JQuery за счет использования нативных функций(там в 15,7 Кб вместилось большая половина функционала JQuery)))
+в будущем может и положу на GitHub, хотя это маловероятно]]></description>
+			<content:encoded><![CDATA[<p>In reply to <a href="https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/#comment-44982">Stepan</a>.</p>
+<p>неа, нельзя ;)<br />
+у меня проект с закрытым исходным кодом который используется только мной ;)<br />
+получилось немножко коряво, но работает намного быстрее JQuery за счет использования нативных функций(там в 15,7 Кб вместилось большая половина функционала JQuery)))<br />
+в будущем может и положу на GitHub, хотя это маловероятно</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Stepan		</title>
+		<link>https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/#comment-44982</link>
+
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 11 May 2015 09:37:19 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2472#comment-44982</guid>
+
+					<description><![CDATA[In reply to &lt;a href=&quot;https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/#comment-44981&quot;&gt;Kostya Begunets&lt;/a&gt;.
+
+следующее.. посмотрим, под настроение :)
+думаю в любом случае: без промисов я Аякс начинать не буду.
+скорее всего промисы и будут следующей главой, 
+хотя может будет еще что-то промежуточное, например - манипуляции DOMом.
+
+а где-то можно посмотреть что у вас получилось?]]></description>
+			<content:encoded><![CDATA[<p>In reply to <a href="https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/#comment-44981">Kostya Begunets</a>.</p>
+<p>следующее.. посмотрим, под настроение :)<br />
+думаю в любом случае: без промисов я Аякс начинать не буду.<br />
+скорее всего промисы и будут следующей главой,<br />
+хотя может будет еще что-то промежуточное, например &#8211; манипуляции DOMом.</p>
+<p>а где-то можно посмотреть что у вас получилось?</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Kostya Begunets		</title>
+		<link>https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/#comment-44981</link>
+
+		<dc:creator><![CDATA[Kostya Begunets]]></dc:creator>
+		<pubDate>Mon, 11 May 2015 09:10:30 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2472#comment-44981</guid>
+
+					<description><![CDATA[Интересно как так получилось, но сейчас тоже пишу свой фреймворк и код в первой статье практически полностью совпал...
+Потом движок Сизл я тоже думал прикрутить, но он слишком большой, в итоге перешел на &quot;querySelectorAll&quot; и цикл &quot;for&quot;(для старых браузеров регулярки и выборка по ID, Class, Name)
+А вот сейчас наши дороги разошлись, вы пишете метод $.ready, а я уже написал $.click, AJAX $.get, сейчас пишу AJAX $.post
+А что же у вас будет следуещее?]]></description>
+			<content:encoded><![CDATA[<p>Интересно как так получилось, но сейчас тоже пишу свой фреймворк и код в первой статье практически полностью совпал&#8230;<br />
+Потом движок Сизл я тоже думал прикрутить, но он слишком большой, в итоге перешел на &#8220;querySelectorAll&#8221; и цикл &#8220;for&#8221;(для старых браузеров регулярки и выборка по ID, Class, Name)<br />
+А вот сейчас наши дороги разошлись, вы пишете метод $.ready, а я уже написал $.click, AJAX $.get, сейчас пишу AJAX $.post<br />
+А что же у вас будет следуещее?</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

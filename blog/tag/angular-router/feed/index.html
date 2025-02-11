@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>angular-router &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/angular-router/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 01 Jul 2017 18:54:30 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Angular: Меняем title в зависимости от стейта</title>
+		<link>https://stepansuvorov.com/blog/2017/03/angular-set-title/</link>
+					<comments>https://stepansuvorov.com/blog/2017/03/angular-set-title/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 25 Mar 2017 10:23:58 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[angular-router]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3319</guid>
+
+					<description><![CDATA[Для того чтобы сделать динамический title в Angular (2+) нам не нужно придумывать свои велосипеды как это было в AngularJs. Достаточно просто использовать сервис Title, у которого есть методы getTitle и setTitle. То есть если вы просто хотите задать тайтл достаточно сделать: &#8230; <a href="https://stepansuvorov.com/blog/2017/03/angular-set-title/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Для того чтобы сделать динамический title в Angular (2+) нам не нужно придумывать свои велосипеды как это было в AngularJs. Достаточно просто использовать сервис <strong><a href="https://angular.io/docs/ts/latest/api/platform-browser/index/Title-class.html">Title</a></strong>, у которого есть методы <strong>getTitle</strong> и <strong>setTitle</strong>.</p>
+<p>То есть если вы просто хотите задать тайтл достаточно сделать:</p>
+<p>[javascript]<br />
+export class AppComponent implements OnInit {<br />
+  constructor(private titleService: Title) {}<br />
+  ngOnInit() {<br />
+    this.titleService.setTitle(&#8216;My Page Title&#8217;);<br />
+  }<br />
+}<br />
+[/javascript]</p>
+<p>При этом Title подключается из модуля <strong>@angular/platform-browser</strong>:</p>
+<p>[javascript]<br />
+import { Title } from &#8216;@angular/platform-browser&#8217;;<br />
+[/javascript]</p>
+<p>Тут вроде как все понятно, но что, если мы захотим динамически менять тайтл в зависимости от стейта/странички на которой находимся?</p>
+<p><span id="more-3319"></span></p>
+<p>Todd Motto предлагает <a href="https://toddmotto.com/dynamic-page-titles-angular-2-router-events">следующее решение</a>.<br />
+Внимание! В представленном ниже примере поправлены имена некоторых переменных по сравнению с оригиналом.<br />
+Сначала мы прописывем значение title для всех стейтов в конфигурации роутера:</p>
+<p>[javascript]<br />
+const routes: Routes = [{<br />
+  path: &#8216;calendar&#8217;,<br />
+  component: CalendarComponent,<br />
+  children: [<br />
+    { path: &#8221;, redirectTo: &#8216;new&#8217;, pathMatch: &#8216;full&#8217; },<br />
+    { path: &#8216;all&#8217;, component: CalendarListComponent, data: { title: &#8216;My Calendar&#8217; } },<br />
+    { path: &#8216;new&#8217;, component: CalendarEventComponent, data: { title: &#8216;New Calendar Entry&#8217; } },<br />
+    { path: &#8216;:id&#8217;, component: CalendarEventComponent, data: { title: &#8216;Calendar Entry&#8217; } }<br />
+  ]<br />
+}];<br />
+[/javascript]</p>
+<p>а потом получаем по событию <a href="https://angular.io/docs/ts/latest/api/router/index/NavigationEnd-class.html">NavigationEnd</a>:</p>
+<p>[javascript]<br />
+export class AppComponent implements OnInit {<br />
+  constructor(<br />
+    private router: Router,<br />
+    private activatedRoute: ActivatedRoute,<br />
+    private titleService: Title<br />
+  ) {}<br />
+  ngOnInit() {<br />
+    //смотрим на все события роутера<br />
+    this.router.events<br />
+      //фильтруем по событию NavigationEnd<br />
+      .filter(event =&gt; event instanceof NavigationEnd)<br />
+      //переключаем поток на сервис activatedRoute<br />
+      .map(() =&gt; this.activatedRoute)<br />
+      //нас интересуют только корневые роуты (это опционально)<br />
+      .map(route =&gt; {<br />
+        while (route.firstChild) route = route.firstChild;<br />
+        return route;<br />
+      })<br />
+      // так же мы выбираем только первичные аутлеты (тоже опционально)<br />
+      .filter(route =&gt; route.outlet === &#8216;primary&#8217;)<br />
+      // выбираем title<br />
+      .mergeMap(route =&gt; route.data.title)<br />
+      //задаем<br />
+      .subscribe(stateTitle =&gt; this.titleService.setTitle(stateTitle);<br />
+  }<br />
+[/javascript]</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/03/angular-set-title/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Angular: Lazy Loading and Preloading strategy</title>
+		<link>https://stepansuvorov.com/blog/2017/03/angular-lazy-loading-and-preloading-strategy/</link>
+					<comments>https://stepansuvorov.com/blog/2017/03/angular-lazy-loading-and-preloading-strategy/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 05 Mar 2017 10:53:59 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[angular-router]]></category>
+		<category><![CDATA[lazy-loading]]></category>
+		<category><![CDATA[preloading-strategy]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3286</guid>
+
+					<description><![CDATA[Almost all of you know that it&#8217;s possible in Angular to load modules asynchronously by using Lazy Loading Router feature, you just need to specify special parameter for the state &#8211; loadChildren: [javascript] { path: &#8216;lazy&#8217;, loadChildren: &#8216;./lazy/lazy.module#LazyModule&#8217; } [/javascript] &#8230; <a href="https://stepansuvorov.com/blog/2017/03/angular-lazy-loading-and-preloading-strategy/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Almost all of you know that it&#8217;s possible in <strong>Angular</strong> to load modules asynchronously by using <strong>Lazy Loading </strong>Router feature, you just need to specify special parameter for the state &#8211; <strong>loadChildren</strong>:</p>
+<p>[javascript]<br />
+{ path: &#8216;lazy&#8217;, loadChildren: &#8216;./lazy/lazy.module#LazyModule&#8217; }<br />
+[/javascript]</p>
+<p>and setup child module with <strong>RouterModule.forChild</strong> method:</p>
+<p>[javascript]<br />
+const routes: Routes = [<br />
+  { path: &#8221;, component: AdminComponent }<br />
+];</p>
+<p>@NgModule({<br />
+  imports: [<br />
+    CommonModule,<br />
+    RouterModule.forChild(routes)<br />
+  ],<br />
+  declarations: [AdminComponent]<br />
+})<br />
+export class LazyModule { }<br />
+[/javascript]</p>
+<p>In most cases you are doing so not to load all the modules at once make &#8220;first screen&#8221; appearing quicker. But it&#8217;s not all folks, you also could preload all your lazy modules when your application base is loaded so: you are showing first screen fast and after load other modules in background to show them immediately when it&#8217;s needed. And it&#8217;s really usy to setup: for you main RouterModule you add the property <strong>preloadingStrategy</strong>:</p>
+<p><span id="more-3286"></span></p>
+<p>[javascript]<br />
+  imports: [<br />
+    CommonModule,<br />
+    RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules }),<br />
+    &#8230;<br />
+  ],</p>
+<p>[/javascript]</p>
+<p>But even more interesting that you could create your own strategy for loading logic. For example you want to start loading the rest of the modules in 5s after app is loaded:</p>
+<p>[javascript]<br />
+export class CustomPreloadingStrategy implements PreloadingStrategy {<br />
+    preload(route: Route, fn: () =&gt; Observable&lt;boolean&gt;): Observable&lt;boolean&gt; {<br />
+        return Observable.of(true).delay(5000).flatMap( (_: boolean)=&gt; fn());<br />
+    }<br />
+}<br />
+[/javascript]</p>
+<p>and you can also specify which routes should not be preloaded:</p>
+<p>[javascript]<br />
+export class CustomPreloadingStrategy implements PreloadingStrategy {</p>
+<p>  public preload(route: Route, fn: () =&gt; Observable&lt;boolean&gt;): Observable&lt;boolean&gt; {<br />
+    if (route.data &amp;&amp; route.data[&#8216;nopreload&#8217;]) {<br />
+      return Observable.of(false);<br />
+    }</p>
+<p>    return Observable.of(true).delay(5000).flatMap((_: boolean) =&gt; fn());<br />
+  }<br />
+}<br />
+[/javascript]</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/03/angular-lazy-loading-and-preloading-strategy/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

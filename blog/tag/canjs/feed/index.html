@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>canjs &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/canjs/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 15 Sep 2012 14:14:49 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Наследование в CanJS</title>
+		<link>https://stepansuvorov.com/blog/2012/09/%d0%bd%d0%b0%d1%81%d0%bb%d0%b5%d0%b4%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%b2-canjs/</link>
+					<comments>https://stepansuvorov.com/blog/2012/09/%d0%bd%d0%b0%d1%81%d0%bb%d0%b5%d0%b4%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%b2-canjs/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 15 Sep 2012 14:14:49 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[canjs]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=586</guid>
+
+					<description><![CDATA[Для начала скажу что CanJs, это форк от JavaScriptMVC, который был разобрал вот тут. Так вот, разбирая наследование контроллеров во фреймворке, не сразу поняли как оно работает. Пример в официальной документации был не очевиден, а гугление не дало быстрого ответа. &#8230; <a href="https://stepansuvorov.com/blog/2012/09/%d0%bd%d0%b0%d1%81%d0%bb%d0%b5%d0%b4%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%b2-canjs/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-full wp-image-590" title="canjs_logo" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/09/canjs_logo.png" alt="" width="200" height="200" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2012/09/canjs_logo.png 200w, https://stepansuvorov.com/blog/wp-content/uploads/2012/09/canjs_logo-150x150.png 150w" sizes="(max-width: 200px) 100vw, 200px" /></p>
+<p>Для начала скажу что <a href="http://canjs.us/">CanJs</a>, это форк от <a href="http://javascriptmvc.com/">JavaScriptMVC</a>, который был разобрал вот <a href="https://stepansuvorov.com/blog/2012/09/%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80-javascriptmvc/">тут</a>.</p>
+<p>Так вот, разбирая наследование контроллеров во фреймворке, не сразу поняли как оно работает. Пример в официальной документации был не очевиден, а гугление не дало быстрого ответа.</p>
+<p><span id="more-586"></span>Все конечно же оказалось просто, но дошли мы к этому не сразу. Надеюсь этот посто облегчит жизнь тем, кто столкнется с аналогичным вопросом.</p>
+<p>Итак, пример. Для начала создадим родительский класс, с методом, который уначледуется, и свойством, которое будет переопределено:</p>
+<pre>var Parent = can.Control({
+    name:'parent',
+    showName: function(){ alert(this.name) }
+})</pre>
+<p>Теперь внимание &#8211; дочерний класс мы создаем уже не через can.Control, через уже существующий класс Parent:</p>
+<pre>var Child = Parent({
+    param:'child'
+})</pre>
+<p>Теперь создадим объекты и вызовем в каждом из них наш метод:</p>
+<pre>var parent = new Parent('#parent');
+var child = new Child('#child');
+parent.showName();
+child.showName();</pre>
+<p>Поддерживается цепочное наследование, т.е. мы дальше можем получать наслдеников от Child:</p>
+<pre>var SubChild = Child({
+    param:'subchild'
+})</pre>
+<p>События, а точнее обработчики событий, тоже наследуются. Что изначально было подвергнуто сомнению.</p>
+<p>Итоговый код:</p>
+<pre>var Parent = can.Control({
+    param:'parent',
+    showName: function(){ alert(this.param) },
+    'click': function(){ this.showName() }
+})
+
+var Child = Parent({
+    param:'child',
+})
+
+var SubChild = Child({
+    param:'subchild',
+})
+
+var parent = new Parent('#parent');
+var child = new Child('#child');
+var subchild = new SubChild('#subchild');</pre>
+<p>Поиграться с ним можно вот <a href="http://jsfiddle.net/zXeyJ/10/">тут</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/09/%d0%bd%d0%b0%d1%81%d0%bb%d0%b5%d0%b4%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%b2-canjs/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

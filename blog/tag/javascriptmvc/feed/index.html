@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>JavascriptMVC &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/javascriptmvc/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 06 Sep 2012 12:55:44 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Разбор JavaScriptMVC</title>
+		<link>https://stepansuvorov.com/blog/2012/09/%d1%80%d0%b0%d0%b7%d0%b1%d0%be%d1%80-javascriptmvc/</link>
+					<comments>https://stepansuvorov.com/blog/2012/09/%d1%80%d0%b0%d0%b7%d0%b1%d0%be%d1%80-javascriptmvc/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Thu, 06 Sep 2012 07:57:54 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[JavascriptMVC]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=543</guid>
+
+					<description><![CDATA[*Для тех, кто подумал что я пропустил пробел перед MVC, скажу: нет &#8211; JavaScriptMVC &#8211; это название фреймворка. Информации в интернете о нем не так много, поэтому попробуем разобрать вместе как его устанавливать и использовать. Для начала выкачаем фреймворк себе &#8230; <a href="https://stepansuvorov.com/blog/2012/09/%d1%80%d0%b0%d0%b7%d0%b1%d0%be%d1%80-javascriptmvc/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>*Для тех, кто подумал что я пропустил пробел перед MVC, скажу: нет &#8211; JavaScriptMVC &#8211; это название фреймворка.</p>
+<p><img decoding="async" class="alignnone size-full wp-image-544" title="javascriptmvc_logo" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/09/javascriptmvc_logo.png" alt="" width="221" height="30" /></p>
+<p>Информации в интернете о нем не так много, поэтому попробуем разобрать вместе как его устанавливать и использовать.</p>
+<p><span id="more-543"></span>Для начала <a title="javascriptmvc download" href="https://github.com/downloads/jupiterjs/javascriptmvc/javascriptmvc-3.2.2.zip">выкачаем</a> фреймворк себе в директорию проекта либо на уровень выше. Изучаем структуру папок и файлов:</p>
+<pre>documentjs - документатор 
+funcunit - приложение для тестирования 
+jquery - jquery и его расширения - jQueryMX 
+steal - менеджер подгрузки скриптов и зависимостей 
+js,js.bat - командная строка для Linux/Mac и Windows</pre>
+<p>Разбор начнем с менеджера подгрузки скриптов <strong>steal</strong>, с которого все и начинается. Метод <strong>steal</strong> имеет довольно простой синтаксис:</p>
+<pre>steal(param1, param2, param3, ...)</pre>
+<p>В параметре мы можем передавать как путь к файлу, который нужно подгрузить, так и callback-функцию, которая выполнится после загрузки файла. Что касается пути, то можно указывать относительный путь от корня фреймворка и сократить расширение .js(он его добавит сам), т.е.:</p>
+<pre>steal('jquery/class')</pre>
+<p>&#8211; это значит что он подключит файл %framework_path%/jquery/class.js</p>
+<p>Внимание. Так как <strong>steal</strong> работает асинхронно, то мы должны помещать код, который зависит от подключаемого модуля в callback:</p>
+<pre>steal('jquery/class', function(){ $.Class })</pre>
+<p>Идем дальше. Все классы в системе создаются вызовом метода</p>
+<pre>$.Class([name,] [classProps,] [prototypeProps])</pre>
+<p>Чтобы создать класс модели используется метод</p>
+<pre>$.Model(name, classProps, prototypeProps)</pre>
+<p>Пришло время переходить к реальным примерам. Создаем в корне папку нашего проекта, например &#8220;<em>todos</em>&#8220;. Помещаем в нее 2 файла: todos.html и todos.js.</p>
+<p><span style="text-decoration: underline;">todos.html:</span></p>
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+    &lt;/head&gt;
+&lt;body&gt;
+    &lt;ul id='todos'&gt;&lt;/ul&gt;
+    &lt;input id='editor'/&gt;
+    &lt;script type='text/javascript' src='../steal/steal.js?todos/todos.js'&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>Всего лишь небольшой кусок HTML кода с подключением второго файла &#8211; <strong>todos.js</strong> через <strong>steal.js</strong>.</p>
+<p>Теперь перейдем к более интересному &#8211; внутренностям <strong>todos.js</strong>:</p>
+<pre>steal('jquery/class',
+      'jquery/model',
+      'jquery/dom/fixture',
+      'jquery/view/ejs',
+      'jquery/controller',
+      'jquery/controller/route',
+       function($){
+             $.Model('Todo',{
+                     findAll : "GET /todos",
+                     findOne : "GET /todos/{id}",
+                     create  : "POST /todos",
+                     update  : "PUT /todos/{id}",
+                     destroy : "DELETE /todos/{id}"
+            },{});
+      }
+)</pre>
+<p>Подключили необходимые модули, создали основную модель. Играем дальше. Чтобы создать объект нашей модели делаем:</p>
+<pre>var todo = new Todo({name: "do the dishes"});</pre>
+<p>Появился объект с атрибутом name. Чтобы получить или изменить атрибут используем метод <code><strong>attr</strong>.</code></p>
+<pre>todo.attr('name') //получит значение атрибута 
+todo.attr('name', "wash the dishes" ); // перезапишет значение</pre>
+<p>Класс модели использует статические методы для создания, чтения, обновления и удаления сущностей на сервере ( findAll, findOne, create, update, and destroy ), т.е.:</p>
+<pre>Todo.findAll({})</pre>
+<p>Но, так как серверной части у нас еще нет, &#8211; методы соответственно не отработают так как нам нужно. Хорошо что в фреймворке это учли и сделали заглушки, с помощью которых мы сможем эмулировать серверные ответы. Заглушка реализуется с помощью метода <strong>fixture</strong>:</p>
+<pre>$.fixture(url, fixture(original, settings, headers) )</pre>
+<p>возвратить функция <strong>fixture</strong>(не путать callback функцию и метод <strong>fixture</strong>) должна следующую структуру:</p>
+<pre>return [ status, statusText, responses, responseHeaders ];</pre>
+<p>например:</p>
+<pre>return [ 200, "success", {json: []}, {} ];</pre>
+<p>Добавим в наш код(это который в <strong>todos.js</strong>) эти заглушки для каждого запроса:</p>
+<pre>// массив данных
+var TODOS = [
+{id: 1, name: "wake up"},
+{id: 2, name: "take out trash"},
+{id: 3, name: "do dishes"}
+];
+
+$.fixture("GET /todos", function(){
+return [TODOS]
+});
+
+$.fixture("GET /todos/{id}", function(orig){
+return TODOS[(+orig.data.id)-1];
+})
+
+var id= 4;
+$.fixture("POST /todos", function(){
+return {id: (id++)}
+})
+
+$.fixture("PUT /todos/{id}", function(){
+return {};
+})
+
+$.fixture("DELETE /todos/{id}", function(){
+return {};
+})</pre>
+<p>Можем проверить как оно работает:</p>
+<pre>Todo.findAll({}, function( todos ) {
+    console.dir( todos );
+})</pre>
+<p>Для создания и обновления мы вызываем метод <strong>save</strong>:</p>
+<pre>// create 
+var todo = new Todo({name: "mow lawn"}) 
+todo.save(function(todo){ console.dir( todo ); }) 
+
+// update todo.attr("name", "mow my lawn") 
+todo.save(function(todo){ console.dir( todo ); })</pre>
+<p>Еще мы можем на модель вешать обработчики событий методом <strong>bind</strong>:</p>
+<pre>.bind( event, handler(ev, todo ) )</pre>
+<p>например:</p>
+<pre>var todo = new Todo({name: "mow lawn"});
+todo.bind('created', function(ev, todo){
+ console.log("created", todo );
+})
+todo.save()</pre>
+<p>При вызове todo.save()сработает обработчик события <em>created</em>.</p>
+<p>Мы рассмотрели принцы организации моделей во фреймворке, теперь перейдем к представлению. Оно реализовано через метод <strong>View</strong>:</p>
+<pre>$.View( idOrUrl, data )</pre>
+<p>где <strong>id0rUrl</strong> &#8211; ID элемента(либо имя файла), который содержит шаблон, а <strong>data</strong> &#8211; данные передаваемые в этот шаблон. Вот пример шаблона:</p>
+<pre>&lt;% for(var i = 0; i &lt; this.length; i++ ) { %&gt; 
+    &lt;li&gt;&lt;%= this[i].name %&gt;&lt;/li&gt;  
+&lt;% } %&gt;</pre>
+<p>который мы сохранили в файл todos.ejs. Возвращает этот метод обработанный шаблон:</p>
+<pre>Todo.findAll( {}, function( todos ){
+    console.log( $.View( 'todos.ejs', todos ) );
+});</pre>
+<p>в данном случае мы получили элементы для модели и вывели их через шаблон. Также стоит упомянуть что фреймворк расширяет стандартные методы JQuery для работы с HTML, такие как: after, append, before, html, prepend, replaceWith и text. Теперь в них мы тоже можем использовать шаблоны:</p>
+<pre>$('#todos').html( 'todos.ejs', todos );</pre>
+<p>Теперь перейдем к организации контроллера, который также основан на вызове метода <strong>Controller</strong>:</p>
+<pre>$.Controller(name, classProps, prototypeProps)</pre>
+<p>с помощью этого метода создается класс JQuery виджета:</p>
+<pre>$.Controller("Todos", 
+            { "init" : function( element , options ){ 
+                   this.element.html('todos.ejs', Todo.findAll() ) 
+                    } 
+})</pre>
+<p>и теперь мы можем создать сам виджет:</p>
+<pre>new Todos('#todos', {});</pre>
+<p>который прикрепится к контейнеру #todos и выведет записи по запросу<code> Todo.findAll()</code> через шаблон<code> todos.ejs.</code></p>
+<p>Тут также не стоит путать виджет контроллера <strong>Todos</strong> и класс модели <strong>Todo</strong>.</p>
+<p>Обязательно параллельно проверяйте все в коде и экспериментируйте с различными вариантами.</p>
+<p>Поговорим более подробно о методе <strong>init</strong> класса контролера, который будет вызван при создании объекта и имеет следующий синтаксис:</p>
+<pre>$.Controller.prototype.init(element, options)</pre>
+<p>где element &#8211; это элемент, на который навесили виджет обернутый в JQuery, a options &#8211; это опции(как подсказывает кэп), который расширяют настройки заданные по умолчанию. Пример создания нескольких виджетов с параметрами:</p>
+<pre>//определяем класс $.Controller("Todos", { defaults : {template: 'todos.ejs'} }, { "init" : function( element , options ){ element.html(options.template, Todo.findAll() ) } }) // а теперь создаем виджеты new Todos( document.body.firstElementChild ); new Todos( $('#todos'), {template: 'specialTodos.ejs'})</pre>
+<p>Также в при создании класса контроллера мы можем сразу же прописать обработчики для событий на элементе виджета следующим образом:</p>
+<pre>$.Controller("Todos",
+            { "init" : ...,
+              "li click" : function(element, event){
+                      console.log("You clicked", li.text() )
+                      // тригерим событие чтобы дать знать другим
+                      element.trigger('selected');
+                    }
+             })</pre>
+<p>как видно из примера мы имеем следующий синтаксис для навешивания обработчиков:</p>
+<pre>"[selector] [event]"</pre>
+<p>Т.е. селектор, причем может быть составной селектор и событие. К сожалению, данный синтаксис не поддерживает множественные события(ну или я не разобрался полностью). Но зато поддерживает динамические шаблоны для подстановки события, выглядит это следующим образом:</p>
+<pre>"li .destroy {Events.destroy}" : function(el, ev){ ... }</pre>
+<p>а теперь инициализируем событие:</p>
+<pre>Events = {destroy: "click"};</pre>
+<p>Также хорошим стилем является триггер нашего события дальше:</p>
+<pre>element.trigger('selected');</pre>
+<p>Т.е. мы отметили что состоялось событие не просто клик, а уже совершилось событие <em>selected</em>.</p>
+<p>Удалять созданные виджеты мы можем 2мя способами: стандартно JQuery-style через удаление элемента &#8211; <code>$("#todos").remove()</code>, либо с помощью метода виджета <code>.destroy()</code></p>
+<p>Кроме контроллера виджетов в фреймворке есть еще контроллер роутов, который создается следующим образом:</p>
+<pre>$.Controller("Routing",
+             { "route" : function(){//сюда попадаем при пустом хеше }, 
+               "todos/:id route" : function(data){ //с параметром } 
+}) 
+
+// создаем контроллер
+new Routing(document.body);</pre>
+<p>Как он работает? Он использует метод <strong>$.route</strong>, который в свою очередь представляет из себя <strong>jQuery.Observe</strong> наблюдающий за состоянием <strong>window.location.hash</strong>.</p>
+<p>Мы можем непосредственно влиять на hash через этот метод:</p>
+<pre>$.route.attr('id','6') // location.hash = #!todos/6
+// или так
+var hash = $.route.url({id: 7}) // #!todos/7 
+location.hash = hash;</pre>
+<p>Более сложный вариант роутера:</p>
+<pre>$.Controller("Routing",
+             {init : function(){ 
+                  this.editor = new Editor("#editor") 
+                  new Todos("#todos"); 
+              }, 
+             "route" : function(){ ... }, 
+             "todos/:id route" : function(data){ ... }, 
+             ".todo selected" : function(el, ev, todo){ $.route.attr('id',todo.id); } 
+}); 
+
+new Routing(document.body);</pre>
+<p>Хочу обратить внимание на вариант, когда когда мы выставляем контроллер не на изменение хеша, а на действие <em>.todo selected</em>, но при этом меняем хеш через <em>$.route.attr(&#8216;id&#8217;,todo.id)</em>.</p>
+<p>Из основного это все.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/09/%d1%80%d0%b0%d0%b7%d0%b1%d0%be%d1%80-javascriptmvc/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

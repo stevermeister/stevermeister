@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>dock &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/dock/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Fri, 15 Dec 2017 13:39:48 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>MacOs: Don&#8217;t show specific app icon on Dock</title>
+		<link>https://stepansuvorov.com/blog/2017/12/macos-dont-show-specific-app-icon-on-dock/</link>
+					<comments>https://stepansuvorov.com/blog/2017/12/macos-dont-show-specific-app-icon-on-dock/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 15 Dec 2017 20:31:52 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[dock]]></category>
+		<category><![CDATA[mac]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3485</guid>
+
+					<description><![CDATA[I have a hotkey for the terminal that why I decided to hide the terminal icon from Dock, but it appeared to be not so easy. You need to go to app contents (by doing right click -&#62; &#8220;Show Package &#8230; <a href="https://stepansuvorov.com/blog/2017/12/macos-dont-show-specific-app-icon-on-dock/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>I have a hotkey for the terminal that why I decided to hide the terminal icon from Dock, but it appeared to be not so easy.</p>
+<p>You need to go to app contents (by doing right click -&gt; &#8220;<strong>Show Package Contents</strong>&#8220;) and change <strong>Info.plist</strong> file &#8211; add special key:</p>
+<p><strong>&lt;key&gt;LSUIElement&lt;/key&gt;</strong><br />
+<strong>&lt;true/&gt;</strong></p>
+<p>(it could be added to the end of the file):<img decoding="async" class="alignnone size-full wp-image-3486" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/12/Screen-Shot-2017-12-15-at-14.38.46.png" alt="" width="344" height="90" /></p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/12/macos-dont-show-specific-app-icon-on-dock/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>RxJS.takeUntil &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/rxjs-takeuntil/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 03 Jun 2017 21:45:30 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Angular &#038; Rxjs: Отписываться или не отписываться?</title>
+		<link>https://stepansuvorov.com/blog/2017/06/angular-rxjs-unsubscribe-or-not-unsubscribe/</link>
+					<comments>https://stepansuvorov.com/blog/2017/06/angular-rxjs-unsubscribe-or-not-unsubscribe/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 03 Jun 2017 21:45:02 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[RxJs]]></category>
+		<category><![CDATA[RxJS.takeUntil]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3361</guid>
+
+					<description><![CDATA[Как вы наверное уже знаете при подписке на обозреваемую последовательность либо просто событие в Javascript вы обычно должны в определенный момент отписываться, чтобы освободить память. Иначе это приведет к утечке памяти. Мы рассмотрим основные случаи, когда вы должны отписываться в ngOnDestroy &#8230; <a href="https://stepansuvorov.com/blog/2017/06/angular-rxjs-unsubscribe-or-not-unsubscribe/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Как вы наверное уже знаете при подписке на обозреваемую последовательность либо просто событие в Javascript вы обычно должны в определенный момент отписываться, чтобы освободить память. Иначе это приведет к утечке памяти.</p>
+<p>Мы рассмотрим основные случаи, когда вы должны отписываться в <strong>ngOnDestroy</strong> хуке компонента, а также случаи, когда можно не отписываться.</p>
+<p><span id="more-3361"></span></p>
+<h2>Нужно отписываться</h2>
+<p><strong>Формы</strong></p>
+<p>необходимо отписываться от формы и от отдельных формконтролов, на которые подписались:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/b0729635a19a20ab8c3ae1731a056cbb">Gist</a>.</p>
+<p><strong>Роутер</strong></p>
+<p>Согласно официальной документации <strong>Angular</strong> должен сам отписывать вас, <a href="https://github.com/angular/angular/issues/16261">но этого не происходит</a>, поэтому:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/ee9fdca12fd3895a1c9d19e8eb2c8de3">Gist</a>.</p>
+<p><strong>Рендерер</strong></p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/ef76fa152c4b601166f008218bbd9409">Gist</a>.</p>
+<p><strong>Бесконечные обозреваемые последовательности</strong></p>
+<p>Примерами бесконечных могут служить последовательности созданные с помощью <strong>interva()</strong> или слушающие события (<strong>fromEvent()</strong>):</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/e38d65c1487f371e509b5da1d0be8ee9">Gist</a>.</p>
+<p><strong>ngRx</strong></p>
+<p>От подписок на состояние <strong>Store ngRx</strong> тоже необходимо отписываться:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/a1ec1b4b6ba2e2e17d92872030ff31b3">Gist</a>.</p>
+<p>&nbsp;</p>
+<h2>Отписываться НЕ нужно</h2>
+<p><strong>Async pipe</strong></p>
+<p>C async pipe нам повезло и он выполнят работу под отписке за нас:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/c87db9bca26a8a5609e01658a7e9b9c3">Gist</a>.</p>
+<p id="c2d0" class="graf graf--h4 graf-after--p"><strong>@HostListener</strong></p>
+<p class="graf graf--h4 graf-after--p">так же нам не нужно отписываться, когда мы навешиваем слушатель события с помощью HostListener:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/fa9aafd4a3351f8a5ce4ceedcd40122c">Gist</a>.</p>
+<p><strong>Конечные обозреваемые последовательности</strong></p>
+<p>Бывают последовательности, которые сами завершаются, такие как <strong>HTTP</strong> и <strong>timer</strong>:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/f28edc7bb3ee905618edeb74ae2cc005">Gist</a>.</p>
+<h2>Bonus</h2>
+<p>Также вы можете использовать оператор <strong><a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/operators/takeuntil.md">takeUntil</a></strong>, который позволит писать код в декларативном стиле, не отписываясь от каждого обозревателя отдельно:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/431d4e5e786a39d2a2cf46c1b2ab1d42">Gist</a>.</p>
+<p>Кроме <strong>takeUntil</strong> вы еще можете использовать <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/operators/take.md">take</a>, <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/operators/takewhile.md">takeWhile</a> и <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/operators/first.md">first</a> которые также позволят &#8220;убить&#8221; последовательность, соотвественно не прийдется от нее отписываться.</p>
+<p>&nbsp;</p>
+<p>Большая часть материала взята из статьи <a href="https://netbasal.com/when-to-unsubscribe-in-angular-d61c6b21bad3">When to Unsubscribe in Angular</a>.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/06/angular-rxjs-unsubscribe-or-not-unsubscribe/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

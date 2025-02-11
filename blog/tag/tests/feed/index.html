@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>tests &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/tests/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 21 Nov 2015 13:24:28 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Автоматизируем тестирование AngularJS с Protractor</title>
+		<link>https://stepansuvorov.com/blog/2014/11/protractor/</link>
+					<comments>https://stepansuvorov.com/blog/2014/11/protractor/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 18 Nov 2014 19:02:58 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[grunt]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[protractor]]></category>
+		<category><![CDATA[tests]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2011</guid>
+
+					<description><![CDATA[О том как установить и запустить Protractor уже было в этом посте &#8211; Тестируем AngularJS используя Protractor. А сейчас мы сделаем фокус  на том, как мы можем интегрировать Protractor в нашу систему и подкючить к Grunt. Подключаем Protractor к Grunt &#8230; <a href="https://stepansuvorov.com/blog/2014/11/protractor/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" fetchpriority="high" class="alignnone size-medium wp-image-2012" title="grunt+angular+protractor" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/falgg2jybmhgk16y62lr-300x300.png" alt="" width="300" height="300" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/falgg2jybmhgk16y62lr-300x300.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/10/falgg2jybmhgk16y62lr-150x150.png 150w, https://stepansuvorov.com/blog/wp-content/uploads/2014/10/falgg2jybmhgk16y62lr.png 500w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>О том как установить и запустить <strong><a title="angular.github.io/protractor" href="http://angular.github.io/protractor/#/">Protractor</a></strong> уже было в этом посте &#8211; <a title="angularjs-protractor" href="https://stepansuvorov.com/blog/2014/02/angularjs-protractor/">Тестируем AngularJS используя Protractor</a>. А сейчас мы сделаем фокус  на том, как мы можем интегрировать <strong>Protractor</strong> в нашу систему и подкючить к <strong><a title="gruntjs" href="http://gruntjs.com/">Grunt</a></strong>.</p>
+<p><span id="more-2011"></span></p>
+<h2>Подключаем Protractor к Grunt</h2>
+<p>Для подключение нам необходимо поставить специальный таск-плагин <a title="npmjs.org" href="https://www.npmjs.org/package/grunt-protractor-runner">grunt-protractor-runner</a> к grunt путем выполнения следующей команды:</p>
+<pre>$ npm install grunt-protractor-runner</pre>
+<p>После чего можем дополнить наш конфигурационный файл секцией для него:</p>
+<p>[javascript]<br />
+protractor: {<br />
+  options: {<br />
+    configFile: &quot;protractor.conf.js&quot;<br />
+  },<br />
+  all: {}<br />
+}<br />
+[/javascript]</p>
+<p><strong>protractor.conf.js</strong> &#8211; конфигурационный файл, который уже у нас есть (создание подробно описано в <a href="https://stepansuvorov.com/blog/2014/02/angularjs-protractor/">предыдущем посте</a>)</p>
+<p><strong>all: {}</strong> &#8211; grunt требует как минимум один &#8220;target&#8221;, поэтому, если все параметры уже указаны в конфиге протрактора, то можем просто добавить пустую сецию.</p>
+<p>Проверим что мы все правильно настроили и команда выполняется без ошибок:</p>
+<p>[bash]<br />
+$ grunt protractor:all<br />
+[/bash]</p>
+<h2>PhantomJS и Protractor</h2>
+<p>В случае, когда мы хотим запускать наши тесты не только локально, но и на сервере, где нет возможности использовать браузер на помощь спешит <a title="phantomjs.org" href="http://phantomjs.org/">PhantomJS</a>. Ознакомиться с <strong>PhantomJS</strong> вы можете в посте &#8211; <a href="https://stepansuvorov.com/blog/2012/09/%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%B5%D0%BC-%D1%8E%D0%BD%D0%B8%D1%82-%D1%82%D0%B5%D1%81%D1%82%D1%8B-%D1%81-phantomjs/">Создаем юнит-тесты с phantomjs</a>, а сейчас мы поговорим о том как его встроить в Protractor.</p>
+<p>Теперь вместо вебдрайвера мы должны запустить фантом-сервер:</p>
+<pre>$ phantomjs --webdriver=4444</pre>
+<p>а наша секция grunt конфига преобразиться следующим образом:</p>
+<p>[javascript]<br />
+protractor: {<br />
+  options: {<br />
+    configFile: &quot;protractor.conf.js&quot;<br />
+  },<br />
+  all: {<br />
+        options: {<br />
+          args:{<br />
+            seleniumAddress: &#8216;http://localhost:4444&#8217;,<br />
+            capabilities: {<br />
+              browserName: &#8216;phantomjs&#8217;<br />
+            }<br />
+          }<br />
+        }<br />
+      }<br />
+}<br />
+[/javascript]</p>
+<p>иногда бывает необходимо специфицировать конкретную версию/путь к phantomjs, тогда добавляем еще одну опцию &#8211; <strong>phantomjs.binary.path</strong>, а аргументы к фантому можем передавать через опцию <strong>phantomjs.cli.args</strong>; итого получим:</p>
+<p>[javascript]<br />
+protractor: {<br />
+  options: {<br />
+    configFile: &quot;protractor.conf.js&quot;<br />
+  },<br />
+  all: {<br />
+        options: {<br />
+          args:{<br />
+            seleniumAddress: &#8216;http://localhost:4444&#8217;,<br />
+            capabilities: {<br />
+              browserName: &#8216;phantomjs&#8217;,<br />
+              &#8216;phantomjs.binary.path&#8217;:&#8217;./node_modules/.bin/phantomjs&#8217;,<br />
+              &#8216;phantomjs.cli.args&#8217;: [&#8216;&#8211;ignore-ssl-errors=true&#8217;,  &#8216;&#8211;web-security=false&#8217;]<br />
+            }<br />
+          }<br />
+        }<br />
+      }<br />
+}<br />
+[/javascript]</p>
+<p>Если мы хотим, чтобы вебдрайвер запустил фантом за нас, то просто не указываем параметр <strong>seleniumAddress</strong>.</p>
+<h2>Отладка тест-сценариев в WebStorm</h2>
+<p>Пару слов о том как можно дебажить тесты в WebStorm. Что для этого нужно сделать:</p>
+<p>Открываем настройки Run/Debug:</p>
+<p><img decoding="async" class="alignnone size-full wp-image-2029" title="webstorm edit run configuration" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-17.51.44.png" alt="" width="119" height="42" /></p>
+<p>Добравляем новую конфигурацию для Node.js:</p>
+<p><img decoding="async" class="alignnone size-medium wp-image-2030" title="webstorm node.js config" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-17.57.17-263x300.png" alt="" width="263" height="300" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-17.57.17-263x300.png 263w, https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-17.57.17.png 326w" sizes="(max-width: 263px) 100vw, 263px" /></p>
+<p>Прописываем следующие ключевые настройки:</p>
+<ul>
+<li><strong>Working directory</strong>: корневой путь вашего проекта (например: ‘<em>/Users/stevermeister/workspace/academy-js</em>’)</li>
+<li><strong>JavaScript file</strong>: путь к cli.js файлу протрактора (как правило это <em>node_modules\protractor\lib\cli.js</em>)</li>
+<li><strong>Application parameters</strong>: путь к файлу конфиг файлу протрактора(например: <em>protractor.conf.js</em>)</li>
+</ul>
+<div><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2032" title="webstorm protractor config" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-18.09.011.png" alt="" width="710" height="379" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-18.09.011.png 710w, https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-18.09.011-300x160.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-18.09.011-500x266.png 500w" sizes="(max-width: 710px) 100vw, 710px" /></div>
+<p>Сохраняем. Готово:</p>
+<p><a href="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-18.11.27.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2033" title="webstorm protractor debug" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-20-18.11.27.png" alt="" width="169" height="39" /></a></p>
+<p>Теперь можно проставлять бреймпоинты и дебажить.</p>
+<h2>Подключение вспомогательных файлов</h2>
+<p>Иногда возникает необходимость подключить файлы, которые не являются тест сценариями, но, в которых содержится вспомогательный функционал(например логин). Для этого необходимо подключаем файл сделать формата модуля <strong>node.js </strong>(<a title="Node-Require-and-Exports" href="http://openmymind.net/2012/2/3/Node-Require-and-Exports/">module.exports</a>), то есть(helpers.js):</p>
+<p>[javascript]<br />
+function login(){<br />
+//&#8230;<br />
+}<br />
+function logout(){<br />
+//&#8230;<br />
+}<br />
+var Helper = {};<br />
+Helper.login = login;<br />
+Helper.logout = logout;<br />
+[/javascript]</p>
+<p>и потом подключить в файле сценария:</p>
+<p>[javascript]<br />
+var helpers = require(&#8216;./helpers&#8217;);<br />
+helpers.login();<br />
+[/javascript]</p>
+<p>Для тех, кто ранее не работал с таким синтаксисом, подчеркну: расширение &#8220;<em>.js</em>&#8221; в данном случае не пишется.</p>
+<p><span style="color: #000000; font-weight: bold;">Примеры тест сценариев</span></p>
+<h2>Авторизация пользователя в приложении:</h2>
+<p>[javascript]<br />
+describe(&#8216;Auth Module&#8217;, function() {<br />
+  var ptor = protractor.getInstance();</p>
+<p>  it(&#8216;should login user&#8217;, function() {<br />
+    browser.get(&#8216;/login&#8217;);<br />
+    browser.waitForAngular();</p>
+<p>    element(by.model(&#8216;username&#8217;)).sendKeys(browser.params.login.user);<br />
+    element(by.model(&#8216;password&#8217;)).sendKeys(browser.params.login.password);<br />
+    element.all(by.css(&#8216;.button&#8211;primary&#8217;)).first().click();</p>
+<p>    element(by.binding(&#8216;user.name&#8217;)).getText().then(function(username) {<br />
+      expect(username).equal(browser.params.login.username);<br />
+    });<br />
+    ptor.getCurrentUrl().then(function(url) {<br />
+      expect(url.slice(-10)).equal(&#8216;/dashboard&#8217;);<br />
+    });<br />
+  });<br />
+});<br />
+[/javascript]</p>
+<p>Параметры типа пароля в тестах, понятное дело лучше не держать. Здесь они вынесены в отдельную секцию конфига протрактора (да, согласен, тоже не комильфо, но всеравно лучше, чем прям в тестах):</p>
+<p>[javascript]<br />
+params: {<br />
+  login: {<br />
+    user: &#8216;stepan@mail.com&#8217;,<br />
+    password: &#8216;XXXXXXXXX&#8217;,<br />
+    username: &#8216;Stepan Suvorov&#8217;<br />
+  }<br />
+}<br />
+[/javascript]</p>
+<h2>Покупка продукта</h2>
+<p>[javascript]<br />
+describe(&#8216;Purchase item&#8217;, function() {<br />
+  var ptor = protractor.getInstance();</p>
+<p>  beforeEach(function() {<br />
+    helpers.logout();<br />
+    helpers.login();<br />
+    browser.sleep(3000);<br />
+  });</p>
+<p>  it(&#8216;should purchase an item&#8217;, function() {</p>
+<p>    browser.get(&#8216;/items/552/buy&#8217;);<br />
+    browser.sleep(3000);<br />
+    element(by.css(&#8216;.modal-window__block .button&#8211;primary&#8217;)).click();</p>
+<p>    ptor.ignoreSynchronization = true;</p>
+<p>    element(by.css(&#8216;#mainSubmit&#8217;)).click();<br />
+    element(by.css(&#8216;input[type=&quot;submit&quot;]&#8217;)).click();</p>
+<p>    ptor.ignoreSynchronization = false;<br />
+  });<br />
+});<br />
+[/javascript]</p>
+<p>хотел бы отметить очень важный момент в этом куске кода:</p>
+<p>[javascript]<br />
+ptor.ignoreSynchronization = true;<br />
+[/javascript]</p>
+<p>этим мы говорим протрактору, что мы покидаем приложение и переходим на страницу без AngularJS.</p>
+<h2>Поиск по каталогу</h2>
+<p>[javascript]<br />
+describe(&#8216;Search&#8217;, function() {<br />
+  it(&#8216;should do search&#8217;, function() {</p>
+<p>    browser.get(&#8216;/items&#8217;);<br />
+    element(by.model(&#8216;itemsSearch.query&#8217;)).sendKeys(&#8216;iBrick&#8217;, protractor.Key.ENTER);</p>
+<p>    element.all(by.repeater(&#8216;item in items&#8217;)).then(function(rows) {<br />
+      var itemTitleElement = rows[0].element(by.className(&#8216;item-tile__name&#8217;));<br />
+      itemTitleElement.getText().then(function(itemTitle) {<br />
+        expect(itemTitle).equal(&#8216;iBrick Plus&#8217;);<br />
+      })</p>
+<p>    });<br />
+  });<br />
+});<br />
+[/javascript]</p>
+<p>&nbsp;</p>
+<h2>Дополнительно</h2>
+<ul>
+<li><a title="egghead.io" href="https://egghead.io/lessons/angularjs-protractor-interactive">Protractor Interactive (видео от Egghead)</a></li>
+<li><a title="stackoverflow.com" href="http://stackoverflow.com/a/25008031/274500">Развернутый ответ на стеке по поводу возможных ошибок</a></li>
+</ul>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/11/protractor/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Специфика тестирования AngularJs директив</title>
+		<link>https://stepansuvorov.com/blog/2014/06/%d1%81%d0%bf%d0%b5%d1%86%d0%b8%d1%84%d0%b8%d0%ba%d0%b0-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-angularjs-%d0%b4%d0%b8%d1%80%d0%b5%d0%ba%d1%82%d0%b8%d0%b2/</link>
+					<comments>https://stepansuvorov.com/blog/2014/06/%d1%81%d0%bf%d0%b5%d1%86%d0%b8%d1%84%d0%b8%d0%ba%d0%b0-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-angularjs-%d0%b4%d0%b8%d1%80%d0%b5%d0%ba%d1%82%d0%b8%d0%b2/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 11 Jun 2014 20:59:32 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[directive]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[tests]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1715</guid>
+
+					<description><![CDATA[Тезисно выкладываю некоторые ключевые моменты по тестированию AngularJS директив. Подготовительные действия ставим тест-драйвер Karma определяемся и подключаем к проекту тест-фреймворк (варианты Mocha, Jasmine) подключаем к проекту вспомогательную библиотеку angular-mocks Написание сценария подключаем Angular-модуль: [javascript]beforeEach(module(&#8216;myapp&#8217;));[/javascript] подключаем шаблон (предварительно скомпилированный с помощью html2js): &#8230; <a href="https://stepansuvorov.com/blog/2014/06/%d1%81%d0%bf%d0%b5%d1%86%d0%b8%d1%84%d0%b8%d0%ba%d0%b0-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-angularjs-%d0%b4%d0%b8%d1%80%d0%b5%d0%ba%d1%82%d0%b8%d0%b2/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Тезисно выкладываю некоторые ключевые моменты по тестированию AngularJS директив.</p>
+<p><span id="more-1715"></span></p>
+<h2>Подготовительные действия</h2>
+<ul>
+<li>ставим тест-драйвер <a href="http://karma-runner.github.io/0.12/index.html">Karma</a></li>
+<li>определяемся и подключаем к проекту тест-фреймворк (варианты <a href="http://visionmedia.github.io/mocha/">Mocha</a>, <a href="http://jasmine.github.io/">Jasmine</a>)</li>
+<li>подключаем к проекту вспомогательную библиотеку <a href="https://github.com/angular/bower-angular-mocks">angular-mocks</a></li>
+</ul>
+<h2>Написание сценария</h2>
+<p>подключаем Angular-модуль:</p>
+<p>[javascript]beforeEach(module(&#8216;myapp&#8217;));[/javascript]</p>
+<p>подключаем шаблон (предварительно скомпилированный с помощью <a href="https://github.com/karlgoldstein/grunt-html2js">html2js</a>):</p>
+<p>[javascript]beforeEach(module(&#8216;path/to/template&#8217;));[/javascript]</p>
+<p>инжектим сервисы:</p>
+<p>[javascript]<br />
+var $timeout, $rootScope;<br />
+beforeEach(inject(function(_$timeout_, _$rootScope_){<br />
+  $timeout = _$timeout_;<br />
+  $rootScope= _$rootScope_;<br />
+}));[/javascript]</p>
+<p>прошу обратить внимание на нижнее подчеркивание, которое используется в Ангуляре для удобства и инжектит одноименный сервис.</p>
+<p>либо инжектим инжектор и с помощью него уже получаем сервисы:</p>
+<p>[javascript]<br />
+var $timeout, $rootScope;<br />
+beforeEach(inject(function($injector){<br />
+  $timeout = $injector.get(&#8216;$timeout&#8217;);<br />
+  $rootScope= $injector.get(&#8216;$rootScope&#8217;);<br />
+}));[/javascript]</p>
+<p>для создания нового $scope делаем:</p>
+<p>[javascript]<br />
+var $scope = $rootScope.$new()<br />
+[/javascript]</p>
+<p>компиляция директивы для тестирования:</p>
+<p>[javascript]<br />
+var element = $compile(&#8216;&lt;my-directive&gt;&lt;/my-directive&gt;&#8217;)($scope);<br />
+[/javascript]</p>
+<p>при этом не забываем инжектить сервис $compile</p>
+<p>получение изолированного $scope:</p>
+<p>[javascript]<br />
+var isolatedScope = element.children().scope()<br />
+[/javascript]</p>
+<p>либо (работает начиная с версии 1.2):</p>
+<p>[javascript]<br />
+var isolatedScope = element.isolateScope()<br />
+[/javascript]</p>
+<p>чтобы запустить все колбэки в таймАут-сервисах:</p>
+<p>[javascript]<br />
+$timeout.flush()<br />
+[/javascript]</p>
+<p>чтобы промисы внутри приложения отрезолвились необходимо вручную делать:</p>
+<p>[javascript]<br />
+scope.$apply();<br />
+[/javascript]</p>
+<p>если что-то забыл &#8211; пиши в комментариях &#8211; дополню.</p>
+<p><strong>UPD:</strong></p>
+<p>подмена сервисов (замена мок-вариатом):<br />
+[javascript]<br />
+beforeEach(module(function ($provide){<br />
+  $provide.service(&#8216;SameNameWithRealService&#8217;, function(){<br />
+      //код вашего мок-сервиса<br />
+  });<br />
+}));<br />
+[/javascript]</p>
+<p>использование &#8220;шпионов&#8221; для проверки вызова методов:<br />
+[javascript]<br />
+//переопределение внутреннего метода<br />
+$scope.someMethod = sinon.spy();<br />
+//вызов внешнего метода, который должен вызвать первый<br />
+$scope.someOtherMethod()<br />
+//проверка<br />
+expect($scope.someMethod.called).equal(true);<br />
+[/javascript]<br />
+&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/06/%d1%81%d0%bf%d0%b5%d1%86%d0%b8%d1%84%d0%b8%d0%ba%d0%b0-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-angularjs-%d0%b4%d0%b8%d1%80%d0%b5%d0%ba%d1%82%d0%b8%d0%b2/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Используем Mocha для unit-тестов</title>
+		<link>https://stepansuvorov.com/blog/2013/11/mocha/</link>
+					<comments>https://stepansuvorov.com/blog/2013/11/mocha/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 29 Nov 2013 14:07:11 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[Mocha]]></category>
+		<category><![CDATA[tests]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=891</guid>
+
+					<description><![CDATA[Mocha &#8211; JavaScript тест-фреймворк, который можно запускать как на node.js, так и в браузере, удобен для асинхронного тестирования. * Правильное произношение слова: &#8220;мока&#8220;. Установка Достаточно выполнить следующую команду $ npm install -g mocha Проверяем установку $ mocha --version 1.14.0 Простой пример По &#8230; <a href="https://stepansuvorov.com/blog/2013/11/mocha/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-892" title="mocha_logo" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/01/mocha_logo-300x116.png" alt="" width="300" height="116" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2013/01/mocha_logo-300x116.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2013/01/mocha_logo-500x194.png 500w, https://stepansuvorov.com/blog/wp-content/uploads/2013/01/mocha_logo.png 507w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p><a href="http://visionmedia.github.com/mocha/">Mocha</a> &#8211; JavaScript тест-фреймворк, который можно запускать как на node.js, так и в браузере, удобен для асинхронного тестирования.</p>
+<p>* Правильное произношение слова: &#8220;<em>мока</em>&#8220;.</p>
+<p><span id="more-891"></span></p>
+<h2>Установка</h2>
+<p>Достаточно выполнить следующую команду</p>
+<pre>$ npm install -g mocha</pre>
+<p>Проверяем установку</p>
+<pre>$ mocha --version
+1.14.0</pre>
+<h2></h2>
+<h2>Простой пример</h2>
+<p>По умолчанию <strong>Mocha</strong> запускает тесты из директории <strong>test</strong>, поэтому создадим такую директорию, а в ней <strong>test.js</strong>:</p>
+<pre>var assert = require("assert")
+     describe('#indexOf()', function(){
+         it('should return -1 when the value is not present', function(){
+             assert.equal(-1, [1,2,3].indexOf(5));
+             assert.equal(-1, [1,2,3].indexOf(0));
+}) })</pre>
+<p>Теперь выполним</p>
+<pre>$ mocha test
+1 passing (3ms)</pre>
+<h2></h2>
+<h2>Синтаксис</h2>
+<p>В базовом синтаксисе тестов на Mocha все стандартно: начинаются с <strong>describe();</strong>, сами тесты в <strong>it();</strong> , которые находятся внутри <strong>describe()</strong>. Также, в случае большого количества блоков, мы можем группировать <strong>describe()</strong> друг в друга.</p>
+<p>Так же доступны хуки: <strong>before()</strong>, <strong>after()</strong>, <strong>beforeEach()</strong>, и <strong>afterEach()</strong>. Хуки так же должны быть описаны внутри блока <strong>describe()</strong>.</p>
+<p>&nbsp;</p>
+<h2>Asset библиотеки</h2>
+<p>Mocha позволяет использовать на выбор библиотеку/стиль для сравнений:</p>
+<ul>
+<li><a href="https://github.com/visionmedia/should.js">should.js</a> BDD style</li>
+<li><a href="https://github.com/LearnBoost/expect.js">expect.js</a></li>
+<li><a href="http://chaijs.com/">chai</a> expect(), assert() and should style assertions</li>
+<li><a href="https://github.com/visionmedia/better-assert">better-assert</a></li>
+</ul>
+<p>&nbsp;</p>
+<h2>Асинхронные тесты</h2>
+<p>Идея ассинхронных тестов на mocha заключается в том, что мы передаем дополнительный callback-параметр <strong>done</strong>, который выполняем в случае успешного прохождения:</p>
+<pre>describe('User#save()', function(){
+    it('should save without error', function(done){
+         var user = new User('Luna');
+         user.save(function(){
+            done();
+         });
+    })
+})</pre>
+<p>Все хуки ( <strong>before()</strong>,<strong> after()</strong>,<strong> beforeEach()</strong>,<strong> afterEach() </strong> ) также поддерживают асинхронную модель поведения:</p>
+<pre>beforeEach(function(done){
+       db.clear(function(){
+         done();
+})})</pre>
+<p>&nbsp;</p>
+<h2>Логирование</h2>
+<p>Поддерживается стандартный метод <strong>console.log()</strong>, который выведет параметр на экран консоли при запуске тестов.</p>
+<p>&nbsp;</p>
+<h2>Постоянное выполнение тестов</h2>
+<p>Можно запускать <strong>Mocha</strong> как одноразово, так и в режиме постоянного тестирования в ожидании изменений. Для второго варианта указываем флажок <strong>watch</strong>:</p>
+<pre>$ mocha --watch</pre>
+<p>&nbsp;</p>
+<h2>Генераторы отчетов</h2>
+<p>Mocha богат в выборе стиле отчетов:</p>
+<ul>
+<li>Dot Matrix &#8211; по умолчанию</li>
+<li>Spec</li>
+<li>Nyan</li>
+<li>TAP</li>
+<li>Landing Strip</li>
+<li>List</li>
+<li>Progress</li>
+<li>JSON</li>
+<li>JSON Stream</li>
+<li>JSONCov</li>
+<li>HTMLCov</li>
+<li>Min</li>
+<li>Doc</li>
+<li>XUnit</li>
+<li>TeamCity</li>
+<li>Markdown</li>
+<li>HTML</li>
+</ul>
+<p>Чтобы задать конкретный стиль при запуске тестов используем параметр <strong>reporter</strong>:</p>
+<pre>$ mocha --reporter list</pre>
+<p>&nbsp;</p>
+<h2>Запуск в браузере</h2>
+<p><strong>Mocha</strong> можно запустить и в браузере, для этого необходимо подключить скрипт стилей и указать какой интерфейс вы хотите использовать и потом запускать тесты.</p>
+<pre>&lt;html&gt;
+&lt;head&gt;
+&lt;link rel="stylesheet" href="mocha.css" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id="mocha"&gt;&lt;/div&gt;
+&lt;script src="jquery.js"&gt;&lt;/script&gt;
+&lt;script src="expect.js"&gt;&lt;/script&gt;
+&lt;script src="mocha.js"&gt;&lt;/script&gt;
+&lt;script&gt;mocha.setup('bdd')&lt;/script&gt;
+&lt;script src="test.array.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    mocha.checkLeaks();
+    mocha.globals(['jQuery']);
+    mocha.run();
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>&nbsp;</p>
+<p>В своем проекте мы использовали связку <strong>mocha</strong> + <strong>chai.expect</strong>. и запускали через <strong><a href="http://karma-runner.github.io/0.10/index.html">karma</a></strong>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/11/mocha/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Тестируем сайт на разных версиях ИЕ под Linux/Mac</title>
+		<link>https://stepansuvorov.com/blog/2013/03/%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d1%83%d0%b5%d0%bc-%d1%81%d0%b0%d0%b9%d1%82-%d0%bd%d0%b0-%d1%80%d0%b0%d0%b7%d0%bd%d1%8b%d1%85-%d0%b2%d0%b5%d1%80%d1%81%d0%b8%d1%8f%d1%85-%d0%b8%d0%b5-%d0%bf%d0%be/</link>
+					<comments>https://stepansuvorov.com/blog/2013/03/%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d1%83%d0%b5%d0%bc-%d1%81%d0%b0%d0%b9%d1%82-%d0%bd%d0%b0-%d1%80%d0%b0%d0%b7%d0%bd%d1%8b%d1%85-%d0%b2%d0%b5%d1%80%d1%81%d0%b8%d1%8f%d1%85-%d0%b8%d0%b5-%d0%bf%d0%be/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 31 Mar 2013 12:25:38 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[browser]]></category>
+		<category><![CDATA[ie]]></category>
+		<category><![CDATA[tests]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[virtualbox]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=930</guid>
+
+					<description><![CDATA[Хочу поделиться скриптом найденым в сети, который создает виртуальные машины(на основе VirtualBox) для всех версий Internet Explorer на раздых Windows, при этом не нарушая лицензии. Подробности под катом. Компания Microsoft сама создала образы вируальных машин с целью предоставляения возможности вебразработчикам &#8230; <a href="https://stepansuvorov.com/blog/2013/03/%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d1%83%d0%b5%d0%bc-%d1%81%d0%b0%d0%b9%d1%82-%d0%bd%d0%b0-%d1%80%d0%b0%d0%b7%d0%bd%d1%8b%d1%85-%d0%b2%d0%b5%d1%80%d1%81%d0%b8%d1%8f%d1%85-%d0%b8%d0%b5-%d0%bf%d0%be/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Хочу поделиться <a href="https://github.com/xdissent/ievms/blob/master/ievms.sh">скриптом</a> найденым в сети, который создает виртуальные машины(на основе <strong>VirtualBox</strong>) для всех версий <strong>Internet Explorer</strong> на раздых <strong>Windows</strong>, при этом <span style="text-decoration: underline;">не нарушая лицензии</span>. Подробности под катом.</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-952" title="virtualbox_win" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/03/virtualbox_win-300x248.png" alt="" width="300" height="248" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2013/03/virtualbox_win-300x248.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2013/03/virtualbox_win-361x300.png 361w, https://stepansuvorov.com/blog/wp-content/uploads/2013/03/virtualbox_win.png 763w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p><span id="more-930"></span></p>
+<p>Компания <strong>Microsoft</strong> сама создала <a href="http://www.microsoft.com/en-us/download/details.aspx?id=11575">образы вируальных машин</a> с целью предоставляения возможности вебразработчикам тестировать их сайты на старых версиях <strong>IE </strong>и/или из другой операционной ситемы(<strong>Linux/Mac</strong>). Для удобного использования <a href="Greg Thornton">Greg Thornton</a> создал <a href="https://github.com/xdissent/ievms">скрипт</a>, который сам все скачивает и устанавливает.</p>
+<p>Плюсы: это бесплатно, легально и это не требует лиценизии на каждую Window.</p>
+<p>Минусы: если вы захотите поставить себе все версии(это опционально), то займет довольно много места на диске (около 45Гб)</p>
+<p><span style="text-decoration: underline;">Внимание!</span> Windows обязательно попросит себя активировать. Это нормально. Чтобы снова получить trial необходимо выполнить c правами администратора следующую команду в командной строке(cmd):</p>
+<pre>slmgr -rearm</pre>
+<p>Пароль по умолчанию для всех версий Windows &#8211; &#8220;<em>Password1</em>&#8220;.</p>
+<p>Запустить скрипт одной сточкой можно так:</p>
+<pre>curl -s https://raw.github.com/xdissent/ievms/master/ievms.sh | bash</pre>
+<p>через параметр <strong>IEVMS_VERSIONS </strong>можно указать конкретные версии, которые необходимо установить</p>
+<pre>curl -s https://raw.github.com/xdissent/ievms/master/ievms.sh | IEVMS_VERSIONS="6 8" bash</pre>
+<p>Спасибо Грегу за скрипт и вам успешного тестирования.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/03/%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d1%83%d0%b5%d0%bc-%d1%81%d0%b0%d0%b9%d1%82-%d0%bd%d0%b0-%d1%80%d0%b0%d0%b7%d0%bd%d1%8b%d1%85-%d0%b2%d0%b5%d1%80%d1%81%d0%b8%d1%8f%d1%85-%d0%b8%d0%b5-%d0%bf%d0%be/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Karma в помощь тестированию</title>
+		<link>https://stepansuvorov.com/blog/2013/01/testacular-%d0%b2-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8e/</link>
+					<comments>https://stepansuvorov.com/blog/2013/01/testacular-%d0%b2-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8e/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 09 Jan 2013 07:33:12 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[karma]]></category>
+		<category><![CDATA[phpStorm]]></category>
+		<category><![CDATA[testacular]]></category>
+		<category><![CDATA[tests]]></category>
+		<category><![CDATA[webStorm]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=876</guid>
+
+					<description><![CDATA[UPD: статься обновлена 21.11.2015. Старое имя утилиты &#8211; Testacular Karma &#8211; инструмент на node.js, позволяющий запускать JavaScript код в нескольких браузерах, нацеленная на поддержку TDD подхода. Karma &#8211; это не фреймворк/библиотека для тестирования, поэтому совместно можно использовать: Mocha Jasmine QUnit либо же что-то совсем другое, &#8230; <a href="https://stepansuvorov.com/blog/2013/01/testacular-%d0%b2-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8e/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><a href="http://karma-runner.github.io/"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2970" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/11/banner.png" alt="karma test runer" width="288" height="67" /></a></p>
+<p><strong>UPD</strong>: статься обновлена <strong>21.11.2015</strong>. Старое имя утилиты &#8211; <a href="https://github.com/vojtajina/testacular/">Testacular</a></p>
+<p><a href="http://karma-runner.github.io/">Karma</a> &#8211; инструмент на <strong>node.js</strong>, позволяющий запускать <strong>JavaScript</strong> код в нескольких браузерах, нацеленная на поддержку <strong>TDD</strong> подхода.</p>
+<p><span id="more-876"></span></p>
+<p><b>Karma</b> &#8211; это <span style="text-decoration: underline;">не фреймворк/библиотека</span> для тестирования, поэтому совместно можно использовать:</p>
+<ul>
+<li><a href="http://visionmedia.github.com/mocha/">Mocha</a></li>
+<li><a href="http://pivotal.github.com/jasmine/">Jasmine</a></li>
+<li><a href="http://qunitjs.com/">QUnit</a></li>
+<li>либо же что-то совсем другое, но написав свой адаптер</li>
+</ul>
+<p><strong>Браузеры</strong>, которые можно использовать:</p>
+<ul>
+<li><a href="https://github.com/karma-runner/karma-chrome-launcher">Chrome and Chrome Canary</a> (npm install karma-chrome-launcher)</li>
+<li><a href="https://github.com/karma-runner/karma-firefox-launcher">Firefox</a> (npm install karma-firefox-launcher)</li>
+<li><a href="https://github.com/karma-runner/karma-safari-launcher">Safari</a> (npm install karma-safari-launcher)</li>
+<li><a href="https://github.com/karma-runner/karma-phantomjs-launcher">PhantomJS</a> (npm install karma-phantomjs-launcher)</li>
+<li><a href="https://github.com/karma-runner/karma-opera-launcher">Opera</a> (npm install karma-opera-launcher)</li>
+<li><a href="https://github.com/karma-runner/karma-ie-launcher">IE</a> (npm install karma-ie-launcher)</li>
+<li><a href="https://github.com/karma-runner/karma-sauce-launcher">SauceLabs</a> (npm install karma-sauce-launcher)</li>
+<li><a href="https://github.com/karma-runner/karma-browserstack-launcher">BrowserStack</a> (npm install karma-browserstack-launcher)</li>
+<li><a href="https://www.npmjs.org/browse/keyword/karma-launcher">и многие другие</a></li>
+</ul>
+<h2>Установка:</h2>
+<pre>$ npm install -g karma</pre>
+<p>Проверяем что все установилось:</p>
+<pre>$ karma --version</pre>
+<p>Так же нам понадобиться тест фреймворк, используем Jasmine:</p>
+<pre>npm install karma-jasmine</pre>
+<p>и подключение к браузеру(возьмем Chrome):</p>
+<pre>npm install karma-chrome-launcher</pre>
+<h2>Настройка:</h2>
+<p>Все настройки можно задать в <a href="https://raw.githubusercontent.com/vojtajina/karma/master/test/client/karma.conf.js">конфигурационном файле</a>. Мы можем создать свой файл настроек воспользовавшись мастером инициализации:</p>
+<pre>$ karma init</pre>
+<p>Разберем основные моменты <strong>karma.config.js</strong>:</p>
+<pre>//в скобках указано значение по умолчанию
+basePath('') -
+files([]) - список файлов/шаблонов для загрузки
+exclude([]) - список исключений для предыдущего пункта
+reporters(['progress']) - вариант вывода прогресса
+port(8080) - порт веб-сервера(testacular)
+runnerPort(9100) - порт клиента
+colors(true) - включение/выключение цветов при выводе
+logLevel(LOG_INFO) - LOG_DISABLE|LOG_ERROR|LOG_WARN|LOG_INFO|LOG_DEBUG
+autoWatch(false) - выполнение тестов при изменении файлов
+browsers([]) - Chrome, ChromeCanary, Firefox, Opera, Safari, PhantomJS
+captureTimeout(5000) - задание таймаута в миллисекундах
+singleRun(false) - для одноразового запуска
+preprocessors({}) - список обработчиков, которые будут применены к файлам, до загрузки в браузер, например - CoffeeScript</pre>
+<p>Итак, у файл настроек есть, теперь можем запускать утилиту:</p>
+<pre>$ karma start</pre>
+<p>Т.к. мы еще не добавили сами тесты, то должно вывести что-то типа:</p>
+<pre>Executed 0 of 0 ERROR (0.006 secs / 0 secs)</pre>
+<p>Давайте создадим простой тест (на <strong>Jasmine</strong>):</p>
+<pre>describe("A suite", function() {
+    it("contains spec with an expectation", function() {
+        expect(true).toBe(true);
+    });
+});</pre>
+<p>сохраним его в файл <strong>test.js</strong> и подключим этот файл в конфиг:</p>
+<pre>files: [
+  'test.js'
+],</pre>
+<p>после чего снова запустим karma и посмотрим в консоль:</p>
+<pre>Executed 1 of 1 SUCCESS (0.086 secs / 0.002 secs)</pre>
+<p>Как видим: тесты прошли успешно, один тест выполнился.</p>
+<h2> Подключение в WebStorm</h2>
+<p><strong>UPD</strong>: WebStrom начиная с версии 7 уже добавили поддержку Karma, поэтому не нужно уже выполнять танцы с бубном и настройкой <a href="http://blog.jetbrains.com/webide/2011/11/webstorm-your-node-app/">node debug</a>, который были до этого.</p>
+<p>Заходим в настройки запуска и отладки:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2974" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/11/Screenshot-2015-11-21-13.55.47.png" alt="webstorm karma" width="329" height="199" /></p>
+<p>Добавляем карму:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2975" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/11/Screenshot-2015-11-21-13.58.08.png" alt="webstorm karma" width="212" height="385" /></p>
+<p>&nbsp;</p>
+<p>Из настроек вам нужно только задать имя и убедиться что подхватился правильный путь к файлу конфигурации.</p>
+<p>Если мы хотим выполнять тесты после каждого изменения в коде, включим вот эту опцию:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2982" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/11/Screenshot-2015-11-21-14.23.28.png" alt="webstorm karma" width="300" height="309" /></p>
+<p>Теперь webstorm будет нас информировать о состоянии тестов, в том числе в бекграунде:</p>
+<p><img decoding="async" loading="lazy" class="alignnone wp-image-2977 size-full" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/11/Screenshot-2015-11-21-14.14.07.png" alt="webstorm karma" width="291" height="88" /></p>
+<p>то есть если мы сделаем TDD или просто хотим знать момент, когда мы что-то пошло не так, это довольно удобно:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2979" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/11/Screenshot-2015-11-21-14.16.13.png" alt="webstorm karma" width="344" height="68" /></p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/01/testacular-%d0%b2-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8e/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

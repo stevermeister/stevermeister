@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>use strict &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/use-strict/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Tue, 08 Jul 2014 19:56:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Что нужно знать о &#8216;strict mode&#8217; в JavaScript</title>
+		<link>https://stepansuvorov.com/blog/2014/07/strict-mode/</link>
+					<comments>https://stepansuvorov.com/blog/2014/07/strict-mode/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 08 Jul 2014 19:56:38 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[use strict]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1730</guid>
+
+					<description><![CDATA[Заметки в помощь пытающимся понять суть &#8220;strict mode&#8220;. применяется ко всему скрипту или к отдельным функциям одинарные или двойные обрамляющие кавычки &#8211; не важно кидает ошибку(ReferenceError) при создании глобальной переменной  предотвращает попытку присвоения NaN, undefined значения(TypeError) предотвращает попытку переопределения свойства &#8230; <a href="https://stepansuvorov.com/blog/2014/07/strict-mode/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Заметки в помощь пытающимся понять суть &#8220;<strong>strict mode</strong>&#8220;.</p>
+<p><span id="more-1730"></span></p>
+<ul>
+<li>применяется ко всему скрипту или к отдельным функциям</li>
+<li>одинарные или двойные обрамляющие кавычки &#8211; не важно</li>
+<li>кидает ошибку(ReferenceError) при создании <strong>глобальной переменной </strong></li>
+<li>предотвращает попытку присвоения <strong>NaN</strong>, <strong>undefined</strong> значения(TypeError)</li>
+<li>предотвращает попытку <strong>переопределения свойства объекта</strong>, <a title="jsfiddle.net" href="http://jsfiddle.net/STEVER/2Lyh2/">закрытого для переопределения</a> (TypeError)</li>
+<li>вернет ошибку(TypeError) при попытке <strong>удалить <a title="например Object.prototype;" href="#">неудаляемое свойство</a></strong></li>
+<li>останавливает интерпретацию кода (SyntaxError) при объявлении в объекте<strong> 2 одинаковых ключей</strong> (без strict &#8211; просто переопределяет значение вторым)</li>
+<li>предотвращает <strong>дупликацию имен параметров</strong> при объявлении <strong>метода</strong></li>
+<li>выключает <strong>восьмиричный</strong> способ задания переменных типа number(SyntaxError )</li>
+<li>запрещает оператор <strong>with</strong> (SyntaxError )</li>
+<li>входящие параметры функции не связаны с <strong>arguments</strong> (т.е. изменение arguments, не ведет к изменению параметра)</li>
+<li>свойство <strong>arguments.callee</strong> недоступно (TypeError)</li>
+<li><strong>this</strong> будет <strong>undefined</strong>, если контекст не определен (а не window), если контекст определен примитивом, то this будет объект-обертка примитива (String, Boolean, Number&#8230;)</li>
+<li>появляются новые зарезервированные слова &#8211; <strong>implements</strong>, <strong>interface</strong>, <strong>let</strong>, <strong>package</strong>, <strong>private</strong>, <strong>protected</strong>, <strong>public</strong>, <strong>static</strong>, <strong>yield</strong> &#8211; которые нельзя использовать (SyntaxError)</li>
+<li>нельзя(SyntaxError) использовать <strong>функциональное объявление</strong> (functional declaration) внутри условных конструкций (или грубо говоря не на верхнем уровне).</li>
+</ul>
+<h2></h2>
+<h2>Полезная литература</h2>
+<ul>
+<li><a title="developer.mozilla.org" href="https://developer.mozilla.org/ru/docs/JavaScript/Reference/Functions_and_function_scope/Strict_mode">Strict mode (MDN)</a></li>
+<li><a title="stackoverflow.com" href="http://stackoverflow.com/questions/1335851/what-does-use-strict-do-in-javascript-and-what-is-the-reasoning-behind-it">What does “use strict” do in JavaScript</a></li>
+</ul>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/07/strict-mode/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

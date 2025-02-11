@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>sizzle &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/sizzle/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 02 May 2015 20:44:35 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Пишем jQuery c нуля. Часть2 &#8211; Поисковый движок и вывод результатов</title>
+		<link>https://stepansuvorov.com/blog/2015/05/jquery-from-sketch-sizzle/</link>
+					<comments>https://stepansuvorov.com/blog/2015/05/jquery-from-sketch-sizzle/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 04 May 2015 04:53:52 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[sizzle]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2469</guid>
+
+					<description><![CDATA[В продолжение рубрики &#8220;Пишем jQuery c нуля&#8221; хотел бы рассказать о внутреннем поисковом движке, той ключевой функциональности, которая и дала название &#8220;jQuery&#8221; (Javascript query). Плюс рассмотрим момент инициализации/создания jQuery объекта. Все разработчики, которые хоть раз использовали jQuery, знают, что если &#8230; <a href="https://stepansuvorov.com/blog/2015/05/jquery-from-sketch-sizzle/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>В продолжение рубрики &#8220;Пишем jQuery c нуля&#8221; хотел бы рассказать о внутреннем поисковом движке, той ключевой функциональности, которая и дала название &#8220;jQuery&#8221; (Javascript <strong>query</strong>). Плюс рассмотрим момент инициализации/создания jQuery объекта.</p>
+<p><span id="more-2469"></span></p>
+<p>Все разработчики, которые хоть раз использовали <strong>jQuery</strong>, знают, что если написать:</p>
+<p>[javascript]<br />
+$(&#8216;div.myclass&#8217;)<br />
+[/javascript]</p>
+<p>нам вернуться все элементы попадающие под этот селектор. Но вот, что происходит внутри и как jQuery обрабатывает эти селекторы и выдает результаты, знает не каждый.</p>
+<p>Поисковый движок получил имя <strong>Sizzle</strong> и в последствии был выделен в <a title="http://sizzlejs.com/" href="http://sizzlejs.com/">отдельную библиотеку</a>, которую <a title="github.com" href="https://github.com/jquery/jquery/blob/master/src/selector-sizzle.js#L6">включает в себя</a> <strong>jQuery</strong>.</p>
+<p>С появлением в браузерах методов для поиска элементов по селекторам &#8211; <a title="developer.mozilla.org" href="https://developer.mozilla.org/ru/docs/Web/API/Document/querySelector">querySelector</a>, <a title="developer.mozilla.org" href="https://developer.mozilla.org/ru/docs/Web/API/Document/querySelectorAll">querySelectorAll</a> острая необходимость в Sizzle пропадает. Мы его можем использовать только для старых браузеров и использовании <a title="api.jquery.com" href="http://api.jquery.com/category/selectors/">расширенных поисковых фильтров</a>.</p>
+<p>Итого как себя ведет jQuery получив строку-селектор параметром:</p>
+<ol>
+<li>анализ <a title="github.com" href="https://github.com/jquery/jquery/blob/master/src/core/init.js#L16">регулярным выражением</a></li>
+<li>если это <strong>id</strong> &#8211; то получаем элемент с помощь <strong>document.getElementById</strong></li>
+<li>если есть возможность, используем <strong>querySelectorAll</strong></li>
+<li>если нет возможности использовать querySelectorAll &#8211; используем <strong>Sizzle</strong></li>
+</ol>
+<p>В своей djQuery я не планирую поддерживать старые браузеры, а фильтры может добавлю потом, поэтому воссоздавать полную функциональность Sizzle не вижу смыла.</p>
+<p>Выделю только ключевые моменты:</p>
+<ul>
+<li> если Sizzle обнаруживает #id селектор внутри строки, то он игнорирует остальное, то есть:</li>
+</ul>
+<p>[javascript]<br />
+$(&#8216;div.myclass#myelem&#8217;)<br />
+[/javascript]</p>
+<p>и</p>
+<p>[javascript]<br />
+$(&#8216;#myelem&#8217;)<br />
+[/javascript]</p>
+<p>будут восприняты одинаково</p>
+<ul>
+<li>разбор селектора идет <span style="text-decoration: underline;">с права на лево</span>, это важно если вы занимаетесь низко уровневой оптимизацией и есть возможность задать более четкое условие справа.</li>
+<li>опять таки, кто стремиться к высокой производительности, тому лучше не увлекаться кастомными фильтрами поиска, которые не дают использовать querySelector даже на современных браузерах</li>
+</ul>
+<p>Так ну а теперь немного кода, чтобы дополнить наш djQuery проект.</p>
+<p>Как мы и договорились поддерживать старые браузеры не будем, поэтому ограничимся использованием querySelector:</p>
+<p>[javascript]<br />
+var result = document.querySelectorAll(selector);<br />
+[/javascript]</p>
+<p>Но просто результат мы не можем вернуть, так как помним, что jQuery возвращает свой экземпляр, поэтому:</p>
+<p>[javascript]<br />
+return this;<br />
+[/javascript]</p>
+<p>ну и предварительно наполним этот объект результатами:</p>
+<p>[javascript]<br />
+for (var i = 0; i &lt; results.length; i++) {<br />
+  this[i] = results[i];<br />
+}<br />
+this.length = i;<br />
+[/javascript]</p>
+<p>все бы хорошо, но правильно работать будет только, если мы сделаем new, то есть вызов:</p>
+<p>[javascript]<br />
+new djQuery(&#8216;div&#8217;)<br />
+[/javascript]</p>
+<p>это не совсем то, чего мы хотели. Как создать контекст уже внутри конструктора?</p>
+<p>Хочется сделать как-то так:</p>
+<p>[javascript]<br />
+var djQuery = function(selector, context) {<br />
+    return new djQuery(selector, context);<br />
+};<br />
+[/javascript]</p>
+<p>Только, понятное дело, внутренняя функция не может дублировать внешнюю. Поэтому сделаем метод <code>init</code>, в который перенесем внутренности djQuery инициализации:</p>
+<p>[javascript]<br />
+var djQuery = function(selector, context) {<br />
+    return new init(selector, context)<br />
+  };</p>
+<p>  init = function( selector ) {<br />
+    var results = document.querySelectorAll(selector);<br />
+    for (var i = 0; i &lt; results.length; i++) {<br />
+      this[i] = results[i];<br />
+    }</p>
+<p>    this.length = i;<br />
+  };<br />
+[/javascript]</p>
+<p>А для того, чтобы все методы прототипа djQuery были доступны из объектов созданных с помощью init конструктора свяжем их прототипы:</p>
+<p>[javascript]<br />
+init.prototype = djQuery.prototype;<br />
+[/javascript]</p>
+<p>Ну вот теперь можем выполнить:</p>
+<p>[javascript]<br />
+djQuery(&#8216;div&#8217;)<br />
+[/javascript]</p>
+<p>И получить ожидаемый список объектов.</p>
+<p>Но если мы сравним в консоли результаты функций (нашей и jQuery), то можем заметить следующее:</p>
+<p><img decoding="async" class="alignnone size-full wp-image-2546" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/05/Screenshot-2015-05-02-22.26.42.png" alt="jQuery vs djQuery" width="418" height="116" /></p>
+<p>Почему-то jQuery выводит результаты в виде массива, а наша djQuery возвращает объект. Оказывается, чтобы объект воспринимался как массив в нем должны присутствовать следующие метод <code>splice</code>. Ну что ж, добавим их в прототип вместе с <code>push</code> и <code>sort</code>:</p>
+<p>[javascript]<br />
+  djQuery.prototype = {<br />
+    length: 0,<br />
+    push: [].push,<br />
+    sort: [].sort,<br />
+    splice: [].splice<br />
+  };<br />
+[/javascript]</p>
+<p>И&#8230; Ура! мы добились того, чего хотели:</p>
+<p><img decoding="async" class="alignnone size-full wp-image-2547" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/05/Screenshot-2015-05-02-22.32.55.png" alt="jQuery vs djQuery array view" width="388" height="111" /></p>
+<p>Еще добавим небольшую проверочку для случая, когда селектор не был передан:</p>
+<p>[javascript]<br />
+  if(!selector){<br />
+    return this;<br />
+  }<br />
+[/javascript]</p>
+<p>Текущая версия кода в теге <a href="https://github.com/stevermeister/djQuery/tree/step-2">step-2</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/05/jquery-from-sketch-sizzle/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

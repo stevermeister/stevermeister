@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>es6 &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/es6/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Wed, 14 Sep 2016 14:12:23 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Angular + ES6 Promise</title>
+		<link>https://stepansuvorov.com/blog/2016/09/angular-es6-promise/</link>
+					<comments>https://stepansuvorov.com/blog/2016/09/angular-es6-promise/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 12 Sep 2016 17:43:29 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[es6]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[promise]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3125</guid>
+
+					<description><![CDATA[It would be really nice if we could use native ECMAScript 2015 Promises with Angular instead of $q service that is provided from box to be close to pure JavaScript: [javascript] //somewhere inside component controller let promise = new Promise((resolve) &#8230; <a href="https://stepansuvorov.com/blog/2016/09/angular-es6-promise/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>It would be really nice if we could use native <strong>ECMAScript 2015</strong> <strong>Promises</strong> with <strong>Angular</strong> instead of <strong>$q</strong> service that is provided from box to be close to pure JavaScript:</p>
+<p>[javascript]<br />
+//somewhere inside component controller<br />
+let promise = new Promise((resolve) =&gt; setTimeout(() =&gt; resolve(&#8216;resolved&#8217;), 2000));<br />
+promise.then(x =&gt; this.x = x);<br />
+[/javascript]</p>
+<p>But in this case we will have to run <strong>digest</strong> manually for each resolve(to synchronise view and model):</p>
+<p>[javascript]<br />
+let promise = new Promise((resolve) =&gt; setTimeout(() =&gt; resolve(&#8216;resolved&#8217;), 2000));<br />
+promise.then(x =&gt; {<br />
+  $scope.apply();<br />
+  this.x = x;<br />
+});<br />
+[/javascript]</p>
+<p>But what if we hack the <strong>Promise</strong> and intercept our <strong>digest</strong> call there:</p>
+<p><span id="more-3125"></span></p>
+<p>[javascript]<br />
+class SubPromise extends Promise {<br />
+  constructor(executor) {<br />
+    super(function(_resolve, _reject) {<br />
+      var resolve = (data) =&gt; {<br />
+        var res = _resolve(data);<br />
+        angular.element(document.body).injector().get(&#8216;$rootScope&#8217;).$apply();<br />
+        return res;<br />
+      }<br />
+      return executor(resolve, _reject);<br />
+    });<br />
+  }<br />
+}<br />
+[/javascript]</p>
+<p>now we just need to overwrite standard <strong>Promise</strong>:</p>
+<p>[javascript]<br />
+window.Promise = SubPromise;<br />
+[/javascript]</p>
+<p>to keep it simple to cover for <strong>unit-tests</strong> you can also wrap it into an angular <strong>factory</strong>:</p>
+<p>[javascript]<br />
+factory(&#8216;Promise&#8217;, () =&gt; Promise);<br />
+[/javascript]</p>
+<p><a href="http://plnkr.co/edit/fysuo9?p=preview">Here</a> you can play with the code.</p>
+<p><a href="http://stackoverflow.com/q/35971958/274500">Discussion on stackoverflow</a> about customising ES6 Promise.</p>
+<p><strong>!Attention:</strong> This experiment was made just for learning purposes and it should not be applied for the real projects.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2016/09/angular-es6-promise/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>setTimeout + ES6 Promise</title>
+		<link>https://stepansuvorov.com/blog/2016/09/settimeout-es6-promise/</link>
+					<comments>https://stepansuvorov.com/blog/2016/09/settimeout-es6-promise/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 10 Sep 2016 09:35:27 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[es6]]></category>
+		<category><![CDATA[promise]]></category>
+		<category><![CDATA[setTimeout]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3120</guid>
+
+					<description><![CDATA[I&#8217;m just thinking how convenient could it be if we have setTimeout returning promise. [javascript] setTimeout(1000).then(/* &#8230; do whatever */); [/javascript] Let&#8217;s create our own one and call it &#8216;delay&#8217; (using ES6 Promise): [javascript] delay = ms =&#62; new Promise(resolve &#8230; <a href="https://stepansuvorov.com/blog/2016/09/settimeout-es6-promise/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>I&#8217;m just thinking how convenient could it be if we have setTimeout returning promise.</p>
+<p>[javascript]<br />
+  setTimeout(1000).then(/* &#8230; do whatever */);<br />
+[/javascript]</p>
+<p>Let&#8217;s create our own one and call it &#8216;delay&#8217; (using ES6 Promise):</p>
+<p><span id="more-3120"></span></p>
+<p>[javascript]<br />
+delay = ms =&gt; new Promise(resolve =&gt; setTimeout(resolve, ms));<br />
+[/javascript]</p>
+<p>so now we already can use our delay function:</p>
+<p>[javascript]<br />
+  delay(1000).then(/* &#8230; do whatever */);<br />
+[/javascript]</p>
+<p>but let&#8217;s not forget about promise cancelation, in this case we need to store reject and timeout id:</p>
+<p>[javascript]<br />
+  delay = ms =&gt; {<br />
+    var promiseCancel, promise = new Promise((resolve, reject) =&gt; {<br />
+        let timeoutId = setTimeout(resolve, ms);<br />
+        promiseCancel = () =&gt; {<br />
+          clearTimeout(timeoutId);<br />
+          reject(Error(&quot;Cancelled&quot;));<br />
+        }<br />
+    });<br />
+    promise.cancel = () =&gt; {<br />
+      promiseCancel();<br />
+    };<br />
+    return promise;<br />
+  }<br />
+[/javascript]</p>
+<p><a href="https://plnkr.co/edit/TeqWpQmj6QD6KlajEc5Z?p=preview">Plunker</a> to play with this code.</p>
+<p><a href="http://stackoverflow.com/a/34255423/274500">Stackoverflow discussion</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2016/09/settimeout-es6-promise/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>ES6 examples</title>
+		<link>https://stepansuvorov.com/blog/2014/02/es6-examples/</link>
+					<comments>https://stepansuvorov.com/blog/2014/02/es6-examples/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 21 Feb 2014 21:57:19 +0000</pubDate>
+				<category><![CDATA[Рекомендую]]></category>
+		<category><![CDATA[es6]]></category>
+		<category><![CDATA[fiddle]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[online]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1483</guid>
+
+					<description><![CDATA[You can try ES6 Examples on es6fiddle.net.]]></description>
+										<content:encoded><![CDATA[<p>You can try ES6 Examples on <a href="http://www.es6fiddle.net/">es6fiddle.net</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/02/es6-examples/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

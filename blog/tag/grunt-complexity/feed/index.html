@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>grunt-complexity &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/grunt-complexity/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Tue, 17 Jun 2014 20:33:45 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>grunt-complexity</title>
+		<link>https://stepansuvorov.com/blog/2014/06/grunt-complexity/</link>
+					<comments>https://stepansuvorov.com/blog/2014/06/grunt-complexity/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 17 Jun 2014 20:33:45 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[grunt]]></category>
+		<category><![CDATA[grunt-complexity]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1728</guid>
+
+					<description><![CDATA[В добавок к валидации кода и покрытия юнит-тестами я прикрутил интересную штуку для проекта &#8211; grunt-complexity &#8211; оценку сложности кода. Установка &#8211; npm пакет: $ npm install grunt-complexity Конфигурирование в grunt-файле: [javascript] complexity: { generic: { src: [&#8216;grunt.js&#8217;, &#8216;tasks/grunt-complexity.js&#8217;], options: &#8230; <a href="https://stepansuvorov.com/blog/2014/06/grunt-complexity/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>В добавок к валидации кода и покрытия юнит-тестами я прикрутил интересную штуку для проекта &#8211; <strong><a href="https://github.com/vigetlabs/grunt-complexity">grunt-complexity</a></strong> &#8211; оценку сложности кода.</p>
+<p><span id="more-1728"></span>Установка &#8211; npm пакет:</p>
+<pre>$ npm install grunt-complexity</pre>
+<p>Конфигурирование в grunt-файле:</p>
+<p>[javascript]<br />
+complexity: {<br />
+  generic: {<br />
+    src: [&#8216;grunt.js&#8217;, &#8216;tasks/grunt-complexity.js&#8217;],<br />
+    options: {<br />
+      errorsOnly: false,<br />
+      cyclomatic: 3,<br />
+      halstead: 8,<br />
+      maintainability: 100<br />
+    }<br />
+  }<br />
+}<br />
+[/javascript]</p>
+<p>И запустив:</p>
+<pre>$ grunt complexity</pre>
+<p>Получим такую интересную картинку:</p>
+<p><img decoding="async" fetchpriority="high" class="alignnone size-full wp-image-1752" title="grunt-complexity" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/06/example.png" alt="grunt-complexity" width="462" height="202" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/06/example.png 462w, https://stepansuvorov.com/blog/wp-content/uploads/2014/06/example-300x131.png 300w" sizes="(max-width: 462px) 100vw, 462px" /></p>
+<p>Теперь давайте разберем что же все таки такое <strong>complexity</strong> и из каких параметров она складывается.</p>
+<h2>Строчки кода (Line of Code or LoC)</h2>
+<p>Это может быть либо физическое количество (строчек кода в файле) либо логическое (считаются только строчки с операторами)</p>
+<h2>Количество парамтров (Number of Parameters)</h2>
+<p>Анализируется семантически(по описанию функции) и без учета использования <strong>arguments</strong>.</p>
+<h2>Цикломатическая сложность (Cyclomatic Complexity)</h2>
+<p>Количество всевозможных проходов блока кода</p>
+<h2>Цикломатическая <span style="color: #000000; font-weight: bold;">плотность </span><span style="color: #000000; font-weight: bold;">(Cyclomatic Complexity Density)</span></h2>
+<p>Отношение циклической сложности к логическому количеству строк кода</p>
+<h2>Критерии сложности Хальстеда (Halstead Complexity Measurement)</h2>
+<p>Основывается на количестве операторов и операндов в конкретной функции. Выделяют 3 основных критерия: Difficulty, Volume, Effort, которые могут быть получены по следующим формулам:</p>
+<div>
+<pre>Difficulty = (# distinct operators / 2) * (# operands / # distinct operands)
+Volume = (# operators + # operands) * log2(# distinct operators + # distinct operands)
+Effort = difficulty * volume</pre>
+<h2>Индекс <em>поддержки</em> (Maintainability Index)</h2>
+<p>Чтобы посчитать его мы должны использовать 3 уже описанные параметра:</p>
+<pre> Maintainability =  171 - (3.42 * ln(effort)) - (0.23 * ln(cyclomatic complexity)) - (16.2 * ln(logical LOC))</pre>
+</div>
+<p>Исходя из этой формулы делаем вывод что индекс может иметь значение от минус бесконечности до <strong>171</strong>. И чем выше индекс &#8211; тем код более поддерживаемый.</p>
+<div>С первого взгляда кажется более чем сложно, но в процессе работы, когда все делает одной командой, а еще лучше просто автоматизировано и выполняется вместе с тестами, &#8211; помогает найти слабыем места и вовремя их исправить.</div>
+<div>Прошу прощения за очень вольный перевод терминов, если где-то неточность &#8211; поправьте пожалуйста.</div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/06/grunt-complexity/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>webpack2 &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/webpack2/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sun, 15 Jan 2017 06:59:47 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Что нового в webpack2</title>
+		<link>https://stepansuvorov.com/blog/2017/01/new-in-webpack2/</link>
+					<comments>https://stepansuvorov.com/blog/2017/01/new-in-webpack2/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 15 Jan 2017 06:59:47 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[webpack]]></category>
+		<category><![CDATA[webpack2]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3212</guid>
+
+					<description><![CDATA[понимание ES6 модулей из коробки (без конвертации в CommonJS) поддержка Tree Shaking конфиг теперь может быть функцией с параметрами и возвращать промис uglifyjs плагин не включает автоматом минификацию других плагинов опциии для лодеров задаются непосредственно в конфигурации лодера, для поддержки старых плагинов добавили LoaderOptionsPlugin, &#8230; <a href="https://stepansuvorov.com/blog/2017/01/new-in-webpack2/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-full wp-image-3213" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/01/Screen-Shot-2017-01-14-at-19.58.07.png" alt="" width="170" height="183" /></p>
+<ul>
+<li>понимание <strong>ES6 модулей</strong> из коробки (без конвертации в CommonJS)</li>
+<li>поддержка <strong>Tree Shaking</strong></li>
+<li>конфиг теперь может быть <strong>функцией с параметрами</strong> и возвращать <strong>промис</strong></li>
+<li><strong>uglifyjs</strong> плагин не включает автоматом минификацию других плагинов</li>
+<li>опциии для лодеров задаются непосредственно в конфигурации лодера, для поддержки старых плагинов добавили <strong>LoaderOptionsPlugin</strong>, который задает опции в контекте всего вебпака</li>
+<li><strong>Promise</strong> полифил теперь не включен в сборку по умолчанию</li>
+<li>большая часть плагинов теперь принимает <strong>параметром объект опций</strong>, вместо набора параметров</li>
+<li>добавлен алиас <strong>webpackfile.js</strong></li>
+<li>флаг &#8220;<strong>-p</strong>&#8221; устанавливает NODE_ENV = “<strong>production</strong>”</li>
+<li><strong>debug</strong> теперь включается для каждого лодера отдельно (нет глобальной опции)</li>
+<li>имена свойств конфига: вместо module.loaders теперь пишем <strong>module.rules</strong>, более чистая нотация с перечислением лодеров в объекте свойства <strong>use</strong></li>
+</ul>
+<p><a href="https://webpack.js.org/guides/migrating/">Инструкции по миграции</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/01/new-in-webpack2/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

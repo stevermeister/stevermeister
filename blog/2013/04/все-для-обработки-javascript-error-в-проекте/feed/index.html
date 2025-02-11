@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	Comments on: Все для обработки JavaScript error в проекте	</title>
+	<atom:link href="https://stepansuvorov.com/blog/2013/04/%d0%b2%d1%81%d0%b5-%d0%b4%d0%bb%d1%8f-%d0%be%d0%b1%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-javascript-error-%d0%b2-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b5/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog/2013/04/%d0%b2%d1%81%d0%b5-%d0%b4%d0%bb%d1%8f-%d0%be%d0%b1%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-javascript-error-%d0%b2-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b5/</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 23 May 2019 15:11:20 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>
+		By: Konstantin		</title>
+		<link>https://stepansuvorov.com/blog/2013/04/%d0%b2%d1%81%d0%b5-%d0%b4%d0%bb%d1%8f-%d0%be%d0%b1%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-javascript-error-%d0%b2-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b5/#comment-57734</link>
+
+		<dc:creator><![CDATA[Konstantin]]></dc:creator>
+		<pubDate>Wed, 28 Oct 2015 13:41:53 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=908#comment-57734</guid>
+
+					<description><![CDATA[In reply to &lt;a href=&quot;https://stepansuvorov.com/blog/2013/04/%d0%b2%d1%81%d0%b5-%d0%b4%d0%bb%d1%8f-%d0%be%d0%b1%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-javascript-error-%d0%b2-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b5/#comment-57728&quot;&gt;Stepan&lt;/a&gt;.
+
+На продакшн sourcemaps нельзя. Нашел такое решение:
+window.onerror = function(msg, file, line, col, error) { ... }
+в данном случае &quot;col&quot; - будет номером символа в строке, что сразу даёт распознать в каком месте ошибка. А &quot;error&quot; - наша ошибка (объект), соответственно можно узнать какого рода ошибка... Браузеры кроме IE9- поддерживают &quot;col&quot; и &quot;error&quot; (не так уж критично в нынешнее время). Я написал такой обработчик ошибок: 
+window.onerror = function(msg, file, line, col, error) {
+
+    // If change, then change in error MW on server
+
+    var report = {
+        agent: navigator.userAgent,
+        url: window.location.href,
+        file: file,
+        line: line
+    };
+
+    if (col) report.column = col;
+
+    if (error) {
+        report.errorType 	   = error instanceof EvalError      ? &#039;EvalError&#039; :
+                                 error instanceof RangeError     ? &#039;RangeError&#039;:
+                                 error instanceof ReferenceError ? &#039;ReferenceError&#039;:
+                                 error instanceof SyntaxError    ? &#039;SyntaxError&#039;:
+                                 error instanceof TypeError      ? &#039;TypeError&#039;:
+                                 error instanceof URIError       ? &#039;URIError&#039;: &#039;Unknown error&#039;;
+        report.stack 		   = error.stack;
+        report.originalMessage = error.message;
+    }
+
+    report.message = msg;
+
+    // тут отправляю отчет об ошибке на сервер
+
+};]]></description>
+			<content:encoded><![CDATA[<p>In reply to <a href="https://stepansuvorov.com/blog/2013/04/%d0%b2%d1%81%d0%b5-%d0%b4%d0%bb%d1%8f-%d0%be%d0%b1%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-javascript-error-%d0%b2-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b5/#comment-57728">Stepan</a>.</p>
+<p>На продакшн sourcemaps нельзя. Нашел такое решение:<br />
+window.onerror = function(msg, file, line, col, error) { &#8230; }<br />
+в данном случае &#8220;col&#8221; &#8211; будет номером символа в строке, что сразу даёт распознать в каком месте ошибка. А &#8220;error&#8221; &#8211; наша ошибка (объект), соответственно можно узнать какого рода ошибка&#8230; Браузеры кроме IE9- поддерживают &#8220;col&#8221; и &#8220;error&#8221; (не так уж критично в нынешнее время). Я написал такой обработчик ошибок:<br />
+window.onerror = function(msg, file, line, col, error) {</p>
+<p>    // If change, then change in error MW on server</p>
+<p>    var report = {<br />
+        agent: navigator.userAgent,<br />
+        url: window.location.href,<br />
+        file: file,<br />
+        line: line<br />
+    };</p>
+<p>    if (col) report.column = col;</p>
+<p>    if (error) {<br />
+        report.errorType 	   = error instanceof EvalError      ? &#8216;EvalError&#8217; :<br />
+                                 error instanceof RangeError     ? &#8216;RangeError&#8217;:<br />
+                                 error instanceof ReferenceError ? &#8216;ReferenceError&#8217;:<br />
+                                 error instanceof SyntaxError    ? &#8216;SyntaxError&#8217;:<br />
+                                 error instanceof TypeError      ? &#8216;TypeError&#8217;:<br />
+                                 error instanceof URIError       ? &#8216;URIError&#8217;: &#8216;Unknown error&#8217;;<br />
+        report.stack 		   = error.stack;<br />
+        report.originalMessage = error.message;<br />
+    }</p>
+<p>    report.message = msg;</p>
+<p>    // тут отправляю отчет об ошибке на сервер</p>
+<p>};</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Stepan		</title>
+		<link>https://stepansuvorov.com/blog/2013/04/%d0%b2%d1%81%d0%b5-%d0%b4%d0%bb%d1%8f-%d0%be%d0%b1%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-javascript-error-%d0%b2-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b5/#comment-57728</link>
+
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 28 Oct 2015 07:16:37 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=908#comment-57728</guid>
+
+					<description><![CDATA[In reply to &lt;a href=&quot;https://stepansuvorov.com/blog/2013/04/%d0%b2%d1%81%d0%b5-%d0%b4%d0%bb%d1%8f-%d0%be%d0%b1%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-javascript-error-%d0%b2-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b5/#comment-57677&quot;&gt;Konstantin&lt;/a&gt;.
+
+sourcemaps нет и не будет?
+если код на продакшене, а в дев среде эта ошибка не возникает, то будет довольно сложно. 
+тут нужно смотреть по деталям: в какой конкретно момент ошибка происходит, на какое действие, с использованием какого модуля/библиотеки.]]></description>
+			<content:encoded><![CDATA[<p>In reply to <a href="https://stepansuvorov.com/blog/2013/04/%d0%b2%d1%81%d0%b5-%d0%b4%d0%bb%d1%8f-%d0%be%d0%b1%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-javascript-error-%d0%b2-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b5/#comment-57677">Konstantin</a>.</p>
+<p>sourcemaps нет и не будет?<br />
+если код на продакшене, а в дев среде эта ошибка не возникает, то будет довольно сложно.<br />
+тут нужно смотреть по деталям: в какой конкретно момент ошибка происходит, на какое действие, с использованием какого модуля/библиотеки.</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Stepan		</title>
+		<link>https://stepansuvorov.com/blog/2013/04/%d0%b2%d1%81%d0%b5-%d0%b4%d0%bb%d1%8f-%d0%be%d0%b1%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-javascript-error-%d0%b2-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b5/#comment-57727</link>
+
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 28 Oct 2015 07:12:50 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=908#comment-57727</guid>
+
+					<description><![CDATA[In reply to &lt;a href=&quot;https://stepansuvorov.com/blog/2013/04/%d0%b2%d1%81%d0%b5-%d0%b4%d0%bb%d1%8f-%d0%be%d0%b1%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-javascript-error-%d0%b2-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b5/#comment-4601&quot;&gt;elledirael&lt;/a&gt;.
+
+большое спасибо за исправления! 
+к сожалению, я не сразу заметил ваш комментарий. 
+
+на блоге сейчас работает система регистрации ошибок - 
+http://stepansuvorov.com/blog/2014/08/%D0%BE%D1%87%D0%B5%D0%BF%D1%8F%D1%82%D0%BA%D0%B8-%D0%BD%D0%B0-%D0%B1%D0%BB%D0%BE%D0%B3%D0%B5/]]></description>
+			<content:encoded><![CDATA[<p>In reply to <a href="https://stepansuvorov.com/blog/2013/04/%d0%b2%d1%81%d0%b5-%d0%b4%d0%bb%d1%8f-%d0%be%d0%b1%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-javascript-error-%d0%b2-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b5/#comment-4601">elledirael</a>.</p>
+<p>большое спасибо за исправления!<br />
+к сожалению, я не сразу заметил ваш комментарий. </p>
+<p>на блоге сейчас работает система регистрации ошибок &#8211;<br />
+<a href="http://stepansuvorov.com/blog/2014/08/%D0%BE%D1%87%D0%B5%D0%BF%D1%8F%D1%82%D0%BA%D0%B8-%D0%BD%D0%B0-%D0%B1%D0%BB%D0%BE%D0%B3%D0%B5/" rel="ugc">http://stepansuvorov.com/blog/2014/08/%D0%BE%D1%87%D0%B5%D0%BF%D1%8F%D1%82%D0%BA%D0%B8-%D0%BD%D0%B0-%D0%B1%D0%BB%D0%BE%D0%B3%D0%B5/</a></p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Konstantin		</title>
+		<link>https://stepansuvorov.com/blog/2013/04/%d0%b2%d1%81%d0%b5-%d0%b4%d0%bb%d1%8f-%d0%be%d0%b1%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-javascript-error-%d0%b2-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b5/#comment-57677</link>
+
+		<dc:creator><![CDATA[Konstantin]]></dc:creator>
+		<pubDate>Tue, 27 Oct 2015 18:47:24 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=908#comment-57677</guid>
+
+					<description><![CDATA[А как быть если код минифицирован (и соответственно нету sourcemaps на клиенте)? Как узнать местонахождение ошибки?]]></description>
+			<content:encoded><![CDATA[<p>А как быть если код минифицирован (и соответственно нету sourcemaps на клиенте)? Как узнать местонахождение ошибки?</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: 7 шагов к качественному JavaScript коду &#124; Stepan Suvorov Blog		</title>
+		<link>https://stepansuvorov.com/blog/2013/04/%d0%b2%d1%81%d0%b5-%d0%b4%d0%bb%d1%8f-%d0%be%d0%b1%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-javascript-error-%d0%b2-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b5/#comment-15864</link>
+
+		<dc:creator><![CDATA[7 шагов к качественному JavaScript коду &#124; Stepan Suvorov Blog]]></dc:creator>
+		<pubDate>Mon, 09 Jun 2014 20:41:44 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=908#comment-15864</guid>
+
+					<description><![CDATA[[...] же не нужно забывать. Я уже писал довольно подробный пост на эту [...]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] же не нужно забывать. Я уже писал довольно подробный пост на эту [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: elledirael		</title>
+		<link>https://stepansuvorov.com/blog/2013/04/%d0%b2%d1%81%d0%b5-%d0%b4%d0%bb%d1%8f-%d0%be%d0%b1%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-javascript-error-%d0%b2-%d0%bf%d1%80%d0%be%d0%b5%d0%ba%d1%82%d0%b5/#comment-4601</link>
+
+		<dc:creator><![CDATA[elledirael]]></dc:creator>
+		<pubDate>Tue, 09 Jul 2013 08:37:49 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=908#comment-4601</guid>
+
+					<description><![CDATA[&#062;&#062;sonething 
+&#062;&#062;системыные
+&#062;&#062;cистема дальше работать не можешь
+&#062;&#062;можем пределить]]></description>
+			<content:encoded><![CDATA[<p>&gt;&gt;sonething<br />
+&gt;&gt;системыные<br />
+&gt;&gt;cистема дальше работать не можешь<br />
+&gt;&gt;можем пределить</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

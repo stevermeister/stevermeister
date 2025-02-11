@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Хочу сделать мир лучше &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/category/%d1%85%d0%be%d1%87%d1%83-%d1%81%d0%b4%d0%b5%d0%bb%d0%b0%d1%82%d1%8c-%d0%bc%d0%b8%d1%80-%d0%bb%d1%83%d1%87%d1%88%d0%b5/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 23 May 2019 15:07:25 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Как работает маршрутизатор Angular</title>
+		<link>https://stepansuvorov.com/blog/2017/10/%d0%9a%d0%b0%d0%ba-%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%b0%d0%b5%d1%82-%d0%bc%d0%b0%d1%80%d1%88%d1%80%d1%83%d1%82%d0%b8%d0%b7%d0%b0%d1%82%d0%be%d1%80-angular/</link>
+					<comments>https://stepansuvorov.com/blog/2017/10/%d0%9a%d0%b0%d0%ba-%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%b0%d0%b5%d1%82-%d0%bc%d0%b0%d1%80%d1%88%d1%80%d1%83%d1%82%d0%b8%d0%b7%d0%b0%d1%82%d0%be%d1%80-angular/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 01 Oct 2017 09:57:42 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3442</guid>
+
+					<description><![CDATA[Резюмируя статью &#8220;The 7-step process of Angular router navigation&#8220; Работу маршрутизатора мы можем разбить на 7 этапов: Parse: разбирает  сроку запроса Redirect: выполняет перенаправление (если нужно) Identify: определяет стейт Guard: запускает гарды конкретного стейта Resolve: резолвит данные стейта Activate: активирует &#8230; <a href="https://stepansuvorov.com/blog/2017/10/%d0%9a%d0%b0%d0%ba-%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%b0%d0%b5%d1%82-%d0%bc%d0%b0%d1%80%d1%88%d1%80%d1%83%d1%82%d0%b8%d0%b7%d0%b0%d1%82%d0%be%d1%80-angular/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><em>Резюмируя статью &#8220;<a href="https://jvandemo.com/the-7-step-process-of-angular-router-navigation/">The 7-step process of Angular router navigation</a>&#8220;</em></p>
+<p>Работу маршрутизатора мы можем разбить на 7 этапов:</p>
+<ol>
+<li><strong>Parse</strong>: разбирает  сроку запроса</li>
+<li><strong>Redirect</strong>: выполняет перенаправление (если нужно)</li>
+<li><strong>Identify</strong>: определяет стейт</li>
+<li><strong>Guard</strong>: запускает гарды конкретного стейта</li>
+<li><strong>Resolve</strong>: резолвит данные стейта</li>
+<li><strong>Activate</strong>: активирует компонент</li>
+<li><strong>Manage</strong>: слушает изменения, чтобы повторить процесс сначала</li>
+</ol>
+<p>Давайте рассмотрим каждый этап более подробно.</p>
+<p><span id="more-3442"></span></p>
+<h2>Parse</h2>
+<p>При разборе URL применяются следующие правила:</p>
+<p>To parse the URL, Angular uses the following conventions:</p>
+<ul>
+<li><code>/</code>: разбиваем на сегменты</li>
+<li><code>()</code>: для <a href="https://angular.io/guide/router#secondary-routes">вторичных роутов</a></li>
+<li><code>:</code>: для задания <a href="https://angular.io/guide/router#displaying-multiple-routes-in-named-outlets">именованых аутлетов </a></li>
+<li><code>;</code>: задание параметров в <a href="https://www.w3.org/DesignIssues/MatrixURIs.html">матричной нотации</a></li>
+<li><code>?,&amp;</code>: разделение <a href="https://angular.io/guide/router#query-parameters-and-fragments">параметров запроса</a></li>
+<li><code>#</code>: задает <a href="https://angular.io/guide/router#query-parameters-and-fragments">фрагмент</a></li>
+<li><code>//</code>: для разделения вторичных роутов</li>
+</ul>
+<p>Исходя из этих правил, следующая строка:</p>
+<pre class="prettyprint prettyprinted"><code class="language-bash"><span class="pun">/</span><span class="pln">section</span><span class="pun">-</span><span class="pln">one</span><span class="pun">;</span><span class="pln">test</span><span class="pun">=</span><span class="pln">one</span><span class="pun">/(</span><span class="pln">nav</span><span class="pun">:</span><span class="pln">navigation</span><span class="pun">;</span><span class="pln">test</span><span class="pun">=</span><span class="pln">two</span><span class="pun">//</span><span class="pln">main</span><span class="pun">:</span><span class="pln">about</span><span class="pun">;</span><span class="pln">test</span><span class="pun">=</span><span class="pln">three</span><span class="pun">)?</span><span class="pln">query</span><span class="pun">=</span><span class="pln">four</span><span class="com">#frag</span></code></pre>
+<p>будет разобрана следующим образом:</p>
+<p><img decoding="async" fetchpriority="high" class="alignnone wp-image-3443" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/09/anatomy-of-angular-router-url.png" alt="" width="799" height="457" /></p>
+<h2>Redirect</h2>
+<p>До создания стейта у нас есть еще фаза редиректа. Возможны 2 варианта редиректа:</p>
+<ul>
+<li><strong>локальные </strong>(не начинаются со слеша и заменяют фрагмент)</li>
+<li><strong>абсолютные </strong>(начинаются со слеша и полностью заменяют URL)</li>
+</ul>
+<h2>Identification</h2>
+<p>В этой фазе Роутер проходит по всем заданным стейтам и проверяет их на полное совпадение. Если полное совпадение не было найдено, он идет дальше.</p>
+<p>Тут очень важно понимать, что при написании общих условий (wild card) они всегда должны идти в декларации ниже специфических.</p>
+<h2>Guards</h2>
+<p>Когда роутер определился с конкретным стейтом, он запускает его гарды, чтобы проверить можно ли его активировать.</p>
+<p>Обратите внимание на порядок запуска гардов:</p>
+<ul>
+<li><strong>CanDeactivate, </strong><strong>CanActivateChild </strong>(запускаются снизу вверх: от самого вложенного к самому корневому)</li>
+<li><strong>CanActivate</strong> (сверху вниз)</li>
+<li><strong>CanLoad </strong>(запускается в случае, когда стейт требует ленивой подгрузки модуля)</li>
+</ul>
+<h2>Resolve</h2>
+<p>После того как роутер знает, что стейт можно активировать он запускает резолверы (если такие определены), для получения данных необходимых стейту.</p>
+<h2>Activate</h2>
+<p>И вот только тут роутер доходит до шага активации компонента определенного для этого роута и его подстановки в <strong>DOM</strong> вместо <strong>router-outlet</strong>.</p>
+<p>Если компонент уже был инициализирован, то используется существующий экземляр.</p>
+<p>Роутер обновляет строку запроса браузера только тогда, когда компонент успешно инициализирован.</p>
+<p>Manage</p>
+<p>После того как произошла активация компонента и выведение его на экран, роутер снова слушает:</p>
+<ul>
+<li>изменения <strong>URL</strong> пользователем</li>
+<li>клики по <strong>routerLink</strong></li>
+<li>вызовы <strong>router.navigate()</strong></li>
+</ul>
+<p>и при одном из этих действий начинает шаги с начала.</p>
+<p>&nbsp;</p>
+<p>Вам была представлена последовательность действий роутера. Если вас интересует больше настройка роутера с примерами, то вам <a href="https://stepansuvorov.com/blog/2017/02/%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%82%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-%D1%80%D0%B0%D0%B7%D0%B1%D0%BE%D1%80-%D0%BC%D0%B0%D1%80%D1%88%D1%80%D1%83%D1%82%D0%B8%D0%B7%D0%B0%D1%82%D0%BE%D1%80/">сюда</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/10/%d0%9a%d0%b0%d0%ba-%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%b0%d0%b5%d1%82-%d0%bc%d0%b0%d1%80%d1%88%d1%80%d1%83%d1%82%d0%b8%d0%b7%d0%b0%d1%82%d0%be%d1%80-angular/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Новое в Angular4.3</title>
+		<link>https://stepansuvorov.com/blog/2017/07/%d0%bd%d0%be%d0%b2%d0%be%d0%b5-%d0%b2-angular4-3/</link>
+					<comments>https://stepansuvorov.com/blog/2017/07/%d0%bd%d0%be%d0%b2%d0%be%d0%b5-%d0%b2-angular4-3/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 26 Jul 2017 18:36:08 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3420</guid>
+
+					<description><![CDATA[HttpClient &#8211; принципиально новый клиент, который переехал из отдельного модуля в подсекцию common (&#8216;@angular/common/http&#8216;): позволяет получить данные сразу в JSON типизировать возвращаемые данные вывод появляются интерсепторы задание дефолтных заголовков (например токена авторизации) подписаться события прогресса Новые гарды роутера: GuardsCheckStart, GuardsCheckEnd, ResolveStart, &#8230; <a href="https://stepansuvorov.com/blog/2017/07/%d0%bd%d0%be%d0%b2%d0%be%d0%b5-%d0%b2-angular4-3/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<ul>
+<li><strong><a href="https://angular.io/guide/http">HttpClient</a> </strong>&#8211; принципиально новый клиент, который переехал из отдельного модуля в подсекцию common (&#8216;<strong>@angular/common/http</strong>&#8216;):
+<ul>
+<li>позволяет получить данные сразу в JSON</li>
+<li>типизировать возвращаемые данные вывод</li>
+<li>появляются интерсепторы</li>
+<li>задание дефолтных заголовков (например токена авторизации)</li>
+<li>подписаться события прогресса</li>
+</ul>
+</li>
+<li>Новые гарды роутера: <strong>GuardsCheckStart</strong>, <strong>GuardsCheckEnd</strong>, <strong>ResolveStart</strong>, <strong>ResolveEnd</strong>, <strong>NavigationStart</strong></li>
+<li>Опция для <a href="https://github.com/angular/angular/issues/16483">отключения анимации в детях</a></li>
+<li>Специальный CSS селектор <strong>::ng-deep</strong>, который является альтернативой <strong>&gt;&gt;&gt;</strong></li>
+</ul>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/07/%d0%bd%d0%be%d0%b2%d0%be%d0%b5-%d0%b2-angular4-3/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Angular: Что такое forwardRef?</title>
+		<link>https://stepansuvorov.com/blog/2017/07/angular-%d1%87%d1%82%d0%be-%d1%82%d0%b0%d0%ba%d0%be%d0%b5-forwardref/</link>
+					<comments>https://stepansuvorov.com/blog/2017/07/angular-%d1%87%d1%82%d0%be-%d1%82%d0%b0%d0%ba%d0%be%d0%b5-forwardref/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 15 Jul 2017 18:13:12 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[angular-forwardRef]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3416</guid>
+
+					<description><![CDATA[Мы иногда встречаем в коде: View the code on Gist. и сразу не понятно, что это магическая функция forwardRef. На самом деле все просто: forwardRef &#8211; это функция-обертка. Зачем она нужна? Чтобы мы могли задавать значением свойства сущности, которые объявлены ниже &#8230; <a href="https://stepansuvorov.com/blog/2017/07/angular-%d1%87%d1%82%d0%be-%d1%82%d0%b0%d0%ba%d0%be%d0%b5-forwardref/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Мы иногда встречаем в коде:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/7144b320098c3afcd1a71879a7eb75ae">Gist</a>.</p>
+<p>и сразу не понятно, что это магическая функция <strong>forwardRef</strong>. На самом деле все просто: <a href="https://angular.io/api/core/forwardRef"><strong>forwardRef</strong></a> &#8211; это функция-обертка. Зачем она нужна? Чтобы мы могли задавать значением свойства сущности, которые объявлены ниже (иначе будет ошибка):</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/d7a18d6196d78080642830bac0321c66">Gist</a>.</p>
+<p>Также можно глянуть в <a href="https://github.com/angular/angular/blob/master/packages/core/src/di/forward_ref.ts#L36">исходники</a>, и убедиться что это просто метод-обертка:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/950e8095689d5c470c75f0ca87acc0b8">Gist</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/07/angular-%d1%87%d1%82%d0%be-%d1%82%d0%b0%d0%ba%d0%be%d0%b5-forwardref/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>AngularCamp 2017, notes</title>
+		<link>https://stepansuvorov.com/blog/2017/07/angularcamp-2017-notes/</link>
+					<comments>https://stepansuvorov.com/blog/2017/07/angularcamp-2017-notes/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 07 Jul 2017 17:50:24 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[AngularCamp]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3399</guid>
+
+					<description><![CDATA[I had I chance to visit AngularCamp these days and would like to share some thoughts/notes with you. Todd Motto &#38; James Henry &#8211; From imperative to reactive thinking (slides) Todd showed 2 great examples of streams of real world. Bulbs that subscribed &#8230; <a href="https://stepansuvorov.com/blog/2017/07/angularcamp-2017-notes/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-full wp-image-3406" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/07/IMG-4c24743ce80cbbd8723a28eec0a6c01c-V.jpg" alt="" width="1210" height="680" /></p>
+<p>I had I chance to visit <strong><a href="https://angularcamp.org">AngularCamp</a></strong> these days and would like to share some thoughts/notes with you.</p>
+<p><span id="more-3399"></span></p>
+<h2>Todd Motto &amp; James Henry &#8211; From imperative to reactive thinking (<a href="https://speakerdeck.com/toddmotto/from-imperative-to-reactive-thinking">slides</a>)</h2>
+<p>Todd showed 2 great examples of streams of real world.</p>
+<p>Bulbs that subscribed to one switch:</p>
+<p><img decoding="async" class="alignnone wp-image-3408" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-10-at-22.01.25.png" alt="" width="173" height="186" /></p>
+<p>and coffee machine that makes different sorts of coffee out of water:</p>
+<p><img decoding="async" loading="lazy" class="alignnone wp-image-3409" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-10-at-22.02.57.png" alt="" width="236" height="160" /></p>
+<p>Next part was about comparing <strong>Imperative</strong> and <strong>Reactive</strong> approaches base on &#8220;game of throwing the ball&#8221; implementation.</p>
+<p><em>Well&#8230; IMHO</em></p>
+<p><strong>Imperative</strong>: too much code, really difficult to follow</p>
+<p><strong>Reactive</strong>: got lost even knowing how to work with Rxjs</p>
+<p>&nbsp;</p>
+<h2>Dmitriy Shekhovtsov &#8211; Unleash The Power Of Angular With Knowledge of Patterns</h2>
+<p>Dmitriy started naming the patterns that everybody knows: <a href="https://en.wikipedia.org/wiki/Singleton_pattern">singleton</a>, <a href="https://en.wikipedia.org/wiki/Factory_(object-oriented_programming)">factory</a>, <a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">pub/sub</a>, <a href="https://en.wikipedia.org/wiki/Adapter_pattern">adapter</a> to warmup audience, after continued with: <a href="https://en.wikipedia.org/wiki/Dependency_injection">DI</a>, <a href="https://en.wikipedia.org/wiki/Module_pattern">module</a>, <a href="https://en.wikipedia.org/wiki/Inversion_of_control">IoC</a>,  <a href="https://en.wikipedia.org/wiki/Command%E2%80%93query_separation">CQRS</a> to make some JS developers exited about new words.</p>
+<p>Then he presented <strong>Dependancy injection</strong> pattern and provided 2 examples: with a fridge where parents &#8220;inject&#8221; food for the child and with carbonara that you don&#8217;t need to take care about ingredients. Frankly speaking, both examples highlighted an encapsulation principle more than DI. After he should how Angular code would look like without DI. I think it would be better to highlight the power of flexibility that DI provides you, instead of showing that</p>
+<p><strong>Module pattern</strong> was next one. Dmitriy highlighted that even with EcmaScript2015+ with native modules we still have to compile it to an old school function wrapper. Some good reasons why to use this pattern:</p>
+<ul>
+<li>namespaces</li>
+<li>encapsulation</li>
+<li>structured code</li>
+<li>manage dependancy</li>
+</ul>
+<p>and after he compared it to <strong>ngModules</strong>: import, export, providers.</p>
+<p>Also Dmitriy provided interesting idea to split you <strong>SharedModule</strong> into 2: to put all you services separately. In this case you would not need <strong>forRoot</strong>/<strong>forChild</strong> approach.</p>
+<p>Next one was a <strong>Change Detection</strong> pattern. Some explanation about Javascript types and memory allocation, and &#8220;<em>why the code worked in AngularJs and doesn&#8217;t work in Angular</em>&#8220;. The answer is <strong>strict equality</strong>.</p>
+<p>Several more words about immutability, pure functions and single responsibility.</p>
+<h2>Simona Cotin &amp; Artur Daschevici &#8211; From Angular to React and back again</h2>
+<p>Simona and Artur provided kind of comparison for <strong>Angular</strong> and <strong>React</strong>(yes, yet another comparison ;) )</p>
+<p>Simona started with Angular history, and told us what things had pushed AngularJs to be Angular:</p>
+<ul>
+<li>ES6</li>
+<li>Web components</li>
+<li>React</li>
+<li>RxJS</li>
+<li>Typescript</li>
+<li>EmberCli</li>
+</ul>
+<p>and also, of course, it was a time for performance changes. so now we have:</p>
+<ul>
+<li>lazy loading</li>
+<li>AoT</li>
+<li>tree shaking</li>
+</ul>
+<p>Then Artur took the floor and told us some parts of React:</p>
+<ul>
+<li>component based</li>
+<li>predictable state management</li>
+<li>ES6</li>
+<li>Flow</li>
+<li>Virtual DOM</li>
+</ul>
+<p>Then they compared CLI tools and component declaration and tools for each framework.</p>
+<p>Issues Angular:</p>
+<ul>
+<li>migration
+<ul>
+<li>Angular Style Guide</li>
+<li>TypeScript</li>
+<li>UpgradeModule</li>
+<li>Upgrade cheatsheet</li>
+</ul>
+</li>
+</ul>
+<p>issues React:</p>
+<ul>
+<li>unmanageble large app</li>
+<li>state management</li>
+<li>no unified way of doing things</li>
+</ul>
+<p>&nbsp;</p>
+<h2>Victor Savkin &#8211; State Management Patterns and Best Practices with NgRxb</h2>
+<p>too much code for 4th talk without break&#8230; it looked like Viktor wanted to put 4 hours talk in 40 minutes&#8230;.</p>
+<p>* I&#8217;ll rewatch video one more time and will return back to you with more information about this topic.</p>
+<p>Also Victor several times during the talk recommended this book:</p>
+<p><a href="https://books.google.nl/books/about/Enterprise_Integration_Patterns.html?id=bUlsAQAAQBAJ&amp;printsec=frontcover&amp;source=kp_read_button&amp;redir_esc=y#v=onepage&amp;q&amp;f=false"><img decoding="async" loading="lazy" class="alignnone wp-image-3411" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/07/images.jpg" alt="" width="184" height="238" /></a></p>
+<p>&nbsp;</p>
+<h2>Martin Splitt &#8211; Virtual Reality with A-Frame</h2>
+<p>Quite inspiring talk: Martin not only showed how to make VR in Javascript with help of simple library but also make all audience laugh.</p>
+<p>He started with some examples of VR</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=TckqNdrdbgk">Tilt Brush: Painting from a new perspective</a></li>
+<li><a href="https://www.youtube.com/watch?v=SCrkZOx5Q1M">Google Earth VR — Bringing the whole wide world to virtual reality</a></li>
+</ul>
+<p>Compared different modern VR devices.</p>
+<p>Explained How VR works.</p>
+<p>I a bit of VR live coding with <a href="https://aframe.io"><strong>a-frame</strong></a> library.</p>
+<p>&nbsp;</p>
+<p><strong>Filip Bech-Larsen &#8211; Building dynamic SPA website</strong></p>
+<p>Filip showed results of his research how to build Angular over existing CMS: to use all management tools for content creation and editing and same time present it like SPA.</p>
+<h1>Pascal Precht &#8211; Angular and Service Workers</h1>
+<p>Progressive web apps (<a href="https://developers.google.com/web/tools/lighthouse/">lighthouse</a> &#8211; to check whether you app is progressive enough)</p>
+<p>Service workers</p>
+<p>Angular Service Worker</p>
+<ul>
+<li>install @angular/serviceworker</li>
+<li>angular-cli  serverWorker: true</li>
+<li>sw-register</li>
+<li>ngsw-manifest</li>
+<li>dynamic routing</li>
+</ul>
+<h1>Carmen Popoviciu &#8211; A moment&#8217;s reflection</h1>
+<p>Deep psychological talk about developer beings from Carmen that was nicely combined with Martin Splitt jokes.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/07/angularcamp-2017-notes/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Формы и валидация данных в Angular</title>
+		<link>https://stepansuvorov.com/blog/2017/07/angular-forms-and-validation/</link>
+					<comments>https://stepansuvorov.com/blog/2017/07/angular-forms-and-validation/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 01 Jul 2017 14:27:40 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[angular-formControl]]></category>
+		<category><![CDATA[angular-forms]]></category>
+		<category><![CDATA[angular-reactive-forms]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3382</guid>
+
+					<description><![CDATA[В отличии от AngularJS в Angular сделали целый модуль, который помогает в обработке форм. Angular предлагает 2 подхода работы с формами: основанный на шаблонах (template-driven) реактивный (reactive) Шаблонный более традиционный для декларативного подхода фреймворка. Реактивный появился позже и считается более &#8230; <a href="https://stepansuvorov.com/blog/2017/07/angular-forms-and-validation/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>В отличии от <strong>AngularJS</strong> в <strong>Angular</strong> сделали целый модуль, который помогает в обработке форм.</p>
+<p>Angular предлагает 2 подхода работы с формами:</p>
+<ul>
+<li>основанный на шаблонах (<strong>template-driven</strong>)</li>
+<li>реактивный (<strong>reactive</strong>)</li>
+</ul>
+<p>Шаблонный более традиционный для декларативного подхода фреймворка. Реактивный появился позже и считается более прогрессивным и гибким. Мы разберем оба подхода.</p>
+<p><span id="more-3382"></span></p>
+<h2>Подключение модуля форм</h2>
+<p>Для начала работы с формами необходимо подключить модуль форм(<strong>FormsModule</strong>):</p>
+<pre>import { FormsModule } from '@angular/forms';</pre>
+<p>если мы хотим работать в реактивном подходе, то подключаем модуль <strong>ReactiveFormsModule</strong>:</p>
+<pre>import { ReactiveFormsModule } from '@angular/forms';</pre>
+<p>И конечно импортируем их в наш основной модуль:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/2949d235a73f5c6c56cd45bad416b199">Gist</a>.</p>
+<h2>Шаблоно-ориентированный подход (template-driven)</h2>
+<p>В шаблонно ориентированном подходе мы по большей части оперируем 3мя сущностями: <a href="https://angular.io/api/forms/NgModel"><strong>ngModel</strong></a>, <strong><a href="https://angular.io/api/forms/NgModelGroup">ngModelGroup</a></strong> и <a href="https://angular.io/api/forms/NgForm"><strong>ngForm</strong></a>.</p>
+<h2>ngModel</h2>
+<p>Чтобы привязать данные к элементу формы мы можем поставить директиву <strong>ngModel</strong>:</p>
+<pre>&lt;input type="text" [ngModel]="name"&gt;</pre>
+<p>Есть 3 способа как получить введенные данные:</p>
+<ul>
+<li>двухстороннее связывание</li>
+<li>обработку события изменения</li>
+<li>ссылку на элемент (либо ngModel)</li>
+</ul>
+<h2>ngModel и двухстороннее связывание (two way binding)</h2>
+<p>Способ, который пришел из <strong>AngularJs</strong> и в <strong>Angular</strong> практически не используется, но тем не менее, его хорошо знать:</p>
+<pre>&lt;input type="text" [(ngModel)]="name"&gt;</pre>
+<p>то есть вы используете специальный синтаксис двойных скобок: сначала прямоугольные, затем круглые ( чтобы было проще запомнить последовательность используется подсказка &#8220;<em>коробка с бананами</em>&#8221; )</p>
+<p>Теперь при вводе данных в элемент формы у нас будет обновляться и свойство контроллера <strong>name</strong>.</p>
+<h2>ngModel и обработка события</h2>
+<p>Вы можете использовать как родное событие поля ввода, например: для <em>type text</em> это будет <strong>input</strong>:</p>
+<pre>&lt;input type="checkbox" [ngModel]="name" (input)="name = $event.target.value"&gt;</pre>
+<p>так и использовать специальное событие <strong>ngModelChange</strong>:</p>
+<div>
+<pre>&lt;input type="text" [ngModel]="name" (ngModelChange)="name = $event"&gt;</pre>
+<div></div>
+</div>
+<h2>ngModel и обращение по ссылке</h2>
+<p>Чтобы поставить ссылку на <strong>ngModel</strong>, мы делаем следующее:</p>
+<pre>&lt;input type="text" [ngModel]="name" #name&gt;</pre>
+<p>теперь мы можем обратиться в шаблоне к значению свойства элемента:</p>
+<pre>{{name.value}}</pre>
+<p>либо в контроллере компонента через специальный декоратор <strong>ViewChild</strong>:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/076ddd493b8f87f39a851ffa9c8ce817">Gist</a>.</p>
+<p>Также мы можем сделать ссылку не только на элемент, но и на сам контроллер ngModel:</p>
+<pre>&lt;input type="text" [ngModel]="name" #nameModel="ngModel"&gt;</pre>
+<p>Теперь в <strong>nameModel</strong> нам доступно не только значение модели, но и все дополнительные свойства и методы контроллера модели:</p>
+<pre>nameModel.valid</pre>
+<h2>Валидация данных в шаблонном подходе</h2>
+<p>Полностью(<em>или почти полностью</em>) поддерживаются HTML5 валидация. То есть, например, если проставить полю атрибут <strong>require</strong>, то Angular его подхватит.</p>
+<h2>Свои валидаторы в шаблонном подходе</h2>
+<p>Не самый очевидный способ предлагают нам разработчики ангуляра для того, чтобы расширить валидаторы в шаблонном подходе. Мы должны создать директиву, в которой переопределить набор стантартных валидаторов <strong>NG_VALIDATORS</strong>, точнее дополнить своим(своими) с помощью флага <a href="https://stepansuvorov.com/blog/2017/01/angular2-opaque-%D1%82%D0%BE%D0%BA%D0%B5%D0%BD%D1%8B-%D0%B8-%D0%BC%D1%83%D0%BB%D1%8C%D1%82%D0%B8%D0%BF%D1%80%D0%BE%D0%B2%D0%B0%D0%B9%D0%B4%D0%B5%D1%80%D1%8B/">multi</a>:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/0eb1129e32beda5405f73f4f87d2db49">Gist</a>.</p>
+<p>таким образом мы создали свой валидатор, который проверит не является ли значение равным &#8216;3&#8217;. Плюс попрошу обратить ваше внимание на селектор для директивы мы указали не только сам атрибут имени директивы, но также что на элементе будет присутствовать <strong>ngModel</strong>.</p>
+<h2>Свои асинхронные валидаторы в шаблонном подходе</h2>
+<p>Полностью идентичны синхронным, отличие только в том что ваш метод валидации возвращает Promise либо Observable, а прописывается не в NG_VALIDATORS, в а <strong>NG_ASYNC_VALIDATORS</strong>:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/871c190a3554b24cdbdf5fa7dc07205e">Gist</a>.</p>
+<h2>Вывод ошибок</h2>
+<p>Чтобы вывести ошибки также можем обратиться к контроллеру <strong>ngModel</strong> по ссылке и получить его свойство <strong>errors</strong>:</p>
+<pre>{{nameModel.errors | json}}</pre>
+<p>.</p>
+<p><em>&#8230;и теперь&#8230;</em></p>
+<p>.</p>
+<p><span style="color: #000000; font-weight: bold;">Реактивный (reactive) подход</span></p>
+<p>Реактивном подходе мы настраиваем элементы формы не в шаблоне, а в контроллере, оперируя при этом следующими понятиями: <a href="https://angular.io/api/forms/FormControl"><strong>FormControl</strong></a>, <a href="https://angular.io/api/forms/FormGroup"><strong>FormGroup</strong></a>, <a href="https://angular.io/api/forms/FormArray"><strong>FormArray</strong></a>, <a href="https://angular.io/api/forms/FormBuilder"><strong>FormBuilder</strong></a>.</p>
+<p>На каждый элемент формы создается(вручную или автоматически) свой <strong>FormControl</strong>.</p>
+<h2>FormControl</h2>
+<p>Чтобы создать <strong>FormControl</strong> мы определяем свойство в контроллере компонента:</p>
+<pre>name: FormControl = new FormControl('Alice');</pre>
+<p>и привязываем его к конкретному элементу в шаблоне:</p>
+<pre>&lt;input type="text" [formControl]="name"&gt;</pre>
+<p>После чего в контроллере мы можем подписаться на изменения:</p>
+<pre>this.name.valueChanges.subscribe(console.log)</pre>
+<p>Либо на изменения статуса(валидности):</p>
+<div>
+<pre>this.name.statusChanges.subscribe(console.log)</pre>
+</div>
+<div>Также можно получать статические значения (не подписываясь):</div>
+<pre>this.name.value
+this.name.valid</pre>
+<div> Полный список свойств можно посмотреть в описании <a href="https://angular.io/api/forms/AbstractControl#abstractcontrol"><strong>AbstractControl</strong></a> (от которого наследуется <strong>FromControl</strong>)</div>
+<div></div>
+<h2>FormGroup</h2>
+<p><strong>FormGroup</strong> помогает удобно группировать контролы. Например: если мы хотим задавать не просто имя, а полное имя, содержащее само имя и фамилию:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/11e44590851ee2e364b8dc66ac3fdc8a">Gist</a>.</p>
+<p>и подключаем в шаблоне:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/a81b6ad729e5852c1d31d599a301c49b">Gist</a>.</p>
+<p>Обратите внимание, что для контролов обернутых в <strong>formGroup</strong> мы уже ставим <strong>formControlName</strong> свойство (а не [formControl]), которое будет указывать на то, где брать контрол в группе.</p>
+<h2>FormArray</h2>
+<p><strong>FormArray</strong> прекрасно подойдет тогда, когда в форме у вас используется список, в который вы можете добавлять элементы. Давайте сделаем форму &#8220;учасников&#8221;, которая содержит список участников:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/81467104fd1e620ec74b2e6187288e0e">Gist</a>.</p>
+<p>и в шаблоне это будет выглядеть так:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/15dac6ddd7d924d0f525fa78792901fb">Gist</a>.</p>
+<p>как видите мы выводим список контролов используя итератор(<strong>index</strong>) как имя контрола(<strong>formControlName</strong>) в списке.</p>
+<p>Давайте добавим возможность добавления участников:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/34cbf2a857699fc044344d4f226358a9">Gist</a>.</p>
+<p>и для этого в контроллере компонента определим 2 дополнительных метода <strong>removeUser</strong> и <strong>addUser</strong>:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/5d87582ba4029fca95d711de0eab7efe">Gist</a>.</p>
+<p>В итоге получим:</p>
+<p><img decoding="async" loading="lazy" class="alignnone wp-image-3386" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/06/angular-fromArray.gif" alt="" width="362" height="251" /></p>
+<h2>FormBuilder</h2>
+<p>Упростить процесс создания новых форм нам помогает сервис <strong>FormBuilder</strong>. Который мы можем инжектировать в контроллер:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/3401d4f27ac0197a56eed5e8390f53f4">Gist</a>.</p>
+<p>После чего создать туже форму (&#8220;учасники&#8221;), только теперь с помощью сервиса:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/a536a894e6554efc59859e35346a1d6f">Gist</a>.</p>
+<p>вы можете сказать, что кода не стало меньше. Да, это так. <strong>FormBuilder</strong> имеет смысл использовать только для сложных форм с большим динамическим количеством контролов.</p>
+<h2>Валидация данных в реактивном подходе</h2>
+<p>Чтобы добавить валидатор на контрол мы всего лишь добавляем второй параметр, который может быть как одним валидатором, так и массивом(применяем разные проверки):</p>
+<pre>name: FormControl = new FormControl('Alice', [Validators.required]);</pre>
+<p>предварительно импортировав коллекцию валидаторов:</p>
+<p>import { Validators } from &#8220;@angular/forms&#8221;;</p>
+<p>Мы можем задавать один и больше валидатор. На данный момент в <a href="https://github.com/angular/angular/blob/master/packages/forms/src/validators.ts">коллекции</a> есть следующие валидаторы:</p>
+<ul>
+<li>min</li>
+<li>max</li>
+<li>required</li>
+<li>requiredTrue</li>
+<li>email</li>
+<li>minLength</li>
+<li>maxLength</li>
+<li>pattern</li>
+</ul>
+<h2>Создание своих валидаторов</h2>
+<p>Валидатор представляет из себя простую функцию, которая возвращает либо объект ошибки либо null:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/85c3c4bcbb08ffa832ae5f419a9b00bd">Gist</a>.</p>
+<p>добавляется вторым параметром в контрол( вместе со стандартными валидаторами):</p>
+<pre>name: FormControl = new FormControl('Alice', [Validators.required, myNameValidator]);</pre>
+<p>В реальных проектах валидаторы собирают в группы заворачивают в классы и делают статическими методами классов.</p>
+<h2>Валидаторы с параметрами</h2>
+<p>Для создания валидаторов с параметрамми нам всего лишь необходимо завернуть нашу функцию валидатор в еще одну функцию, которая создаст замыкание для хранения параметров:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/4015dce6441d413b9d781dfd67c499a5">Gist</a>.</p>
+<p>Асинхронные валидаторы</p>
+<p>Асинхронные валидаторы отличаются от синхронных только тем, что возвращают не статические данные, а <strong>Observable</strong> либо <strong>Promise</strong>:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/d1d7b8d95267ba0fe504a50d8ce93369">Gist</a>.</p>
+<p>и также определяются 3-м параметром в конструкторе контрола:</p>
+<pre>name: FormControl = new FormControl('Alice', [myNameValidator], [myAsyncNameValidator]);</pre>
+<h2>Вывод ошибок</h2>
+<p>Ошибки контрола хранятся в свойстве <strong>errors</strong>:</p>
+<pre>this.name.errors</pre>
+<p>Чтобы сделать какие-то действия в случае появления ошибок, можем написать так: добавив фильтры на изменение состояния и собственно валидность данных:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/9eb766ea93950ae844155e85adf2b62a">Gist</a>.</p>
+<p>Свойство есть не только у обычного контрола, но так же и у FormGroup, поэтому вы можете получить объект со всеми ошибками формы:</p>
+<pre>this.participantsForm.errors</pre>
+<h2>Создание кастомных контроллов</h2>
+<p>Решил вынести эту главу в отдельный пост.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/07/angular-forms-and-validation/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Запускаем Angular виджет в приложение без Angular</title>
+		<link>https://stepansuvorov.com/blog/2017/06/angular-for-non-angular-apps/</link>
+					<comments>https://stepansuvorov.com/blog/2017/06/angular-for-non-angular-apps/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 25 Jun 2017 16:02:11 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[angular-componentFactory]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3378</guid>
+
+					<description><![CDATA[Очень маловероятно, что вы захотите добавлять Angular в приложение только для того, чтобы завести один компонент. Рекомендую смотреть на этот пост, не как на практическое руководство к действию, а как на работу по исследованию возможностей фреймворка. Предположим что у нас &#8230; <a href="https://stepansuvorov.com/blog/2017/06/angular-for-non-angular-apps/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" loading="lazy" class="alignnone wp-image-3379" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/06/web-design-2-512.png" alt="" width="205" height="205" /></p>
+<p><em>Очень маловероятно, что вы захотите добавлять Angular в приложение только для того, чтобы завести один компонент. Рекомендую смотреть на этот пост, не как на практическое руководство к действию, а как на работу по исследованию возможностей фреймворка.</em></p>
+<p><span id="more-3378"></span></p>
+<p>Предположим что у нас уже есть какой-то компонент, который мы хотим вывести на странице не <strong>Angular</strong> приложения:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/0fa603b4a2d98eaf71263b3f7b181e22">Gist</a>.</p>
+<p>Для запуска <strong>Angular</strong> нам нужно также создать модуль, объявить наш компонент в нем и указать на то, что он будет инициирован <strong>динамически</strong>:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/0408b48d28a22638c0711821636aa6d3">Gist</a>.</p>
+<p>Создав модуль, мы можем его бустрапить:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/773a866d6912fb08f2af9b8bcf098606">Gist</a>.</p>
+<h2>Использование фабрики компонентов</h2>
+<p>Чтобы инициировать динамически компонент, нам нужен <strong>componentFactoryResolver</strong>, который мы можем получить из сущности нашего модуля:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/0256fd2a45cebdb4f207e5dc84908be7">Gist</a>.</p>
+<p>теперь можем получить фабрику для нашего конкретного компонента:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/1c90c8d4383efb3d34ca96e193c2ec0b">Gist</a>.</p>
+<p>и с помощью полученной фабрики создать компонент:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/f6f89631dfd9d5cde07e11f557aef562">Gist</a>.</p>
+<p>обратите внимание, что мы произвели создание компонента прям на самом элементе (<strong><span class="pl-c1">querySelector</span>(<span class="pl-s"><span class="pl-pds">&#8216;</span>hello<span class="pl-pds">&#8216;</span></span>)</strong>), но это не обязательно, мы бы также могли инициализировать контейнер, который содержит наш hello-элемент (например <strong>body</strong>).</p>
+<p>Мы вывели компонент на страницу.</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-3380" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/06/Screen-Shot-2017-06-25-at-17.40.12.png" alt="" width="284" height="121" /></p>
+<p>Но еще не все.</p>
+<h2>Подключаем механизм обнаружения изменений (Change Detection)</h2>
+<p>Чтобы представление нашего компонента реагировало на изменение состояния приложения, нам необходимо добавить <a href="https://angular.io/api/core/ComponentRef#hostView"><strong>hostView</strong></a> компонента в приложение (<strong>ApplicationRef</strong>). Для этого используем метод <a href="https://angular.io/api/core/ApplicationRef#attachView">attachView</a>:</p>
+<pre> ngModuleRef.injector.get(ApplicationRef).attachView(componentRef.hostView);</pre>
+<p>Получим:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/a43f1fbf4f6174c7f70281aa998ae63b">Gist</a>.</p>
+<p>Также мы можем сделать отложенную инициализацию по таймеру (например: через 5 секунд):</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/98820b3cd5c5ece59dabc963a172ec73">Gist</a>.</p>
+<p>Вот <a href="https://github.com/javascriptru/angular-for-non-angular-apps">тут</a> полный пример.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/06/angular-for-non-angular-apps/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Что нового в Angular 4.2</title>
+		<link>https://stepansuvorov.com/blog/2017/06/whats-new-in-angular-4-2/</link>
+					<comments>https://stepansuvorov.com/blog/2017/06/whats-new-in-angular-4-2/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 24 Jun 2017 21:14:43 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3373</guid>
+
+					<description><![CDATA[оператор не нулевого присвоения ( Non-null assertion operator ) теперь можно использовать в шаблонах: &#60;h2&#62;{{ user!.name }}&#60;/h2&#62; очень много изменений по анимации (смотрите в отдельном посте) добавили поддержку mix &#38; max стандартных валидаторов (но уже в 4.3.0-beta.0 удалили эту возможность признав как breaking change) в &#8230; <a href="https://stepansuvorov.com/blog/2017/06/whats-new-in-angular-4-2/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-3374" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/06/angular.png" alt="" width="250" height="250" /></p>
+<ul>
+<li>
+<p id="non-null-assertion-operator">оператор не нулевого присвоения ( <strong><a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator">Non-null assertion operator</a> </strong>) теперь можно использовать в шаблонах:</p>
+<pre class="highlight prettyprint"><code><span class="tag">&lt;h2&gt;</span><span class="pln">{{ user!.name }}</span><span class="tag">&lt;/h2&gt;</span></code></pre>
+</li>
+<li>очень много изменений по анимации (смотрите в отдельном посте)</li>
+<li>добавили поддержку <strong>mix</strong> &amp; <strong>max</strong> стандартных валидаторов (но уже в <a style="font-weight: bold;" href="https://github.com/angular/angular/compare/4.2.1...4.3.0-beta.0">4.3.0-beta.0 </a>удалили эту возможность признав как <b>breaking change</b>)</li>
+<li>в тестах появились 3 вспомогательных метода:
+<ul>
+<li><strong>TestBed.overrideProvider()</strong> &#8211; <a href="https://docs.google.com/document/d/1VmTkz0EbEVSWfEEWEvQ5sXyQXSCvtMOw4t7pKU-jOwc/edit">приближает возможность</a> тестировать в <strong>AOT</strong>,</li>
+<li><strong>flush()</strong> &#8211; для сбрасывания всех счетчиков и выполнения колбэков всех асинхронных операций,</li>
+<li><strong>fixture.<a href="https://github.com/angular/angular/pull/16732/files#diff-06a7a4c8d110ad13148ca89fd955d385R19">whenRenderingDone</a>()</strong> &#8211; возвращает промис, который ждет выполнения всех анимаций</li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/06/whats-new-in-angular-4-2/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Angular &#038; Rxjs: Отписываться или не отписываться?</title>
+		<link>https://stepansuvorov.com/blog/2017/06/angular-rxjs-unsubscribe-or-not-unsubscribe/</link>
+					<comments>https://stepansuvorov.com/blog/2017/06/angular-rxjs-unsubscribe-or-not-unsubscribe/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 03 Jun 2017 21:45:02 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[RxJs]]></category>
+		<category><![CDATA[RxJS.takeUntil]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3361</guid>
+
+					<description><![CDATA[Как вы наверное уже знаете при подписке на обозреваемую последовательность либо просто событие в Javascript вы обычно должны в определенный момент отписываться, чтобы освободить память. Иначе это приведет к утечке памяти. Мы рассмотрим основные случаи, когда вы должны отписываться в ngOnDestroy &#8230; <a href="https://stepansuvorov.com/blog/2017/06/angular-rxjs-unsubscribe-or-not-unsubscribe/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Как вы наверное уже знаете при подписке на обозреваемую последовательность либо просто событие в Javascript вы обычно должны в определенный момент отписываться, чтобы освободить память. Иначе это приведет к утечке памяти.</p>
+<p>Мы рассмотрим основные случаи, когда вы должны отписываться в <strong>ngOnDestroy</strong> хуке компонента, а также случаи, когда можно не отписываться.</p>
+<p><span id="more-3361"></span></p>
+<h2>Нужно отписываться</h2>
+<p><strong>Формы</strong></p>
+<p>необходимо отписываться от формы и от отдельных формконтролов, на которые подписались:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/b0729635a19a20ab8c3ae1731a056cbb">Gist</a>.</p>
+<p><strong>Роутер</strong></p>
+<p>Согласно официальной документации <strong>Angular</strong> должен сам отписывать вас, <a href="https://github.com/angular/angular/issues/16261">но этого не происходит</a>, поэтому:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/ee9fdca12fd3895a1c9d19e8eb2c8de3">Gist</a>.</p>
+<p><strong>Рендерер</strong></p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/ef76fa152c4b601166f008218bbd9409">Gist</a>.</p>
+<p><strong>Бесконечные обозреваемые последовательности</strong></p>
+<p>Примерами бесконечных могут служить последовательности созданные с помощью <strong>interva()</strong> или слушающие события (<strong>fromEvent()</strong>):</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/e38d65c1487f371e509b5da1d0be8ee9">Gist</a>.</p>
+<p><strong>ngRx</strong></p>
+<p>От подписок на состояние <strong>Store ngRx</strong> тоже необходимо отписываться:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/a1ec1b4b6ba2e2e17d92872030ff31b3">Gist</a>.</p>
+<p>&nbsp;</p>
+<h2>Отписываться НЕ нужно</h2>
+<p><strong>Async pipe</strong></p>
+<p>C async pipe нам повезло и он выполнят работу под отписке за нас:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/c87db9bca26a8a5609e01658a7e9b9c3">Gist</a>.</p>
+<p id="c2d0" class="graf graf--h4 graf-after--p"><strong>@HostListener</strong></p>
+<p class="graf graf--h4 graf-after--p">так же нам не нужно отписываться, когда мы навешиваем слушатель события с помощью HostListener:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/fa9aafd4a3351f8a5ce4ceedcd40122c">Gist</a>.</p>
+<p><strong>Конечные обозреваемые последовательности</strong></p>
+<p>Бывают последовательности, которые сами завершаются, такие как <strong>HTTP</strong> и <strong>timer</strong>:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/f28edc7bb3ee905618edeb74ae2cc005">Gist</a>.</p>
+<h2>Bonus</h2>
+<p>Также вы можете использовать оператор <strong><a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/operators/takeuntil.md">takeUntil</a></strong>, который позволит писать код в декларативном стиле, не отписываясь от каждого обозревателя отдельно:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/431d4e5e786a39d2a2cf46c1b2ab1d42">Gist</a>.</p>
+<p>Кроме <strong>takeUntil</strong> вы еще можете использовать <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/operators/take.md">take</a>, <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/operators/takewhile.md">takeWhile</a> и <a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/operators/first.md">first</a> которые также позволят &#8220;убить&#8221; последовательность, соотвественно не прийдется от нее отписываться.</p>
+<p>&nbsp;</p>
+<p>Большая часть материала взята из статьи <a href="https://netbasal.com/when-to-unsubscribe-in-angular-d61c6b21bad3">When to Unsubscribe in Angular</a>.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/06/angular-rxjs-unsubscribe-or-not-unsubscribe/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Знаю ли я AngularJS?</title>
+		<link>https://stepansuvorov.com/blog/2017/05/%d0%b7%d0%bd%d0%b0%d1%8e-%d0%bb%d0%b8-%d1%8f-angularjs/</link>
+					<comments>https://stepansuvorov.com/blog/2017/05/%d0%b7%d0%bd%d0%b0%d1%8e-%d0%bb%d0%b8-%d1%8f-angularjs/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 21 May 2017 20:06:00 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2963</guid>
+
+					<description><![CDATA[Меня попросили составить список вопросов, которые смогут показать высокий уровень ваших знаний или же выявить какие-то пробелы. 1 Как получить конструктор-метод директивы из консоли? 2 Как создать новый скоуп снаружи ангуляра (не находясь внутри сущности)? 3 Чем отличается service, factory, &#8230; <a href="https://stepansuvorov.com/blog/2017/05/%d0%b7%d0%bd%d0%b0%d1%8e-%d0%bb%d0%b8-%d1%8f-angularjs/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Меня попросили составить список вопросов, которые смогут показать высокий уровень ваших знаний или же выявить какие-то пробелы.</p>
+<p><span id="more-2963"></span></p>
+<p>1 Как получить конструктор-метод директивы из консоли?</p>
+<p>2 Как создать новый скоуп снаружи ангуляра (не находясь внутри сущности)?</p>
+<p>3 Чем отличается service, factory, provider?</p>
+<p>4 Как &#8220;выключить&#8221; вотчер?</p>
+<p>5 Как использовать экземпляр сервиса внутри app.config? (Ангуляр допускает использование только провайдеров, при прямом внедрении)</p>
+<p>6 В базе данных хранится ангуляровское выражение, как вывести его результат на фронтенд?</p>
+<p>7 Что будет если определить 2 сущности с одним и тем же именем: для модуля, сервиса, директивы?</p>
+<p>8 Если у вас есть директива1 и вложенная в нее директива2, то в каком порядке будут запущены controller и link методы этих директив?</p>
+<p>9 Какой тип scope создает ui-view директива? (ui-router модуль)</p>
+<p>Если у вас есть другие интересные вопросы, пожалуйста поделитесь ими в комментариях.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/05/%d0%b7%d0%bd%d0%b0%d1%8e-%d0%bb%d0%b8-%d1%8f-angularjs/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Изучаем Redux и пишем свой Mini-Redux</title>
+		<link>https://stepansuvorov.com/blog/2017/05/learn-redux/</link>
+					<comments>https://stepansuvorov.com/blog/2017/05/learn-redux/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 21 May 2017 16:03:20 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[redux]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3344</guid>
+
+					<description><![CDATA[Предлагаю вам перевод статьи Learn Redux by coding a Mini-Redux. Существует множество ресурсов по изучению Redux: официальная документация, примеры, учебники, статьи, видео уроки&#8230; Имея такое большое количество информации многие начинающие Redux разработчики порой просто теряются в ней. Другой подход изучения &#8211; это &#8230; <a href="https://stepansuvorov.com/blog/2017/05/learn-redux/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Предлагаю вам перевод статьи <a href="http://blog.jakoblind.no/2017/03/13/learn-redux-by-coding-a-mini-redux/">Learn Redux by coding a Mini-Redux</a>.</p>
+<p>Существует множество ресурсов по изучению <strong>Redux</strong>: официальная документация, примеры, учебники, статьи, видео уроки&#8230; Имея такое большое количество информации многие начинающие <strong>Redux</strong> разработчики порой просто теряются в ней.</p>
+<p>Другой подход изучения &#8211; это самостоятельно написать прототип <strong>Redux</strong>, чтобы понять основы библиотеки. Для меня это был реальный прорыв.</p>
+<p><strong>Не беспокойтесь, это совсем не сложно.</strong> Ядро Redux, как вы убедитесь, достаточно просто.</p>
+<p>Для начала нам необходимо общее понимание что делает <strong>Redux</strong>.</p>
+<p><span id="more-3344"></span></p>
+<h2>Что конкретно делает Redux?</h2>
+<p>Основная идея <strong>Redux</strong> &#8211; всегда иметь единственное состояние приложения. Это состояние представляет из себя Javascript объект &#8211; Redux <strong>Store</strong>, который доступен только для чтения. Если вы хотите изменить состояние, то вам нужно породить <strong>Action</strong>, что тоже является Javascript объектом.</p>
+<p>Элементы вашего приложения могут подписываться на изменение состояния <strong>Store</strong>. Если мы посмотрим на примере с React, то компоненты React получают уведомление о изменении состояния и могут изменить отображение базируясь на новых данных.</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-3353" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/05/redux.png" alt="" width="488" height="324" /></p>
+<p>Чтобы обновить <strong>Store</strong>, когда приходит <strong>Action</strong>, используется <strong>Reducer</strong> &#8211; обычная Javascript функция.</p>
+<h2>Давайте начнем писать код!</h2>
+<p>Обобщая, мы должны сделать 3 вещи:</p>
+<ol>
+<li>Получать состояние приложение из <strong>Store</strong></li>
+<li>Разобрать событие <strong>Action</strong>, которое будет передано на <strong>Reducer</strong>, который изменит состояние <strong>Store</strong>.</li>
+<li>Следить за изменениями <strong>Store</strong></li>
+</ol>
+<p>Так же мы должны определить начальные значения для <strong>Store</strong> и <strong>Reducer</strong>, давайте с этого начнем:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/f081b321b521e2bce69733da42aa6190">Gist</a>.</p>
+<p>&nbsp;</p>
+<h2>1. Получение состояния (state)</h2>
+<p>Мы создали функцию, которая просто сохраняет начальное состояние и редьюсер локально. Теперь давайте реализуем возможность получения этого состояния с помощью специального метода :</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/8501a3223d5d6bd70bb42ce2a088a3b4">Gist</a>.</p>
+<h2>2. Отправка события (dispatch an action)</h2>
+<p>Следующий шаг &#8211; отправка события:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/264750ace5e45bd4ee041d9656b49ab8">Gist</a>.</p>
+<p>Функция <strong>dispatch</strong> используя текущее состояние отправляет событие на редьюсер, который мы определили при инициализации. А он в свою очередь перезаписывает объект currentState новым значением.</p>
+<h2>3. Подписка на изменения</h2>
+<p>Теперь мы можем получать и обновлять состояние! Оставшийся шаг &#8211; сделать возможность подписаться на изменения:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/b9315d65a8cfdee8589f0a9da17ba61a">Gist</a>.</p>
+<p>Теперь мы можем вызывать <strong>subscribe</strong> с коллбэк-параметром, который будет вызван в случае получения события на изменнеие состояния.</p>
+<h2>Все готово.</h2>
+<p>Это все что нам нужно было сделать для создания mini-Redux.</p>
+<p>На официальной <a href="https://github.com/reactjs/redux">github странице</a> есть пример как использовать <strong>Redux</strong>. Мы можем скопировать пример, чтобы протестировать нашу собственную реализацию <strong>Redux</strong>:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/4b515d5246ca90b66f0c701560a3c80a">Gist</a>.</p>
+<p>Поиграться с кодом можно <a href="https://plnkr.co/edit/OX7hNMlFXtEA2d7aSU1Y?p=preview">тут</a>.</p>
+<h2>Выводы</h2>
+<p>Мы разработали рабочую версию аналога <strong>Redux</strong>, которая уместилась в 18 строчках кода. Впечатляет, правда?</p>
+<p>Конечно, этот код не для продакшена. Сравнивая с реальной библиотекой мы выкинули отлов ошибок, не поддерживаем множественные подписки и другие возможности.</p>
+<p>Теперь вы знаете основные принципы того как работает Redux, что поможет вам лучше ориентироваться в потоке информации.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/05/learn-redux/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

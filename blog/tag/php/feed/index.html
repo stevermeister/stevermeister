@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>php &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/php/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sun, 02 Sep 2012 17:42:04 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Объектно ориентированный подход при работе с датой</title>
+		<link>https://stepansuvorov.com/blog/2012/09/%d0%be%d0%b1%d1%8a%d0%b5%d0%ba%d1%82%d0%bd%d0%be-%d0%be%d1%80%d0%b8%d0%b5%d0%bd%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%bd%d1%8b%d0%b9-%d0%bf%d0%be%d0%b4%d1%85%d0%be%d0%b4-%d0%bf%d1%80%d0%b8/</link>
+					<comments>https://stepansuvorov.com/blog/2012/09/%d0%be%d0%b1%d1%8a%d0%b5%d0%ba%d1%82%d0%bd%d0%be-%d0%be%d1%80%d0%b8%d0%b5%d0%bd%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%bd%d1%8b%d0%b9-%d0%bf%d0%be%d0%b4%d1%85%d0%be%d0%b4-%d0%bf%d1%80%d0%b8/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 02 Sep 2012 17:42:04 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[date]]></category>
+		<category><![CDATA[DateTime]]></category>
+		<category><![CDATA[php]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=537</guid>
+
+					<description><![CDATA[Все мы раньше так или иначе использовали в PHP функцию date() для произведения необходимых манипуляций с датой. Она прекрасна и решает множество задач, но увы иногда, когда очень хочется использовать объектный подход, она выпадает. Существует множество пользовательских решений, которые представляют &#8230; <a href="https://stepansuvorov.com/blog/2012/09/%d0%be%d0%b1%d1%8a%d0%b5%d0%ba%d1%82%d0%bd%d0%be-%d0%be%d1%80%d0%b8%d0%b5%d0%bd%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%bd%d1%8b%d0%b9-%d0%bf%d0%be%d0%b4%d1%85%d0%be%d0%b4-%d0%bf%d1%80%d0%b8/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Все мы раньше так или иначе использовали в PHP функцию <strong>date</strong>() для произведения необходимых манипуляций с датой. Она прекрасна и решает множество задач, но увы иногда, когда очень хочется использовать объектный подход, она выпадает. Существует множество пользовательских решений, которые представляют классс-оболочку <strong>Date</strong> для функции <strong>date</strong>(), что решает вопрос. Но как мы знаем в <strong>5.2</strong> версии языка наконец-то сообразили сделать встроенный родной класс, и имя ему <strong>DateTime</strong>. В общем-то был добавлена целая группу классов работы с датой, но <strong>DateTime</strong> &#8211; основной, поэтому его мы и разберем.</p>
+<p><span id="more-537"></span>Для тех кто работал с объектом Date на Javascript думаю будет проще перейти на DateTime. Начнем с начала &#8211; создадим объект:</p>
+<pre>$oDate = new DateTime;</pre>
+<p>можно как оставить конструктор без параметров, так и задать необходимое значение:</p>
+<pre>$oDate = new DateTime('2012-09-02 11:48:15');</pre>
+<p>тут есть особенность: есть мы хотим указать время через unixtime &#8211; то должны переди ставить значок &#8220;@&#8221;:</p>
+<pre>$oDate = new DateTime('@1346586632');</pre>
+<p>Итак мы создали объект даты <strong>$oDate</strong> и теперь мы конечно захотим вывести его. Для этого есть специальный метод <strong>format()</strong>. Синтаксис аналогичен date():</p>
+<pre>echo $oDate-&gt;format('Y-m-d H:i:s');</pre>
+<p>Встроенного магического метода __toString() почему-то не сделали, думаю можем сами расширить, если постоянно необходимо выводить один и тот же формат даты:</p>
+<pre>class CDateTime extends DateTime{
+  function __toString() {
+    return $this-&gt;format('Y-m-d H:i:s');
+  }
+}</pre>
+<p>Тогда может будет просто вывести:</p>
+<pre>echo $oDate;</pre>
+<p>Что еще есть полезного в этом объекте? Еще есть 2 метода, которые позволяют удобно прибавлять и отнимать определенный временной промежуток:</p>
+<pre>$oDate-&gt;add(DateInterval::createFromDateString('10 days'));
+$oDate-&gt;sub(DateInterval::createFromDateString('2 month'));</pre>
+<p>Вот таким способом мы прибавили 10 дней и отняли 2 месяца. Здесь стоит уделить внимание объекту нового для нас класса <strong>DateInterval</strong>, которые необходим для задания временного интервала. Создать мы его можем разными способами:</p>
+<ul>
+<li>через метод <strong>createFromDateString</strong></li>
+<li>через параметр конструктора</li>
+</ul>
+<p>Вот некое соответствие между ними:</p>
+<table>
+<tbody>
+<tr>
+<th>параметр createFromDateString</th>
+<th>параметр конструктора</th>
+</tr>
+<tr>
+<td>1 day</td>
+<td>P1D</td>
+</tr>
+<tr>
+<td>2 weeks</td>
+<td>P2W</td>
+</tr>
+<tr>
+<td>3 months</td>
+<td>P3M</td>
+</tr>
+<tr>
+<td>4 years</td>
+<td>P4Y</td>
+</tr>
+<tr>
+<td>1 year + 1 day</td>
+<td>P1Y1D</td>
+</tr>
+<tr>
+<td>1 day + 12 hours</td>
+<td>P1DT12H</td>
+</tr>
+<tr>
+<td>3600 seconds</td>
+<td>PT3600S</td>
+</tr>
+</tbody>
+</table>
+<p>После создания данного объекта мы можем его менять обращаясь непосредственно к переменным:</p>
+<pre>$interval = DateInterval::createFromDateString('2 month');
+$interval-&gt;h = 10; //задали значение часов</pre>
+<p>Очень интересно что вывод значения объекта осуществляется также через метод format(), <span style="text-decoration: underline;">[!Внимание</span>] синтаксис для задания формата отличается от <strong>DateTime</strong>, и тут многие делают ошибку. Символы обозначения разрядов остались такие же(Y &#8211; год, m &#8211; месяц), но теперь перед каждым нужно добавлять значок &#8220;%&#8221;:</p>
+<pre>echo $interval-&gt;format('%Y years %m months %d days %H hours ...');</pre>
+<p>Оставшиеся функции, которые могут быть интересны:</p>
+<p><strong>DateTime::modify</strong> ( string <code>$modify</code> ) &#8211; по синтаксису функции strtotime()<br />
+<strong>DateTime::diff</strong> ( DateTime <code>$datetime2</code>) &#8211; вычисление расхождений дат</p>
+<p>Также класс содержит константы необходимых форматов, например:</p>
+<pre>echo DateTime::W3C; //'Y-m-d\TH:i:sP'</pre>
+<p>&nbsp;</p>
+<p>По основному все. Если кто-то знает еще какую либо полезную информацию о использовании объекта DateTime &#8211; пишите.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/09/%d0%be%d0%b1%d1%8a%d0%b5%d0%ba%d1%82%d0%bd%d0%be-%d0%be%d1%80%d0%b8%d0%b5%d0%bd%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%bd%d1%8b%d0%b9-%d0%bf%d0%be%d0%b4%d1%85%d0%be%d0%b4-%d0%bf%d1%80%d0%b8/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Примеры задач на собеседование для старших разработчиков</title>
+		<link>https://stepansuvorov.com/blog/2012/07/%d0%bf%d1%80%d0%b8%d0%bc%d0%b5%d1%80%d1%8b-%d0%b7%d0%b0%d0%b4%d0%b0%d1%87-%d0%bd%d0%b0-%d1%81%d0%be%d0%b1%d0%b5%d1%81%d0%b5%d0%b4%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%b4%d0%bb%d1%8f-%d1%81%d1%82/</link>
+					<comments>https://stepansuvorov.com/blog/2012/07/%d0%bf%d1%80%d0%b8%d0%bc%d0%b5%d1%80%d1%8b-%d0%b7%d0%b0%d0%b4%d0%b0%d1%87-%d0%bd%d0%b0-%d1%81%d0%be%d0%b1%d0%b5%d1%81%d0%b5%d0%b4%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%b4%d0%bb%d1%8f-%d1%81%d1%82/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 31 Jul 2012 08:43:05 +0000</pubDate>
+				<category><![CDATA[IT Рынок]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[php]]></category>
+		<category><![CDATA[sql]]></category>
+		<category><![CDATA[собеседование]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=370</guid>
+
+					<description><![CDATA[В случая, когда становится ясно, что человек очень легко справляется с задачами для начинающего разработчика, можно переходить к более серьезным вариантам. PHP: Необходимо задать так $a, чтобы следующее выражение ($a[0] === 1 &#38;&#38; $a[0] === 2) вернуло TRUE. Подсказка: вопрос &#8230; <a href="https://stepansuvorov.com/blog/2012/07/%d0%bf%d1%80%d0%b8%d0%bc%d0%b5%d1%80%d1%8b-%d0%b7%d0%b0%d0%b4%d0%b0%d1%87-%d0%bd%d0%b0-%d1%81%d0%be%d0%b1%d0%b5%d1%81%d0%b5%d0%b4%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%b4%d0%bb%d1%8f-%d1%81%d1%82/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>В случая, когда становится ясно, что человек очень легко справляется с задачами для <a href="https://stepansuvorov.com/blog/2012/07/%D0%BE%D1%82%D0%B1%D0%BE%D1%80-php-%D0%BA%D0%B0%D0%BD%D0%B4%D0%B8%D0%B4%D0%B0%D1%82%D0%BE%D0%B2-%D0%B2-%D0%BD%D0%B0%D1%88%D0%B5%D0%B9-%D0%BA%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D0%B8/">начинающего разработчика</a>, можно переходить к более серьезным вариантам.</p>
+<p><span id="more-370"></span><span style="text-decoration: underline;">PHP</span>:</p>
+<p>Необходимо задать так <strong>$a</strong>, чтобы следующее выражение</p>
+<pre>($a[0] === 1 &amp;&amp; $a[0] === 2)</pre>
+<p>вернуло <strong>TRUE</strong>.</p>
+<p>Подсказка: <span style="color: #ffffff;">вопрос на понимание использования SPL</span>.</p>
+<p><span style="text-decoration: underline;">JavaScript</span>:</p>
+<p>Необходимо так задать sum, чтобы выражение:</p>
+<pre>sum(3)(7)</pre>
+<p>вернуло сумму чисел переданных таким образом. И дополнение к задаче, кто сразу понял как решать первый вариант:</p>
+<pre>+sum(3)(7)...(5)</pre>
+<p>т.е. параметров может быть неограниченное количество.</p>
+<p>Подсказка: <span style="color: #ffffff;">В данной задаче поднимаются темы: создания объекта, замыкание, псевдостатические переменные, магические методы</span>.</p>
+<p><span style="text-decoration: underline;">SQL</span>:</p>
+<p>Составить запрос по следующему условию:  в библиотеке на пронумерованных полках стоят книги разного цвета. Составьте запрос, который найдёт все полки в библиотеке, на которых стоят <span style="text-decoration: underline;">только</span> красные книги.</p>
+<p>Успешной подготовки!</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/07/%d0%bf%d1%80%d0%b8%d0%bc%d0%b5%d1%80%d1%8b-%d0%b7%d0%b0%d0%b4%d0%b0%d1%87-%d0%bd%d0%b0-%d1%81%d0%be%d0%b1%d0%b5%d1%81%d0%b5%d0%b4%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%b4%d0%bb%d1%8f-%d1%81%d1%82/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>PHP The Right Way.</title>
+		<link>https://stepansuvorov.com/blog/2012/07/php-the-right-way/</link>
+					<comments>https://stepansuvorov.com/blog/2012/07/php-the-right-way/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 29 Jul 2012 17:53:44 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[manual]]></category>
+		<category><![CDATA[php]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=358</guid>
+
+					<description><![CDATA[worth reading]]></description>
+										<content:encoded><![CDATA[<p><a href="http://www.phptherightway.com"><br />
+<img decoding="async" src="http://www.phptherightway.com/images/banners/lg-rect-386x280.png" alt="PHP: The Right Way" /><br />
+</a></p>
+<p><strong>worth reading</strong></p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/07/php-the-right-way/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Отбор PHP кандидатов в нашей компании.</title>
+		<link>https://stepansuvorov.com/blog/2012/07/%d0%be%d1%82%d0%b1%d0%be%d1%80-php-%d0%ba%d0%b0%d0%bd%d0%b4%d0%b8%d0%b4%d0%b0%d1%82%d0%be%d0%b2-%d0%b2-%d0%bd%d0%b0%d1%88%d0%b5%d0%b9-%d0%ba%d0%be%d0%bc%d0%bf%d0%b0%d0%bd%d0%b8%d0%b8/</link>
+					<comments>https://stepansuvorov.com/blog/2012/07/%d0%be%d1%82%d0%b1%d0%be%d1%80-php-%d0%ba%d0%b0%d0%bd%d0%b4%d0%b8%d0%b4%d0%b0%d1%82%d0%be%d0%b2-%d0%b2-%d0%bd%d0%b0%d1%88%d0%b5%d0%b9-%d0%ba%d0%be%d0%bc%d0%bf%d0%b0%d0%bd%d0%b8%d0%b8/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 24 Jul 2012 12:34:04 +0000</pubDate>
+				<category><![CDATA[IT Рынок]]></category>
+		<category><![CDATA[php]]></category>
+		<category><![CDATA[собеседование]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=326</guid>
+
+					<description><![CDATA[Думаю статья будет полезна тем, кто хочет подготовиться к собеседованию, но не знает за какую книжку схватиться. Любой отбор начинается с небольшого письменного теста, который позволяет определить ваш приблизительный уровень. Тут не будет трудных вопросов: немного на понимание синтаксиса, типов &#8230; <a href="https://stepansuvorov.com/blog/2012/07/%d0%be%d1%82%d0%b1%d0%be%d1%80-php-%d0%ba%d0%b0%d0%bd%d0%b4%d0%b8%d0%b4%d0%b0%d1%82%d0%be%d0%b2-%d0%b2-%d0%bd%d0%b0%d1%88%d0%b5%d0%b9-%d0%ba%d0%be%d0%bc%d0%bf%d0%b0%d0%bd%d0%b8%d0%b8/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Думаю статья будет полезна тем, кто хочет подготовиться к собеседованию, но не знает за какую книжку схватиться.</p>
+<p>Любой отбор начинается с небольшого письменного теста, который позволяет определить ваш приблизительный уровень. Тут не будет трудных вопросов: немного на понимание синтаксиса, типов и функций PHP; еще немного на тему javascript; и еще кусочек на составление запросов к базе данных.</p>
+<p><span id="more-326"></span>Если вы успешно справились с тестом(это набрали хотя бы треть правильных ответов) &#8211; сразу же начинается второй этап &#8211; собеседование. Как правило интервью проводят 2 человека. Диалог начинается с вольной темы &#8220;Почему именно PHP?&#8221; или &#8220;Какие были интересные проекты?&#8221;. Далее идут вопросы по теории. Если вы претендуете на должность выше начинающего разработчика, вы должны разбираться в следующих темах:</p>
+<p>1. Проектирование и ООП</p>
+<ul>
+<li>3 базовых понятия ООП</li>
+<li>модификаторы доступа</li>
+<li>статические члены класса</li>
+<li>магические методы, конструктор</li>
+<li>Абстрактный класс и Интерфейс</li>
+<li>шаблоны проектирования, Синглтон</li>
+</ul>
+<p>2. Клиент-серверное взаимодействие</p>
+<ul>
+<li>идея DNS</li>
+<li>протокол HTTP, заголовки, GET/POST</li>
+<li>логика работы session и cookies</li>
+</ul>
+<p>3. Работа с базой данных</p>
+<ul>
+<li>типы данных</li>
+<li>отличия индексов</li>
+<li>нормализация</li>
+<li>виды движков (engine) таблиц</li>
+<li>joins</li>
+<li>views, triggers, procedures, functions, transactions</li>
+<li>понимание агрегирующих операций</li>
+</ul>
+<p>4. Настройка рабочей среды и администрирование</p>
+<ul>
+<li>настройка вебсервера и виртуальных хостов</li>
+<li>самые основные команды для работы в среде Linux</li>
+</ul>
+<p>5. Базовые принципы HTML/CSS</p>
+<ul>
+<li>типы элементов</li>
+<li>позиционирование</li>
+<li>селекторы и их приоритетность</li>
+</ul>
+<p>6. JavaScript</p>
+<ul>
+<li>элементы и их события</li>
+<li>работа с объектами</li>
+<li>jQuery</li>
+</ul>
+<p>7. Регулярные выражения</p>
+<ul>
+<li>пониманием базовых принципов</li>
+</ul>
+<p>&nbsp;</p>
+<p>Напоследок мы обычно даем задачу на логику или пространственное мышление. Для начинающих разработчиков будет большим плюсом ее решение: этим вы покажете, что можете быстро анализировать информацию и обладаете аналитическим складом ума.</p>
+<p>Успешной вам подготовки!</p>
+<p>Буду рад услышать критику или предложения в комментариях.</p>
+<p>P.S.: так же могу порекомендовать вам менее структурированную, но не менее информативную статью <a href="http://anton.shevchuk.name/php/junior-php-developer-skills/" target="_blank">на блоге Антона Шевчука</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/07/%d0%be%d1%82%d0%b1%d0%be%d1%80-php-%d0%ba%d0%b0%d0%bd%d0%b4%d0%b8%d0%b4%d0%b0%d1%82%d0%be%d0%b2-%d0%b2-%d0%bd%d0%b0%d1%88%d0%b5%d0%b9-%d0%ba%d0%be%d0%bc%d0%bf%d0%b0%d0%bd%d0%b8%d0%b8/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Совсем немного о многопроцессовости в PHP</title>
+		<link>https://stepansuvorov.com/blog/2012/07/%d1%81%d0%be%d0%b2%d1%81%d0%b5%d0%bc-%d0%bd%d0%b5%d0%bc%d0%bd%d0%be%d0%b3%d0%be-%d0%be-%d0%bc%d0%bd%d0%be%d0%b3%d0%be%d0%bf%d1%80%d0%be%d1%86%d0%b5%d1%81%d1%81%d0%be%d0%b2%d0%be%d1%81%d1%82%d0%b8/</link>
+					<comments>https://stepansuvorov.com/blog/2012/07/%d1%81%d0%be%d0%b2%d1%81%d0%b5%d0%bc-%d0%bd%d0%b5%d0%bc%d0%bd%d0%be%d0%b3%d0%be-%d0%be-%d0%bc%d0%bd%d0%be%d0%b3%d0%be%d0%bf%d1%80%d0%be%d1%86%d0%b5%d1%81%d1%81%d0%be%d0%b2%d0%be%d1%81%d1%82%d0%b8/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 02 Jul 2012 12:33:35 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[forks]]></category>
+		<category><![CDATA[php]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=265</guid>
+
+					<description><![CDATA[Только ключевые моменты: &#8211; магия происходит с помощью функции pcntl_fork. &#8211; работает только в CGI и CLI-режимах &#8211; немного кода $pid = pcntl_fork(); // создался дочерний процесс, все просто // но дальше основная магия: выполнение едет в 2 независимых потока &#8230; <a href="https://stepansuvorov.com/blog/2012/07/%d1%81%d0%be%d0%b2%d1%81%d0%b5%d0%bc-%d0%bd%d0%b5%d0%bc%d0%bd%d0%be%d0%b3%d0%be-%d0%be-%d0%bc%d0%bd%d0%be%d0%b3%d0%be%d0%bf%d1%80%d0%be%d1%86%d0%b5%d1%81%d1%81%d0%be%d0%b2%d0%be%d1%81%d1%82%d0%b8/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Только ключевые моменты:</p>
+<p>&#8211; магия происходит с помощью функции <code>pcntl_fork</code>.</p>
+<p>&#8211; работает только в CGI и CLI-режимах</p>
+<p>&#8211; немного кода</p>
+<pre>$pid = pcntl_fork();
+// создался дочерний процесс, все просто
+// но дальше основная магия: выполнение едет в 2 независимых потока
+// и все что будет дальше выполнится 2 раза
+// резонный вопрос: как нам определить основной потом и дочерний
+// а вот так:
+if ($pid == -1) {
+    //функции не удалось создать поток - ошибка
+} elseif ($pid) {
+    //если идентификатор есть - это родительский поток
+} else {
+    //если нет - соответственно дочерний
+}
+i++; //а этот код будет выполнен обеими потоками</pre>
+<p><span id="more-265"></span></p>
+<p>&#8211; теперь пример</p>
+<pre>$pid = pcntl_fork();
+if ($pid == -1) {
+     die('Error of pcntl_fork');
+} elseif ($pid) {
+    echo '[first]';
+} else {
+    echo '[second]';
+}
+echo '[both]';</pre>
+<p>Выполним через командную строку:</p>
+<pre>$ php fork.php
+[first][both][second][both]</pre>
+<p>Вот такой вот порядок.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/07/%d1%81%d0%be%d0%b2%d1%81%d0%b5%d0%bc-%d0%bd%d0%b5%d0%bc%d0%bd%d0%be%d0%b3%d0%be-%d0%be-%d0%bc%d0%bd%d0%be%d0%b3%d0%be%d0%bf%d1%80%d0%be%d1%86%d0%b5%d1%81%d1%81%d0%be%d0%b2%d0%be%d1%81%d1%82%d0%b8/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Вторая встреча ThinkPHP.</title>
+		<link>https://stepansuvorov.com/blog/2012/06/%d0%b2%d1%82%d0%be%d1%80%d0%b0%d1%8f-%d0%b2%d1%81%d1%82%d1%80%d0%b5%d1%87%d0%b0-thinkphp/</link>
+					<comments>https://stepansuvorov.com/blog/2012/06/%d0%b2%d1%82%d0%be%d1%80%d0%b0%d1%8f-%d0%b2%d1%81%d1%82%d1%80%d0%b5%d1%87%d0%b0-thinkphp/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 27 Jun 2012 16:43:13 +0000</pubDate>
+				<category><![CDATA[Возможно будет интересно]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[php]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=246</guid>
+
+					<description><![CDATA[ThinkPHP#2 или подумаем о PHP еще раз. Хотя (просматривая темы докладов), думать-обсуждать в этот раз мы похоже PHP не будем, будем думать о JavaScript, что тоже хорошо. Итак посмотрим что у нас есть по докладам: 1. Управление кодом в JavaScript. &#8230; <a href="https://stepansuvorov.com/blog/2012/06/%d0%b2%d1%82%d0%be%d1%80%d0%b0%d1%8f-%d0%b2%d1%81%d1%82%d1%80%d0%b5%d1%87%d0%b0-thinkphp/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-thumbnail wp-image-248" title="thinkphp-big-q" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/06/thinkphp-big-q-150x150.jpg" alt="" width="150" height="150" /></p>
+<p><strong>ThinkPHP#2</strong> или подумаем о PHP еще раз. Хотя (просматривая темы докладов), думать-обсуждать в этот раз мы похоже PHP не будем, будем думать о JavaScript, что тоже хорошо.</p>
+<p>Итак посмотрим что у нас есть по докладам:</p>
+<p><span id="more-246"></span></p>
+<p>1. <strong>Управление кодом в JavaScript</strong>. &#8211; из описания следует что это очень общая и пафосная тема. Трудно представить что реально там будет.  Ставлю <strong>7 балов</strong> из 10 по шкале интересности.</p>
+<p>2. <strong>Безопасность веб приложений</strong>. &#8211; Ну тут вообще капец какая общая тема, даже после описания тема не стала уже. Хоть бы пару тезисов. А так судя по всему просто по верхам пройдемся. <strong>4 бала</strong></p>
+<p>3. <strong>Введение в MVVM на примере Knockout для JavaScript разработчиков.</strong> &#8211; Вот это пожалуй самая интересная тема, по крайней мере самая четкая: MVVM подход и Knockout. При хорошем изложении материала может быть очень полезно. Ставлю на хорошего докладчика <strong>9 балов</strong>.</p>
+<p>Линк на регистрацию http://thinkphp.com.ua/think-two.html</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/06/%d0%b2%d1%82%d0%be%d1%80%d0%b0%d1%8f-%d0%b2%d1%81%d1%82%d1%80%d0%b5%d1%87%d0%b0-thinkphp/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>ThinkPHP &#8211; сообществу быть?</title>
+		<link>https://stepansuvorov.com/blog/2012/05/thinkphp-%d1%81%d0%be%d0%be%d0%b1%d1%89%d0%b5%d1%81%d1%82%d0%b2%d1%83-%d0%b1%d1%8b%d1%82%d1%8c/</link>
+					<comments>https://stepansuvorov.com/blog/2012/05/thinkphp-%d1%81%d0%be%d0%be%d0%b1%d1%89%d0%b5%d1%81%d1%82%d0%b2%d1%83-%d0%b1%d1%8b%d1%82%d1%8c/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Thu, 24 May 2012 06:06:03 +0000</pubDate>
+				<category><![CDATA[Возможно будет интересно]]></category>
+		<category><![CDATA[event]]></category>
+		<category><![CDATA[php]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=233</guid>
+
+					<description><![CDATA[Решил опубликовать ссылку на событие: http://thinkphp.com.ua/ &#8220;это мероприятие – первый кирпичик в основание этого сообщества&#8220; Посмотрим что будет.]]></description>
+										<content:encoded><![CDATA[<p>Решил опубликовать ссылку на событие: http://thinkphp.com.ua/</p>
+<p><a title="thinkphp" href="http://anton.shevchuk.name/php/meetup-thinkphp-in-kharkov/">&#8220;<em>это мероприятие – первый кирпичик в основание этого сообщества</em>&#8220;</a></p>
+<p>Посмотрим что будет.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/05/thinkphp-%d1%81%d0%be%d0%be%d0%b1%d1%89%d0%b5%d1%81%d1%82%d0%b2%d1%83-%d0%b1%d1%8b%d1%82%d1%8c/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Отправка логов php на почту.</title>
+		<link>https://stepansuvorov.com/blog/2012/05/%d0%be%d1%82%d0%bf%d1%80%d0%b0%d0%b2%d0%ba%d0%b0-%d0%bb%d0%be%d0%b3%d0%be%d0%b2-php-%d0%bd%d0%b0-%d0%bf%d0%be%d1%87%d1%82%d1%83/</link>
+					<comments>https://stepansuvorov.com/blog/2012/05/%d0%be%d1%82%d0%bf%d1%80%d0%b0%d0%b2%d0%ba%d0%b0-%d0%bb%d0%be%d0%b3%d0%be%d0%b2-php-%d0%bd%d0%b0-%d0%bf%d0%be%d1%87%d1%82%d1%83/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 16 May 2012 07:12:10 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[debug]]></category>
+		<category><![CDATA[php]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=221</guid>
+
+					<description><![CDATA[При отладке какого-либо скрипта часто возникает необходимость прослеживать по логам состояние/значение переменных, вхождение в блоки условий и т.д. Есть множество различных способов ведения логов и их дальнейшего разбора. Я бы хотел рассмотреть в этом посте логирование с отправкой информации на &#8230; <a href="https://stepansuvorov.com/blog/2012/05/%d0%be%d1%82%d0%bf%d1%80%d0%b0%d0%b2%d0%ba%d0%b0-%d0%bb%d0%be%d0%b3%d0%be%d0%b2-php-%d0%bd%d0%b0-%d0%bf%d0%be%d1%87%d1%82%d1%83/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>При отладке какого-либо скрипта часто возникает необходимость прослеживать по логам состояние/значение переменных, вхождение в блоки условий и т.д. Есть множество различных способов ведения логов и их дальнейшего разбора. Я бы хотел рассмотреть в этом посте логирование с отправкой информации на почтовый ящик. Это удобно для дебага, когда применить нормальные средства отладки не удается. Итак что нам нужно:</p>
+<p><span id="more-221"></span>1) Работающая функция mail на стороне сервера.</p>
+<p>Если не работает &#8211; идем сюда<strong> /etc/php5/apache2/php.ini</strong> и ищем параметр <code>sendmail_path</code> прописываем в него следующее:</p>
+<pre>sendmail_path = "/usr/sbin/sendmail -t -i"</pre>
+<p>Да, можно настроить и свой крутой почтовый сервер, но нам пока этого не нужно.</p>
+<p>проверим:</p>
+<pre>&lt;?php mail('somewhere@somemail.com', 'hi', 'your mail works');</pre>
+<p>Дальше можно накидать свою функцию, которая будет логировать все что мы ее подадим в качестве параметра, что типа:</p>
+<pre>function mylog( $data )
+{
+    $dumpData = "\n";
+    $dumpData .=  "&lt;pre&gt;";
+    $dumpData .= print_r($data, 1);
+    $dumpData .=  "&lt;/pre&gt;";
+    $dumpData .= "&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;\n\n\n";
+    $dumpData .= print_r(debug_backtrace(), 1);
+    mail( MAIL_TO, DEBUG, $dumpData );
+}</pre>
+<p>2) Удобный почтовый клиент, который позволит фильтровать полученные логи.</p>
+<p>Мне лично для этих целей очень нравится <strong>thunderbird</strong>, в котором можно удобно настроить автоматические фильтры и повесить на них различные события.</p>
+<p>Еще раз повторюсь я за отладку с использованием спец программ для отладки, но порой бывает приходится прибегать и к таким методам.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/05/%d0%be%d1%82%d0%bf%d1%80%d0%b0%d0%b2%d0%ba%d0%b0-%d0%bb%d0%be%d0%b3%d0%be%d0%b2-php-%d0%bd%d0%b0-%d0%bf%d0%be%d1%87%d1%82%d1%83/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

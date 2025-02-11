@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>directive &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/directive/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 22 Oct 2015 08:07:20 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>AngularJS: How to pass a method into an isolated scope</title>
+		<link>https://stepansuvorov.com/blog/2015/07/angularjs-how-to-pass-a-method-into-an-isolated-scope/</link>
+					<comments>https://stepansuvorov.com/blog/2015/07/angularjs-how-to-pass-a-method-into-an-isolated-scope/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 29 Jul 2015 17:58:42 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[directive]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2780</guid>
+
+					<description><![CDATA[I came to conclusion that it&#8217;s not very obvious how to pass a method into an isolated scope. And that&#8217;s why my junior AngularJS developers just do direct call: [javascript] $scope.$parent.methodOfParentScope(); [/javascript] but it&#8217;s more like a hack. It&#8217;s more correct to &#8230; <a href="https://stepansuvorov.com/blog/2015/07/angularjs-how-to-pass-a-method-into-an-isolated-scope/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>I came to conclusion that it&#8217;s not very obvious how to pass a method into an isolated scope. And that&#8217;s why my junior AngularJS developers just do direct call:</p>
+<p>[javascript]<br />
+$scope.$parent.methodOfParentScope();<br />
+[/javascript]</p>
+<p>but it&#8217;s more like a hack. It&#8217;s more correct to pass it via attribute:</p>
+<p><span id="more-2780"></span></p>
+<p>[html]<br />
+&lt;my-directive say=&quot;sayHello()&quot;&gt;&lt;/my-directive&gt;<br />
+[/html]</p>
+<p>and inside directive:</p>
+<p>[javascript]<br />
+{<br />
+   say: &#8216;&amp;&#8217;<br />
+}<br />
+[/javascript]</p>
+<p>and now you can use it in isolated scope:</p>
+<p>[javascript]<br />
+scope.say()<br />
+[/javascript]</p>
+<p>And when you have method with param it&#8217;s little bit more tricky.</p>
+<p>For example you have a method in a parent scope:</p>
+<p>[javascript]<br />
+scope.sayHello = function(name){<br />
+//&#8230;<br />
+}<br />
+[/javascript]</p>
+<p>in this case you should also specify it in the attribute:</p>
+<p>[html]<br />
+&lt;my-directive say=&quot;sayHello(name)&quot;&gt;&lt;/my-directive&gt;<br />
+[/html]</p>
+<p>and for method call use specific format:</p>
+<p>[javascript]<br />
+scope.say({name: &#8216;Alice&#8217;})<br />
+[/javascript]</p>
+<p>Code is <a href="http://jsfiddle.net/STEVER/j6eL82kk/">here</a>.</p>
+<p>Also highly recommend to watch episode from Egghead &#8211; <a href="https://egghead.io/lessons/angularjs-isolate-scope-expression-binding">Isolate Scope &#8220;&amp;&#8221; </a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/07/angularjs-how-to-pass-a-method-into-an-isolated-scope/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>AngularJS Directive attribute binding options</title>
+		<link>https://stepansuvorov.com/blog/2014/11/angularjs-directive-binding/</link>
+					<comments>https://stepansuvorov.com/blog/2014/11/angularjs-directive-binding/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 16 Nov 2014 06:43:59 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[directive]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2099</guid>
+
+					<description><![CDATA[This example explicitly shows the difference between directive attribute binding types. Let&#8217;s say you have directive: [javascript] function myDirective() { return { scope: { x: &#8216;@&#8217;, // String, interpolated with {{ }} y: &#8216;=&#8217;, // Expression z: &#8216;&#38;&#8217; // Function &#8230; <a href="https://stepansuvorov.com/blog/2014/11/angularjs-directive-binding/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>This example explicitly shows the difference between directive attribute binding types. Let&#8217;s say you have directive:</p>
+<p>[javascript]<br />
+function myDirective() {<br />
+  return {<br />
+    scope: {<br />
+    x: &#8216;@&#8217;, // String, interpolated with {{ }}<br />
+    y: &#8216;=&#8217;, // Expression<br />
+    z: &#8216;&amp;&#8217;  // Function<br />
+        }<br />
+  };<br />
+}<br />
+[/javascript]</p>
+<p>it means that you will do such operations with attributes to pass the directive:</p>
+<p>[javascript]<br />
+function MyDirectiveController($scope, $element, $attrs, $interpolate, $parse) {<br />
+    $attrs.$observe(&#8216;x&#8217;, function(value) {});<br />
+    $interpolate($attrs.x)($scope);<br />
+    $scope.$eval($attrs.y);<br />
+    var fn = $parse($attrs.z);<br />
+    $element.on(&#8216;click&#8217;, function() {<br />
+      fn($scope);<br />
+    });<br />
+}<br />
+[/javascript]</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/11/angularjs-directive-binding/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Специфика тестирования AngularJs директив</title>
+		<link>https://stepansuvorov.com/blog/2014/06/%d1%81%d0%bf%d0%b5%d1%86%d0%b8%d1%84%d0%b8%d0%ba%d0%b0-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-angularjs-%d0%b4%d0%b8%d1%80%d0%b5%d0%ba%d1%82%d0%b8%d0%b2/</link>
+					<comments>https://stepansuvorov.com/blog/2014/06/%d1%81%d0%bf%d0%b5%d1%86%d0%b8%d1%84%d0%b8%d0%ba%d0%b0-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-angularjs-%d0%b4%d0%b8%d1%80%d0%b5%d0%ba%d1%82%d0%b8%d0%b2/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 11 Jun 2014 20:59:32 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[directive]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[tests]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1715</guid>
+
+					<description><![CDATA[Тезисно выкладываю некоторые ключевые моменты по тестированию AngularJS директив. Подготовительные действия ставим тест-драйвер Karma определяемся и подключаем к проекту тест-фреймворк (варианты Mocha, Jasmine) подключаем к проекту вспомогательную библиотеку angular-mocks Написание сценария подключаем Angular-модуль: [javascript]beforeEach(module(&#8216;myapp&#8217;));[/javascript] подключаем шаблон (предварительно скомпилированный с помощью html2js): &#8230; <a href="https://stepansuvorov.com/blog/2014/06/%d1%81%d0%bf%d0%b5%d1%86%d0%b8%d1%84%d0%b8%d0%ba%d0%b0-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-angularjs-%d0%b4%d0%b8%d1%80%d0%b5%d0%ba%d1%82%d0%b8%d0%b2/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Тезисно выкладываю некоторые ключевые моменты по тестированию AngularJS директив.</p>
+<p><span id="more-1715"></span></p>
+<h2>Подготовительные действия</h2>
+<ul>
+<li>ставим тест-драйвер <a href="http://karma-runner.github.io/0.12/index.html">Karma</a></li>
+<li>определяемся и подключаем к проекту тест-фреймворк (варианты <a href="http://visionmedia.github.io/mocha/">Mocha</a>, <a href="http://jasmine.github.io/">Jasmine</a>)</li>
+<li>подключаем к проекту вспомогательную библиотеку <a href="https://github.com/angular/bower-angular-mocks">angular-mocks</a></li>
+</ul>
+<h2>Написание сценария</h2>
+<p>подключаем Angular-модуль:</p>
+<p>[javascript]beforeEach(module(&#8216;myapp&#8217;));[/javascript]</p>
+<p>подключаем шаблон (предварительно скомпилированный с помощью <a href="https://github.com/karlgoldstein/grunt-html2js">html2js</a>):</p>
+<p>[javascript]beforeEach(module(&#8216;path/to/template&#8217;));[/javascript]</p>
+<p>инжектим сервисы:</p>
+<p>[javascript]<br />
+var $timeout, $rootScope;<br />
+beforeEach(inject(function(_$timeout_, _$rootScope_){<br />
+  $timeout = _$timeout_;<br />
+  $rootScope= _$rootScope_;<br />
+}));[/javascript]</p>
+<p>прошу обратить внимание на нижнее подчеркивание, которое используется в Ангуляре для удобства и инжектит одноименный сервис.</p>
+<p>либо инжектим инжектор и с помощью него уже получаем сервисы:</p>
+<p>[javascript]<br />
+var $timeout, $rootScope;<br />
+beforeEach(inject(function($injector){<br />
+  $timeout = $injector.get(&#8216;$timeout&#8217;);<br />
+  $rootScope= $injector.get(&#8216;$rootScope&#8217;);<br />
+}));[/javascript]</p>
+<p>для создания нового $scope делаем:</p>
+<p>[javascript]<br />
+var $scope = $rootScope.$new()<br />
+[/javascript]</p>
+<p>компиляция директивы для тестирования:</p>
+<p>[javascript]<br />
+var element = $compile(&#8216;&lt;my-directive&gt;&lt;/my-directive&gt;&#8217;)($scope);<br />
+[/javascript]</p>
+<p>при этом не забываем инжектить сервис $compile</p>
+<p>получение изолированного $scope:</p>
+<p>[javascript]<br />
+var isolatedScope = element.children().scope()<br />
+[/javascript]</p>
+<p>либо (работает начиная с версии 1.2):</p>
+<p>[javascript]<br />
+var isolatedScope = element.isolateScope()<br />
+[/javascript]</p>
+<p>чтобы запустить все колбэки в таймАут-сервисах:</p>
+<p>[javascript]<br />
+$timeout.flush()<br />
+[/javascript]</p>
+<p>чтобы промисы внутри приложения отрезолвились необходимо вручную делать:</p>
+<p>[javascript]<br />
+scope.$apply();<br />
+[/javascript]</p>
+<p>если что-то забыл &#8211; пиши в комментариях &#8211; дополню.</p>
+<p><strong>UPD:</strong></p>
+<p>подмена сервисов (замена мок-вариатом):<br />
+[javascript]<br />
+beforeEach(module(function ($provide){<br />
+  $provide.service(&#8216;SameNameWithRealService&#8217;, function(){<br />
+      //код вашего мок-сервиса<br />
+  });<br />
+}));<br />
+[/javascript]</p>
+<p>использование &#8220;шпионов&#8221; для проверки вызова методов:<br />
+[javascript]<br />
+//переопределение внутреннего метода<br />
+$scope.someMethod = sinon.spy();<br />
+//вызов внешнего метода, который должен вызвать первый<br />
+$scope.someOtherMethod()<br />
+//проверка<br />
+expect($scope.someMethod.called).equal(true);<br />
+[/javascript]<br />
+&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/06/%d1%81%d0%bf%d0%b5%d1%86%d0%b8%d1%84%d0%b8%d0%ba%d0%b0-%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d1%8f-angularjs-%d0%b4%d0%b8%d1%80%d0%b5%d0%ba%d1%82%d0%b8%d0%b2/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>AngularJs: альтернативный синтаксис регистрации директив</title>
+		<link>https://stepansuvorov.com/blog/2014/02/angularjs-%d0%b0%d0%bb%d1%8c%d1%82%d0%b5%d1%80%d0%bd%d0%b0%d1%82%d0%b8%d0%b2%d0%bd%d1%8b%d0%b9-%d1%81%d0%b8%d0%bd%d1%82%d0%b0%d0%ba%d1%81%d0%b8%d1%81/</link>
+					<comments>https://stepansuvorov.com/blog/2014/02/angularjs-%d0%b0%d0%bb%d1%8c%d1%82%d0%b5%d1%80%d0%bd%d0%b0%d1%82%d0%b8%d0%b2%d0%bd%d1%8b%d0%b9-%d1%81%d0%b8%d0%bd%d1%82%d0%b0%d0%ba%d1%81%d0%b8%d1%81/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 16 Feb 2014 20:07:18 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[controller]]></category>
+		<category><![CDATA[directive]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1462</guid>
+
+					<description><![CDATA[Вместо привычного нам: app.directive('directiveName', function() { ... можно использовать групповой синтаксис: app.directive(directives) где directives &#8211; объект содержащий в себе директивы (ключ &#8211; название директивы, значение &#8211; функция конструктор). Может быть удобно для использования пространства имен (namespaces): User.directives = {}; User.directives.myDirective &#8230; <a href="https://stepansuvorov.com/blog/2014/02/angularjs-%d0%b0%d0%bb%d1%8c%d1%82%d0%b5%d1%80%d0%bd%d0%b0%d1%82%d0%b8%d0%b2%d0%bd%d1%8b%d0%b9-%d1%81%d0%b8%d0%bd%d1%82%d0%b0%d0%ba%d1%81%d0%b8%d1%81/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Вместо привычного нам:</p>
+<pre>app.directive('directiveName', function() { ...</pre>
+<p>можно использовать групповой синтаксис:</p>
+<pre>app.directive(directives)</pre>
+<p>где <strong>directives</strong> &#8211; объект содержащий в себе директивы (ключ &#8211; название директивы, значение &#8211; функция конструктор).</p>
+<p>Может быть удобно для использования пространства имен (namespaces):</p>
+<pre>User.directives = {};
+User.directives.myDirective = function () { ...
+angular.directive(User.directives);</pre>
+<p>данный синтаксис работает также и для контроллеров.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/02/angularjs-%d0%b0%d0%bb%d1%8c%d1%82%d0%b5%d1%80%d0%bd%d0%b0%d1%82%d0%b8%d0%b2%d0%bd%d1%8b%d0%b9-%d1%81%d0%b8%d0%bd%d1%82%d0%b0%d0%ba%d1%81%d0%b8%d1%81/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>AngularJS: Использование контроллера директивы в другой директиве</title>
+		<link>https://stepansuvorov.com/blog/2014/02/angularjs-directive-controller-reuse/</link>
+					<comments>https://stepansuvorov.com/blog/2014/02/angularjs-directive-controller-reuse/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 14 Feb 2014 08:59:26 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[controller]]></category>
+		<category><![CDATA[directive]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1448</guid>
+
+					<description><![CDATA[Опция require в описании директивы дает нам возможность использовать контроллер другой директивы. Мы также можем указать массив контроллеров. Объяснение можно посмотреть на egghead.io, код можно взять тут. Важно: если поставить в начале значения символ &#8216;^&#8217;,  то интерпретатор будет пытаться найти контроллер &#8230; <a href="https://stepansuvorov.com/blog/2014/02/angularjs-directive-controller-reuse/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Опция <strong>require</strong> в описании <strong>директивы</strong> дает нам возможность использовать <strong>контроллер</strong> другой директивы. Мы также можем указать массив контроллеров.</p>
+<p>Объяснение можно посмотреть на <a href="https://egghead.io/lessons/angularjs-directive-to-directive-communication">egghead.io</a>, код можно взять <a title="github" href="https://github.com/msfrisbie/egghead-angularjs/blob/master/app/lessons/15/main.js">тут</a>.</p>
+<p><strong>Важно</strong>: если поставить в начале значения символ &#8216;^&#8217;,  то интерпретатор будет пытаться найти контроллер директивы в <strong>родительских</strong> элементах. Если не поставить &#8211; только на <strong>текущем</strong> елементе(<em>как это было в примере на egghead.io</em>).</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/02/angularjs-directive-controller-reuse/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>ngDirective &#8211; директива для загрузки директив</title>
+		<link>https://stepansuvorov.com/blog/2014/02/ng-directive/</link>
+					<comments>https://stepansuvorov.com/blog/2014/02/ng-directive/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 10 Feb 2014 22:11:29 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[directive]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[ng]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1404</guid>
+
+					<description><![CDATA[Суть: директива типа &#8220;атрибут&#8221;, значением идет имя поддирективы, которую необходимо динамически подгрузить. Может быть удобно в случае, когда в зависиомти от условия мы должны выводить различные компоненты. Предистория: В проекте (на AngularJS) стала задача вывести список сущностей, каждая из которых &#8230; <a href="https://stepansuvorov.com/blog/2014/02/ng-directive/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<h2>Суть:</h2>
+<p><em> директива типа &#8220;атрибут&#8221;, значением идет имя поддирективы, которую необходимо динамически подгрузить. Может быть удобно в случае, когда в зависиомти от условия мы должны выводить различные компоненты</em>.</p>
+<p><span id="more-1404"></span></p>
+<h2>Предистория<strong>:</strong></h2>
+<p>В проекте (на <strong>AngularJS</strong>) стала задача вывести список сущностей, каждая из которых имеет свойства и представление (<em>директивы</em>). Но сложность заключается в том, что сущности могут буть разных типов, совершенно разных: с различным представлением и поведением. Вопрос: &#8220;что делать, если хочется все вывести через <strong>ng-repeat</strong>?&#8221;. Одну директиву в духе <a href="http://ru.wikipedia.org/wiki/%D0%91%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82">god-antipattern</a>, где будет сразу все возможные варианты поведения и отображения, лепить не хотелось. Хотелось использовать разные, чтобы потом еще можно было делать новые и они автоматически подхватывались. Но как их подгружать?</p>
+<h2>Решение:</h2>
+<p>Для динамической сборки директивы нам нужен сервис <strong><a title="angularjs docs" href="http://docs.angularjs.org/api/ng.$compile">$compile</a></strong>. В итоге получилось такое( выкладываю упрощенный вариант):</p>
+<p><span style="text-decoration: underline;">html</span>:</p>
+<pre>&lt;div ng-repeat="item in items"&gt;
+  &lt;itemDirective&gt;&lt;/itemDirective&gt;
+&lt;/div&gt;</pre>
+<p>а внутри директивы <span style="text-decoration: underline;">itemDirective</span>:</p>
+<pre>element.append($compile(angular.element('&lt;' + $scope.item.type + '/&gt;'))($scope));</pre>
+<p>После чего пришла мысль &#8220;<em>а почему бы это не оформить в виде директивы, которая будет подгружать в себя в зависимости от параметра другую директиву</em>&#8220;.</p>
+<p>И код преобразился следующим образом:</p>
+<pre>&lt;div ng-repeat="item in items"&gt;
+  &lt;itemDirective ng-directive="{{item.type}}"&gt;&lt;/itemDirective&gt;
+&lt;/div&gt;</pre>
+<p>А в директиве:</p>
+<pre>element.append($compile(angular.element('&lt;' +  attrs.ngDirective + '/&gt;'))($scope));</pre>
+<div id="LC10">Так же не помешает наблюдение за состояние атрибута, чтобы было в духе Ангуляра, поэтому добавим <strong>$observe</strong>:</div>
+<div>
+<pre>attrs.$observe('ngDirective', function(directive) {
+    element.html('');
+    element.append($compile(angular.element('&lt;' + directive + '/&gt;'))($scope));
+});</pre>
+</div>
+<p>&nbsp;</p>
+<p>Вот <a title="github" href="https://github.com/stevermeister/ngDirective">код</a> и <a href="http://jsbin.com/sewug/1/">демо</a>.</p>
+<p>Очень бы хотелось услышать конструктивную критику.</p>
+<p>Идея пришла под вдохновлением от прочтения <a href="http://onehungrymind.com/angularjs-dynamic-templates/">этой</a> статьи.</p>
+<p>&nbsp;</p>
+<p><strong>UPD:</strong> как подсказали в сообществе:</p>
+<ol>
+<li>лучше не <strong>смешивать логику с представлением</strong>(хранить имя директивы в контролере)</li>
+<li>следить за <strong>утечками памяти</strong>, ибо в данном случае новая директива создает много вотчеров, которые потом никто не зачищает</li>
+<li>использовать для данной задачи <strong>ngSwitch</strong></li>
+</ol>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/02/ng-directive/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

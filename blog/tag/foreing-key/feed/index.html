@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>foreing key &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/foreing-key/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sun, 15 Jul 2012 12:41:43 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Что нужно для создания внешнего ключа(FOREIGN KEY) в MySQL</title>
+		<link>https://stepansuvorov.com/blog/2012/07/create-foreign-key-mysql/</link>
+					<comments>https://stepansuvorov.com/blog/2012/07/create-foreign-key-mysql/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 15 Jul 2012 12:27:29 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[foreing key]]></category>
+		<category><![CDATA[mysql]]></category>
+		<category><![CDATA[phpmyadmin]]></category>
+		<category><![CDATA[sql]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=301</guid>
+
+					<description><![CDATA[Все или почти все слышали что есть такое понятие как внешний ключ, но не все его умеют использовать. Поэтому я выкину теорию &#8220;зачем это нужно&#8221; и &#8220;на сколько это полезно&#8221; и сразу перейду к практике. Давайте разберемся что нам необходимо &#8230; <a href="https://stepansuvorov.com/blog/2012/07/create-foreign-key-mysql/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Все или почти все слышали что есть такое понятие как <strong>внешний ключ</strong>, но не все его умеют использовать. Поэтому я выкину теорию &#8220;зачем это нужно&#8221; и &#8220;на сколько это полезно&#8221; и сразу перейду к практике. Давайте разберемся что нам необходимо для создания внешнего ключа в MySQL:</p>
+<p>1. Движок(engine) обеих связываемых таблиц должен быть <strong>InnoDB.</strong></p>
+<p>2. Связываемые поля должны быть <strong>проиндексированы</strong> и иметь <strong>один тип</strong> ( размер и знак должен быть один )</p>
+<p><span id="more-301"></span>Из основного это все.</p>
+<p>Теперь синтаксис взятый из официального мануала:</p>
+<pre>[CONSTRAINT [<em><code>symbol</code></em>]] FOREIGN KEY
+    [<em><code>index_name</code></em>] (<em><code>index_col_name</code></em>, ...)
+    REFERENCES <em><code>tbl_name</code></em> (<em><code>index_col_name</code></em>,...)
+    [ON DELETE <em><code>reference_option</code></em>]
+    [ON UPDATE <em><code>reference_option</code></em>]
+
+<em><code>reference_option</code></em>:
+    RESTRICT | CASCADE | SET NULL | NO ACTION</pre>
+<p>Где:</p>
+<pre><em><code>symbol</code></em> - имя ключа
+<em><code>index_name</code></em> - имя поля в таблице, которое мы хотим сделать ключом<em><code> tbl_name - таблица, с которой осуществляем связывание index_col_name - имя поля, с которым связываем наш ключ reference_option - какое действие осуществляем в случае чего</code></em></pre>
+<p>Для пользователей <strong>phpmyadmin</strong> все это можно осуществить кнопочкой <strong>Relation view</strong> в структуре таблицы, в которой хотим задать внешний ключ.</p>
+<p><img decoding="async" class="alignnone size-medium wp-image-302" title="foreingkey" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/07/foreingkey-300x57.png" alt="" width="300" height="57" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2012/07/foreingkey-300x57.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2012/07/foreingkey.png 398w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>Дальше только выбрать что мы с чем хотим связать и какие действия выполнять в случае удаления или обновления одной записи из связки.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/07/create-foreign-key-mysql/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>browser &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/browser/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 19 Feb 2015 16:08:47 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Шорткаты адресной строки браузера</title>
+		<link>https://stepansuvorov.com/blog/2014/06/browser-search-shortcuts/</link>
+					<comments>https://stepansuvorov.com/blog/2014/06/browser-search-shortcuts/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 20:04:26 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[browser]]></category>
+		<category><![CDATA[chrome]]></category>
+		<category><![CDATA[search]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1773</guid>
+
+					<description><![CDATA[На хабре уже мелькала статья в тему. Суть в том, что мы делаем поисковый запрос, используя поисковый механизм конкретного сайта, до перехода на сам сайт в адресной строке браузера. Проще будет на примере. Мы хотим запустить поиск по хабру. Переходим &#8230; <a href="https://stepansuvorov.com/blog/2014/06/browser-search-shortcuts/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>На хабре уже мелькала <a title="habrahabr.ru" href="http://habrahabr.ru/post/218051/">статья</a> в тему. Суть в том, что мы делаем поисковый запрос, <span style="text-decoration: underline;">используя поисковый механизм конкретного сайта</span>, до перехода на сам сайт в адресной строке браузера.</p>
+<p>Проще будет на примере. Мы хотим запустить поиск по хабру. Переходим в строку браузера и пишем &#8220;h&#8221; и далее пробел, и о чудо:</p>
+<p><img decoding="async" class="alignnone size-full wp-image-1804" title="chrome habr search" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/06/p9vHyY3QpQ8gRopPMcIUJOMAI1J5a-WLvEexSauTUh8.png" alt="" width="203" height="38" /></p>
+<p>мы видим что мы уже ищем по хабру.</p>
+<p><span id="more-1773"></span></p>
+<p>Как сделать это чудо? Оказывается в chrome-браузере(как и в Firefox) уже есть встроенная возможность создавать такие алиасы.</p>
+<p>Для того, чтобы создать такой шорткат в chrome, открываем <a href="http://chrome//settings/searchEngines">chrome://settings/searchEngines</a>, затем добавляем новый поисковый движок <strong>habr</strong>, ключевое слово &#8211; <strong>h</strong>, ссылка с параметром &#8211;  <strong>http://habrahabr.ru/search/?q=%s</strong>. Вот и все.</p>
+<p><img decoding="async" class="alignnone size-full wp-image-1807" style="color: #333333; font-style: normal; line-height: 24.375px;" title="habr search" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/06/FJDD1XjLih8ThacK3d-8VBwOgAsqNYdwN5morWwOqvA1.png" alt="" width="650" height="29" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/06/FJDD1XjLih8ThacK3d-8VBwOgAsqNYdwN5morWwOqvA1.png 650w, https://stepansuvorov.com/blog/wp-content/uploads/2014/06/FJDD1XjLih8ThacK3d-8VBwOgAsqNYdwN5morWwOqvA1-300x13.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/06/FJDD1XjLih8ThacK3d-8VBwOgAsqNYdwN5morWwOqvA1-500x22.png 500w" sizes="(max-width: 650px) 100vw, 650px" /></p>
+<p>Пробуем(в адресной строке браузера):</p>
+<ul>
+<li>h [пробел] angular</li>
+<li>h [пробел] рекурсия</li>
+</ul>
+<p>Полезный набор шорткатов:</p>
+<ul>
+<li><strong>wiki</strong> &#8211; Wikipedia &#8211; http://en.wikipedia.org/wiki/Special:Search?search=%s</li>
+<li><strong>tr</strong> &#8211; google translate &#8211; http://translate.google.com/?source=osdd#auto|auto|%s</li>
+<li><strong>h</strong> &#8211; habrahabr &#8211; http://habrahabr.ru/search/?q=%s</li>
+<li><strong>jq</strong> -jQuery &#8211; http://jquery.com/%s</li>
+<li><strong>calendar</strong> &#8211; google calendar &#8211; https://www.google.com/calendar</li>
+<li><strong>s</strong> &#8211; Stackoverflow &#8211; http://stackoverflow.com/search?q=%s</li>
+<li><strong>вики</strong> &#8211; Википедия &#8211; http://ru.wikipedia.org/wiki/Special:Search?search=%s</li>
+<li><strong>bug</strong> &#8211; любимый баг трекер ( например для поиска по ID )</li>
+</ul>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/06/browser-search-shortcuts/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Octane &#8211; Browser (javascript engine) benchmark</title>
+		<link>https://stepansuvorov.com/blog/2014/02/octane-browser-javascript-engine-benchmark/</link>
+					<comments>https://stepansuvorov.com/blog/2014/02/octane-browser-javascript-engine-benchmark/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 08 Feb 2014 20:53:14 +0000</pubDate>
+				<category><![CDATA[Рекомендую]]></category>
+		<category><![CDATA[benchmark]]></category>
+		<category><![CDATA[browser]]></category>
+		<category><![CDATA[engine]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[octane]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1415</guid>
+
+					<description><![CDATA[test your browser javascript engine with Octane 2.0 from Google.]]></description>
+										<content:encoded><![CDATA[<p>test your <strong>browser</strong> <strong>javascript</strong> <strong>engine</strong> with <strong><a title="octane-benchmark" href="http://octane-benchmark.googlecode.com/svn/latest/index.html">Octane 2.0</a></strong> from <strong>Google</strong>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/02/octane-browser-javascript-engine-benchmark/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Browser to Notepad in one click</title>
+		<link>https://stepansuvorov.com/blog/2013/12/notepad/</link>
+					<comments>https://stepansuvorov.com/blog/2013/12/notepad/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 07 Dec 2013 18:45:42 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[browser]]></category>
+		<category><![CDATA[notepad]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1310</guid>
+
+					<description><![CDATA[Just do click. You can save this link to your bookmarks and/or customise it by own taste. Code and comments you can find here. &#160; &#160;]]></description>
+										<content:encoded><![CDATA[<p>Just do <a title="click here" href="data:text/html, 20%3Chtml%20contenteditable%3E%3Chead%3E%3Ctitle%3ENotepad%3C%2Ftitle%3E%3C%2Fhead%3E%3C%2Fhtml%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E.e%7Bposition%3Aabsolute%3Btop%3A0%3Bright%3A0%3Bbottom%3A0%3Bleft%3A0%3B%7D%3C%2Fstyle%3E%3Cdiv%20class%3D%22e%22%20id%3D%22editor%22%3E%3C%2Fdiv%3E%3Cscript%20src%3D%22http%3A%2F%2Fd1n0x3qji82z53.cloudfront.net%2Fsrc-min-noconflict%2Face.js%22%20type%3D%22text%2Fjavascript%22%20charset%3D%22utf-8%22%3E%3C%2Fscript%3E%3Cscript%3Evar%20e%3Dace.edit(%22editor%22)%3Be.setTheme(%22ace%2Ftheme%2Fmonokai%22)%3Be.getSession().setMode(%22ace%2Fmode%2Fjavascript%22)%3B%3C%2Fscript%3E">click</a>.</p>
+<p>You can save this link to your bookmarks and/or customise it by own taste. Code and comments you can find <a title="gist" href="https://gist.github.com/stevermeister/7846746">here</a>.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/12/notepad/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Userscript console++</title>
+		<link>https://stepansuvorov.com/blog/2013/10/console-plus-plus/</link>
+					<comments>https://stepansuvorov.com/blog/2013/10/console-plus-plus/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 29 Oct 2013 08:33:50 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[browser]]></category>
+		<category><![CDATA[console]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1249</guid>
+
+					<description><![CDATA[I&#8217;ve created userscript to extend browser console. Basic options: own console object with all methods to prevent errors in old browsers using console without context (we can pass console.log as a callback, and no &#8220;Illegal invocation&#8221; error will be shown) &#8230; <a href="https://stepansuvorov.com/blog/2013/10/console-plus-plus/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>I&#8217;ve created userscript to extend browser console.</p>
+<p>Basic options:</p>
+<ul>
+<li>own <strong>console object</strong> with all methods to prevent errors in <strong>old browsers</strong></li>
+<li>using console without context (we can pass <strong>console.log</strong> as a <strong>callback</strong>, and no &#8220;Illegal invocation&#8221; error will be shown)</li>
+<li><strong>production param</strong> (debug information only for dev environment )</li>
+<li><strong>time</strong> and <strong>timeEnd</strong> methods (if they are not exist)</li>
+<li><strong>log</strong> alias for <strong>console.log</strong></li>
+</ul>
+<p><a title="userscripts.org" href="http://userscripts-mirror.org/scripts/show/181073">Download/install console++</a>.</p>
+<p>sources of inspiration:</p>
+<ul>
+<li>https://github.com/theshock/console-cap</li>
+<li><a title="paulirish" href="http://www.paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/">Log() &#8211; a Lightweight Wrapper for console.log</a></li>
+<li>http://habrahabr.ru/post/116852/</li>
+</ul>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/10/console-plus-plus/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Возможности консоли браузера</title>
+		<link>https://stepansuvorov.com/blog/2013/04/%d0%b2%d0%be%d0%b7%d0%bc%d0%be%d0%b6%d0%bd%d0%be%d1%81%d1%82%d0%b8-%d0%ba%d0%be%d0%bd%d1%81%d0%be%d0%bb%d0%b8-%d0%b1%d1%80%d0%b0%d1%83%d0%b7%d0%b5%d1%80%d0%b0/</link>
+					<comments>https://stepansuvorov.com/blog/2013/04/%d0%b2%d0%be%d0%b7%d0%bc%d0%be%d0%b6%d0%bd%d0%be%d1%81%d1%82%d0%b8-%d0%ba%d0%be%d0%bd%d1%81%d0%be%d0%bb%d0%b8-%d0%b1%d1%80%d0%b0%d1%83%d0%b7%d0%b5%d1%80%d0%b0/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 01 Apr 2013 18:17:42 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[browser]]></category>
+		<category><![CDATA[chrome]]></category>
+		<category><![CDATA[console]]></category>
+		<category><![CDATA[Firefox]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=928</guid>
+
+					<description><![CDATA[Речь пойдет о начинке встроенного объекта console в браузерах Chrome и Firefox. Начнем с простого &#8211; метод console.log(). Базовый синтаксис: console.log(obj1 [, obj2, ..., objN); console.log(msg [, subst1, ..., substN); Если с первым вариантом использования все понятно, то со вторым &#8230; <a href="https://stepansuvorov.com/blog/2013/04/%d0%b2%d0%be%d0%b7%d0%bc%d0%be%d0%b6%d0%bd%d0%be%d1%81%d1%82%d0%b8-%d0%ba%d0%be%d0%bd%d1%81%d0%be%d0%bb%d0%b8-%d0%b1%d1%80%d0%b0%d1%83%d0%b7%d0%b5%d1%80%d0%b0/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Речь пойдет о начинке встроенного объекта <strong>console</strong> в браузерах <strong>Chrome</strong> и <strong>Firefox</strong>.</p>
+<p>Начнем с простого &#8211; метод <strong>console.log</strong>(). Базовый синтаксис:</p>
+<pre>console.log(obj1 [, obj2, ..., objN);
+console.log(msg [, subst1, ..., substN);</pre>
+<p>Если с первым вариантом использования все понятно, то со вторым следует разобраться: в данном случае мы можем использовать шаблон первым параметром, в который будут подставлены переменные, пример:</p>
+<pre>console.log("%s is %d years old.", "Bob", 42)</pre>
+<p>и выведет оно, как вы уже догадались: <em>Bob is 42 years old.</em></p>
+<p>Для подстановки можно использовать следующие подшаблоны:</p>
+<ul>
+<li><strong>%o</strong> &#8211; для ссылки на объект</li>
+<li><strong>%d</strong>, <strong>%i</strong> &#8211; целые чила (integer)</li>
+<li><strong>%s</strong> &#8211; строки</li>
+<li><strong>%f</strong> &#8211; числа с плавающей запятой (float)</li>
+</ul>
+<p><span id="more-928"></span></p>
+<p>Далее перейдем к схожим методам, а именно <strong>console.info()</strong>, <strong>console.warn()</strong>, <strong>console.error()</strong>,<strong> console.debug()</strong>. Все они работают аналогично <strong>console.log()</strong>, а метод <strong>console.debug()</strong> вообще является его алисом(deprecated). Отличие по сути только в варианте вывода(примеры для FireFox и Chrome):</p>
+<p><img decoding="async" class="alignnone size-full wp-image-955" title="consol_output" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/04/consol_output.png" alt="" width="154" height="116" /><img decoding="async" loading="lazy" class="alignnone size-full wp-image-956" title="console_output_chrome" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_output_chrome.png" alt="" width="123" height="87" /></p>
+<p>&nbsp;</p>
+<p>Иногда, когда объект вложеный удобнее использовать не <strong>console.log()</strong>, а <strong>console.dir()</strong>, который выведет все в виде структуры:</p>
+<pre>console.log(location)
+console.dir(location)</pre>
+<p><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-957" title="console_dir" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_dir-300x125.png" alt="" width="300" height="125" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_dir-300x125.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_dir-500x209.png 500w, https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_dir.png 534w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>чтобы вывести красиво HTML/XML можно использовать <strong>console.dirxml()</strong>:</p>
+<pre>console.dirxml(document.body)</pre>
+<p>правда, если говорить о <strong>Chrome</strong>, то там объединили понятие <strong>dir/dirxml</strong> и <strong>log</strong> и для сложных обектов со вложенными свойствами используют <strong>dir<strong>/dirxml</strong></strong> вместо <strong>log</strong> по умолчанию.</p>
+<p>Если в консоль выводится много информации, то будет полезно разделять информацию по группам исползуя метод <strong>console.group() </strong>плюс вспомогательные <strong>console.groupEnd()</strong> и <strong>console.groupCollapsed()</strong>:</p>
+<pre>console.clear()
+console.group("module A")
+console.log('a')
+console.log('a')
+console.log('a')
+console.group("nested module B")
+console.log('b')
+console.log('b')
+console.log('b')
+console.groupEnd()
+console.groupCollapsed("nested collapsed module C")
+console.log('c')
+console.log('c')
+console.log('c')
+console.groupEnd()
+console.groupEnd()
+console.group("module D")
+console.log('d')
+console.log('d')
+console.log('d')
+console.groupEnd()</pre>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-958" title="console_groups" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_groups.png" alt="" width="259" height="260" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_groups.png 259w, https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_groups-150x150.png 150w" sizes="(max-width: 259px) 100vw, 259px" /></p>
+<p>Лично мне кажется, что группировка реализована не совсем удобно: нельзя записывать данные в несколько групп паралельно, т.е. пока одна группа не закрыта &#8211; мы пишем в нее.</p>
+<p>Для оценки времени выполнения чего-либо существует удобный метод <strong>console.time()</strong> и <strong>console.timeEnd()</strong>, синтаксис:</p>
+<pre>console.time(timerName);</pre>
+<pre>console.timeEnd(timerName);</pre>
+<p>Пример:</p>
+<pre>console.time("timer1")
+console.time("timer2")
+var i = 10000, j = 0;
+while(i--){ j++}
+console.timeEnd("timer1")
+while(j--){}
+console.timeEnd("timer2")</pre>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-959" title="console_time" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_time.png" alt="" width="198" height="41" /></p>
+<p>Есть также в консоли и метод для трассировки вызова &#8211; <strong>console.trace()</strong>. Наиболее полезное примененеие ему &#8211; вывод полного стека вызовов при возникновении ошибки &#8211; что делает браузер по умолчанию, но всеже, если мы переопределили стандартное поведение браузера, нам очень поможет этот метод:</p>
+<pre>(function foo() {
+  function bar() { console.trace(); };
+  bar();
+})()</pre>
+<p>К сожалению, в FireBug это не работает, а Chrome выдал следующее:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-960" title="console_trace" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_trace.png" alt="" width="276" height="95" /></p>
+<p>Через консоль еще можно проверять ожидаемые значения используя метод <strong>console.assert()</strong>, который в случае невыполнения условия внутри вернет <strong>console.error()</strong>.</p>
+<p>Для работы с <strong>DOM</strong> есть ряд полезных хелперов:</p>
+<ul>
+<li><strong>$(), $$()</strong> &#8211; краткая запись для document.querySelector</li>
+<li><strong>$x()</strong> &#8211; получение элемента по XPath</li>
+<li><strong>$0</strong> &#8211; выбранный инспектором элемент</li>
+<li><strong>$1</strong> &#8211; предыдущий выбранный инспектором элемент</li>
+<li><strong>$n()</strong> &#8211; показать один из пяти последних выбранных элементов (параметром идет номер элемента) &#8211; работает только для <strong>FireBug</strong></li>
+</ul>
+<p>Другие полезные хелперы:</p>
+<ul>
+<li><strong>keys()</strong> &#8211; выводит ключи объекта</li>
+<li><strong>values()</strong> &#8211; выводи значения объекта</li>
+<li><strong>inspect()</strong> &#8211; открывает объект для инспектирования</li>
+<li><strong>clear()</strong> &#8211; очищает консоль</li>
+</ul>
+<p>Ну и конечно самый главный метод <strong>help()</strong>, плохо что его так и не реализовали в <strong>Chrome</strong>, но в <strong>FireBug</strong> он работает отлично, рекомендую.</p>
+<p>&nbsp;</p>
+<p>Ну и еще как <strong>бонус</strong>, для тех, кто долистал этот посто до конца. В <strong>FireBug</strong> есть интересный синтаксис работы с переменными из замыкания используя &#8220;<em>%</em>&#8220;:</p>
+<pre>function Person(name)
+{
+    this.introduce = function()
+    {
+        return 'Hello, my name is ' + name;
+    }
+}
+
+var someone = new Person("Arthur");
+someone.%name; // выведет "Arthur"</pre>
+<p>&nbsp;</p>
+<p>Советую следить за обновлениями набора методов, так как бразуры постоянно совершенствуются и добавляют новые интересные плюшки.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/04/%d0%b2%d0%be%d0%b7%d0%bc%d0%be%d0%b6%d0%bd%d0%be%d1%81%d1%82%d0%b8-%d0%ba%d0%be%d0%bd%d1%81%d0%be%d0%bb%d0%b8-%d0%b1%d1%80%d0%b0%d1%83%d0%b7%d0%b5%d1%80%d0%b0/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Тестируем сайт на разных версиях ИЕ под Linux/Mac</title>
+		<link>https://stepansuvorov.com/blog/2013/03/%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d1%83%d0%b5%d0%bc-%d1%81%d0%b0%d0%b9%d1%82-%d0%bd%d0%b0-%d1%80%d0%b0%d0%b7%d0%bd%d1%8b%d1%85-%d0%b2%d0%b5%d1%80%d1%81%d0%b8%d1%8f%d1%85-%d0%b8%d0%b5-%d0%bf%d0%be/</link>
+					<comments>https://stepansuvorov.com/blog/2013/03/%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d1%83%d0%b5%d0%bc-%d1%81%d0%b0%d0%b9%d1%82-%d0%bd%d0%b0-%d1%80%d0%b0%d0%b7%d0%bd%d1%8b%d1%85-%d0%b2%d0%b5%d1%80%d1%81%d0%b8%d1%8f%d1%85-%d0%b8%d0%b5-%d0%bf%d0%be/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 31 Mar 2013 12:25:38 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[browser]]></category>
+		<category><![CDATA[ie]]></category>
+		<category><![CDATA[tests]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[virtualbox]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=930</guid>
+
+					<description><![CDATA[Хочу поделиться скриптом найденым в сети, который создает виртуальные машины(на основе VirtualBox) для всех версий Internet Explorer на раздых Windows, при этом не нарушая лицензии. Подробности под катом. Компания Microsoft сама создала образы вируальных машин с целью предоставляения возможности вебразработчикам &#8230; <a href="https://stepansuvorov.com/blog/2013/03/%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d1%83%d0%b5%d0%bc-%d1%81%d0%b0%d0%b9%d1%82-%d0%bd%d0%b0-%d1%80%d0%b0%d0%b7%d0%bd%d1%8b%d1%85-%d0%b2%d0%b5%d1%80%d1%81%d0%b8%d1%8f%d1%85-%d0%b8%d0%b5-%d0%bf%d0%be/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Хочу поделиться <a href="https://github.com/xdissent/ievms/blob/master/ievms.sh">скриптом</a> найденым в сети, который создает виртуальные машины(на основе <strong>VirtualBox</strong>) для всех версий <strong>Internet Explorer</strong> на раздых <strong>Windows</strong>, при этом <span style="text-decoration: underline;">не нарушая лицензии</span>. Подробности под катом.</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-952" title="virtualbox_win" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/03/virtualbox_win-300x248.png" alt="" width="300" height="248" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2013/03/virtualbox_win-300x248.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2013/03/virtualbox_win-361x300.png 361w, https://stepansuvorov.com/blog/wp-content/uploads/2013/03/virtualbox_win.png 763w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p><span id="more-930"></span></p>
+<p>Компания <strong>Microsoft</strong> сама создала <a href="http://www.microsoft.com/en-us/download/details.aspx?id=11575">образы вируальных машин</a> с целью предоставляения возможности вебразработчикам тестировать их сайты на старых версиях <strong>IE </strong>и/или из другой операционной ситемы(<strong>Linux/Mac</strong>). Для удобного использования <a href="Greg Thornton">Greg Thornton</a> создал <a href="https://github.com/xdissent/ievms">скрипт</a>, который сам все скачивает и устанавливает.</p>
+<p>Плюсы: это бесплатно, легально и это не требует лиценизии на каждую Window.</p>
+<p>Минусы: если вы захотите поставить себе все версии(это опционально), то займет довольно много места на диске (около 45Гб)</p>
+<p><span style="text-decoration: underline;">Внимание!</span> Windows обязательно попросит себя активировать. Это нормально. Чтобы снова получить trial необходимо выполнить c правами администратора следующую команду в командной строке(cmd):</p>
+<pre>slmgr -rearm</pre>
+<p>Пароль по умолчанию для всех версий Windows &#8211; &#8220;<em>Password1</em>&#8220;.</p>
+<p>Запустить скрипт одной сточкой можно так:</p>
+<pre>curl -s https://raw.github.com/xdissent/ievms/master/ievms.sh | bash</pre>
+<p>через параметр <strong>IEVMS_VERSIONS </strong>можно указать конкретные версии, которые необходимо установить</p>
+<pre>curl -s https://raw.github.com/xdissent/ievms/master/ievms.sh | IEVMS_VERSIONS="6 8" bash</pre>
+<p>Спасибо Грегу за скрипт и вам успешного тестирования.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/03/%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d1%83%d0%b5%d0%bc-%d1%81%d0%b0%d0%b9%d1%82-%d0%bd%d0%b0-%d1%80%d0%b0%d0%b7%d0%bd%d1%8b%d1%85-%d0%b2%d0%b5%d1%80%d1%81%d0%b8%d1%8f%d1%85-%d0%b8%d0%b5-%d0%bf%d0%be/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

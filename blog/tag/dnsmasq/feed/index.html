@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>dnsmasq &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/dnsmasq/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Mon, 29 Jun 2015 07:58:55 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Dnsmasq для локальной разработки под Mac</title>
+		<link>https://stepansuvorov.com/blog/2015/05/dnsmasq-%d0%b4%d0%bb%d1%8f-%d0%bb%d0%be%d0%ba%d0%b0%d0%bb%d1%8c%d0%bd%d0%be%d0%b9-%d1%80%d0%b0%d0%b7%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-%d0%bf%d0%be%d0%b4-mac/</link>
+					<comments>https://stepansuvorov.com/blog/2015/05/dnsmasq-%d0%b4%d0%bb%d1%8f-%d0%bb%d0%be%d0%ba%d0%b0%d0%bb%d1%8c%d0%bd%d0%be%d0%b9-%d1%80%d0%b0%d0%b7%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-%d0%bf%d0%be%d0%b4-mac/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 09 May 2015 08:00:23 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[DNS]]></category>
+		<category><![CDATA[dnsmasq]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2615</guid>
+
+					<description><![CDATA[Так как наш проект использует динамические поддомены, то есть, кроме основного www.studytube.com, может быть еще сколько угодно XXX.studytube.com. Для локальной среды мы настроили домен studytube.dev. Но тут же появился вопрос: как сделать так, чтобы не нужно было каждый раз прописывать в &#8230; <a href="https://stepansuvorov.com/blog/2015/05/dnsmasq-%d0%b4%d0%bb%d1%8f-%d0%bb%d0%be%d0%ba%d0%b0%d0%bb%d1%8c%d0%bd%d0%be%d0%b9-%d1%80%d0%b0%d0%b7%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-%d0%bf%d0%be%d0%b4-mac/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Так как наш проект использует динамические поддомены, то есть, кроме основного <code>www.studytube.com</code>, может быть еще сколько угодно <code>XXX.studytube.com</code>. Для локальной среды мы настроили домен <code>studytube.dev</code>. Но тут же появился вопрос: как сделать так, чтобы не нужно было каждый раз прописывать в хосты новый поддомен. Wildcard опцию, то есть возможность указать <code>*.studytube.dev</code>, к сожалению, <code>/etc/hosts</code> не поддерживает.</p>
+<p>К счастью, на помощь к нам пришел локальный <code>DNS</code>-сервер <strong><a href="http://www.thekelleys.org.uk/dnsmasq/doc.html">Dnsmasq</a></strong>.</p>
+<p><span id="more-2615"></span></p>
+<p>Настройка его очень простая. Все что вам нужно сделать это:</p>
+<ul>
+<li>установить <strong>Dnsmasq</strong></li>
+<li>настроить <strong>Dnsmasq</strong>, чтобы все запросы <code>.dev</code> он отдавал <code>127.0.0.1</code></li>
+<li>настроить <strong>OS X</strong> для отправки всех запросов <code>.dev<code> в <code>Dnsmasq</code>;</code></code></li>
+</ul>
+<p>Более подробно можно <a href="http://passingcuriosity.com/2013/dnsmasq-dev-osx/">тут</a> и на русском <a href="https://kossoff.ru/2014/11/22/%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-dnsmasq-%D0%B4%D0%BB%D1%8F-%D0%BB%D0%BE%D0%BA%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B9-%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%BD%D0%B0-os-x">тут</a>.</p>
+<p>На всякий случай, список команд сохраню тут:</p>
+<p>[shell]<br />
+brew install dnsmasq<br />
+cp $(brew list dnsmasq | grep /dnsmasq.conf.example$) /usr/local/etc/dnsmasq.conf<br />
+sudo cp $(brew list dnsmasq | grep /homebrew.mxcl.dnsmasq.plist$) /Library/LaunchDaemons/<br />
+sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist<br />
+echo &quot;\naddress=/dev/127.0.0.1&quot; &gt;&gt; /usr/local/etc/dnsmasq.conf<br />
+sudo launchctl stop homebrew.mxcl.dnsmasq<br />
+sudo launchctl start homebrew.mxcl.dnsmasq<br />
+sudo mkdir -p /etc/resolver<br />
+sudo tee /etc/resolver/dev &gt;/dev/null &lt;&lt;EOF<br />
+nameserver 127.0.0.1<br />
+EOF<br />
+ping xxx.dev<br />
+[/shell]</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/05/dnsmasq-%d0%b4%d0%bb%d1%8f-%d0%bb%d0%be%d0%ba%d0%b0%d0%bb%d1%8c%d0%bd%d0%be%d0%b9-%d1%80%d0%b0%d0%b7%d1%80%d0%b0%d0%b1%d0%be%d1%82%d0%ba%d0%b8-%d0%bf%d0%be%d0%b4-mac/feed/</wfw:commentRss>
+			<slash:comments>5</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>keypress &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/keypress/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 14 Jun 2014 15:50:49 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Delayed Keypress или создаем свои хуки событий на jQuery</title>
+		<link>https://stepansuvorov.com/blog/2014/06/delayed-keypress-jquery/</link>
+					<comments>https://stepansuvorov.com/blog/2014/06/delayed-keypress-jquery/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 15:50:49 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[jQuery.event]]></category>
+		<category><![CDATA[keypress]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1683</guid>
+
+					<description><![CDATA[Иногда возникает необходимость расширить стандартное событие JavaScript/jQuery, добавить определенную специфику, например: мы хотим выводить авто-дополнение для текстового поля при вводе, при этом мы не хотим чтобы запрос отправлялся на сервер при каждом нажатии клавиши(будет очень много ненужных запросов). Зададимся целью &#8230; <a href="https://stepansuvorov.com/blog/2014/06/delayed-keypress-jquery/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Иногда возникает необходимость расширить стандартное событие <strong>JavaScript</strong>/<strong>jQuery</strong>, добавить определенную специфику, например: мы хотим выводить авто-дополнение для текстового поля при вводе, при этом мы не хотим чтобы запрос отправлялся на сервер при каждом нажатии клавиши(будет очень много ненужных запросов). Зададимся целью посылать запрос через 500 миллисекунд (полсекунды) после того, как пользователь прекратит набирать(либо остановился в ожидании подсказки авто-дополнения).</p>
+<p><span id="more-1683"></span></p>
+<p>Если не создавать своего события, а просто обработать <strong>keypress</strong>, то получим где-то такой код:</p>
+<p>[javascript]<br />
+$(function() {<br />
+    var timer;<br />
+    $(&quot;#id&quot;).keypress(function() {<br />
+        timer &amp;&amp; clearTimeout(timer);<br />
+        timer = setTimeout(someMethod, 500);<br />
+    });<br />
+});<br />
+[/javascript]</p>
+<p>Теперь попробуем создать свое событие <strong>delayedkeypress</strong>, обработчик которого можно будет повесить на любой элемент DOM.</p>
+<p><strong>jQuery</strong> имеет следующий синтаксис для определения своих событий:</p>
+<p>[javascript]<br />
+jQuery.event.special.myevent = {<br />
+  delegateType: &#8216;eventType&#8217;,<br />
+  bindType: &#8216;eventType&#8217;,<br />
+  setup: function( data, namespaces, eventHandle ) {<br />
+    // code<br />
+  },<br />
+  teardown: function( namespaces ) {<br />
+    // code<br />
+  },<br />
+  add: function( handleObj ) {<br />
+    // code<br />
+  },<br />
+  remove: function( handleObj ) {<br />
+    // code<br />
+  },<br />
+  _default: function( event ) {<br />
+    // code<br />
+  },<br />
+  trigger: function( event: jQuery.Event, data: Object ) {<br />
+    // code<br />
+  },<br />
+  handle: function( event: jQuery.Event, data: Object ){<br />
+    // code<br />
+  }<br />
+};<br />
+[/javascript]</p>
+<p>Немного пояснений по свойствам и колбэкам:</p>
+<ul>
+<li><strong>bindType</strong> &#8211; тип стандартного события(если такое имеется), к которому хотим привязаться</li>
+<li><strong>delegateType</strong> &#8211; какому типу события делегируем последующее выполнение</li>
+<li><strong>setup</strong> &#8211; вызовется при первом навешивании обработчика</li>
+<li><strong>teardown</strong> &#8211; когда все обработчики сняты</li>
+<li><strong>add</strong>/<strong>remove</strong> &#8211; при каждом добавлении/удалении нового обработчика</li>
+<li><strong>trigger</strong> &#8211; вызовется при использовании методов <strong>.trigger()</strong> и <strong>.triggerHandler()</strong></li>
+<li><strong>_default</strong> &#8211; определяет нужно ли запускать стандартный обработчик браузера</li>
+<li><strong>handle</strong> &#8211; основной метод, который будет вызван при обнаружении события определенного в <strong>bindType</strong> опции</li>
+</ul>
+<p>Если мы хотим просто прокинуть стандартный <strong>keypress</strong> через свой обработчик, получим:</p>
+<p>[javascript]jQuery.event.special.delayedkeypress = {<br />
+    delegateType: &quot;keypress&quot;,<br />
+    bindType: &quot;keypress&quot;,<br />
+    handle: function (event) {<br />
+        return event.handleObj.handler.apply(this, arguments);<br />
+    }<br />
+};[/javascript]</p>
+<p>а теперь добавим нашу обработку c таймером:</p>
+<p>[javascript]<br />
+jQuery.event.special.delayedkeypress = {<br />
+    delegateType: &quot;keypress&quot;,<br />
+    bindType: &quot;keypress&quot;,<br />
+    handle: function (event) {<br />
+        var self = this;<br />
+        this.timer &amp;&amp; clearTimeout(this.timer);<br />
+        this.timer = setTimeout(function(){<br />
+            event.handleObj.handler.apply(self, arguments);<br />
+        }, 500);<br />
+    }<br />
+};<br />
+[/javascript]</p>
+<p>это позволит нам превратить первоначальный код в простой отлов события:</p>
+<p>[javascript]$(&quot;#id&quot;).on(&quot;delayedkeypress&quot;, someMethod);[/javascript]</p>
+<p>ну и для полной jquery-ности добавим алиас-метод <strong>delayedkeypress</strong> для быстрой работы с событием(аналогично <em>click()</em>, <em>focus()</em>, <em>scroll()</em>):</p>
+<p>[javascript]<br />
+jQuery.fn[ &quot;delayedkeypress&quot; ] = function( data, fn ) {<br />
+  return arguments.length &gt; 0 ?<br />
+         this.on( &quot;delayedkeypress&quot;, null, data, fn ) :<br />
+	 this.trigger( &quot;delayedkeypress&quot; );<br />
+};[/javascript]</p>
+<p>получим:</p>
+<p>[javascript]$(&quot;#id&quot;).delayedkeypress(someMethod);[/javascript]</p>
+<p>Вот <a title="jsfiddle" href="http://jsfiddle.net/STEVER/y5R5V/">тут</a> можно поиграть с кодом. Более подробную информацию можно найти в <a title="event.js" href="https://github.com/jquery/jquery/blob/master/src/event.js">исходниках</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/06/delayed-keypress-jquery/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>angular2-providers &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/angular2-providers/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 21 Jan 2017 18:37:41 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Angular2: Opaque токены и мультипровайдеры</title>
+		<link>https://stepansuvorov.com/blog/2017/01/angular2-opaque-%d1%82%d0%be%d0%ba%d0%b5%d0%bd%d1%8b-%d0%b8-%d0%bc%d1%83%d0%bb%d1%8c%d1%82%d0%b8%d0%bf%d1%80%d0%be%d0%b2%d0%b0%d0%b9%d0%b4%d0%b5%d1%80%d1%8b/</link>
+					<comments>https://stepansuvorov.com/blog/2017/01/angular2-opaque-%d1%82%d0%be%d0%ba%d0%b5%d0%bd%d1%8b-%d0%b8-%d0%bc%d1%83%d0%bb%d1%8c%d1%82%d0%b8%d0%bf%d1%80%d0%be%d0%b2%d0%b0%d0%b9%d0%b4%d0%b5%d1%80%d1%8b/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 21 Jan 2017 18:35:12 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular2]]></category>
+		<category><![CDATA[angular2-providers]]></category>
+		<category><![CDATA[opaque-token]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3232</guid>
+
+					<description><![CDATA[При определении провайдеров рано или поздно у всех у нас возникает вопрос &#8220;А что если будет 2 провайдера с одним и тем же именем?&#8221; &#8211; Ну тут все довольно просто: последний определенный перезатрет все определенные до него. Но что если &#8230; <a href="https://stepansuvorov.com/blog/2017/01/angular2-opaque-%d1%82%d0%be%d0%ba%d0%b5%d0%bd%d1%8b-%d0%b8-%d0%bc%d1%83%d0%bb%d1%8c%d1%82%d0%b8%d0%bf%d1%80%d0%be%d0%b2%d0%b0%d0%b9%d0%b4%d0%b5%d1%80%d1%8b/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>При определении провайдеров рано или поздно у всех у нас возникает вопрос &#8220;<em>А что если будет 2 провайдера с одним и тем же именем?</em>&#8221; &#8211; Ну тут все довольно просто: последний определенный перезатрет все определенные до него.</p>
+<p>Но что если вы подключаете сторонний модуль, а в нем уже определен провайдер с таким же именем? Очевидно, что вы его перезатрете своим. Как избежать этого?</p>
+<p><span id="more-3232"></span></p>
+<h2>Opaque токен</h2>
+<p>На помощь нам спешит <strong>opaque токен</strong>, который выглядит немного как костыль архитектуры. Чтобы избежать коллизии, мы заворачиваем имя нашего сервиса в объект с помощью класса <strong>OpaqueToken</strong>:</p>
+<p>[javascript]<br />
+const MY_HTTP_TOKEN: OpaqueToken = new OpaqueToken(&#8216;Http&#8217;);<br />
+[/javascript]</p>
+<p>Если мы посмотрим на исходный код этого класса, то увидим <a href="https://github.com/angular/angular/blob/d169c2434e3b5cd5991e38ffd8904e0919f11788/modules/%40angular/core/src/di/injection_token.ts#L35">всего одну строчку реализации</a>:</p>
+<p>[javascript]<br />
+export class OpaqueToken {<br />
+  constructor(protected _desc: string) {}</p>
+<p>  toString(): string { return `Token ${this._desc}`; }<br />
+}<br />
+[/javascript]</p>
+<p>То есть мы просто  заворачиваем наше название в объект, который в случае чего его вернет.</p>
+<p>Что это дает? Какое бы мы <s>дурацкое</s> уникальное имя не придумали для своего провайдера, все равно есть вероятность, что кто-то придумает что-то подобное. А вот при создании нового объекта мы всегда гарантируем что он будет уникальный. И теперь коллизии нам не страшны &#8211; можем спокойно внедрять нашу сущность:</p>
+<p>[javascript]<br />
+constructor(@Inject(MY_HTTP_TOKEN) private myHttp){<br />
+[/javascript]</p>
+<h2></h2>
+<p>&nbsp;</p>
+<h2>Мультипровайдеры</h2>
+<p>Но представим другую ситуацию: вам внезапно захотелось запихнуть в провайдер несколько классов. Зачем? Ну вот захотелось. И чтобы для каждого класса отрабатывал механизм внедрения зависимости и получал сущность. И, да, разработчики предусмотрели и такой случай. Для этого вам нужно использовать мультипровайдеры, а именно специальное свойство <strong>multi</strong> при определении провайдера:</p>
+<p>[javascript]<br />
+  providers: [<br />
+  { provide: &#8216;SuperProvider&#8217;, useClass: class A {}, multi: true },<br />
+  { provide: &#8216;SuperProvider&#8217;, useClass: class B {}, multi: true}]<br />
+[/javascript]</p>
+<p>И теперь можем инжектить два-в-одном:</p>
+<p>[javascript]<br />
+ constructor(@Inject(&#8216;SuperProvider&#8217;) private testInjection) {<br />
+[/javascript]</p>
+<p>и получить в testInjection массив из 2х сущностей: экземпляров класса A и B.</p>
+<p>Так, еще раз &#8211; зачем это нужно? Если вы пишете библиотеку/плагин и хотите сделать его расширяемым для разработчиков, которые будут подключать ваше решение в свои приложения, думаю это именно то, что вам нужно. Именно так реализованы 2 сервиса хранящие валидаторы в ангуляре, а именно <strong>NG_VALIDATORS</strong> и <strong>NG_ASYNC_VALIDATORS</strong>, что позволяет вам добавить свои валидаторы в стандартную коллекцию:</p>
+<p>[javascript]<br />
+{ provide: NG_VALIDATORS, useValue: (formControl) =&gt; {}, multi: true }<br />
+[/javascript]</p>
+<p>По прежнему остается вопрос: зачем использовать задание провайдеров через строки, если это может привести к коллизии? Оставим его на совести разработчиков Angular 2.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/01/angular2-opaque-%d1%82%d0%be%d0%ba%d0%b5%d0%bd%d1%8b-%d0%b8-%d0%bc%d1%83%d0%bb%d1%8c%d1%82%d0%b8%d0%bf%d1%80%d0%be%d0%b2%d0%b0%d0%b9%d0%b4%d0%b5%d1%80%d1%8b/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

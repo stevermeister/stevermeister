@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="en-US">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 6) & !(IE 7) & !(IE 8)]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+
+<!-- Mirrored from stepansuvorov.com/blog/2012/12/с-чего-начать-изучение-angularjs/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Feb 2025 14:03:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>
+С чего начать изучение AngularJS | Stepan Suvorov Blog	</title>
+<link rel="profile" href="https://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="../../../wp-content/themes/twentyeleven/stylede5a.css?ver=20221126" />
+<link rel="pingback" href="../../../xmlrpc.php">
+<!--[if lt IE 9]>
+<script src="https://stepansuvorov.com/blog/wp-content/themes/twentyeleven/js/html5.js?ver=3.7.0" type="text/javascript"></script>
+<![endif]-->
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='http://www.googletagmanager.com/' />
+<link rel='dns-prefetch' href='http://pagead2.googlesyndication.com/' />
+<link rel="alternate" type="application/rss+xml" title="Stepan Suvorov Blog &raquo; Feed" href="../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Stepan Suvorov Blog &raquo; Comments Feed" href="../../../comments/feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Stepan Suvorov Blog &raquo; С чего начать изучение AngularJS Comments Feed" href="feed/index.html" />
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/stepansuvorov.com\/blog\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.3.1"}};
+/*! This file is auto-generated */
+!function(i,n){var o,s,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),r=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===r[t]})}function u(e,t,n){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\uddfa\ud83c\uddf3","\ud83c\uddfa\u200b\ud83c\uddf3")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!n(e,"\ud83e\udef1\ud83c\udffb\u200d\ud83e\udef2\ud83c\udfff","\ud83e\udef1\ud83c\udffb\u200b\ud83e\udef2\ud83c\udfff")}return!1}function f(e,t,n){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):i.createElement("canvas"),a=r.getContext("2d",{willReadFrequently:!0}),o=(a.textBaseline="top",a.font="600 32px Arial",{});return e.forEach(function(e){o[e]=t(a,e,n)}),o}function t(e){var t=i.createElement("script");t.src=e,t.defer=!0,i.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",s=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){i.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"}),a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=function(e){c(n=e.data),a.terminate(),t(n)})}catch(e){}c(n=f(s,u,p))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css' href='../../../wp-includes/css/dist/block-library/style.min9b30.css?ver=6.3.1' type='text/css' media='all' />
+<style id='wp-block-library-theme-inline-css' type='text/css'>
+.wp-block-audio figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio figcaption{color:hsla(0,0%,100%,.65)}.wp-block-audio{margin:0 0 1em}.wp-block-code{border:1px solid #ccc;border-radius:4px;font-family:Menlo,Consolas,monaco,monospace;padding:.8em 1em}.wp-block-embed figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed figcaption{color:hsla(0,0%,100%,.65)}.wp-block-embed{margin:0 0 1em}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:hsla(0,0%,100%,.65)}.wp-block-image figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-image figcaption{color:hsla(0,0%,100%,.65)}.wp-block-image{margin:0 0 1em}.wp-block-pullquote{border-bottom:4px solid;border-top:4px solid;color:currentColor;margin-bottom:1.75em}.wp-block-pullquote cite,.wp-block-pullquote footer,.wp-block-pullquote__citation{color:currentColor;font-size:.8125em;font-style:normal;text-transform:uppercase}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;font-style:normal;position:relative}.wp-block-quote.has-text-align-right{border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote.has-text-align-center{border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large,.wp-block-quote.is-style-plain{border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-search__button{border:1px solid #ccc;padding:.375em .625em}:where(.wp-block-group.has-background){padding:1.25em 2.375em}.wp-block-separator.has-css-opacity{opacity:.4}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto}.wp-block-separator.has-alpha-channel-opacity{opacity:1}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table{margin:0 0 1em}.wp-block-table td,.wp-block-table th{word-break:normal}.wp-block-table figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video{margin:0 0 1em}.wp-block-template-part.has-background{margin-bottom:0;margin-top:0;padding:1.25em 2.375em}
+</style>
+<style id='kevinbatdorf-code-block-pro-style-inline-css' type='text/css'>
+.wp-block-kevinbatdorf-code-block-pro{box-sizing:border-box!important;direction:ltr!important;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;position:relative!important}.wp-block-kevinbatdorf-code-block-pro *{box-sizing:border-box!important}.wp-block-kevinbatdorf-code-block-pro pre,.wp-block-kevinbatdorf-code-block-pro pre *{font-size:inherit!important;line-height:inherit!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor) pre{--tw-shadow:0 0 #0000!important;--tw-shadow-colored:0 0 #0000!important;background-image:none!important;border:0!important;border-radius:0!important;border-style:none!important;border-width:0!important;box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)!important;color:inherit!important;font-family:inherit!important;margin:0!important;overflow:auto!important;overflow-wrap:normal!important;padding:16px 0 16px 16px!important;text-align:left!important;white-space:pre!important}.wp-block-kevinbatdorf-code-block-pro.padding-disabled:not(.code-block-pro-editor) pre{padding:0!important}.wp-block-kevinbatdorf-code-block-pro.padding-bottom-disabled pre{padding-bottom:0!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor) pre code{--tw-shadow:0 0 #0000!important;--tw-shadow-colored:0 0 #0000!important;background:none!important;background-color:transparent!important;border:0!important;border-radius:0!important;border-style:none!important;border-width:0!important;box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)!important;color:inherit!important;display:block!important;font-family:inherit!important;margin:0!important;overflow-wrap:normal!important;padding:0!important;text-align:left!important;white-space:pre!important;width:100%!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor) pre code .line{display:inline-block!important;min-width:var(--cbp-block-width,100%)!important;vertical-align:top!important}.wp-block-kevinbatdorf-code-block-pro.cbp-has-line-numbers:not(.code-block-pro-editor) pre code .line{padding-left:calc(12px + var(--cbp-line-number-width, auto))!important}.wp-block-kevinbatdorf-code-block-pro.cbp-has-line-numbers:not(.code-block-pro-editor) pre code{counter-increment:step calc(var(--cbp-line-number-start, 1) - 1)!important;counter-reset:step!important}.wp-block-kevinbatdorf-code-block-pro pre code .line{position:relative!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor) pre code .line:before{content:""!important;display:inline-block!important}.wp-block-kevinbatdorf-code-block-pro.cbp-has-line-numbers:not(.code-block-pro-editor) pre code .line:not(.cbp-line-number-disabled):before{color:var(--cbp-line-number-color,#999)!important;content:counter(step)!important;counter-increment:step!important;left:0!important;opacity:.5!important;position:absolute!important;text-align:right!important;transition-duration:.5s!important;transition-property:opacity!important;transition-timing-function:cubic-bezier(.4,0,.2,1)!important;-webkit-user-select:none!important;-moz-user-select:none!important;user-select:none!important;width:var(--cbp-line-number-width,auto)!important}.wp-block-kevinbatdorf-code-block-pro.cbp-highlight-hover .line{min-height:var(--cbp-block-height,100%)!important}.wp-block-kevinbatdorf-code-block-pro .line.cbp-line-highlight .cbp-line-highlighter,.wp-block-kevinbatdorf-code-block-pro .line.cbp-no-blur:hover .cbp-line-highlighter,.wp-block-kevinbatdorf-code-block-pro.cbp-highlight-hover:not(.cbp-blur-enabled:not(.cbp-unblur-on-hover)) .line:hover .cbp-line-highlighter{background:var(--cbp-line-highlight-color,rgb(14 165 233/.2))!important;left:-16px!important;min-height:var(--cbp-block-height,100%)!important;min-width:calc(var(--cbp-block-width, 100%) + 16px)!important;pointer-events:none!important;position:absolute!important;top:0!important;width:100%!important}[data-code-block-pro-font-family="Code-Pro-Comic-Mono.ttf"].wp-block-kevinbatdorf-code-block-pro .line.cbp-line-highlight .cbp-line-highlighter,[data-code-block-pro-font-family="Code-Pro-Comic-Mono.ttf"].wp-block-kevinbatdorf-code-block-pro .line.cbp-no-blur:hover .cbp-line-highlighter,[data-code-block-pro-font-family="Code-Pro-Comic-Mono.ttf"].wp-block-kevinbatdorf-code-block-pro.cbp-highlight-hover:not(.cbp-blur-enabled:not(.cbp-unblur-on-hover)) .line:hover .cbp-line-highlighter{top:-.125rem!important}[data-code-block-pro-font-family=Code-Pro-Fira-Code].wp-block-kevinbatdorf-code-block-pro .line.cbp-line-highlight .cbp-line-highlighter,[data-code-block-pro-font-family=Code-Pro-Fira-Code].wp-block-kevinbatdorf-code-block-pro .line.cbp-no-blur:hover .cbp-line-highlighter,[data-code-block-pro-font-family=Code-Pro-Fira-Code].wp-block-kevinbatdorf-code-block-pro.cbp-highlight-hover:not(.cbp-blur-enabled:not(.cbp-unblur-on-hover)) .line:hover .cbp-line-highlighter{top:-1.5px!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor).padding-disabled pre .line.cbp-line-highlight:after{left:0!important;width:100%!important}.wp-block-kevinbatdorf-code-block-pro.cbp-blur-enabled pre .line:not(.cbp-no-blur){filter:blur(1px)!important;opacity:.4!important;pointer-events:none!important;transition-duration:.2s!important;transition-property:all!important;transition-timing-function:cubic-bezier(.4,0,.2,1)!important}.wp-block-kevinbatdorf-code-block-pro.cbp-blur-enabled.cbp-unblur-on-hover:hover pre .line:not(.cbp-no-blur){--tw-blur:blur(0)!important;filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)!important;opacity:1!important;pointer-events:auto!important}.wp-block-kevinbatdorf-code-block-pro:not(.code-block-pro-editor) pre *{font-family:inherit!important}.cbp-see-more-simple-btn-hover{transition-property:none!important}.cbp-see-more-simple-btn-hover:hover{box-shadow:inset 0 0 100px 100px hsla(0,0%,100%,.1)!important}.code-block-pro-copy-button{background:none!important;background-color:transparent!important;border:0!important;border-style:none!important;border-width:0!important;cursor:pointer!important;left:auto!important;line-height:1!important;opacity:.1!important;padding:6px!important;position:absolute!important;right:0!important;top:0!important;transition-duration:.2s!important;transition-property:opacity!important;transition-timing-function:cubic-bezier(.4,0,.2,1)!important;z-index:10!important}.code-block-pro-copy-button:focus{opacity:.4!important}.wp-block-kevinbatdorf-code-block-pro.padding-disabled .code-block-pro-copy-button{padding:0!important}.wp-block-kevinbatdorf-code-block-pro:hover .code-block-pro-copy-button{opacity:.5!important}.wp-block-kevinbatdorf-code-block-pro .code-block-pro-copy-button:hover{opacity:.9!important}.code-block-pro-copy-button .without-check{display:block!important}.code-block-pro-copy-button .with-check,.code-block-pro-copy-button.cbp-copying .without-check{display:none!important}.code-block-pro-copy-button.cbp-copying .with-check{display:block!important}.cbp-footer-link:hover{text-decoration-line:underline!important}
+
+</style>
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #fff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--blue: #1982d1;--wp--preset--color--dark-gray: #373737;--wp--preset--color--medium-gray: #666;--wp--preset--color--light-gray: #e2e2e2;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='wprc-style-css' href='../../../wp-content/plugins/report-content/static/css/styles9b30.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyeleven-block-style-css' href='../../../wp-content/themes/twentyeleven/blocks03d3.css?ver=20230122' type='text/css' media='all' />
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery.min3088.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../../../wp-includes/js/jquery/jquery-migrate.min5589.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' id='wprc-script-js-extra'>
+/* <![CDATA[ */
+var wprcajaxhandler = {"ajaxurl":"https:\/\/stepansuvorov.com\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/plugins/report-content/static/js/scripts9b30.js?ver=6.3.1' id='wprc-script-js'></script>
+
+<!-- Google Analytics snippet added by Site Kit -->
+<script type='text/javascript' src='https://www.googletagmanager.com/gtag/js?id=GT-5NXW8XZ' id='google_gtagjs-js' async></script>
+<script id="google_gtagjs-js-after" type="text/javascript">
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}
+gtag('set', 'linker', {"domains":["stepansuvorov.com"]} );
+gtag("js", new Date());
+gtag("set", "developer_id.dZTNiMT", true);
+gtag("config", "GT-5NXW8XZ");
+</script>
+
+<!-- End Google Analytics snippet added by Site Kit -->
+<link rel="https://api.w.org/" href="../../../wp-json/index.html" /><link rel="alternate" type="application/json" href="../../../wp-json/wp/v2/posts/834.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc0db0.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel="canonical" href="index.html" />
+<link rel='shortlink' href='../../../indexe9c6.html?p=834' />
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embedf43a.json?url=https%3A%2F%2Fstepansuvorov.com%2Fblog%2F2012%2F12%2F%25d1%2581-%25d1%2587%25d0%25b5%25d0%25b3%25d0%25be-%25d0%25bd%25d0%25b0%25d1%2587%25d0%25b0%25d1%2582%25d1%258c-%25d0%25b8%25d0%25b7%25d1%2583%25d1%2587%25d0%25b5%25d0%25bd%25d0%25b8%25d0%25b5-angularjs%2F" />
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed5ef3?url=https%3A%2F%2Fstepansuvorov.com%2Fblog%2F2012%2F12%2F%25d1%2581-%25d1%2587%25d0%25b5%25d0%25b3%25d0%25be-%25d0%25bd%25d0%25b0%25d1%2587%25d0%25b0%25d1%2582%25d1%258c-%25d0%25b8%25d0%25b7%25d1%2583%25d1%2587%25d0%25b5%25d0%25bd%25d0%25b8%25d0%25b5-angularjs%2F&amp;format=xml" />
+<meta name="generator" content="Site Kit by Google 1.110.0" /><meta name="google-site-verification" content="xt946WTH7xxkpeWcqzwQ1xmLLmr91UbOF6VSIl7m5rk">
+<!-- Google AdSense snippet added by Site Kit -->
+<meta name="google-adsense-platform-account" content="ca-host-pub-2644536267352236">
+<meta name="google-adsense-platform-domain" content="sitekit.withgoogle.com">
+<!-- End Google AdSense snippet added by Site Kit -->
+
+<!-- Google AdSense snippet added by Site Kit -->
+<script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2931348686023542&amp;host=ca-host-pub-2644536267352236" crossorigin="anonymous" type="text/javascript"></script>
+
+<!-- End Google AdSense snippet added by Site Kit -->
+</head>
+
+<body class="post-template-default single single-post postid-834 single-format-standard wp-embed-responsive single-author singular two-column right-sidebar">
+<div class="skip-link"><a class="assistive-text" href="#content">Skip to primary content</a></div><div id="page" class="hfeed">
+	<header id="branding">
+			<hgroup>
+				<h1 id="site-title"><span><a href="../../../index.html" rel="home">Stepan Suvorov Blog</a></span></h1>
+				<h2 id="site-description">Release 2.0</h2>
+			</hgroup>
+
+						<a href="../../../index.html">
+									<img src="../../../wp-content/uploads/2012/02/cropped-DSC_3293.jpg" width="1000" height="288" alt="Stepan Suvorov Blog" />
+								</a>
+			
+									<form method="get" id="searchform" action="https://stepansuvorov.com/blog/">
+		<label for="s" class="assistive-text">Search</label>
+		<input type="text" class="field" name="s" id="s" placeholder="Search" />
+		<input type="submit" class="submit" name="submit" id="searchsubmit" value="Search" />
+	</form>
+			
+			<nav id="access">
+				<h3 class="assistive-text">Main menu</h3>
+				<div class="menu-menu-1-container"><ul id="menu-menu-1" class="menu"><li id="menu-item-3600" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-3600"><a href="../../../index.html">Home</a></li>
+<li id="menu-item-3602" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3602"><a href="../../../useful-linux-comands/index.html">shell tricks</a></li>
+<li id="menu-item-3603" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3603"><a href="../../../subscribe/index.html">Subscribe</a></li>
+<li id="menu-item-3604" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3604"><a href="../../../i-use/index.html">I use</a></li>
+<li id="menu-item-3606" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3606"><a href="https://stepansuvorov.com/">me</a></li>
+</ul></div>			</nav><!-- #access -->
+	</header><!-- #branding -->
+
+
+	<div id="main">
+
+		<div id="primary">
+			<div id="content" role="main">
+
+				
+					<nav id="nav-single">
+						<h3 class="assistive-text">Post navigation</h3>
+						<span class="nav-previous"><a href="../webstormphpstorm-%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%b0%d0%b8%d0%b2%d0%b0%d0%b5%d0%bc-%d0%b8-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d0%b5%d0%bc-live-edit/index.html" rel="prev"><span class="meta-nav">&larr;</span> Previous</a></span>
+						<span class="nav-next"><a href="../../../2013/01/git-hook/index.html" rel="next">Next <span class="meta-nav">&rarr;</span></a></span>
+					</nav><!-- #nav-single -->
+
+					
+<article id="post-834" class="post-834 post type-post status-publish format-standard hentry category-4 tag-angularjs tag-javascript">
+	<header class="entry-header">
+		<h1 class="entry-title">С чего начать изучение AngularJS</h1>
+
+				<div class="entry-meta">
+			<span class="sep">Posted on </span><a href="index.html" title="11:47" rel="bookmark"><time class="entry-date" datetime="2012-12-31T11:47:40+02:00">31.12.12</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="../../../author/admin/index.html" title="View all posts by Stepan" rel="author">Stepan</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<p><img decoding="async" fetchpriority="high" class="alignnone size-medium wp-image-836" title="AngularJs" src="../../../wp-content/uploads/2012/12/angularjs_logo1-300x300.png" alt="angularjs_logo" width="300" height="300" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2012/12/angularjs_logo1-300x300.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2012/12/angularjs_logo1-150x150.png 150w, https://stepansuvorov.com/blog/wp-content/uploads/2012/12/angularjs_logo1.png 500w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>Этот пост предназначен для тех, кто только начинает знакомиться с javascript фреймворком <strong>AngularJs</strong>.</p>
+<p><strong>UPD</strong>: Пост обновлен <span style="text-decoration: underline;">25.10.2015</span> и является актуальным для <strong>Angular1.4</strong>.</p>
+<p><span id="more-834"></span>Обычно <strong>список литературы</strong> дается в конце, но в данном случае разумно было бы предоставить все полезные ссылки сразу же.</p>
+<p>Итак, что полезного есть на официальном сайте:</p>
+<ul>
+<li><a title="angularjs быстрый старт" href="http://docs.angularjs.org/tutorial/">Быстрый старт</a> (пошаговая разработка простого приложения)</li>
+<li><a title="Руководство AngularJs" href="http://docs.angularjs.org/guide/">Руководство разработчика</a> и <a title="AngularJs API" href="http://docs.angularjs.org/api">API</a></li>
+</ul>
+<p>Статьи на хабре(полистать, а потом вернуться полистать еще раз):</p>
+<ul>
+<li><a href="http://habrahabr.ru/post/149060/">AngularJS — фреймворк для динамических веб-приложений от Google</a></li>
+<li><a href="http://habrahabr.ru/post/149757/">Практикум AngularJS — разработка административной панели</a></li>
+</ul>
+<p>Готовый скелет(структура с файлами, директориями и веб-сервером), с которого можно начинать создания своего приложения берем тут: <a href="https://github.com/angular/angular-seed">github</a>( либо <a href="https://github.com/angular/angular-seed/archive/master.zip">zip</a>).</p>
+<p>Преимущества использования AngularJS(от <a href="http://habrahabr.ru/post/142590/">сюда</a>):</p>
+<ul>
+<li>Dependency injection в стандартной поставке</li>
+<li>Возможности модульного тестирования в стандартной поставке</li>
+<li>e2e тесты позволяют легко мокать запросы</li>
+<li>Декларативность(использование HTML атрибутов по максимуму)</li>
+<li>Отличное open source сообщество</li>
+<li>Дружелюбность к REST</li>
+<li>Scopes, bindings и watches</li>
+</ul>
+<p>Немного видео(на английском):</p>
+<ul>
+<li><a href="http://www.youtube.com/watch?v=uFTFsKmkQnQ">AngularJS Hello World</a> ( 4 минуты )</li>
+<li><a href="http://www.youtube.com/watch?v=WuiHuZq_cg4">AngularJS Tutorial</a> ( 12минут )</li>
+<li><a href="http://www.youtube.com/watch?v=zogrnQjHZAM">AngularJS &#8211; Routes and Partials</a> ( 14 минут )</li>
+</ul>
+<p>Крайне рекомендую все <a href="https://egghead.io/technologies/angularjs">ролики о AngularJS от egghead</a>, очень хорошее инвестирование времени. К ним вы сможете еще не раз возвращаться и пересматривать.</p>
+<p>Вспомогательные инструменты на данный момент по прежнему находятся в состоянии зародыша(либо выкидыша) но взглянуть все равно стоит:</p>
+<ul>
+<li><a href="https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk">AngularJS Batarang</a> &#8211;  в дополнение Chrome Developer Tools.</li>
+<li data-wpview-marker="http%3A%2F%2Fng-inspector.org%2F"><a href="http://ng-inspector.org/">ng-inspector</a> &#8211; расширение для Chrome направленное на анализ scope</li>
+<li data-wpview-marker="http%3A%2F%2Fng-inspector.org%2F"><a href="https://chrome.google.com/webstore/detail/angularjs-inspect-watcher/gdfcinoagafkodbnkjemaajfahnmfkhg?hl=en">AngularJS Inspect Watchers</a> &#8211; анализ вотчеров на сайте</li>
+</ul>
+<h1></h1>
+<h1>Быстрый старт</h1>
+<p>Давайте теперь вместе проделаем шаги из &#8220;быстрого старта&#8221;.</p>
+<p>Убеждаемся в том что у нас стоит:</p>
+<ul>
+<li><a href="http://git-scm.com/download">git</a></li>
+<li><a href="http://nodejs.org/">node.js</a></li>
+<li><a href="http://karma-runner.github.io/">karma</a> (npm install -g karma)</li>
+</ul>
+<p>Выкачиваем себе тренинг проект:</p>
+<p>[shell gutter=&#8221;false&#8221;]<br />
+$ git clone &#8211;depth=14 https://github.com/angular/angular-phonecat.git<br />
+[/shell]</p>
+<p>Мы используем специальный флаг <strong>&#8211;depth==14</strong>, чтобы получить только последние 14 коммитов.</p>
+<p>Перейдем в директорию проекта:</p>
+<p>[shell gutter=&#8221;false&#8221;]<br />
+$ cd angular-phonecat<br />
+[/shell]</p>
+<h2>Самонастройка(Bootstrapping)</h2>
+<p>В начале каждого пункта будет дана команда, используя которую можно откатиться до состояния кода конкретного пункта.</p>
+<p>[shell gutter=&#8221;false&#8221;]<br />
+$ git checkout -f step-0<br />
+[/shell]</p>
+<p>Запустим наш web-сервер:</p>
+<p>[shell gutter=&#8221;false&#8221;]<br />
+$ npm start<br />
+[/shell]</p>
+<p>Если все отработало без ошибок &#8211; можем переходить на  <a href="http://localhost:8000/app/index.html">http://localhost:8000/app/index.html</a></p>
+<p>Открываем файл app/index.html:</p>
+<pre>&lt;!doctype html&gt;
+&lt;html lang="en" ng-app&gt;
+&lt;head&gt;
+ &lt;meta charset="utf-8"&gt;
+ &lt;title&gt;My HTML File&lt;/title&gt;
+ &lt;link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"&gt;
+ &lt;link rel="stylesheet" href="css/app.css"&gt;
+ &lt;script src="bower_components/angular/angular.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+ &lt;p&gt;Nothing here {{'yet' + '!'}}&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Вот она наша первая песочница для <strong>AngularJs</strong>. Важные моменты, которые мы должны вынести из этого кусочка HTML:</p>
+<pre>&lt;html lang="en" ng-app&gt;
+</pre>
+<p>&#8211; специальный <strong>ng-app</strong> атрибут, указывающий на то, какой элемент в DOM будет корневым для приложения(Т.е. мы можем сказать, что AngularJs будет использовать весь документ, либо какую-то конкретную его часть).</p>
+<pre>Nothing here {{'yet' + '!'}}`</pre>
+<p>Двойная фигурная кавычка используется для шаблонов: внутри можно указать переменную, выражение(подробнее <a href="../../../2013/06/start-with-angularjs-part2/index.html">в части о шаблонах</a>).</p>
+<p>Нам предлагают поиграться и заменить эту строчку на что-то такое:</p>
+<pre> &lt;p&gt;1 + 2 = {{ 1 + 2 }}&lt;/p&gt;</pre>
+<p>Теперь проясним что происходит при инициализации AngularJs, которая происходит автоматически по умолчанию:</p>
+<ol>
+<li>создается специальный объект Инжектор(<a href="http://docs.angularjs.org/api/AUTO.$injector">$injector</a>), по средствам которого получаются все остальные сущности</li>
+<li>Инжектор создает <a href="http://docs.angularjs.org/api/ng.$rootScope">$rootScope</a>, что является контекстом для модели нашего приложения</li>
+<li>фреймворк &#8220;компилирует&#8221; DOM начиная с ngApp используя при этом rootScope.</li>
+</ol>
+<p>После того как приложение выполнило этап самонастройки оно ждет событий от браузера, по которым, в случае необходимости, будут реагировать модели.</p>
+<h2>MVC</h2>
+<p>[shell gutter=&#8221;false&#8221;]<br />
+$ git checkout -f step-2<br />
+[/shell]</p>
+<p><strong>Представление (View)</strong></p>
+<p>В AngularJS <strong>view</strong> компонент представляет из себя отображение модели через HTML шаблон. Это означает, что при изменение модели, представление тоже будет меняться.</p>
+<p>Зайдем в <em>app/index.htm </em>и посмотрим на содержание body:</p>
+<pre>&lt;li ng-repeat="phone in phones"&gt;
+  &lt;span&gt;{{phone.name}}&lt;/span&gt;
+  &lt;p&gt;{{phone.snippet}}&lt;/p&gt;
+&lt;/li&gt;</pre>
+<p>phones &#8211; переменная(массив объектов), которую мы задали в контроллере(о нем позже)</p>
+<p><a href="http://docs.angularjs.org/api/ng.directive:ngRepeat">ng-repeat</a> &#8211; директива, которая запускает перебор коллекции(аналог forEach)</p>
+<p>{{phone}} &#8211; элемент коллекции</p>
+<p>{{phone.name}}, {{phone.snippet}} &#8211; свойства элемента коллекции</p>
+<p>Т.е. другими словами: сколько  элементов будет в массиве phones &#8211; столько &lt;li&gt; выведет view.</p>
+<p>Поэкспериментируем с шаблоном и выведем что-то такое:</p>
+<pre> &lt;p&gt;Total number of phones: {{phones.length}}&lt;/p&gt;</pre>
+<p>или такое(так тоже можно использовать директиву ng-repeat):</p>
+<pre>&lt;table&gt;
+&lt;tr&gt;&lt;th&gt;row number&lt;/th&gt;&lt;/tr&gt;
+&lt;tr ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7]"&gt;&lt;td&gt;{{i+1}}&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</pre>
+<p><strong>Контроллер (Controller)</strong></p>
+<p>Еще раз посмотрим на <em>app/index.htm</em> и обратим внимание на атрибут тега body:</p>
+<pre>&lt;body ng-controller="PhoneListCtrl"&gt;</pre>
+<p>&#8211; в директиве <a href="http://docs.angularjs.org/api/ng.directive:ngController">ng-controller</a> мы указываем, какой контролер должен обрабатывать данную область.</p>
+<p>PhoneListCtrl  &#8211; это имя метода, который мы можем найти тут app/js/controllers.js:</p>
+<p>[javascript]<br />
+function PhoneListCtrl($scope) {<br />
+  $scope.phones = [<br />
+    {&quot;name&quot;: &quot;Nexus S&quot;,<br />
+     &quot;snippet&quot;: &quot;Fast just got faster with Nexus S.&quot;},<br />
+    {&quot;name&quot;: &quot;Motorola XOOM™ with Wi-Fi&quot;,<br />
+     &quot;snippet&quot;: &quot;The Next, Next Generation tablet.&quot;},<br />
+    {&quot;name&quot;: &quot;MOTOROLA XOOM™&quot;,<br />
+     &quot;snippet&quot;: &quot;The Next, Next Generation tablet.&quot;}<br />
+  ];<br />
+}<br />
+[/javascript]</p>
+<p>В нашем случае мы просто заносим в <a href="http://docs.angularjs.org/api/ng.$rootScope.Scope">$scope</a> коллекцию объектов, чтобы потом ее отобразить во вью.</p>
+<p><strong>$scope, $rootScope</strong></p>
+<p><span style="text-decoration: underline;">В AngularJS <strong>$scope</strong> и <strong>$rootScope</strong> &#8211; это ключевые сущности для передачи данных между моделью и отображением посредством контроллера</span>. При этом $rootScope &#8211; это корневой scope, к которому имеют доступ все, а  $scope &#8211; scope определенного контроллера. Т.е. в нашем примере мы занесли данные только в scope нашего контроллера(<em>PhoneListCtrl</em>), а если бы мы хотели, чтобы другие контроллеры тоже получили доступ, то нам необходимо было использовать $rootScope. Более подробно можно почитать <a href="http://docs.angularjs.org/api/ng.$rootScope.Scope">тут</a>. ( <em>также в тему</em>: <a href="../../../2014/09/angularjs-data-transfer/index.html">Передача данных между сущностями AngularJS</a> )</p>
+<p>Теперь, когда мы знаем что такое Скоуп можно поэкспериментировать и с ним записать другие данные и попытаться отобразить их в представлении:</p>
+<pre>$scope.hello = "Hello, World!"
+$rootScope.hello = "Hello, Universe!"</pre>
+<p><strong>!Внимание.</strong> Чтобы использовать $rootScope его также нужно добавить как зависимость в контроллере:</p>
+<pre>function PhoneListCtrl($scope, $rootScope)</pre>
+<h2>Unit-тесты в AngularJS</h2>
+<p>Посмотрим пример теста в test/unit/controllersSpec.js:</p>
+<p>[javascript]<br />
+describe(&#8216;PhoneCat controllers&#8217;, function() {</p>
+<p>  describe(&#8216;PhoneListCtrl&#8217;, function(){</p>
+<p>    it(&#8216;should create &quot;phones&quot; model with 3 phones&#8217;, function() {<br />
+      var scope = {},<br />
+          ctrl = new PhoneListCtrl(scope);</p>
+<p>      expect(scope.phones.length).toBe(3);<br />
+    });<br />
+  });<br />
+});<br />
+[/javascript]</p>
+<p>Кто разбирался с <a href="../../10/jasmine-%d0%b8-%d1%8e%d0%bd%d0%b8%d1%82-%d1%82%d0%b5%d1%81%d1%82%d1%8b/index.html">Jasmine</a>, нет ничего особо сложного: в данном тесте мы проверяем контроллер и хотим убедиться что он занес в коллекцию 3 записи.</p>
+<p><strong>Запуск тестов используя <a href="http://karma-runner.github.io/">karma</a>.</strong></p>
+<p>Для запуска тестов выполняем команду:</p>
+<pre>$ npm test</pre>
+<p>И после этого у нас должен запуститься тест-сервер и открыться 2 браузера(Chrome и Firefox). В двух браузерах будут выполнены тестовые манипуляции, после чего вы должны увидеть в у себя в консоле примерно следующее:</p>
+<pre>Chrome 46.0.2490 (Mac OS X 10.11.0): Executed 1 of 1 SUCCESS (0.045 secs / 0.039 secs)
+Firefox 41.0.0 (Mac OS X 10.11.0): Executed 1 of 1 SUCCESS (0.033 secs / 0.031 secs)
+TOTAL: 2 SUCCESS
+</pre>
+<p>Теперь можете попробовать что-то изменить в коде. Заметили? Тесты были запущены заново, т.е. после каждого изменения karma будет выполнять тесты. Файлы, за изменением которых нужно наблюдать, можно выставить в конфиге( test/karma.conf.js)</p>
+<p><em>Продолжение следует&#8230; </em></p>
+<p><strong>UPD:</strong> <a title="на английском " href="http://www.angularbasics.co.uk/">AngularJs Basics</a> &#8211; прекрасно структурированный сайт документации</p>
+<h2>все части рубрики &#8220;С чего начать изучение AngularJS&#8221;:</h2>
+<ul>
+<li><a href="index.html">Часть1 &#8211; С чего начать изучение AngularJS.</a></li>
+<li><a href="../../../2013/06/start-with-angularjs-part2/index.html">Часть2 – Шаблоны оживают.</a></li>
+<li><a href="../../../2015/02/%d1%81-%d1%87%d0%b5%d0%b3%d0%be-%d0%bd%d0%b0%d1%87%d0%b0%d1%82%d1%8c-angularjs-%d1%87%d0%b0%d1%81%d1%82%d1%8c3/index.html">Часть3 – Ох уж эти сервисы.</a></li>
+</ul>
+			</div><!-- .entry-content -->
+
+	<footer class="entry-meta">
+		This entry was posted in <a href="../../../category/%d1%85%d0%be%d1%87%d1%83-%d1%81%d0%b4%d0%b5%d0%bb%d0%b0%d1%82%d1%8c-%d0%bc%d0%b8%d1%80-%d0%bb%d1%83%d1%87%d1%88%d0%b5/index.html" rel="category tag">Хочу сделать мир лучше</a> and tagged <a href="../../../tag/angularjs/index.html" rel="tag">AngularJs</a>, <a href="../../../tag/javascript/index.html" rel="tag">javascript</a> by <a href="../../../author/admin/index.html">Stepan</a>. Bookmark the <a href="index.html" title="Permalink to С чего начать изучение AngularJS" rel="bookmark">permalink</a>.
+		
+			</footer><!-- .entry-meta -->
+</article><!-- #post-834 -->
+
+					
+<div id="disqus_thread"></div>
+
+				
+			</div><!-- #content -->
+		</div><!-- #primary -->
+
+
+	</div><!-- #main -->
+
+	<footer id="colophon">
+
+			
+
+			<div id="site-generator">
+												<a href="https://wordpress.org/" class="imprint" title="Semantic Personal Publishing Platform">
+					Proudly powered by WordPress				</a>
+			</div>
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<script type='text/javascript' src='../../../wp-includes/js/comment-reply.min9b30.js?ver=6.3.1' id='comment-reply-js'></script>
+<script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"stepansuvorovblog"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/plugins/disqus-comment-system/public/js/comment_count7ee6.js?ver=3.0.23' id='disqus_count-js'></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.23"},"disqusIdentifier":"834 http:\/\/stepansuvorov.com\/blog\/?p=834","disqusShortname":"stepansuvorovblog","disqusTitle":"\u0421 \u0447\u0435\u0433\u043e \u043d\u0430\u0447\u0430\u0442\u044c \u0438\u0437\u0443\u0447\u0435\u043d\u0438\u0435 AngularJS","disqusUrl":"https:\/\/stepansuvorov.com\/blog\/2012\/12\/%d1%81-%d1%87%d0%b5%d0%b3%d0%be-%d0%bd%d0%b0%d1%87%d0%b0%d1%82%d1%8c-%d0%b8%d0%b7%d1%83%d1%87%d0%b5%d0%bd%d0%b8%d0%b5-angularjs\/","postId":"834"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../wp-content/plugins/disqus-comment-system/public/js/comment_embed7ee6.js?ver=3.0.23' id='disqus_embed-js'></script>
+
+</body>
+
+<!-- Mirrored from stepansuvorov.com/blog/2012/12/с-чего-начать-изучение-angularjs/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Feb 2025 14:03:13 GMT -->
+</html>

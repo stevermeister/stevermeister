@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>search &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/search/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sun, 29 Jun 2014 20:05:59 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Шорткаты адресной строки браузера</title>
+		<link>https://stepansuvorov.com/blog/2014/06/browser-search-shortcuts/</link>
+					<comments>https://stepansuvorov.com/blog/2014/06/browser-search-shortcuts/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 29 Jun 2014 20:04:26 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[browser]]></category>
+		<category><![CDATA[chrome]]></category>
+		<category><![CDATA[search]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1773</guid>
+
+					<description><![CDATA[На хабре уже мелькала статья в тему. Суть в том, что мы делаем поисковый запрос, используя поисковый механизм конкретного сайта, до перехода на сам сайт в адресной строке браузера. Проще будет на примере. Мы хотим запустить поиск по хабру. Переходим &#8230; <a href="https://stepansuvorov.com/blog/2014/06/browser-search-shortcuts/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>На хабре уже мелькала <a title="habrahabr.ru" href="http://habrahabr.ru/post/218051/">статья</a> в тему. Суть в том, что мы делаем поисковый запрос, <span style="text-decoration: underline;">используя поисковый механизм конкретного сайта</span>, до перехода на сам сайт в адресной строке браузера.</p>
+<p>Проще будет на примере. Мы хотим запустить поиск по хабру. Переходим в строку браузера и пишем &#8220;h&#8221; и далее пробел, и о чудо:</p>
+<p><img decoding="async" class="alignnone size-full wp-image-1804" title="chrome habr search" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/06/p9vHyY3QpQ8gRopPMcIUJOMAI1J5a-WLvEexSauTUh8.png" alt="" width="203" height="38" /></p>
+<p>мы видим что мы уже ищем по хабру.</p>
+<p><span id="more-1773"></span></p>
+<p>Как сделать это чудо? Оказывается в chrome-браузере(как и в Firefox) уже есть встроенная возможность создавать такие алиасы.</p>
+<p>Для того, чтобы создать такой шорткат в chrome, открываем <a href="http://chrome//settings/searchEngines">chrome://settings/searchEngines</a>, затем добавляем новый поисковый движок <strong>habr</strong>, ключевое слово &#8211; <strong>h</strong>, ссылка с параметром &#8211;  <strong>http://habrahabr.ru/search/?q=%s</strong>. Вот и все.</p>
+<p><img decoding="async" class="alignnone size-full wp-image-1807" style="color: #333333; font-style: normal; line-height: 24.375px;" title="habr search" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/06/FJDD1XjLih8ThacK3d-8VBwOgAsqNYdwN5morWwOqvA1.png" alt="" width="650" height="29" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/06/FJDD1XjLih8ThacK3d-8VBwOgAsqNYdwN5morWwOqvA1.png 650w, https://stepansuvorov.com/blog/wp-content/uploads/2014/06/FJDD1XjLih8ThacK3d-8VBwOgAsqNYdwN5morWwOqvA1-300x13.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/06/FJDD1XjLih8ThacK3d-8VBwOgAsqNYdwN5morWwOqvA1-500x22.png 500w" sizes="(max-width: 650px) 100vw, 650px" /></p>
+<p>Пробуем(в адресной строке браузера):</p>
+<ul>
+<li>h [пробел] angular</li>
+<li>h [пробел] рекурсия</li>
+</ul>
+<p>Полезный набор шорткатов:</p>
+<ul>
+<li><strong>wiki</strong> &#8211; Wikipedia &#8211; http://en.wikipedia.org/wiki/Special:Search?search=%s</li>
+<li><strong>tr</strong> &#8211; google translate &#8211; http://translate.google.com/?source=osdd#auto|auto|%s</li>
+<li><strong>h</strong> &#8211; habrahabr &#8211; http://habrahabr.ru/search/?q=%s</li>
+<li><strong>jq</strong> -jQuery &#8211; http://jquery.com/%s</li>
+<li><strong>calendar</strong> &#8211; google calendar &#8211; https://www.google.com/calendar</li>
+<li><strong>s</strong> &#8211; Stackoverflow &#8211; http://stackoverflow.com/search?q=%s</li>
+<li><strong>вики</strong> &#8211; Википедия &#8211; http://ru.wikipedia.org/wiki/Special:Search?search=%s</li>
+<li><strong>bug</strong> &#8211; любимый баг трекер ( например для поиска по ID )</li>
+</ul>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/06/browser-search-shortcuts/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

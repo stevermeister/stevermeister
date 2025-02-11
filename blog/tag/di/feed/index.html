@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>DI &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/di/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 22 Oct 2015 08:17:39 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Выдираем логику DI из AngularJS</title>
+		<link>https://stepansuvorov.com/blog/2014/03/%d0%b2%d1%8b%d0%b4%d0%b8%d1%80%d0%b0%d0%b5%d0%bc-%d0%bb%d0%be%d0%b3%d0%b8%d0%ba%d1%83-di-%d0%b8%d0%b7-angularjs/</link>
+					<comments>https://stepansuvorov.com/blog/2014/03/%d0%b2%d1%8b%d0%b4%d0%b8%d1%80%d0%b0%d0%b5%d0%bc-%d0%bb%d0%be%d0%b3%d0%b8%d0%ba%d1%83-di-%d0%b8%d0%b7-angularjs/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 05 Mar 2014 10:11:47 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[DI]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1051</guid>
+
+					<description><![CDATA[Dependency Injection &#8211; одна из парадигм на которых строиться AngularJS. Давайте подумаем как вот этот синтаксис можно превратить в DI, и выполнить внедрение $scope и $http (в данном случае). Итак, поставим задачу в духе TTD:  у нас есть основная функция &#8230; <a href="https://stepansuvorov.com/blog/2014/03/%d0%b2%d1%8b%d0%b4%d0%b8%d1%80%d0%b0%d0%b5%d0%bc-%d0%bb%d0%be%d0%b3%d0%b8%d0%ba%d1%83-di-%d0%b8%d0%b7-angularjs/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><strong><a title="wiki" href="http://en.wikipedia.org/wiki/Dependency_injection">Dependency Injection</a></strong> &#8211; одна из парадигм на которых строиться <strong>AngularJS</strong>.</p>
+<p>Давайте подумаем как вот этот синтаксис</p>
+<p><img decoding="async" class="alignnone size-medium wp-image-1533" title="Screenshot 2014-03-04 15.58.52" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/12/Screenshot-2014-03-04-15.58.52-300x41.png" alt="" width="300" height="41" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2013/12/Screenshot-2014-03-04-15.58.52-300x41.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2013/12/Screenshot-2014-03-04-15.58.52.png 336w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>можно превратить в <strong>DI</strong>, и выполнить внедрение <em>$scope</em> и <em>$http</em> (в данном случае).</p>
+<p><span id="more-1051"></span></p>
+<p>Итак, поставим задачу в духе TTD:  у нас есть основная функция DemoController:</p>
+<pre>function DemoController($scope, $log){
+  $log($scope.someVariable);
+}</pre>
+<p>и вероятно еще 2 функции-конструкторы для объектов, которые будем внедрять:</p>
+<pre>function scopeProvider(){
+  return { someVariable: 'Some text'}
+}
+
+function logProvider(){
+  return function(text){
+    console.log.apply(console,arguments);
+  }
+}</pre>
+<p>Теперь мы должны написать такую функцию <strong>invoke</strong>, используя которую можно будет выполнить</p>
+<pre>invoke('DemoController');</pre>
+<p>Первое что приходит в голову &#8211; получить функцию ввиде строки(<strong>toString</strong>), а потом достать из нее параметры регуляркой.</p>
+<p>Получить метод по имени можно через объект, в котором он опеределен. В нашем случае это глобальный объект window:</p>
+<pre>var fn = window[functionName];</pre>
+<p>получаем описание функции в виде строки:</p>
+<pre>var fnText = fn.toString();</pre>
+<p>вырезаем из нее аргументы и записываем в массив:</p>
+<pre>var args = fnText.slice(fnText.indexOf('(') + 1, fnText.indexOf(')')).match(/([^\s,]+)/g);</pre>
+<p>итого имеем в <em>args:</em></p>
+<pre>["$scope", "$log"]</pre>
+<p>пройдемся по ним циклом, создадим экземпляр класса провайдера для каждого и запишем в массив:</p>
+<pre>args.forEach(function(arg){
+  var providerName = arg.replace('$', '') + 'Provider';
+  injectors.push(new window[providerName]);
+})</pre>
+<p>ну и теперь осталось только выполнить наш метод с этими параметрами:</p>
+<pre>fn.apply(window, injectors);</pre>
+<p>Весь метод:</p>
+<pre>function invoke(functionName){
+	var fn = window[functionName],
+      fnText = fn.toString(),
+      args,
+      injectors = [];
+
+  args = fnText.slice(fnText.indexOf('(') + 1, fnText.indexOf(')')).match(/([^\s,]+)/g);
+
+  args.forEach(function(arg){
+    var providerName = arg.replace('$', '') + 'Provider';
+    injectors.push(new window[providerName]);
+  })
+
+  fn.apply(window, injectors);
+}
+
+invoke('DemoController');</pre>
+<p>Для одного уровня зависимостей этого достаточно, но что если мы захотим также добавить зависимости для <em>scopeProvider</em> и <em>logProvider</em>? Получается мы рекурсивно должны пройтись по всем вложенным конструкторам.</p>
+<p>Итак добавим еще одну зависимость для scopeProvider:</p>
+<pre>function scopeProvider($dbAdapter){
+ this.someVariable = $dbAdapter.getText();
+}</pre>
+<pre>function dbAdapterProvider(){
+  this.getText = function(){
+    return 'Some text'
+  }
+}</pre>
+<p>Попробуем пока без рекурсии добавить обработку еще одного уровня вложенности расширив метод invoke:</p>
+<pre>function invoke(functionName){
+  var fn = window[functionName],
+      args,
+      injectors = [];
+
+  args = parseArguments(fn.toString()) || [];
+
+  args.forEach(function(arg){
+    var providerName = arg.replace('$', '') + 'Provider',
+    subfn = window[providerName],
+    subargs = parseArguments(subfn.toString()) || [],
+    subinjectors = [];
+
+    subargs.forEach(function(subarg){
+      var subproviderName = subarg.replace('$', '') + 'Provider';
+      subinjectors.push(ObjectFactory(window[subproviderName]));
+    });
+
+    injectors.push(ObjectFactory(window[providerName], subinjectors));
+  })
+
+  fn.apply(window, injectors);
+}</pre>
+<p>Прошу обратить внимание на ключевые моменты:</p>
+<ul>
+<li>регулярные выражения мы вынесли в отдельный метод <em>parseArguments</em></li>
+<li>для динамического создания экземпляра класса мы использовали вспомогательный метод <em>ObjectFactory</em></li>
+</ul>
+<p>Содержание метода <em>ObjectFactory</em>:</p>
+<pre>function ObjectFactory(Constructor, args) {
+    var Temp = function(){},
+        inst, ret;
+
+    Temp.prototype = Constructor.prototype;
+    inst = new Temp;
+
+    ret = Constructor.apply(inst, args);
+    return Object(ret) === ret ? ret : inst;
+}</pre>
+<p>Мы решили задачу, но опять у нас есть ограничение по уровню вложенности. Перед тем как переходить к рекурсивному решению еще немного упростим код:</p>
+<pre>function invoke(fn){
+  var args= parseArguments(fn.toString()) || [],
+  injectors = [];
+
+  args.forEach(function(arg){
+    var provider = getProviderMethod(arg);
+    subargs = parseArguments(provider.toString()) || [];
+    provider.injectors = [];
+
+    subargs.forEach(function(subarg){
+      provider.injectors.push(ObjectFactory(getProviderMethod(subarg)));
+    });
+
+    injectors.push(ObjectFactory(provider, provider.injectors));
+  })
+
+  fn.apply(window, injectors);
+}
+
+invoke(window['DemoController']);</pre>
+<p>что изменилось:</p>
+<ul>
+<li>теперь передаем параметром ссылку на саму функцию(а не название)</li>
+<li>получение метода провайдера вынесено в отдельную функцию <em>getProviderMethod</em></li>
+</ul>
+<p>Возьмемся за рекурсию:</p>
+<pre>function getInjectors(fn){
+
+  if(!fn.length){
+    //no injectors
+    return [];
+  }
+
+  var args = parseArguments(fn.toString()) || [],
+      injectors = [];
+
+  args.forEach(function(arg){
+    var provider = getProviderMethod(arg);
+    injectors.push(ObjectFactory(provider, getInjectors(provider)));
+  })
+
+  return injectors;
+}
+
+function invoke(fn){
+  fn.apply(window, getInjectors(fn));
+}</pre>
+<p>&nbsp;</p>
+<p>Вот так мы пришли к упрощенному варианту того, что внутри <a title="github" href="https://github.com/angular/angular.js/blob/v1.2.13/src/auto/injector.js">angular.$injector</a>.</p>
+<p>Методы инжектора Angular и их аналог в нашем примере:</p>
+<ul>
+<li><strong>invoke</strong> &#8211; <em>invoke</em></li>
+<li><strong>instantiate</strong> &#8211; <em>ObjectFactory</em></li>
+<li><strong>get</strong> &#8211;  <em>getProviderMethod</em></li>
+<li><strong>annotate</strong> &#8211; <em>getInjectors</em></li>
+</ul>
+<div>Плюс в полном варианте есть поддержка модулей, переопределение провайдеров, и описание DI-сущностей: <strong>constant</strong>, <strong>value</strong>, <strong>provider</strong>, <strong>factory</strong>, <strong>service</strong>, <strong>decorator</strong>.</div>
+<div>Полный код примера на <a href="https://gist.github.com/stevermeister/9368235">gist</a>, <a href="http://jsbin.com/kiwis/1/edit?html,js,console,output">jsbin</a>.</div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/03/%d0%b2%d1%8b%d0%b4%d0%b8%d1%80%d0%b0%d0%b5%d0%bc-%d0%bb%d0%be%d0%b3%d0%b8%d0%ba%d1%83-di-%d0%b8%d0%b7-angularjs/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

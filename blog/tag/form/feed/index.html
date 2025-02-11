@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>form &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/form/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 22 Oct 2015 08:06:23 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>AngularJS и проверка данных формы</title>
+		<link>https://stepansuvorov.com/blog/2015/06/angularjs-%d0%b8-%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b0-%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85-%d1%84%d0%be%d1%80%d0%bc%d1%8b/</link>
+					<comments>https://stepansuvorov.com/blog/2015/06/angularjs-%d0%b8-%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b0-%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85-%d1%84%d0%be%d1%80%d0%bc%d1%8b/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 14 Jun 2015 15:15:52 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[form]]></category>
+		<category><![CDATA[html5]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[validation]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2001</guid>
+
+					<description><![CDATA[Пост состоит из следующих частей: Проверка данных в HTML5 AngularJS расширения для валидации Свои кастомные проверки данных на AngularJS Вывод сообщений об ошибках и ng-messages &#160; HTML5 валидация данных В первую очередь следует отметить, что у тега &#60;form&#62; в HTML5 появился &#8230; <a href="https://stepansuvorov.com/blog/2015/06/angularjs-%d0%b8-%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b0-%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85-%d1%84%d0%be%d1%80%d0%bc%d1%8b/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone wp-image-2686" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/06/AngularJS-Shield-large.png" alt="AngularJS Validation" width="211" height="223" /></p>
+<p>Пост состоит из следующих частей:</p>
+<ul>
+<li>Проверка данных в HTML5</li>
+<li>AngularJS расширения для валидации</li>
+<li>Свои кастомные проверки данных на AngularJS</li>
+<li>Вывод сообщений об ошибках и ng-messages</li>
+</ul>
+<p>&nbsp;</p>
+<p><span id="more-2001"></span></p>
+<h2>HTML5 валидация данных</h2>
+<p>В первую очередь следует отметить, что у тега <code>&lt;form&gt;</code> в HTML5 появился атрибут <code>novalidate</code>, который говорит браузеру, что форму валидировать не нужно.</p>
+<p>Вспомогательные атрибуты проверки данных:</p>
+<ul>
+<li><strong>require</strong> &#8211; говорит о том, что поле обязательно и должно быть заполнено</li>
+<li><strong>min/max</strong> &#8211; характерно для элемента <code>input</code> и указывает граничные значения</li>
+<li><strong>maxlength</strong> &#8211; для <code>input</code> и <code>textarea</code>, задает максимальное количество символов</li>
+<li><strong>type</strong> &#8211; в поле типа мы можем указывать не только <code>text</code>, но так же такие значения как <code>email</code>, <code>url</code>, которые будут провалидированы стандартными правилами. Болле подробно о стандартах <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation">тут</a>.</li>
+<li><strong>pattern</strong> &#8211; позволяет задать регулярное выражение для проверки поля.</li>
+</ul>
+<p>API для проверки данных:</p>
+<ul>
+<li><strong>checkValidity()</strong> &#8211; метод, который есть, как у всей формы, так и у каждого элемента. Возвращает true/false.</li>
+<li><strong>willValidate</strong> &#8211; свойство, false, когда элемент содержит невалидные данные</li>
+<li><strong>validity</strong> &#8211; свойство, содержит объект экземпляр <code><a title="DOM/ValidityState Interface" href="https://developer.mozilla.org/en-US/docs/DOM/ValidityState">ValidityState</a></code></li>
+<li><strong>validationMessage</strong> &#8211; содержит сообщение ошибки</li>
+<li><strong>setCustomValidity(message)</strong> &#8211; позволяет задать сообщение ошибки</li>
+</ul>
+<p>Поиграться с атрибутами проверки и API можно <a href="http://jsfiddle.net/STEVER/o6q4tp53/">тут</a>.</p>
+<h2>AngularJS расширения для валидации</h2>
+<p>Ангуляр автоматически применяется к элементу формы, в текущий <strong>$scope</strong> будет добавлена ссылка на <strong><a href="https://docs.angularjs.org/api/ng/type/form.FormController">formCotroller</a></strong>, ключом будет являться значение атрибута <strong>name</strong>. В нем мы можем найти ссылки на <strong><a href="https://docs.angularjs.org/api/ng/type/ngModel.NgModelController">ngModelController</a></strong> для всех элементов формы ( так же по  name). То есть, мы добавили в наше Ангуляр приложение форму:</p>
+<p>[html]<br />
+&lt;form name=login&gt;<br />
+  &lt;input name=&quot;username&quot;&gt;<br />
+  &lt;input name=&quot;password&quot;&gt;<br />
+&lt;/form&gt;<br />
+[/html]</p>
+<p>После чего в нашем скоуп будут:</p>
+<p>[javascript]<br />
+$scope.login  // formController<br />
+$scope.login.username //ngModelController<br />
+$scope.login.password //ngModelController<br />
+[/javascript]</p>
+<p>И при этом каждый объект <strong>formController</strong> и <strong>ngModelController</strong> содержит следующие свойства (касательно валидации):</p>
+<ul>
+<li><strong>$valid</strong> &#8211; true/false &#8211; валидности введенных данных относительно заданных правил</li>
+<li><strong>$invalid</strong> &#8211; false/true &#8211; обратный к предыдущему</li>
+<li><strong>$pristine</strong> &#8211; true, если форма/элемент еще не использовались</li>
+<li><strong>$dirty</strong> &#8211; обратные к предыдущему</li>
+<li><strong>$touched</strong> &#8211; на элементе произошло событие blur</li>
+<li><strong>$error</strong> &#8211; объект ошибки</li>
+<li><strong>$isEmpty(value)</strong> &#8211; вспомогательный метод, который проверяет является ли значение undefined, &#8221;, null или NaN</li>
+<li><strong>$validate()</strong> &#8211; true/false &#8211; запускает все валидаторы зарегистрированные на модели</li>
+<li><strong>$setValidity(validationErrorKey, isValid)</strong> &#8211; задание значения валидности для одного из критериев</li>
+<li><strong>$setPristine()</strong>/<strong>$setDirty()</strong> &#8211; сеттеры для $pristine/$dirty</li>
+<li><strong>$setUntouched()</strong>/<strong>$setTouched()</strong> &#8211; сеттеры для $touched</li>
+</ul>
+<p>Так же ngModelController содержит свойство <strong>$validators</strong>, в котором мы можем определять наши методы для проверки данных, то есть:</p>
+<p>[javascript]<br />
+ngModel.$validators.validCharacters = function(modelValue, viewValue) {<br />
+  var value = modelValue || viewValue;<br />
+  return /[0-9]+/.test(value) &amp;&amp;<br />
+         /[a-z]+/.test(value) &amp;&amp;<br />
+         /[A-Z]+/.test(value) &amp;&amp;<br />
+         /\W+/.test(value);<br />
+};<br />
+[/javascript]</p>
+<p>Вот тут можно посмотреть как изменяются свойства в зависимости от изменения значений полей:</p>
+<p><iframe style="width: 100%;" src="//codepen.io/sevilayha/embed/xFcdI/?height=332&amp;theme-id=0&amp;default-tab=result" width="300" height="332" frameborder="no" scrolling="no" allowfullscreen="allowfullscreen">See the Pen <a href="http://codepen.io/sevilayha/pen/xFcdI/">AngularJS Form Validation</a> by Chris Sevilleja (<a href="http://codepen.io/sevilayha">@sevilayha</a>) on <a href="http://codepen.io">CodePen</a>.<br />
+</iframe></p>
+<p>Ангуляр полностью дублирует атрибуты валидации HTML5, причем в некоторых случаях оставляя их без изменения (как required), а в некоторых изменяет названия атрибута (ng-maxlength); плюс использует свои дополнительные:</p>
+<ul>
+<li><strong>required</strong> &#8211; просто парсит HTML5 атрибут</li>
+<li><strong>ng-minlength</strong>/<strong>ng-maxlength</strong> &#8211; ограничения по количеству символово (как и maxlength)</li>
+<li><strong>type</strong> &#8211; использует атрибут HTML5</li>
+<li><strong>ng-pattern</strong> &#8211; отличие в том что мы можем подставлять паттерн динамически и ошибка по умолчанию не тригерится наверх (<a href="http://plnkr.co/edit/O3RDTSi06iVNEj9jfLx4?p=preview">сравнить</a>)</li>
+</ul>
+<p><strong><span style="text-decoration: underline;">!Внимание</span></strong>:</p>
+<ul>
+<li>все валидируемые елементы должны содержать директиву <strong>ng-model</strong>, именно благодаря ней мы имеем доступ к ngModelController</li>
+<li>если у вас в <strong>scope</strong> свойство, которая не соответствует критериям, &#8211; оно выведено не будет.</li>
+</ul>
+<h2>Свои кастомные проверки данных на AngularJS</h2>
+<p>Для дополнительных проверок можно создать директиву, которая будет навешиваться на элемент.</p>
+<p>C директивой все понятно. Но вот то, как мы вернем потом значение, не так однозначно, особенно в случае асинхронных операций.</p>
+<p>Вот пример проверки уникальности записи от <a href="http://www.ng-newsletter.com/posts/validations.html">ng-newsletter</a>, атрибут-директива для элемента формы, которая следит за изменением значения:</p>
+<p>[javascript]<br />
+app.directive(&#8216;ensureUnique&#8217;, [&#8216;$http&#8217;, function($http) {<br />
+  return {<br />
+    require: &#8216;ngModel&#8217;,<br />
+    link: function(scope, ele, attrs, c) {<br />
+      scope.$watch(attrs.ngModel, function() {<br />
+        $http({<br />
+          method: &#8216;POST&#8217;,<br />
+          url: &#8216;/api/check/&#8217; + attrs.ensureUnique,<br />
+          data: {&#8216;field&#8217;: attrs.ensureUnique}<br />
+        }).success(function(data, status, headers, cfg) {<br />
+          c.$setValidity(&#8216;unique&#8217;, data.isUnique);<br />
+        }).error(function(data, status, headers, cfg) {<br />
+          c.$setValidity(&#8216;unique&#8217;, false);<br />
+        });<br />
+      });<br />
+    }<br />
+  }<br />
+}]);<br />
+[/javascript]</p>
+<p>А вот так (взято из <a href="https://docs.angularjs.org/guide/forms">оф доки</a>) мы можем переопределить стандартную проверку:</p>
+<p>[javascript]<br />
+app.directive(&#8216;overwriteEmail&#8217;, function() {<br />
+  var EMAIL_REGEXP = /^[a-z0-9!#$%&amp;&#8217;*+/=?^_`{|}~.-]+@example\.com$/i;</p>
+<p>  return {<br />
+    require: &#8216;ngModel&#8217;,<br />
+    restrict: &#8221;,<br />
+    link: function(scope, elm, attrs, ctrl) {<br />
+      if (ctrl &amp;&amp; ctrl.$validators.email) {</p>
+<p>        ctrl.$validators.email = function(modelValue) {<br />
+          return ctrl.$isEmpty(modelValue) || EMAIL_REGEXP.test(modelValue);<br />
+        };<br />
+      }<br />
+    }<br />
+  };<br />
+});<br />
+[/javascript]</p>
+<p>И есть еще один интересный <a href="http://habrahabr.ru/post/167793/">пример</a> с хабра и использованием свойств котроллера модели $parsers и $formatters:</p>
+<p>[javascript]<br />
+  mod.directive(&#8216;strongPassRequired&#8217;, function () {<br />
+        var isValid = function(s) {<br />
+            return s &amp;&amp; s.length &gt; 5 &amp;&amp; /\D/.test(s) &amp;&amp; /\d/.test(s);<br />
+        };</p>
+<p>        return {<br />
+            require:&#8217;ngModel&#8217;,<br />
+            link:function (scope, elm, attrs, ngModelCtrl) {</p>
+<p>                ngModelCtrl.$parsers.unshift(function (viewValue) {<br />
+                    ngModelCtrl.$setValidity(&#8216;strongPass&#8217;, isValid(viewValue));<br />
+                    return viewValue;<br />
+                });</p>
+<p>                ngModelCtrl.$formatters.unshift(function (modelValue) {<br />
+                    ngModelCtrl.$setValidity(&#8216;strongPass&#8217;, isValid(modelValue));<br />
+                    return modelValue;<br />
+                });<br />
+            }<br />
+        };<br />
+    });<br />
+[/javascript]</p>
+<p>хотя думаю можно было ограничится просто использованием свойства $validators.</p>
+<p>&nbsp;</p>
+<h2>Вывод сообщений об ошибках и ng-messages</h2>
+<p>Начиная с Angular 1.3 появилась возможность подключить прекрасный модуль <a href="https://docs.angularjs.org/api/ngMessages/directive/ngMessages">ngMessages</a>, который серьезно упрощает работу по выводу ошибок. В старых версиях нам приходилось выдумывать что-то с ng-if/ng-show, а теперь все можно сделать так:</p>
+<p>[html]<br />
+&lt;form name=&quot;demoForm&quot;&gt;<br />
+  &lt;input name=&quot;amount&quot; type=&quot;number&quot; ng-model=&quot;amount&quot; max=&quot;100&quot;&gt;<br />
+  &lt;div ng-messages=&quot;demoForm.amount.$error&quot;&gt;<br />
+    &lt;div ng-message=&quot;number&quot;&gt;Should be a number&lt;/div&gt;<br />
+    &lt;div ng-message=&quot;max&quot;&gt;The number is too large.&lt;/div&gt;<br />
+  &lt;/div&gt;<br />
+&lt;/form&gt;<br />
+[/html]</p>
+<p>Поиграться с кодом можно <a href="http://jsfiddle.net/STEVER/n7uzrets/">тут</a>.</p>
+<p><span style="text-decoration: underline;">!Внимание</span>: при этом не забудьте подключить в зависимости ваш модуль:</p>
+<p>[javascript]<br />
+angular.module(&#8216;app&#8217;, [&#8216;ngMessages&#8217;]);<br />
+[/javascript]</p>
+<p>ну и конечно подключить .js файл.</p>
+<h2>Стилизация валидируемых полей</h2>
+<p>Для каждого состояния Ангуляр добавляет специальный класс:</p>
+<ul>
+<li><strong>ng-valid</strong>/<strong>ng-invalid</strong></li>
+<li><strong>ng-valid-[key]</strong> / <strong>ng-invalid-[key]</strong> &#8211; отдельный для каждого ключа заданного через  <strong>$setValidity</strong></li>
+<li><strong>ng-pristine</strong>/<strong>ng-dirty</strong></li>
+<li><strong>ng-touched</strong>/<strong>ng-untouched</strong></li>
+<li><strong>ng-pending</strong> &#8211; ждет асинронной валидации от <strong>$asyncValidators</strong></li>
+</ul>
+<p>&nbsp;</p>
+<p>Сейчас вот задался вопросом: &#8220;Почему до сих пор нет никакого готового (и популярного) модуля для валидации данных?&#8221; Чтобы можно было на всю форму (например) навесить директиву и передать ей конфиг заполняемых полей. Если что-то знаете в тему &#8211; подскажите пожалуйста в комментариях. Иначе прийдется делать свой велосипед.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/06/angularjs-%d0%b8-%d0%bf%d1%80%d0%be%d0%b2%d0%b5%d1%80%d0%ba%d0%b0-%d0%b4%d0%b0%d0%bd%d0%bd%d1%8b%d1%85-%d1%84%d0%be%d1%80%d0%bc%d1%8b/feed/</wfw:commentRss>
+			<slash:comments>10</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>$scope.$on &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/scope-on/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sun, 07 Jun 2015 19:51:29 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Angular: $scope.$on() &#8211; listen to several events</title>
+		<link>https://stepansuvorov.com/blog/2015/06/angular-scope-on-listen-to-several-events/</link>
+					<comments>https://stepansuvorov.com/blog/2015/06/angular-scope-on-listen-to-several-events/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 07 Jun 2015 19:48:32 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[$scope.$on]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2682</guid>
+
+					<description><![CDATA[I found it quite strange that AngularJS does not have possibility to watch several Angular-events, i.e.: [javascript] $scope.$on([&#8216;user.login&#8217;, &#8216;user.logout&#8217;], callback); [/javascript] and I decided to extend $on method, to make it handle such case: [javascript] var $onOrigin = $rootScope.$on; $rootScope.$on = function(names, listener) &#8230; <a href="https://stepansuvorov.com/blog/2015/06/angular-scope-on-listen-to-several-events/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>I found it quite strange that AngularJS does not have possibility to watch several Angular-events, i.e.:</p>
+<p>[javascript]<br />
+$scope.$on([&#8216;user.login&#8217;, &#8216;user.logout&#8217;], callback);<br />
+[/javascript]</p>
+<p>and I decided to extend $on method, to make it handle such case:</p>
+<p>[javascript]<br />
+  var $onOrigin = $rootScope.$on;<br />
+  $rootScope.$on = function(names, listener) {<br />
+    var self = this;</p>
+<p>    if (!angular.isArray(names)) {<br />
+      names = [names];<br />
+    }</p>
+<p>    names.forEach(function(name) {<br />
+      $onOrigin.call(self, name, listener);<br />
+    });</p>
+<p>  };<br />
+[/javascript]</p>
+<p>Sandbox for this code you can find <a href="http://jsfiddle.net/STEVER/h6u92pe8/">here</a>.</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/06/angular-scope-on-listen-to-several-events/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

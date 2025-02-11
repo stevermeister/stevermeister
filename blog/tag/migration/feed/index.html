@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>migration &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/migration/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 22 Oct 2015 08:22:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>AngularJS: from 1.2 to 1.4 hints</title>
+		<link>https://stepansuvorov.com/blog/2015/10/angularjs-from-1-2-to-1-4-hints/</link>
+					<comments>https://stepansuvorov.com/blog/2015/10/angularjs-from-1-2-to-1-4-hints/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 20 Oct 2015 20:24:01 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[migration]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2844</guid>
+
+					<description><![CDATA[Just a checklist to prevent issues with application migration. Expressions no .bind, .call and .apply no __proto__ no Object toBoolean fixed strange behaviour (from 1.3): before &#8216;f&#8217;, &#8216;0&#8217;, &#8216;false&#8217;, &#8216;no&#8217;, &#8216;n&#8217;, &#8216;[]&#8217;  have been converted to false. Check you ng-if statements. helpers .copy() &#8230; <a href="https://stepansuvorov.com/blog/2015/10/angularjs-from-1-2-to-1-4-hints/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Just a checklist to prevent issues with application migration.</p>
+<h2>Expressions</h2>
+<ul>
+<li>no .bind, .call and .apply</li>
+<li>no __proto__</li>
+<li>no Object</li>
+</ul>
+<h2>toBoolean</h2>
+<p>fixed strange behaviour (from 1.3): before <i>&#8216;f&#8217;</i>, <i>&#8216;0&#8217;</i>, <i>&#8216;false&#8217;</i>, <i>&#8216;no&#8217;</i>, <i>&#8216;n&#8217;</i>, <i>&#8216;[]&#8217; </i> have been converted to <strong>false</strong>. Check you <strong>ng-if</strong> statements.</p>
+<h2>helpers</h2>
+<p><strong>.copy()</strong> &#8211; makes a copy of only own properties (from <strong>1.3</strong>)</p>
+<p><strong>.forEach()</strong> &#8211; does not take in account new elements (if during the loop size was changed)(from <strong>1.3</strong>)</p>
+<h2>other</h2>
+<p>directive property <strong>replace</strong> &#8211; is now deprecated (from <strong>1.3</strong>)</p>
+<p><strong>responseInterceptors</strong> property was removed from <strong>$httpProvider</strong> (from <strong>1.3</strong>) &#8211; now it&#8217;s just <strong>$httpProvider.interceptors</strong></p>
+<p><strong>$cookieStore</strong> is deprecated from <strong>1.4</strong> ( you should use $cookie instead)</p>
+<p>If you know more tricky places &#8211; do not hesitate to share!</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/10/angularjs-from-1-2-to-1-4-hints/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

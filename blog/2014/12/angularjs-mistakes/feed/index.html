@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	Comments on: Самые распространенные ошибки AngularJS разработчиков	</title>
+	<atom:link href="https://stepansuvorov.com/blog/2014/12/angularjs-mistakes/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog/2014/12/angularjs-mistakes/</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Mon, 08 Aug 2016 08:43:00 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>
+		By: Denis Kornei		</title>
+		<link>https://stepansuvorov.com/blog/2014/12/angularjs-mistakes/#comment-63309</link>
+
+		<dc:creator><![CDATA[Denis Kornei]]></dc:creator>
+		<pubDate>Mon, 08 Aug 2016 08:43:00 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2060#comment-63309</guid>
+
+					<description><![CDATA[Правильнее будет вообще не использовать скоуп, следовать практике John Papa:
+
+app.controller(&#039;navCtrl&#039;, function () {
+var vm = this;
+vm.user = &#039;Bob&#039;
+});
+
+----
+
+ {{vm.user}}
+
+     {{vm.user}}
+
+        
+    
+
+
+P.S. сам только начал изучать, крутой сайт :) Хоть информация уже и старая, но мало ли будут новички, как я :)]]></description>
+			<content:encoded><![CDATA[<p>Правильнее будет вообще не использовать скоуп, следовать практике John Papa:</p>
+<p>app.controller(&#8216;navCtrl&#8217;, function () {<br />
+var vm = this;<br />
+vm.user = &#8216;Bob&#8217;<br />
+});</p>
+<p>&#8212;-</p>
+<p> {{vm.user}}</p>
+<p>     {{vm.user}}</p>
+<p>P.S. сам только начал изучать, крутой сайт :) Хоть информация уже и старая, но мало ли будут новички, как я :)</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: С чего начать изучение AngularJS. Часть3 &#8211; Ох уж эти сервисы. &#124; Stepan Suvorov Blog		</title>
+		<link>https://stepansuvorov.com/blog/2014/12/angularjs-mistakes/#comment-63247</link>
+
+		<dc:creator><![CDATA[С чего начать изучение AngularJS. Часть3 &#8211; Ох уж эти сервисы. &#124; Stepan Suvorov Blog]]></dc:creator>
+		<pubDate>Thu, 24 Mar 2016 11:24:49 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2060#comment-63247</guid>
+
+					<description><![CDATA[[&#8230;] По сути одно и тоже. Уже было довольно подробно описаны тут и тут. [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] По сути одно и тоже. Уже было довольно подробно описаны тут и тут. [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: art		</title>
+		<link>https://stepansuvorov.com/blog/2014/12/angularjs-mistakes/#comment-51008</link>
+
+		<dc:creator><![CDATA[art]]></dc:creator>
+		<pubDate>Wed, 22 Jul 2015 16:26:28 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2060#comment-51008</guid>
+
+					<description><![CDATA[Крутая статья. Стоит ещё добавить про совместное использование ng-controller и resolve из angular-route. О том, что нужно убрать атрибут ng-controller из html разметки в случае использования resolve:
+[javascript]
+ app.config([&#034;$stateProvider&#034;,
+            function ($stateProvider) {
+                $stateProvider
+                    .state(&#034;productEditState&#034;, {
+                        abstract: true,
+                        url: &#034;/products/edit/:productId&#034;,
+                        templateUrl: appFilesPath + &#034;products/productEditView.html&#034;,
+                        controller: &#034;productEditController&#034;,
+                        controllerAs: &#034;vm&#034;,
+                        resolve: {
+                            product: [ &#039;$stateParams&#039;, function ($stateParams) {
+                                
+                            }]
+                        }
+                    })
+[/javascript]]]></description>
+			<content:encoded><![CDATA[<p>Крутая статья. Стоит ещё добавить про совместное использование ng-controller и resolve из angular-route. О том, что нужно убрать атрибут ng-controller из html разметки в случае использования resolve:<br />
+[javascript]<br />
+ app.config([&quot;$stateProvider&quot;,<br />
+            function ($stateProvider) {<br />
+                $stateProvider<br />
+                    .state(&quot;productEditState&quot;, {<br />
+                        abstract: true,<br />
+                        url: &quot;/products/edit/:productId&quot;,<br />
+                        templateUrl: appFilesPath + &quot;products/productEditView.html&quot;,<br />
+                        controller: &quot;productEditController&quot;,<br />
+                        controllerAs: &quot;vm&quot;,<br />
+                        resolve: {<br />
+                            product: [ &#8216;$stateParams&#8217;, function ($stateParams) {</p>
+<p>                            }]<br />
+                        }<br />
+                    })<br />
+[/javascript]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Stepan		</title>
+		<link>https://stepansuvorov.com/blog/2014/12/angularjs-mistakes/#comment-35349</link>
+
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 09 Feb 2015 07:52:17 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2060#comment-35349</guid>
+
+					<description><![CDATA[In reply to &lt;a href=&quot;https://stepansuvorov.com/blog/2014/12/angularjs-mistakes/#comment-35319&quot;&gt;nuclear&lt;/a&gt;.
+
+для продакшена все компилируется в один файл, так что &quot;куча загрузок скриптов в index&quot; не будет.
+рекомендую посмотреть в сторону &lt;a href=&quot;http://gruntjs.com/&quot; rel=&quot;nofollow&quot;&gt;grunt&lt;/a&gt; сборщика]]></description>
+			<content:encoded><![CDATA[<p>In reply to <a href="https://stepansuvorov.com/blog/2014/12/angularjs-mistakes/#comment-35319">nuclear</a>.</p>
+<p>для продакшена все компилируется в один файл, так что &#8220;куча загрузок скриптов в index&#8221; не будет.<br />
+рекомендую посмотреть в сторону <a href="http://gruntjs.com/" rel="nofollow">grunt</a> сборщика</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: nuclear		</title>
+		<link>https://stepansuvorov.com/blog/2014/12/angularjs-mistakes/#comment-35319</link>
+
+		<dc:creator><![CDATA[nuclear]]></dc:creator>
+		<pubDate>Sun, 08 Feb 2015 21:03:15 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2060#comment-35319</guid>
+
+					<description><![CDATA[Спасибо за статью, только не понял по 1му пункту: при такой структуре подразумевается, что каждый js будет являться отдельным модулем и соответственно куча зависимостей на модули в app.js (+ куча загрузок скриптов в index) или как то должно быть иначе?]]></description>
+			<content:encoded><![CDATA[<p>Спасибо за статью, только не понял по 1му пункту: при такой структуре подразумевается, что каждый js будет являться отдельным модулем и соответственно куча зависимостей на модули в app.js (+ куча загрузок скриптов в index) или как то должно быть иначе?</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: иван		</title>
+		<link>https://stepansuvorov.com/blog/2014/12/angularjs-mistakes/#comment-32965</link>
+
+		<dc:creator><![CDATA[иван]]></dc:creator>
+		<pubDate>Fri, 23 Jan 2015 09:12:33 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2060#comment-32965</guid>
+
+					<description><![CDATA[Похоже очень не плохой перевод. Спасибо :)]]></description>
+			<content:encoded><![CDATA[<p>Похоже очень не плохой перевод. Спасибо :)</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Londeren		</title>
+		<link>https://stepansuvorov.com/blog/2014/12/angularjs-mistakes/#comment-30864</link>
+
+		<dc:creator><![CDATA[Londeren]]></dc:creator>
+		<pubDate>Fri, 26 Dec 2014 09:18:34 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2060#comment-30864</guid>
+
+					<description><![CDATA[Спасибо за статью!]]></description>
+			<content:encoded><![CDATA[<p>Спасибо за статью!</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Stepan		</title>
+		<link>https://stepansuvorov.com/blog/2014/12/angularjs-mistakes/#comment-29620</link>
+
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 15 Dec 2014 19:06:44 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2060#comment-29620</guid>
+
+					<description><![CDATA[In reply to &lt;a href=&quot;https://stepansuvorov.com/blog/2014/12/angularjs-mistakes/#comment-29568&quot;&gt;Евгений&lt;/a&gt;.
+
+да по сути нет никакой разницы. Единственное: если мы хотим подчернуть что используем паттерн &quot;фабрика&quot;, то имеет смысл использовать factory. 
+
+а на счет того, что пример работать не будет, - вот пожалуйста
+http://jsfiddle.net/STEVER/aws2f6t6/]]></description>
+			<content:encoded><![CDATA[<p>In reply to <a href="https://stepansuvorov.com/blog/2014/12/angularjs-mistakes/#comment-29568">Евгений</a>.</p>
+<p>да по сути нет никакой разницы. Единственное: если мы хотим подчернуть что используем паттерн &#8220;фабрика&#8221;, то имеет смысл использовать factory. </p>
+<p>а на счет того, что пример работать не будет, &#8211; вот пожалуйста<br />
+<a href="http://jsfiddle.net/STEVER/aws2f6t6/" rel="nofollow ugc">http://jsfiddle.net/STEVER/aws2f6t6/</a></p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Евгений		</title>
+		<link>https://stepansuvorov.com/blog/2014/12/angularjs-mistakes/#comment-29568</link>
+
+		<dc:creator><![CDATA[Евгений]]></dc:creator>
+		<pubDate>Mon, 15 Dec 2014 08:54:15 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2060#comment-29568</guid>
+
+					<description><![CDATA[Спасибо конечно за статью, но вот про сервисы и фектори совсем не понял разницы. И пример с &quot;helloFactory&quot; работать не будет.]]></description>
+			<content:encoded><![CDATA[<p>Спасибо конечно за статью, но вот про сервисы и фектори совсем не понял разницы. И пример с &#8220;helloFactory&#8221; работать не будет.</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

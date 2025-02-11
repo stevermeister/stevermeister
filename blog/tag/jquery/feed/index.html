@@ -1,0 +1,1131 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>jQuery &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/jquery/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Fri, 01 Sep 2023 15:40:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Пишем jQuery c нуля. Часть3 – DOMContentLoaded shortcut</title>
+		<link>https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/</link>
+					<comments>https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 11 May 2015 05:44:06 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2472</guid>
+
+					<description><![CDATA[В продолжение серии постов &#8220;Пишем jQuery c нуля&#8221;. Решил осветить тему события загрузки дома(DOMContentLoaded) и регистрацию колбэков по этому событию через jQuery. Как мы знаем: в jQuery есть вспомогательный метод $.ready(), который принимает параметром функцию и вызывает ее по событию DOMContentLoaded. &#8230; <a href="https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>В продолжение серии постов &#8220;Пишем jQuery c нуля&#8221;. Решил осветить тему события загрузки дома(<strong>DOMContentLoaded</strong>) и регистрацию колбэков по этому событию через jQuery.</p>
+<p><span id="more-2472"></span></p>
+<p>Как мы знаем: в jQuery есть вспомогательный метод <strong>$.ready()</strong>, который принимает параметром функцию и вызывает ее по событию <strong>DOMContentLoaded</strong>. Попробуем воссоздать у себя в djQuery такой же метод.</p>
+<p>Должно быт как-то так:</p>
+<p>[javascript]<br />
+var callbacks = [];<br />
+djQuery.ready = function(callback) {<br />
+  callbacks.push(callback);<br />
+}<br />
+[/javascript]</p>
+<p>Теперь сделаем, чтобы колбэки выполнились по событию загрузки DOM:</p>
+<p>[javascript]<br />
+document.addEventListener( &quot;DOMContentLoaded&quot;, function() {<br />
+    callbacks.forEach(function(callback) {<br />
+      callback.apply();<br />
+    });<br />
+  });<br />
+[/javascript]</p>
+<p>Вынесем функцию отдельно(как это сделано в jQuery) и назовем ее <code>completed</code>:</p>
+<p>[javascript]<br />
+function completed() {<br />
+    callbacks.forEach(function(callback) {<br />
+      callback.apply();<br />
+    });<br />
+  }<br />
+document.addEventListener( &quot;DOMContentLoaded&quot;, completed );<br />
+[/javascript]</p>
+<p>И еще хорошо бы отписаться от события, когда мы его получим:</p>
+<p>[javascript]<br />
+function completed() {<br />
+    document.removeEventListener( &quot;DOMContentLoaded&quot;, completed);<br />
+    callbacks.forEach(function(callback) {<br />
+      callback.apply();<br />
+    });<br />
+  }<br />
+document.addEventListener( &quot;DOMContentLoaded&quot;, completed );<br />
+[/javascript]</p>
+<p>Для старых браузеров jQuery проделывает еще 2 вещи:</p>
+<p>Ставит 3тий параметр false (useCapture &#8211; опция, которая и так выключена для новых версий браузеров):</p>
+<p>[javascript]<br />
+document.addEventListener( &quot;DOMContentLoaded&quot;, completed, true);<br />
+[/javascript]</p>
+<p>и дополнительно слушает еще одно событие:</p>
+<p>[javascript]<br />
+window.addEventListener( &quot;load&quot;, completed, false );<br />
+[/javascript]</p>
+<p>Мы этого всего для нашего djQuery делать не будем, так как</p>
+<p><img decoding="async" fetchpriority="high" class="alignnone size-full wp-image-2559" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/05/Screenshot-2015-05-04-21.13.27.png" alt="DOMContentLoaded support" width="606" height="236" /></p>
+<p>Плюс нам еще осталось добавить короткую форму записи для <code>$.ready(callback)</code>, которая представляет из себя:</p>
+<p>[javascript]<br />
+$(callback);<br />
+[/javascript]</p>
+<p>То есть, если мы передадим в jQuery функции как параметр, она будет записана в  <code>$.ready </code>колбэки и выполнится по событию загрузки DOM:</p>
+<p>[javascript]<br />
+if(typeof selector === &#8216;function&#8217;){<br />
+      djQuery.ready(selector);<br />
+      return this;<br />
+    }<br />
+[/javascript]</p>
+<p>Теперь для проверки отдельно от нашей библиотеки пишем:</p>
+<p>[javascript]<br />
+djQuery(function(){<br />
+    console.log(&#8216;DOMContentLoaded&#8217;);<br />
+  });<br />
+[/javascript]</p>
+<p>или просто:</p>
+<p>[javascript]<br />
+$(function(){<br />
+  console.log(&#8216;DOMContentLoaded&#8217;);<br />
+});<br />
+[/javascript]</p>
+<p>Код можно взять в теге <a href="https://github.com/stevermeister/djQuery/tree/step-3">step-3</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/05/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-jquery-c-%d0%bd%d1%83%d0%bb%d1%8f-%d1%87%d0%b0%d1%81%d1%82%d1%8c3-domcontentloaded-shortcut/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Пишем jQuery c нуля. Часть2 &#8211; Поисковый движок и вывод результатов</title>
+		<link>https://stepansuvorov.com/blog/2015/05/jquery-from-sketch-sizzle/</link>
+					<comments>https://stepansuvorov.com/blog/2015/05/jquery-from-sketch-sizzle/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 04 May 2015 04:53:52 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[sizzle]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2469</guid>
+
+					<description><![CDATA[В продолжение рубрики &#8220;Пишем jQuery c нуля&#8221; хотел бы рассказать о внутреннем поисковом движке, той ключевой функциональности, которая и дала название &#8220;jQuery&#8221; (Javascript query). Плюс рассмотрим момент инициализации/создания jQuery объекта. Все разработчики, которые хоть раз использовали jQuery, знают, что если &#8230; <a href="https://stepansuvorov.com/blog/2015/05/jquery-from-sketch-sizzle/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>В продолжение рубрики &#8220;Пишем jQuery c нуля&#8221; хотел бы рассказать о внутреннем поисковом движке, той ключевой функциональности, которая и дала название &#8220;jQuery&#8221; (Javascript <strong>query</strong>). Плюс рассмотрим момент инициализации/создания jQuery объекта.</p>
+<p><span id="more-2469"></span></p>
+<p>Все разработчики, которые хоть раз использовали <strong>jQuery</strong>, знают, что если написать:</p>
+<p>[javascript]<br />
+$(&#8216;div.myclass&#8217;)<br />
+[/javascript]</p>
+<p>нам вернуться все элементы попадающие под этот селектор. Но вот, что происходит внутри и как jQuery обрабатывает эти селекторы и выдает результаты, знает не каждый.</p>
+<p>Поисковый движок получил имя <strong>Sizzle</strong> и в последствии был выделен в <a title="http://sizzlejs.com/" href="http://sizzlejs.com/">отдельную библиотеку</a>, которую <a title="github.com" href="https://github.com/jquery/jquery/blob/master/src/selector-sizzle.js#L6">включает в себя</a> <strong>jQuery</strong>.</p>
+<p>С появлением в браузерах методов для поиска элементов по селекторам &#8211; <a title="developer.mozilla.org" href="https://developer.mozilla.org/ru/docs/Web/API/Document/querySelector">querySelector</a>, <a title="developer.mozilla.org" href="https://developer.mozilla.org/ru/docs/Web/API/Document/querySelectorAll">querySelectorAll</a> острая необходимость в Sizzle пропадает. Мы его можем использовать только для старых браузеров и использовании <a title="api.jquery.com" href="http://api.jquery.com/category/selectors/">расширенных поисковых фильтров</a>.</p>
+<p>Итого как себя ведет jQuery получив строку-селектор параметром:</p>
+<ol>
+<li>анализ <a title="github.com" href="https://github.com/jquery/jquery/blob/master/src/core/init.js#L16">регулярным выражением</a></li>
+<li>если это <strong>id</strong> &#8211; то получаем элемент с помощь <strong>document.getElementById</strong></li>
+<li>если есть возможность, используем <strong>querySelectorAll</strong></li>
+<li>если нет возможности использовать querySelectorAll &#8211; используем <strong>Sizzle</strong></li>
+</ol>
+<p>В своей djQuery я не планирую поддерживать старые браузеры, а фильтры может добавлю потом, поэтому воссоздавать полную функциональность Sizzle не вижу смыла.</p>
+<p>Выделю только ключевые моменты:</p>
+<ul>
+<li> если Sizzle обнаруживает #id селектор внутри строки, то он игнорирует остальное, то есть:</li>
+</ul>
+<p>[javascript]<br />
+$(&#8216;div.myclass#myelem&#8217;)<br />
+[/javascript]</p>
+<p>и</p>
+<p>[javascript]<br />
+$(&#8216;#myelem&#8217;)<br />
+[/javascript]</p>
+<p>будут восприняты одинаково</p>
+<ul>
+<li>разбор селектора идет <span style="text-decoration: underline;">с права на лево</span>, это важно если вы занимаетесь низко уровневой оптимизацией и есть возможность задать более четкое условие справа.</li>
+<li>опять таки, кто стремиться к высокой производительности, тому лучше не увлекаться кастомными фильтрами поиска, которые не дают использовать querySelector даже на современных браузерах</li>
+</ul>
+<p>Так ну а теперь немного кода, чтобы дополнить наш djQuery проект.</p>
+<p>Как мы и договорились поддерживать старые браузеры не будем, поэтому ограничимся использованием querySelector:</p>
+<p>[javascript]<br />
+var result = document.querySelectorAll(selector);<br />
+[/javascript]</p>
+<p>Но просто результат мы не можем вернуть, так как помним, что jQuery возвращает свой экземпляр, поэтому:</p>
+<p>[javascript]<br />
+return this;<br />
+[/javascript]</p>
+<p>ну и предварительно наполним этот объект результатами:</p>
+<p>[javascript]<br />
+for (var i = 0; i &lt; results.length; i++) {<br />
+  this[i] = results[i];<br />
+}<br />
+this.length = i;<br />
+[/javascript]</p>
+<p>все бы хорошо, но правильно работать будет только, если мы сделаем new, то есть вызов:</p>
+<p>[javascript]<br />
+new djQuery(&#8216;div&#8217;)<br />
+[/javascript]</p>
+<p>это не совсем то, чего мы хотели. Как создать контекст уже внутри конструктора?</p>
+<p>Хочется сделать как-то так:</p>
+<p>[javascript]<br />
+var djQuery = function(selector, context) {<br />
+    return new djQuery(selector, context);<br />
+};<br />
+[/javascript]</p>
+<p>Только, понятное дело, внутренняя функция не может дублировать внешнюю. Поэтому сделаем метод <code>init</code>, в который перенесем внутренности djQuery инициализации:</p>
+<p>[javascript]<br />
+var djQuery = function(selector, context) {<br />
+    return new init(selector, context)<br />
+  };</p>
+<p>  init = function( selector ) {<br />
+    var results = document.querySelectorAll(selector);<br />
+    for (var i = 0; i &lt; results.length; i++) {<br />
+      this[i] = results[i];<br />
+    }</p>
+<p>    this.length = i;<br />
+  };<br />
+[/javascript]</p>
+<p>А для того, чтобы все методы прототипа djQuery были доступны из объектов созданных с помощью init конструктора свяжем их прототипы:</p>
+<p>[javascript]<br />
+init.prototype = djQuery.prototype;<br />
+[/javascript]</p>
+<p>Ну вот теперь можем выполнить:</p>
+<p>[javascript]<br />
+djQuery(&#8216;div&#8217;)<br />
+[/javascript]</p>
+<p>И получить ожидаемый список объектов.</p>
+<p>Но если мы сравним в консоли результаты функций (нашей и jQuery), то можем заметить следующее:</p>
+<p><img decoding="async" class="alignnone size-full wp-image-2546" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/05/Screenshot-2015-05-02-22.26.42.png" alt="jQuery vs djQuery" width="418" height="116" /></p>
+<p>Почему-то jQuery выводит результаты в виде массива, а наша djQuery возвращает объект. Оказывается, чтобы объект воспринимался как массив в нем должны присутствовать следующие метод <code>splice</code>. Ну что ж, добавим их в прототип вместе с <code>push</code> и <code>sort</code>:</p>
+<p>[javascript]<br />
+  djQuery.prototype = {<br />
+    length: 0,<br />
+    push: [].push,<br />
+    sort: [].sort,<br />
+    splice: [].splice<br />
+  };<br />
+[/javascript]</p>
+<p>И&#8230; Ура! мы добились того, чего хотели:</p>
+<p><img decoding="async" class="alignnone size-full wp-image-2547" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/05/Screenshot-2015-05-02-22.32.55.png" alt="jQuery vs djQuery array view" width="388" height="111" /></p>
+<p>Еще добавим небольшую проверочку для случая, когда селектор не был передан:</p>
+<p>[javascript]<br />
+  if(!selector){<br />
+    return this;<br />
+  }<br />
+[/javascript]</p>
+<p>Текущая версия кода в теге <a href="https://github.com/stevermeister/djQuery/tree/step-2">step-2</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/05/jquery-from-sketch-sizzle/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Пишем jQuery c нуля. Часть1</title>
+		<link>https://stepansuvorov.com/blog/2015/03/jquery-from-sketch/</link>
+					<comments>https://stepansuvorov.com/blog/2015/03/jquery-from-sketch/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 17 Mar 2015 20:38:49 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2465</guid>
+
+					<description><![CDATA[Начинаю новую рубрику статей посвященных внутренностям jQuery. Материал должен стать полезен как начинающим JavaScript/jQuery разработчикам, так и опытным специалистам. Шаг за шагом мы воссоздадим функциональность самой популярной на сегодняшний день библиотеки. Специально для этого я создал репозиторий на gitHub(с кодовым &#8230; <a href="https://stepansuvorov.com/blog/2015/03/jquery-from-sketch/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" loading="lazy" class="alignnone  wp-image-2466" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/03/0_9229e_6f7e1115_orig.png" alt="djQuery" width="282" height="182" /></p>
+<p>Начинаю новую рубрику статей посвященных внутренностям <strong>jQuery</strong>. Материал должен стать полезен как начинающим <strong>JavaScript</strong>/<strong>jQuery</strong> разработчикам, так и опытным специалистам. Шаг за шагом мы воссоздадим функциональность самой популярной на сегодняшний день библиотеки.</p>
+<p><span id="more-2465"></span></p>
+<p>Специально для этого я создал <a title="https://github.com/stevermeister/djQuery" href="https://github.com/stevermeister/djQuery">репозиторий</a> на gitHub(с кодовым именем <strong>djQuery</strong>), где буду выкладывать код рубрики:</p>
+<p>[shell]<br />
+git clone git@github.com:stevermeister/djQuery.git<br />
+cd djQuery<br />
+git checkout step-1<br />
+[/shell]</p>
+<p>Ну что начнем?</p>
+<p><em>&#8211; Что представляет из себя jQuery?</em><br />
+<em> &#8211; Это функция.</em><br />
+<em> &#8211; какие принимает параметры?</em><br />
+<em> &#8211; селектор, ну и что-то еще может</em></p>
+<p>Отлично, тогда напишем такой базовый код:</p>
+<p>[javascript]<br />
+var djQuery = function(selector, content){</p>
+<p>  };<br />
+[/javascript]</p>
+<p>Пока вроде все понятно.</p>
+<p>Еще сразу, для красоты модульной, завернем все в самовыполняющуюся функцию:</p>
+<p>[javascript]<br />
+(function(w){<br />
+  var djQuery = function(selector, content){</p>
+<p>  };</p>
+<p>  w.$ = w.djQuery = djQuery;<br />
+})(window);<br />
+[/javascript]</p>
+<p>и внутрь передали объект window и импортировали в него ссылку на нашу функцию(плюс привычный $ &#8211; алиас).</p>
+<p>Думаю для первой части хватит. Код можно взять по тегу <a title="github.com" href="https://github.com/stevermeister/djQuery/tree/step-1">step-1</a>.</p>
+<pre>git checkout step-1</pre>
+<p>Больше кода обещаю во второй части ;)</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/03/jquery-from-sketch/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Nowadays: From jQuery to JavaScript</title>
+		<link>https://stepansuvorov.com/blog/2014/11/nowadays-from-jquery-to-javascript/</link>
+					<comments>https://stepansuvorov.com/blog/2014/11/nowadays-from-jquery-to-javascript/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 07 Nov 2014 20:25:51 +0000</pubDate>
+				<category><![CDATA[Рекомендую]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2077</guid>
+
+					<description><![CDATA[If you are jQuery-coder but would like to become real JavaScript Engineer, Youmightnotneedjquery is good resource for you.]]></description>
+										<content:encoded><![CDATA[<p><a title="http://youmightnotneedjquery.com/" href="http://youmightnotneedjquery.com/"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2078" title="you might not need jquery" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/11/Screenshot-2014-11-07-16.29.36.png" alt="" width="610" height="70" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/11/Screenshot-2014-11-07-16.29.36.png 610w, https://stepansuvorov.com/blog/wp-content/uploads/2014/11/Screenshot-2014-11-07-16.29.36-300x34.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/11/Screenshot-2014-11-07-16.29.36-500x57.png 500w" sizes="(max-width: 610px) 100vw, 610px" /></a></p>
+<p>If you are <strong><em>jQuery-coder </em></strong>but would like to become real <strong>JavaScript Engineer</strong>, <a title="http://youmightnotneedjquery.com/" href="http://youmightnotneedjquery.com/">Youmightnotneedjquery</a> is good resource for you.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/11/nowadays-from-jquery-to-javascript/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Как правильно готовить Angular</title>
+		<link>https://stepansuvorov.com/blog/2014/07/%d0%ba%d0%b0%d0%ba-%d0%bf%d1%80%d0%b0%d0%b2%d0%b8%d0%bb%d1%8c%d0%bd%d0%be-%d0%b3%d0%be%d1%82%d0%be%d0%b2%d0%b8%d1%82%d1%8c-angular/</link>
+					<comments>https://stepansuvorov.com/blog/2014/07/%d0%ba%d0%b0%d0%ba-%d0%bf%d1%80%d0%b0%d0%b2%d0%b8%d0%bb%d1%8c%d0%bd%d0%be-%d0%b3%d0%be%d1%82%d0%be%d0%b2%d0%b8%d1%82%d1%8c-angular/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 07 Jul 2014 11:17:56 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1771</guid>
+
+					<description><![CDATA[Пост составлен на основе развернутого ответа John David Miller о том, как человеку, который писал сайты с jQuery, переключится на AngularJS &#8211; мышление. 1. Проектируйте страницу в момент написания HTML В jQuery-ориентированном подходе вы сначала верстаете страницу, а потом &#8211; делаете ее &#8220;динамической&#8221;. &#8230; <a href="https://stepansuvorov.com/blog/2014/07/%d0%ba%d0%b0%d0%ba-%d0%bf%d1%80%d0%b0%d0%b2%d0%b8%d0%bb%d1%8c%d0%bd%d0%be-%d0%b3%d0%be%d1%82%d0%be%d0%b2%d0%b8%d1%82%d1%8c-angular/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Пост составлен на основе развернутого <a title="stackoverflow.com" href="http://stackoverflow.com/questions/14994391/how-do-i-think-in-angularjs-if-i-have-a-jquery-background/15012542#15012542">ответа</a> <a title="joshdavidmiller.com" href="http://joshdavidmiller.com/">John David Miller</a> о том, как человеку, который писал сайты с <strong>jQuery</strong>, переключится на <strong>AngularJS</strong> &#8211; мышление.</p>
+<p><span id="more-1771"></span></p>
+<h1>1. Проектируйте страницу в момент написания HTML</h1>
+<p>В <strong>jQuery</strong>-ориентированном подходе вы сначала верстаете страницу, а потом &#8211; делаете ее &#8220;динамической&#8221;.</p>
+<p>В <strong>AngularJS</strong> вы должны начинать с архитектуры в самом начале. Вместо того, чтобы думать &#8220;У меня есть этот кусок DOM и я хочу заставить его делать что-то такое &#8230;&#8221;, сразу думать о том, что хотите достичь в целом(от приложения), и только затем переходить к структуре, и в самую последнюю очередь &#8211; к дизайну конкретного отображения.</p>
+<h1>2. Не пытайтесь &#8220;разогнать&#8221; jQuery с помощью AngularJS</h1>
+<p>Проще говоря: не начинайте с мысли &#8220;у меня есть jQuery, оно делает делает X, Y и Z, и я просто добавлю AngularJS для создания моделей и контроллеров&#8221;. Это очень заманчиво, особенно тогда, когда вы только начали работать с AngularJS и еще не понимаете всех концептов. Именно поэтому я всегда рекомендую начинающим AngularJS разработчикам <span style="text-decoration: underline;">не использовать jQuery вообще</span>. До тек пор, пока они не почувствуют как делать &#8220;<strong>Angular-way</strong>&#8220;.</p>
+<p>Я видел много разработчиков создающих эти запутанные решения с jQuery плагинами на 150-200 строчек кода, которые они пытаются прикрутить к AngularJS с помощью набора колбеков совместно с использованием <strong>$apply</strong>, что крайне запутано и сбивает с толку, но они таки заставляют &#8220;<em>Это&#8221;</em> работать. Проблема состоит в том, что в большинстве случаев jQuery плагин может быть переписан в несколько строчек AngularJS, где все бы стало на свои места и было просто и понятно.</p>
+<p>Суть заключается в следующем: когда вы стараетесь думать &#8220;<strong>Angular-way</strong>&#8220;, даже если вы не можете сразу решить задачу &#8211; спросите Angular-сообщество, если и после этого решение не было найдено &#8211; используйте jQuery. <span style="text-decoration: underline;">Но не позволяйте jQuery стать костылем для всех решений</span>, иначе вы никогда не освоите AngularJS.</p>
+<h1>3. Всегда думаете в терминах архитектуры</h1>
+<p>Single page applications &#8211; это приложение, но не в коем случае не набор веб-страниц. Поэтому мы должны думать не только как разработчики клиентской части, но так же как сервер-сайд разработчики(в плане взаимодействия данных). Мы должны думать о том, как разбить наше приложение на индивидуальные, расширяемые компоненты, которые легко будет потом покрыть тестами.</p>
+<p>И как это сделать? Как думать Angular-way? Далее представлены основные принципы, контрастирующие с jQuery:</p>
+<h2>Место действия View</h2>
+<p>В jQuery мы программно изменяем представление(<strong>view</strong>). Рассмотрим пример выпадающего меню:</p>
+<p>[html]<br />
+&lt;ul class=&quot;main-menu&quot;&gt;<br />
+&lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#/home&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;<br />
+&lt;li&gt;&lt;a href=&quot;#/menu1&quot;&gt;Menu 1&lt;/a&gt;<br />
+&lt;ul&gt;<br />
+&lt;li&gt;&lt;a href=&quot;#/sm1&quot;&gt;Submenu 1&lt;/a&gt;&lt;/li&gt;<br />
+&lt;li&gt;&lt;a href=&quot;#/sm2&quot;&gt;Submenu 2&lt;/a&gt;&lt;/li&gt;<br />
+&lt;li&gt;&lt;a href=&quot;#/sm3&quot;&gt;Submenu 3&lt;/a&gt;&lt;/li&gt;<br />
+&lt;/ul&gt;<br />
+&lt;/li&gt;<br />
+&lt;li&gt;&lt;a href=&quot;#/home&quot;&gt;Menu 2&lt;/a&gt;&lt;/li&gt;<br />
+&lt;/ul&gt;<br />
+[/html]</p>
+<p>В jQuery мы активируем логику нашего приложения как-то так:</p>
+<p>[javascript]$(&#8216;.main-menu&#8217;).dropdownMenu();[/javascript]</p>
+<p>Если мы посмотрим только на первую часть, то совсем не очевидно будет ли там какая-то функциональность. Для небольших проектов это нормально. Но для сложных много компонентных приложений, все становится более чем запутано.</p>
+<p>В AngularJS представление определяет логику представления. Наше объявление View будет следующим:</p>
+<p>[html]<br />
+&lt;ul class=&quot;main-menu&quot; dropdown-menu&gt;&#8230;&lt;/ul&gt;<br />
+[/html]</p>
+<p>Обе версии(jQuery &amp; AngularJS) делают одно и тоже, но в случае с AngularJS &#8211; любой смотря в шаблон может понять суть. Когда новый разработчик изучает проект, он может посмотреть на этот код  и сделать вывод что тут используется директива <em>dropdownMenu</em>. Представление раскажет все, что ожидается в плане функциональности намного яснее, чем какой-то сторонний код, прикрепленный непонятно где.</p>
+<p>Разработчики начиная использовать AngularJS часто задают вопрос типа: как я могу выбрать все нужные элементы и добавить к ним директиву. И они застынут от изумления, когда услышат ответ &#8220;вам не нужно искать элементы&#8221;. Но причина, по которой вы не дожны так делать: это полу-jQuery полу-AngularJS &#8211; что к добру не приведет. Проблема тут заключается в том, что разработчик пытается &#8220;делать jQuery&#8221; в контексте AngularJS. Снаружи директивы вы никогда не изменяете DOM, а директивы применяются во View. Замысел должен быть ясен.</p>
+<p>Запомните: не работаете над дизайном, а потом версткой. Вы должны работать над архитектурой, а потом дизайном.</p>
+<h2>Связывание данных (Data binding)</h2>
+<p>Это одна из самых крутых фишек AngularJS. Она отбрасывает кучу не нужной работы с DOM. AngularJS автоматически обновит ваше представление и вам не нужно будет этого делать! В jQuery, мы реагируем на события и обновляем контент:</p>
+<p>[javascript]<br />
+$.ajax({<br />
+  url: &#8216;/myEndpoint.json&#8217;,<br />
+  success: function ( data, status ) {<br />
+    $(&#8216;ul#log&#8217;).append(&#8216;&lt;li&gt;Data Received!&lt;/li&gt;&#8217;);<br />
+  }<br />
+});<br />
+[/javascript]</p>
+<p>а представление выглядит так:</p>
+<p>[html]<br />
+&lt;ul id=&quot;log&quot; class=&quot;messages&quot;&gt;<br />
+&lt;/ul&gt;<br />
+[/html]</p>
+<p>Как видим, у нас теже проблемы. Но что более важно &#8211; мы должны в ручную обновлять DOM. А если мы захотим удалить один элемент из списка &#8211; мы тоже должны писать для этого дополнительный код. Как мы можем протестировать логику отдельно от DOM? И что, если я хочу изменить представление?</p>
+<p>Немного хардкорно, но в AngularJS мы можем сделать так:</p>
+<p>[javascript]<br />
+$http( &#8216;/myEndpoint.json&#8217; ).then( function ( response ) {<br />
+    $scope.log.push( { msg: &#8216;Data Received!&#8217; } );<br />
+});<br />
+[/javascript]</p>
+<p>И представление будет выглядеть следующим образом:</p>
+<p>[html]<br />
+&lt;ul class=&quot;messages&quot;&gt;<br />
+&lt;li class=&quot;alert&quot; ng-repeat=&quot;entry in log&quot;&gt;{{ entry.msg }}&lt;/li&gt;<br />
+&lt;/ul&gt;<br />
+[/html]</p>
+<p>Но наше представление так же может выглядеть так:</p>
+<p>[html]<br />
+&lt;div class=&quot;messages&quot;&gt;<br />
+&lt;div class=&quot;alert&quot; ng-repeat=&quot;entry in log&quot;&gt;{{ entry.msg }}&lt;/div&gt;<br />
+&lt;/div&gt;<br />
+[/html]</p>
+<p>Теперь мы используем бустраповские алерты вместо списка. И мы даже не прикасались к коду контроллера! Но еще важнее, что каким бы способом не обновлялся log &#8211; представление тоже обновится. Автоматически!</p>
+<p>Связывание данных двух стороннее(two-way). Лог-сообщения могут быть редактируемыми, просто вот так:</p>
+<p>[html]<br />
+&lt;input type=&quot;text&quot; ng-model=&quot;entry.msg&quot;/&gt;<br />
+[/html]</p>
+<p>Разве не повод для радости?</p>
+<h2>Выделение уровня модели</h2>
+<p>В <strong>jQuery</strong> <strong>DOM</strong> является моделью, но в <strong>AngularJS</strong> у нас отдельный уровень модели, которым мы можем управлять как захотим, и полностью независимо от представления.</p>
+<h2>Разделение концептов</h2>
+<p>Ваше представление (<strong>View</strong>) определяет поведение, ваша <strong>модель</strong> представляет данные, ваш уровень <strong>сервисов</strong> служит для различных задач, которые будут выполнятся не один раз. Вы работаете с DOM и расширяете представление в <strong>директивах</strong>, и соединяете все вместе с помощью <strong>контроллеров</strong>.</p>
+<h2>Внедрение зависимости (Dependency injection)</h2>
+<p>В разделении концептов нам помогает DI. Если вы пришли с серверных языков (от Java до PHP), вы вероятно уже знакомы с данным термином, но если вы разрабатывали только клиент на jQuery, этот концепт может показаться глупым либо хипстерским. Но это далеко не так. :)</p>
+<p>В общем случае DI дает возможность объявлять компоненты очень свободно и из разных других компонент, просто запросите экземпляр в нужном месте и он будет предоставлен. Вам не нужно задумываться о порядке загрузки, или размещении файлов или еще о чем-то таком. Мощь механизма может быть не сразу ощутима, но я приведу лишь один общий пример &#8211; тестирование.</p>
+<p>Предположим в вашем приложении вам нужен сервис, который реализует сервер-сайд хранилище и, в зависимости от состояния приложения, также локальное хранилище. Когда мы запускаем юнит-тесты для наших контроллерах, мы не хотим взаимодействовать с сервером  &#8211; мы тестируем контроллер. Мы можем добавить просто мок-сервис с таким же именем как оригинальный компонент и инжектор будет гарантировать, что контроллер получит мок-сервис автоматически &#8211; и ему не нужно знать различие.</p>
+<h1>4. Разработка через тестирование (Test-driven development) &#8211; всегда</h1>
+<p>На самом деле это тоже часть секции 3, но это довольно важно, поэтому выношу в отдельный пункт.</p>
+<p>Из множества jQuery плагинов, которые вы видели/использовали, сколько из них идут покрытые тестами? &#8211; Не так много. Это потому что jQuery не очень поддается тестированию, а вот AngularJS в тестировании очень хорош.</p>
+<p>В <strong>jQuery</strong> единственный способ протестировать &#8211; создавать отдельный от приложения компонент на демо- страничке, на которой будет произведены DOM-манипуляции. То есть, мы должны разрабатывать компонент отдельно, а потом интегрировать его в приложение. Как неудобно!</p>
+<p>Но, так как в <strong>AngularJS</strong> мы используем разделение концептов, то мы можем легко делать TDD! Например: мы хотим простую директиву для индикации роли в меню. Мы можем объявить что мы хотим в нашем представлении:</p>
+<p>[html]<br />
+&lt;a href=&quot;/hello&quot; when-active&gt;Hello&lt;/a&gt;<br />
+[/html]</p>
+<p>Теперь мы можем написать тест:</p>
+<p>[javascript]<br />
+it( &#8216;should add &quot;active&quot; when the route changes&#8217;, inject(function() {<br />
+    var elm = $compile( &#8216;&lt;a href=&quot;/hello&quot; when-active&gt;Hello&lt;/a&gt;&#8217; )( $scope );</p>
+<p>    $location.path(&#8216;/not-matching&#8217;);<br />
+    expect( elm.hasClass(&#8216;active&#8217;) ).toBeFalsey();</p>
+<p>    $location.path( &#8216;/hello&#8217; );<br />
+    expect( elm.hasClass(&#8216;active&#8217;) ).toBeTruthy();<br />
+}));<br />
+[/javascript]</p>
+<p>Запускаем тест, убеждаемся, что он не проходит, и пишем директиву:</p>
+<p>[javascript]<br />
+.directive( &#8216;whenActive&#8217;, function ( $location ) {<br />
+    return {<br />
+        scope: true,<br />
+        link: function ( scope, element, attrs ) {<br />
+            scope.$on( &#8216;$routeChangeSuccess&#8217;, function () {<br />
+                if ( $location.path() == element.attr( &#8216;href&#8217; ) ) {<br />
+                    element.addClass( &#8216;active&#8217; );<br />
+                }<br />
+                else {<br />
+                    element.removeClass( &#8216;active&#8217; );<br />
+                }<br />
+            });<br />
+        }<br />
+    };<br />
+});<br />
+[/javascript]</p>
+<p>Теперь тест проходит и меню рабоает. TDD.</p>
+<h1>5. Директивы &#8211; это не запакованый jQuery код</h1>
+<p>Вы часто слышите &#8220;работа с DOM только в директиве&#8221;. Это необходимо. Отнеситесь к этому серьезно!</p>
+<p>Но давайте нырнем глубже&#8230;</p>
+<p>Некоторые директивы просто являются декораторами того, что уже есть в представлении (<em>ngClass</em>) и поэтому иногда работают с DOM напрямую(без нашего кода). Но, если директива типа &#8220;виджет&#8221; и имеет шаблон, она также должна следовать принципу разделения концептов. То есть, шаблон также должен быть независим от области его применения в link-методе и контроллере.</p>
+<p>В AngularJS есть целый набор готовых директив, что серьезно упрощает нашу работу: с <strong>ngClass</strong> мы можем динамически обновлять классы, <strong>ngBind</strong> позволяет делать двусторонне связывание данных, <strong>ngShow</strong> и <strong>ngHide </strong>показывают и прячут элемент. Другими словами: мы можем делать &#8220;конфетку&#8221; даже без манипуляций с DOM. Чем меньше работы с DOM &#8211; тем проще тестировать директиву, а также изменять в будущем.</p>
+<p>Я вижу многие начинающие <strong>AngularJS</strong> используют директивы как место, куда можно вкинуть <strong>jQuery</strong> код. Другими словами: они думают &#8220;если я не могу работать с DOM в контроллере, то я напишу этот код в директиве&#8221;. Это намного лучше, но все еще не angualr-way.</p>
+<p>Обратите внимание на систему логирования, которую мы описали в разделе 3. Даже, если мы поместим jQuery код в директиву, мы по прежнему хотим делат это angular-way. Есть много случаев, когда работа с DOM необходима, но этих случаев намного меньше, чем вы думаете! До того как сделать какие-либо операции с DOM, спросите себя нужны ли они вам. Возможно есть лучший способ, который позволит обойтись без них использовав встроенные инструменты фреймворка.</p>
+<p>Вот быстрый пример показывающий шаблон, который я вижу очень часто. Задача &#8211; сделать кнопку-переключатель (Учтите: этот пример немного надуманный, сжатое представление кода, который служит для решения более сложных задач таким же способом )</p>
+<p>[javascript]<br />
+.directive( &#8216;myDirective&#8217;, function () {<br />
+  return {<br />
+    template: &#8216;&lt;a class=&quot;btn&quot;&gt;Toggle me!&lt;/a&gt;&#8217;,<br />
+    link: function ( scope, element, attrs ) {<br />
+         var on = false;<br />
+         $(element).click( function () {<br />
+             if ( on ) {<br />
+                $(element).removeClass( &#8216;active&#8217; );<br />
+             } else {<br />
+                $(element).addClass( &#8216;active&#8217; );<br />
+             }</p>
+<p>             on = !on;<br />
+         });<br />
+     }<br />
+   };<br />
+});<br />
+[/javascript]</p>
+<p>Но что-то с ним не так.</p>
+<ul>
+<li>jQuery тут совсем не нужно.</li>
+<li>даже если у нас где-то есть jQuery код на странице, то совсем не обязательно использовать его тут для совместимости.  Мы можем просто использовать <strong>angular.element</strong> и все зависимости продолжат работать в проекте без jQuery</li>
+<li>даже если jQuery нам необходим для использования конкретно в этой директиве, то мы опять же всегда можем использовать <strong>angular.element</strong>, который представляет из себя <strong>jqLite</strong>, а если jQuery подключена к проекту, то ссылку на <strong>jQuery</strong>. То есть нет необходимости использовать $ вобще &#8211; вместо него лучше использовать <strong>angular.element</strong>.</li>
+<li>довольно тесно идет с предыдущим пунктом: <strong>element</strong>, который получает функция <strong>link</strong> как параметр уже является экземпляром <strong>jqLite</strong> и его не нужно дополнительно оборачивать в <strong>jQuery</strong>.</li>
+<li>что мы говорили о смешении шаблона и представления с логикой в предыдущей секции?</li>
+</ul>
+<p>Эта директива может быть переписана следующим образом:</p>
+<p>[javascript]<br />
+.directive( &#8216;myDirective&#8217;, function () {<br />
+  return {<br />
+    scope: true,<br />
+    template: &#8216;&lt;a class=&quot;btn&quot; ng-class=&quot;{active:on}&quot; ng-click=&quot;toggle()&quot;&gt;Toggle me!&lt;/a&gt;&#8217;,<br />
+    link: function ( scope, element, attrs ) {<br />
+      scope.on = false;<br />
+      scope.toggle = function () {<br />
+        scope.on = !scope.on;<br />
+      };<br />
+    }<br />
+  };<br />
+});<br />
+[/javascript]</p>
+<p>Опять же таки: логика и шаблон идут раздельно, тестирование делать просто, изменнеия вносить просто: как шаблона, так и логики.</p>
+<p>Итак, директивы &#8211; это не просто коллекции jQuery-подобных функций. Но что же они? <strong>Директивы &#8211; это расширение HTML</strong>. Если HTML не позволяет сделать то, что вам нужно сделать &#8211; вы пишете директиву, и используете ее так, как будто это часть HTML.</p>
+<p>Или по другому: если AngularJS что-то не делает &#8220;из коробки&#8221;, то подумайте, как бы вы могли это правильно сделать с <em>ngClick</em>, <em>ngClass</em> и так далее.</p>
+<h1>Итого</h1>
+<p>Даже не пытайтесь использовать jQuery. Даже не подключайте ее. И каждый раз, при желании воспользоваться $, думайте как бы вы могли сделать это в рамках AngularJS. Если не знаете &#8211; спросите! В 19ти случаях из 20ти лучший способ решения задачи не требует использования jQuery.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/07/%d0%ba%d0%b0%d0%ba-%d0%bf%d1%80%d0%b0%d0%b2%d0%b8%d0%bb%d1%8c%d0%bd%d0%be-%d0%b3%d0%be%d1%82%d0%be%d0%b2%d0%b8%d1%82%d1%8c-angular/feed/</wfw:commentRss>
+			<slash:comments>9</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>jQuery to String</title>
+		<link>https://stepansuvorov.com/blog/2014/06/jquery-to-string/</link>
+					<comments>https://stepansuvorov.com/blog/2014/06/jquery-to-string/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 28 Jun 2014 08:14:21 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[toString]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1775</guid>
+
+					<description><![CDATA[Иногда возникает необходимость получить html-содержимое jQuery-объекта в виде строки. Первое что приходит в голову [javascript]$element.html();[/javascript] да, это работает, но мы не получаем html-кода самого контейнера (или корневого элемента). Следующий вариант, который приходит в голову &#8211; сделать обертку копии текущего элемента &#8230; <a href="https://stepansuvorov.com/blog/2014/06/jquery-to-string/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Иногда возникает необходимость получить <strong>html</strong>-содержимое <strong>jQuery</strong>-объекта в виде <strong>строки</strong>. Первое что приходит в голову</p>
+<p>[javascript]$element.html();[/javascript]</p>
+<p>да, это работает, но мы не получаем html-кода самого контейнера (или корневого элемента). Следующий вариант, который приходит в голову &#8211; сделать <strong>обертку</strong> копии текущего элемента и после уже получить содержимое:</p>
+<p>[javascript]$(&#8216;&lt;div&gt;&#8217;).append($element.clone()).html();[/javascript]</p>
+<p>но как-то это громоздкою.<br />
+Погуглив нашел еще интересный вариант, который работает в <strong>jQuery</strong> начиная с версии <strong>1.6</strong>:</p>
+<p>[javascript]$element.prop(&#8216;outerHTML&#8217;); [/javascript]</p>
+<p>Ну и можно еще поиграть с переопределением метода toString (сделано в качестве эксперимента и крайне не рекомендуется делать в реальном проекте):</p>
+<p>[javascript]<br />
+$.fn.toString = function() {<br />
+   return $(this).prop(&#8216;outerHTML&#8217;);<br />
+}<br />
+[/javascript]</p>
+<p>после чего</p>
+<p>[javascript]alert($element) [/javascript]</p>
+<p>выведет не просто [Object object], а строку &#8211; HTML содержимое объекта.</p>
+<p>И <a title="jsfiddle" href="http://jsfiddle.net/STEVER/LPPzh/">код</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/06/jquery-to-string/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Delayed Keypress или создаем свои хуки событий на jQuery</title>
+		<link>https://stepansuvorov.com/blog/2014/06/delayed-keypress-jquery/</link>
+					<comments>https://stepansuvorov.com/blog/2014/06/delayed-keypress-jquery/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 15:50:49 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[jQuery.event]]></category>
+		<category><![CDATA[keypress]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1683</guid>
+
+					<description><![CDATA[Иногда возникает необходимость расширить стандартное событие JavaScript/jQuery, добавить определенную специфику, например: мы хотим выводить авто-дополнение для текстового поля при вводе, при этом мы не хотим чтобы запрос отправлялся на сервер при каждом нажатии клавиши(будет очень много ненужных запросов). Зададимся целью &#8230; <a href="https://stepansuvorov.com/blog/2014/06/delayed-keypress-jquery/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Иногда возникает необходимость расширить стандартное событие <strong>JavaScript</strong>/<strong>jQuery</strong>, добавить определенную специфику, например: мы хотим выводить авто-дополнение для текстового поля при вводе, при этом мы не хотим чтобы запрос отправлялся на сервер при каждом нажатии клавиши(будет очень много ненужных запросов). Зададимся целью посылать запрос через 500 миллисекунд (полсекунды) после того, как пользователь прекратит набирать(либо остановился в ожидании подсказки авто-дополнения).</p>
+<p><span id="more-1683"></span></p>
+<p>Если не создавать своего события, а просто обработать <strong>keypress</strong>, то получим где-то такой код:</p>
+<p>[javascript]<br />
+$(function() {<br />
+    var timer;<br />
+    $(&quot;#id&quot;).keypress(function() {<br />
+        timer &amp;&amp; clearTimeout(timer);<br />
+        timer = setTimeout(someMethod, 500);<br />
+    });<br />
+});<br />
+[/javascript]</p>
+<p>Теперь попробуем создать свое событие <strong>delayedkeypress</strong>, обработчик которого можно будет повесить на любой элемент DOM.</p>
+<p><strong>jQuery</strong> имеет следующий синтаксис для определения своих событий:</p>
+<p>[javascript]<br />
+jQuery.event.special.myevent = {<br />
+  delegateType: &#8216;eventType&#8217;,<br />
+  bindType: &#8216;eventType&#8217;,<br />
+  setup: function( data, namespaces, eventHandle ) {<br />
+    // code<br />
+  },<br />
+  teardown: function( namespaces ) {<br />
+    // code<br />
+  },<br />
+  add: function( handleObj ) {<br />
+    // code<br />
+  },<br />
+  remove: function( handleObj ) {<br />
+    // code<br />
+  },<br />
+  _default: function( event ) {<br />
+    // code<br />
+  },<br />
+  trigger: function( event: jQuery.Event, data: Object ) {<br />
+    // code<br />
+  },<br />
+  handle: function( event: jQuery.Event, data: Object ){<br />
+    // code<br />
+  }<br />
+};<br />
+[/javascript]</p>
+<p>Немного пояснений по свойствам и колбэкам:</p>
+<ul>
+<li><strong>bindType</strong> &#8211; тип стандартного события(если такое имеется), к которому хотим привязаться</li>
+<li><strong>delegateType</strong> &#8211; какому типу события делегируем последующее выполнение</li>
+<li><strong>setup</strong> &#8211; вызовется при первом навешивании обработчика</li>
+<li><strong>teardown</strong> &#8211; когда все обработчики сняты</li>
+<li><strong>add</strong>/<strong>remove</strong> &#8211; при каждом добавлении/удалении нового обработчика</li>
+<li><strong>trigger</strong> &#8211; вызовется при использовании методов <strong>.trigger()</strong> и <strong>.triggerHandler()</strong></li>
+<li><strong>_default</strong> &#8211; определяет нужно ли запускать стандартный обработчик браузера</li>
+<li><strong>handle</strong> &#8211; основной метод, который будет вызван при обнаружении события определенного в <strong>bindType</strong> опции</li>
+</ul>
+<p>Если мы хотим просто прокинуть стандартный <strong>keypress</strong> через свой обработчик, получим:</p>
+<p>[javascript]jQuery.event.special.delayedkeypress = {<br />
+    delegateType: &quot;keypress&quot;,<br />
+    bindType: &quot;keypress&quot;,<br />
+    handle: function (event) {<br />
+        return event.handleObj.handler.apply(this, arguments);<br />
+    }<br />
+};[/javascript]</p>
+<p>а теперь добавим нашу обработку c таймером:</p>
+<p>[javascript]<br />
+jQuery.event.special.delayedkeypress = {<br />
+    delegateType: &quot;keypress&quot;,<br />
+    bindType: &quot;keypress&quot;,<br />
+    handle: function (event) {<br />
+        var self = this;<br />
+        this.timer &amp;&amp; clearTimeout(this.timer);<br />
+        this.timer = setTimeout(function(){<br />
+            event.handleObj.handler.apply(self, arguments);<br />
+        }, 500);<br />
+    }<br />
+};<br />
+[/javascript]</p>
+<p>это позволит нам превратить первоначальный код в простой отлов события:</p>
+<p>[javascript]$(&quot;#id&quot;).on(&quot;delayedkeypress&quot;, someMethod);[/javascript]</p>
+<p>ну и для полной jquery-ности добавим алиас-метод <strong>delayedkeypress</strong> для быстрой работы с событием(аналогично <em>click()</em>, <em>focus()</em>, <em>scroll()</em>):</p>
+<p>[javascript]<br />
+jQuery.fn[ &quot;delayedkeypress&quot; ] = function( data, fn ) {<br />
+  return arguments.length &gt; 0 ?<br />
+         this.on( &quot;delayedkeypress&quot;, null, data, fn ) :<br />
+	 this.trigger( &quot;delayedkeypress&quot; );<br />
+};[/javascript]</p>
+<p>получим:</p>
+<p>[javascript]$(&quot;#id&quot;).delayedkeypress(someMethod);[/javascript]</p>
+<p>Вот <a title="jsfiddle" href="http://jsfiddle.net/STEVER/y5R5V/">тут</a> можно поиграть с кодом. Более подробную информацию можно найти в <a title="event.js" href="https://github.com/jquery/jquery/blob/master/src/event.js">исходниках</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/06/delayed-keypress-jquery/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>jQuery: $.put and $.delete</title>
+		<link>https://stepansuvorov.com/blog/2014/04/jquery-put-and-delete/</link>
+					<comments>https://stepansuvorov.com/blog/2014/04/jquery-put-and-delete/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 01 Apr 2014 09:52:55 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[ajax]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1644</guid>
+
+					<description><![CDATA[jQuery Ajax helpers set does not have shortcuts for &#160;PUT and DELETE methods, but nothing prevents us to make them ourselves. put delete And a short form for both is:]]></description>
+										<content:encoded><![CDATA[
+<p><strong>jQuery Ajax</strong> helpers set does not have shortcuts for &nbsp;<strong>PUT</strong> and <strong>DELETE</strong> methods, but nothing prevents us to make them ourselves.</p>
+
+
+
+<span id="more-1644"></span>
+
+
+
+<h2 class="wp-block-heading">put</h2>
+
+
+
+<div class="wp-block-kevinbatdorf-code-block-pro" data-code-block-pro-font-family="Code-Pro-JetBrains-Mono" style="font-size:.875rem;font-family:Code-Pro-JetBrains-Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25rem"><span style="display:block;padding:16px 0 0 16px;margin-bottom:-1px;width:100%;text-align:left;background-color:#2e3440ff"><svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14"><g fill="none" fill-rule="evenodd" transform="translate(1 1)"><circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle><circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle><circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle></g></svg></span><span role="button" tabindex="0" data-code="$.put = function(url, data, callback, type){
+
+  if ( $.isFunction(data) ){
+    type = type || callback,
+    callback = data,
+    data = {}
+  }
+
+  return $.ajax({
+    url: url,
+    type: 'PUT',
+    success: callback,
+    data: data,
+    contentType: type
+  });
+}" style="color:#d8dee9ff;display:none" aria-label="Copy" class="code-block-pro-copy-button"><svg xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path class="with-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path><path class="without-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg></span><pre class="shiki nord" style="background-color: #2e3440ff" tabindex="0"><code><span class="line"><span style="color: #D8DEE9">$</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">put</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">function</span><span style="color: #ECEFF4">(</span><span style="color: #D8DEE9">url</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span><span style="color: #ECEFF4">){</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">if</span><span style="color: #D8DEE9FF"> ( </span><span style="color: #D8DEE9">$</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">isFunction</span><span style="color: #D8DEE9FF">(</span><span style="color: #D8DEE9">data</span><span style="color: #D8DEE9FF">) )</span><span style="color: #ECEFF4">{</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #D8DEE9">type</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">||</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #D8DEE9">callback</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #D8DEE9">data</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">{}</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #ECEFF4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">return</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">$</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">ajax</span><span style="color: #D8DEE9FF">(</span><span style="color: #ECEFF4">{</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">url</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">url</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">type</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">&#39;</span><span style="color: #A3BE8C">PUT</span><span style="color: #ECEFF4">&#39;</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">success</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">data</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">contentType</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #ECEFF4">}</span><span style="color: #D8DEE9FF">)</span><span style="color: #81A1C1">;</span></span>
+<span class="line"><span style="color: #ECEFF4">}</span></span></code></pre></div>
+
+
+
+<h2 class="wp-block-heading">delete</h2>
+
+
+
+<div class="wp-block-kevinbatdorf-code-block-pro" data-code-block-pro-font-family="Code-Pro-JetBrains-Mono" style="font-size:.875rem;font-family:Code-Pro-JetBrains-Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25rem"><span style="display:block;padding:16px 0 0 16px;margin-bottom:-1px;width:100%;text-align:left;background-color:#2e3440ff"><svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14"><g fill="none" fill-rule="evenodd" transform="translate(1 1)"><circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle><circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle><circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle></g></svg></span><span role="button" tabindex="0" data-code="$.delete = function(url, data, callback, type){
+
+  if ( $.isFunction(data) ){
+    type = type || callback,
+    callback = data,
+    data = {}
+  }
+
+  return $.ajax({
+    url: url,
+    type: 'DELETE',
+    success: callback,
+    data: data,
+    contentType: type
+  });
+}" style="color:#d8dee9ff;display:none" aria-label="Copy" class="code-block-pro-copy-button"><svg xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path class="with-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path><path class="without-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg></span><pre class="shiki nord" style="background-color: #2e3440ff" tabindex="0"><code><span class="line"><span style="color: #D8DEE9">$</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">delete</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">function</span><span style="color: #ECEFF4">(</span><span style="color: #D8DEE9">url</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span><span style="color: #ECEFF4">){</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">if</span><span style="color: #D8DEE9FF"> ( </span><span style="color: #D8DEE9">$</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">isFunction</span><span style="color: #D8DEE9FF">(</span><span style="color: #D8DEE9">data</span><span style="color: #D8DEE9FF">) )</span><span style="color: #ECEFF4">{</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #D8DEE9">type</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">||</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #D8DEE9">callback</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #D8DEE9">data</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">{}</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #ECEFF4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">return</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">$</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">ajax</span><span style="color: #D8DEE9FF">(</span><span style="color: #ECEFF4">{</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">url</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">url</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">type</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">&#39;</span><span style="color: #A3BE8C">DELETE</span><span style="color: #ECEFF4">&#39;</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">success</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">data</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">contentType</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #ECEFF4">}</span><span style="color: #D8DEE9FF">)</span><span style="color: #81A1C1">;</span></span>
+<span class="line"><span style="color: #ECEFF4">}</span></span></code></pre></div>
+
+
+
+<p>And a short form for both is:</p>
+
+
+
+<div class="wp-block-kevinbatdorf-code-block-pro" data-code-block-pro-font-family="Code-Pro-JetBrains-Mono" style="font-size:.875rem;font-family:Code-Pro-JetBrains-Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25rem"><span style="display:block;padding:16px 0 0 16px;margin-bottom:-1px;width:100%;text-align:left;background-color:#2e3440ff"><svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14"><g fill="none" fill-rule="evenodd" transform="translate(1 1)"><circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle><circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle><circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle></g></svg></span><span role="button" tabindex="0" data-code="jQuery.each( [ &quot;put&quot;, &quot;delete&quot; ], function( i, method ) {
+  jQuery[ method ] = function( url, data, callback, type ) {
+    if ( jQuery.isFunction( data ) ) {
+      type = type || callback;
+      callback = data;
+      data = undefined;
+    }
+
+    return jQuery.ajax({
+      url: url,
+      type: method,
+      dataType: type,
+      data: data,
+      success: callback
+    });
+  };
+});" style="color:#d8dee9ff;display:none" aria-label="Copy" class="code-block-pro-copy-button"><svg xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path class="with-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path><path class="without-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg></span><pre class="shiki nord" style="background-color: #2e3440ff" tabindex="0"><code><span class="line"><span style="color: #D8DEE9">jQuery</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">each</span><span style="color: #D8DEE9FF">( [ </span><span style="color: #ECEFF4">&quot;</span><span style="color: #A3BE8C">put</span><span style="color: #ECEFF4">&quot;</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">&quot;</span><span style="color: #A3BE8C">delete</span><span style="color: #ECEFF4">&quot;</span><span style="color: #D8DEE9FF"> ]</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">function</span><span style="color: #ECEFF4">(</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">i</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">method</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">)</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">{</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #D8DEE9">jQuery</span><span style="color: #D8DEE9FF">[ </span><span style="color: #D8DEE9">method</span><span style="color: #D8DEE9FF"> ] </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">function</span><span style="color: #ECEFF4">(</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">url</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">)</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">{</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #81A1C1">if</span><span style="color: #D8DEE9FF"> ( </span><span style="color: #D8DEE9">jQuery</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">isFunction</span><span style="color: #D8DEE9FF">( </span><span style="color: #D8DEE9">data</span><span style="color: #D8DEE9FF"> ) ) </span><span style="color: #ECEFF4">{</span></span>
+<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #D8DEE9">type</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">||</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span><span style="color: #81A1C1">;</span></span>
+<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #D8DEE9">callback</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #81A1C1">;</span></span>
+<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #D8DEE9">data</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">undefined;</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #ECEFF4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #81A1C1">return</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">jQuery</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">ajax</span><span style="color: #D8DEE9FF">(</span><span style="color: #ECEFF4">{</span></span>
+<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #88C0D0">url</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">url</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #88C0D0">type</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">method</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #88C0D0">dataType</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #88C0D0">data</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #88C0D0">success</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #ECEFF4">}</span><span style="color: #D8DEE9FF">)</span><span style="color: #81A1C1">;</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #ECEFF4">}</span><span style="color: #81A1C1">;</span></span>
+<span class="line"><span style="color: #ECEFF4">}</span><span style="color: #D8DEE9FF">)</span><span style="color: #81A1C1">;</span></span></code></pre></div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/04/jquery-put-and-delete/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>jQuery Ajax Simple Mock</title>
+		<link>https://stepansuvorov.com/blog/2014/01/jquery-ajax-simple-mock/</link>
+					<comments>https://stepansuvorov.com/blog/2014/01/jquery-ajax-simple-mock/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 21 Jan 2014 15:27:12 +0000</pubDate>
+				<category><![CDATA[Рекомендую]]></category>
+		<category><![CDATA[ajax]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[mock]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1401</guid>
+
+					<description><![CDATA[jQuery Ajax Simple Mock from Cowboy to bookmarks.]]></description>
+										<content:encoded><![CDATA[<p><a href="https://gist.github.com/cowboy/1371254">jQuery Ajax Simple Mock</a> from <a href="https://github.com/cowboy">Cowboy</a> to bookmarks.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/01/jquery-ajax-simple-mock/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>jQuery selectors</title>
+		<link>https://stepansuvorov.com/blog/2013/09/jquery-selectors/</link>
+					<comments>https://stepansuvorov.com/blog/2013/09/jquery-selectors/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Thu, 05 Sep 2013 12:16:15 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[selectors]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1197</guid>
+
+					<description><![CDATA[Sometimes it could be quite useful to remind: Selector Type jQuery Syntax Basic All Selector * Class Selector .class Element Selector element ID Selector #id Multiple Selector selector1, selector2, selectorN   Hierarchy Child Selector parent &#62; child Descendant Selector ancestor &#8230; <a href="https://stepansuvorov.com/blog/2013/09/jquery-selectors/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Sometimes it could be quite useful to remind:</p>
+<table width="82%" border="0" cellspacing="1" cellpadding="0">
+<thead>
+<tr>
+<td width="173">
+<p align="center"><strong>Selector Type</strong></p>
+</td>
+<td colspan="4" width="167">
+<p align="center"><strong>jQuery Syntax</strong></p>
+</td>
+<td width="2"></td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="4" valign="top" width="266"><strong>Basic</strong></td>
+<td colspan="2" width="77"></td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/all-selector/">All Selector</a></td>
+<td colspan="4" valign="top" width="167">*</td>
+<td width="2"></td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/class-selector/">Class Selector</a></td>
+<td colspan="4" valign="top" width="167">.class</td>
+<td width="2"></td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/element-selector/">Element Selector</a></td>
+<td colspan="4" valign="top" width="167">element</td>
+<td width="2"></td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/id-selector/">ID Selector</a></td>
+<td colspan="4" valign="top" width="167">#id</td>
+<td width="2"></td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/multiple-selector/">Multiple Selector</a></td>
+<td colspan="4" valign="top" width="167">selector1, selector2, selectorN</td>
+<td width="2"></td>
+</tr>
+<tr>
+<td valign="top" width="173"> <span id="more-1197"></span></td>
+<td colspan="4" valign="top" width="167"></td>
+<td width="2"></td>
+</tr>
+<tr>
+<td colspan="4" valign="top" width="266"><strong>Hierarchy</strong></td>
+<td colspan="2" width="77"></td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/child-selector/">Child Selector</a></td>
+<td colspan="4" valign="top" width="167">parent &gt; child</td>
+<td width="2"></td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/descendant-selector/">Descendant Selector</a></td>
+<td colspan="4" valign="top" width="167">ancestor descendant</td>
+<td width="2"></td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/next-adjacent-Selector/">Next Adjacent Selector</a></td>
+<td colspan="4" valign="top" width="167">prev + next</td>
+<td width="2"></td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/next-siblings-selector/">Next Siblings Selector</a></td>
+<td colspan="4" valign="top" width="167">prev ~ siblings</td>
+<td width="2"></td>
+</tr>
+<tr>
+<td colspan="4" valign="top" width="266"><strong>Attribute</strong></td>
+<td colspan="2" width="77"></td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/attribute-contains-prefix-selector/">Attribute Contains Prefix Selector</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">[name|=value]</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/attribute-contains-word-selector/">Attribute Contains Selector</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">[name*=value]</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/attribute-contains-word-selector/">Attribute Contains Word Selector</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">[name~=value]</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/attribute-ends-with-selector/">Attribute Ends With Selector</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">[name$=value]</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/attribute-equals-selector/">Attribute Equals Selector</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">[name=value]</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/attribute-not-equal-selector/">Attribute Not Equal Selector</a>(<em>non-standard</em>)</td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">[name!=value]</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/attribute-starts-with-selector/">Attribute Starts With Selector</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">[name^=value]</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/has-attribute-selector/">Has Attribute Selector</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">[name]</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/multiple-attribute-selector/">Multiple Attribute Selector</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">[name=value][name2=value2]</td>
+</tr>
+<tr>
+<td colspan="4" valign="top" width="266"><strong>Basic Filter(</strong><em>non-standard</em><strong>)</strong></td>
+<td colspan="2" width="77"></td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/animated-selector/">Animated filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:animated</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/not-selector/">Not equal filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:not()</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/even-selector/">Evenness filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:even, :odd</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/gt-selector/">Comparison filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:gt(),:lt(), :eq()</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/first-selector/">Order filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:first, :last</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/header-selector/">Header filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:header</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/focus-selector/">Focus filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:focus</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/target-selector/">Target filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:target</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/root-selector/">Root Filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:root</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/lang-selector/">Language filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:lang</td>
+</tr>
+<tr>
+<td colspan="4" valign="top" width="266"><strong>Child Filter</strong></td>
+<td colspan="2" width="77"></td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/first-child-selector/">First/Last child filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:first-child, :last-child</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/first-of-type-selector/">First/Last of type filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:first-of-type, :last-of-type</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/nth-child-selector/">Nth-child filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:nth-child()</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/nth-last-child-selector/">Last Nth-child filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:nth-last-child()</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/nth-last-of-type-selector/">Nth-child of type filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:nth-of-type()</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/nth-of-type-selector/">Last nth-child of type filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:nth-last-of-type()</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/only-child-selector/">Only child filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:only-child</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/only-of-type-selector/">Only child of type filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:only-of-type</td>
+</tr>
+<tr>
+<td valign="top" width="173"></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166"></td>
+</tr>
+<tr>
+<td colspan="4" valign="top" width="266"><strong>Content Filter</strong></td>
+<td colspan="2" width="77"></td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/contains-selector/">Contains filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:contains()</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/empty-selector/">Empty filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:empty</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/has-selector/">Has filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:has()</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/parent-selector/">Parent filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:parent</td>
+</tr>
+<tr>
+<td valign="top" width="173"></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166"></td>
+</tr>
+<tr>
+<td colspan="3" valign="top" width="178"><strong><a href="http://api.jquery.com/hidden-selector/">Visibility</a> (</strong><em>non-standard</em><strong>)</strong></td>
+<td valign="top" width="87">:hidden, :visible<strong></strong></td>
+<td colspan="2" width="77"></td>
+</tr>
+<tr>
+<td colspan="4" valign="top" width="266"><strong>Form</strong></td>
+<td colspan="2" width="77"></td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/checked-selector/">Checked filter</a>(<em>standard</em>)</td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:checked</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/selected-selector/">Selected filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:selected</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/enabled-selector/">Disabled filter</a>(<em>standard</em>)</td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:disabled, :enabled</td>
+</tr>
+<tr>
+<td valign="top" width="173"><a href="http://api.jquery.com/button-selector/">Input type filter</a></td>
+<td valign="top" width="3"></td>
+<td colspan="4" valign="top" width="166">:button, :file, :image, :input, :password, :radio, :checkbox, :reset, :submit, :text</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>Based on</p>
+<ul>
+<li>http://api.jquery.com/</li>
+<li>http://www.amplesdk.com/tutorials/jquery/</li>
+</ul>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/09/jquery-selectors/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

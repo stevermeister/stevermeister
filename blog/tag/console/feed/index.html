@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>console &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/console/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sun, 18 Feb 2018 14:30:30 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Что можно достать из Angular через console.log</title>
+		<link>https://stepansuvorov.com/blog/2016/12/angular-console-log/</link>
+					<comments>https://stepansuvorov.com/blog/2016/12/angular-console-log/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 07 Dec 2016 16:45:49 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[console]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3166</guid>
+
+					<description><![CDATA[Мы уже все привыкли к angular.element API предоставляемое AngularJs, благодаря чему мы можем выбрать элемент и дальше исследовать его свойства в консоли обращаясь как : &#62; angular.element($0) Более подробно тут. Но что же может нам дать Angular2? Оказывается в Angular2 &#8230; <a href="https://stepansuvorov.com/blog/2016/12/angular-console-log/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Мы уже все привыкли к <strong>angular.element API</strong> предоставляемое AngularJs, благодаря чему мы можем выбрать элемент и дальше исследовать его свойства в консоли обращаясь как :</p>
+<p><code><br />
+&gt; angular.element($0)<br />
+</code></p>
+<p><img decoding="async" fetchpriority="high" class="alignnone wp-image-3169" src="https://stepansuvorov.com/blog/wp-content/uploads/2016/12/angular-element.gif" alt="angular-element" width="455" height="238" /></p>
+<p>Более подробно <a href="https://stepansuvorov.com/blog/2013/03/angularjs-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B0%D0%B5%D0%BC-scopeinjectorcontroller-%D0%B8%D0%B7-dom/">тут</a>.</p>
+<p>Но что же может нам дать <strong>Angular2</strong>?</p>
+<p><span id="more-3166"></span></p>
+<p>Оказывается в <strong>Angular2</strong> мы тоже можем кое-что получить.</p>
+<p>Во-первых, убедимся что у нас <span style="text-decoration: underline;">не включен продакшен мод</span>, в котором посмотреть ничего не получится. В коде не должен вызываться метод <strong>enableProdMode</strong>:</p>
+<p>[javascript]<br />
+import { enableProdMode } from &#8216;@angular/core&#8217;;<br />
+enableProdMode();<br />
+[/javascript]</p>
+<p>Теперь можем проинспектировать элемент и набрать в консоли:<code><br />
+&gt; ng.probe($0)<br />
+</code></p>
+<p>получим тем самым доступ к API отрисованного компонента(можно сделать на корневом теге). Так же мы можем теперь получить экземпляр класса нашего компонента:<code><br />
+&gt; ng.probe($0).componentInstance<br />
+</code></p>
+<p>соотвественно, если мы захотим изменить какое-то свойство:<code><br />
+&gt; ng.probe($0).componentInstance.user.name = "Bob"<br />
+</code></p>
+<p>Теперь чтобы изменения были применены к UI нам нужно запустить <strong>ChangeDetection</strong> (то что вы первом Ангуляре вы делали через <strong>$scope.$apply()</strong>). Самый простой способ запустить механизм обнаружения изменений &#8211; обратиться к сервису <strong>changeDetectorRef</strong> через специальное отладочное свойство <strong>_debugInfo</strong>:<code><br />
+&gt; ng.probe($0)._debugInfo._view.changeDetectorRef.detectChanges()<br />
+</code></p>
+<p>Но учтите, в данном случае вы запускаете <strong>ChangeDetection</strong> только для текущего выбранного компонента и всех его детей. При этом если вы хотите применить изменения ко всему приложению &#8211; необходимо проделать тоже самое только с корневым элементом.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2016/12/angular-console-log/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Speedtest.net from terminal</title>
+		<link>https://stepansuvorov.com/blog/2016/02/speedtest-net-from-terminal/</link>
+					<comments>https://stepansuvorov.com/blog/2016/02/speedtest-net-from-terminal/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 06 Feb 2016 16:10:33 +0000</pubDate>
+				<category><![CDATA[Рекомендую]]></category>
+		<category><![CDATA[console]]></category>
+		<category><![CDATA[speedtest.net]]></category>
+		<category><![CDATA[terminal]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3011</guid>
+
+					<description><![CDATA[Everything you need is just install npm package: $ npm install --global speed-test and run $ speed-test]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone  wp-image-3012" src="https://stepansuvorov.com/blog/wp-content/uploads/2016/02/screenshot.gif" alt="speedtest.net from terminal" width="421" height="218" /></p>
+<p>Everything you need is just install npm package:</p>
+<pre><code>$ npm install --global speed-test</code></pre>
+<p>and run</p>
+<pre><code>$ speed-test</code></pre>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2016/02/speedtest-net-from-terminal/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Caniuse service in command line</title>
+		<link>https://stepansuvorov.com/blog/2015/10/caniuse-service-in-command-line/</link>
+					<comments>https://stepansuvorov.com/blog/2015/10/caniuse-service-in-command-line/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 24 Oct 2015 18:39:40 +0000</pubDate>
+				<category><![CDATA[Рекомендую]]></category>
+		<category><![CDATA[caniuse]]></category>
+		<category><![CDATA[console]]></category>
+		<category><![CDATA[terminal]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2910</guid>
+
+					<description><![CDATA[[shell] npm install -g caniuse-cmd [/shell] Source code.]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-full wp-image-2911" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/10/Screenshot-2015-10-24-20.37.18.png" alt="caniuse in console" width="450" height="183" /></p>
+<p>[shell]<br />
+npm install -g caniuse-cmd<br />
+[/shell]</p>
+<p><a href="https://github.com/sgentle/caniuse-cmd">Source code</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/10/caniuse-service-in-command-line/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>&#8216;fuck&#8217; &#8211; command for all the cases</title>
+		<link>https://stepansuvorov.com/blog/2015/07/fuck-command-for-all-the-cases/</link>
+					<comments>https://stepansuvorov.com/blog/2015/07/fuck-command-for-all-the-cases/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 21 Jul 2015 17:40:36 +0000</pubDate>
+				<category><![CDATA[Рекомендую]]></category>
+		<category><![CDATA[console]]></category>
+		<category><![CDATA[shell]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2754</guid>
+
+					<description><![CDATA[instead of many words: &#160;]]></description>
+										<content:encoded><![CDATA[<p>instead of many words:</p>
+<p><a href="https://github.com/nvbn/thefuck"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2755" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/07/example.gif" alt="thefuck console command" width="686" height="379" /></a></p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/07/fuck-command-for-all-the-cases/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Компилируем AngularJS шаблоны в консоли</title>
+		<link>https://stepansuvorov.com/blog/2015/01/angularjs-console-compile/</link>
+					<comments>https://stepansuvorov.com/blog/2015/01/angularjs-console-compile/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 24 Jan 2015 20:17:07 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[$compile]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[console]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2209</guid>
+
+					<description><![CDATA[В дополнение к этой заметке еще одна о том, как можно проверить работу шаблона/директивы/фильтра в консоли. Для того, чтобы скомпилировать шаблон нам необходим $compile сервис, который можно получить с помощью инжектора: [javascript] $injector = angular.element(document).injector(); $compile = $injector.get(&#8216;$compile&#8217;); [/javascript] также &#8230; <a href="https://stepansuvorov.com/blog/2015/01/angularjs-console-compile/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>В дополнение к <a title="AngularJS: получаем scope/injector/controller из DOM" href="https://stepansuvorov.com/blog/2013/03/angularjs-%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B0%D0%B5%D0%BC-scopeinjectorcontroller-%D0%B8%D0%B7-dom/">этой заметке</a> еще одна о том, как можно проверить работу шаблона/директивы/фильтра в консоли.</p>
+<p><span id="more-2209"></span></p>
+<p>Для того, чтобы скомпилировать шаблон нам необходим <strong>$compile</strong> сервис, который можно получить с помощью инжектора:</p>
+<p>[javascript]<br />
+$injector = angular.element(document).injector();<br />
+$compile = $injector.get(&#8216;$compile&#8217;);<br />
+[/javascript]</p>
+<p>также для компиляции нам нужен конкретный $scope:</p>
+<p>[javascript]<br />
+$scope = angular.element(document).scope();<br />
+[/javascript]</p>
+<p>на вот теперь можно компилировать:</p>
+<p>[javascript]<br />
+var template = &#8216;{{price|currency}}&#8217;;<br />
+var element = angular.element(&#8216;&lt;div&gt;&#8217;).append(template); //контейнер для шаблона<br />
+$scope.price = 999999; //просто для теста<br />
+$compile(element)($scope);<br />
+[/javascript]</p>
+<p>и конечно же не забудем обновить дайджест:</p>
+<p>[javascript]<br />
+$scope.$apply();<br />
+[/javascript]</p>
+<p>после чего можно доставать результат:</p>
+<p>[javascript]<br />
+element.html();<br />
+[/javascript]</p>
+<p>Теперь все вместе и более в сжатой форме:</p>
+<p>[javascript]<br />
+(function(template){<br />
+	var $ = angular.element, $0, $scope, $compile, $element;<br />
+	if(!$0) $0 = document;<br />
+	$scope = $($0).scope();<br />
+	$compile = $(document).injector().get(&#8216;$compile&#8217;);<br />
+	$element = $(&#8216;&lt;div/&gt;&#8217;).append(template);<br />
+	$compile($element)($scope);<br />
+	$scope.$apply();<br />
+	return $element.html();<br />
+})(&#8216;{{1000000|currency}}&#8217;);<br />
+[/javascript]</p>
+<p>&nbsp;</p>
+<p>Ну и при желании можно даже <a title="jsbin.com" href="http://jsbin.com/kepeji/1/watch?html,output">кнопочку для браузера</a> сделать (просто перетащите кнопку в панель закладок и можете пользоваться везде).</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/01/angularjs-console-compile/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>New Chrome console features</title>
+		<link>https://stepansuvorov.com/blog/2014/10/new-chrome-console-features/</link>
+					<comments>https://stepansuvorov.com/blog/2014/10/new-chrome-console-features/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 29 Oct 2014 19:24:21 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[chrome]]></category>
+		<category><![CDATA[console]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2051</guid>
+
+					<description><![CDATA[You could set the focus on element without pointing it via inspector, there is &#8220;inspect&#8221; method in console now: one more helper-method in console is &#8220;copy&#8221; &#8211; to stringify and copy to clipboard: after such operation you will have document.body &#8230; <a href="https://stepansuvorov.com/blog/2014/10/new-chrome-console-features/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>You could set the focus on element without pointing it via inspector, there is &#8220;<strong>inspect</strong>&#8221; method in <strong>console</strong> now:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2052" title="console.inspect" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-29-10.29.31.png" alt="" width="568" height="34" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-29-10.29.31.png 568w, https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-29-10.29.31-300x17.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-29-10.29.31-500x29.png 500w" sizes="(max-width: 568px) 100vw, 568px" /></p>
+<p>one more helper-method in console is &#8220;<strong>copy</strong>&#8221; &#8211; to stringify and copy to clipboard:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2053" title="console.copy" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/10/Screenshot-2014-10-29-10.32.40.png" alt="" width="176" height="29" /></p>
+<p>after such operation you will have document.body element converted into string in your clipboard.</p>
+<p>Some inspiration for start playing:</p>
+<p>[javascript]<br />
+inspect(document.body.firstChild)<br />
+inspect(document.querySelector(&#8216;div&#8217;))<br />
+inspect(document.querySelector(&#8216;.ng-scope&#8217;))<br />
+inspect($1)</p>
+<p>copy($0)<br />
+copy(document.querySelectorAll(&#8216;div&#8217;)[0])<br />
+copy(document.cookie)<br />
+[/javascript]</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/10/new-chrome-console-features/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>console.log(resume)</title>
+		<link>https://stepansuvorov.com/blog/2014/04/console-logresume/</link>
+					<comments>https://stepansuvorov.com/blog/2014/04/console-logresume/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 01 Apr 2014 08:39:29 +0000</pubDate>
+				<category><![CDATA[IT Рынок]]></category>
+		<category><![CDATA[console]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1492</guid>
+
+					<description><![CDATA[По случаю первого апреля создал резюме в консоле.]]></description>
+										<content:encoded><![CDATA[<p>По случаю первого апреля создал <a href="http://js4.it">резюме в консоле</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/04/console-logresume/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>jTypes console</title>
+		<link>https://stepansuvorov.com/blog/2014/02/jtypes-console/</link>
+					<comments>https://stepansuvorov.com/blog/2014/02/jtypes-console/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 18 Feb 2014 08:44:28 +0000</pubDate>
+				<category><![CDATA[Рекомендую]]></category>
+		<category><![CDATA[console]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[tool]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1469</guid>
+
+					<description><![CDATA[jTypes console &#8211; nice light pop-up JavaScript console]]></description>
+										<content:encoded><![CDATA[<p><a href="http://www.jtypes.com/console">jTypes console</a> &#8211; nice light pop-up JavaScript console</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/02/jtypes-console/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Userscript console++</title>
+		<link>https://stepansuvorov.com/blog/2013/10/console-plus-plus/</link>
+					<comments>https://stepansuvorov.com/blog/2013/10/console-plus-plus/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 29 Oct 2013 08:33:50 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[browser]]></category>
+		<category><![CDATA[console]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1249</guid>
+
+					<description><![CDATA[I&#8217;ve created userscript to extend browser console. Basic options: own console object with all methods to prevent errors in old browsers using console without context (we can pass console.log as a callback, and no &#8220;Illegal invocation&#8221; error will be shown) &#8230; <a href="https://stepansuvorov.com/blog/2013/10/console-plus-plus/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>I&#8217;ve created userscript to extend browser console.</p>
+<p>Basic options:</p>
+<ul>
+<li>own <strong>console object</strong> with all methods to prevent errors in <strong>old browsers</strong></li>
+<li>using console without context (we can pass <strong>console.log</strong> as a <strong>callback</strong>, and no &#8220;Illegal invocation&#8221; error will be shown)</li>
+<li><strong>production param</strong> (debug information only for dev environment )</li>
+<li><strong>time</strong> and <strong>timeEnd</strong> methods (if they are not exist)</li>
+<li><strong>log</strong> alias for <strong>console.log</strong></li>
+</ul>
+<p><a title="userscripts.org" href="http://userscripts-mirror.org/scripts/show/181073">Download/install console++</a>.</p>
+<p>sources of inspiration:</p>
+<ul>
+<li>https://github.com/theshock/console-cap</li>
+<li><a title="paulirish" href="http://www.paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/">Log() &#8211; a Lightweight Wrapper for console.log</a></li>
+<li>http://habrahabr.ru/post/116852/</li>
+</ul>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/10/console-plus-plus/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Возможности консоли браузера</title>
+		<link>https://stepansuvorov.com/blog/2013/04/%d0%b2%d0%be%d0%b7%d0%bc%d0%be%d0%b6%d0%bd%d0%be%d1%81%d1%82%d0%b8-%d0%ba%d0%be%d0%bd%d1%81%d0%be%d0%bb%d0%b8-%d0%b1%d1%80%d0%b0%d1%83%d0%b7%d0%b5%d1%80%d0%b0/</link>
+					<comments>https://stepansuvorov.com/blog/2013/04/%d0%b2%d0%be%d0%b7%d0%bc%d0%be%d0%b6%d0%bd%d0%be%d1%81%d1%82%d0%b8-%d0%ba%d0%be%d0%bd%d1%81%d0%be%d0%bb%d0%b8-%d0%b1%d1%80%d0%b0%d1%83%d0%b7%d0%b5%d1%80%d0%b0/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 01 Apr 2013 18:17:42 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[browser]]></category>
+		<category><![CDATA[chrome]]></category>
+		<category><![CDATA[console]]></category>
+		<category><![CDATA[Firefox]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=928</guid>
+
+					<description><![CDATA[Речь пойдет о начинке встроенного объекта console в браузерах Chrome и Firefox. Начнем с простого &#8211; метод console.log(). Базовый синтаксис: console.log(obj1 [, obj2, ..., objN); console.log(msg [, subst1, ..., substN); Если с первым вариантом использования все понятно, то со вторым &#8230; <a href="https://stepansuvorov.com/blog/2013/04/%d0%b2%d0%be%d0%b7%d0%bc%d0%be%d0%b6%d0%bd%d0%be%d1%81%d1%82%d0%b8-%d0%ba%d0%be%d0%bd%d1%81%d0%be%d0%bb%d0%b8-%d0%b1%d1%80%d0%b0%d1%83%d0%b7%d0%b5%d1%80%d0%b0/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Речь пойдет о начинке встроенного объекта <strong>console</strong> в браузерах <strong>Chrome</strong> и <strong>Firefox</strong>.</p>
+<p>Начнем с простого &#8211; метод <strong>console.log</strong>(). Базовый синтаксис:</p>
+<pre>console.log(obj1 [, obj2, ..., objN);
+console.log(msg [, subst1, ..., substN);</pre>
+<p>Если с первым вариантом использования все понятно, то со вторым следует разобраться: в данном случае мы можем использовать шаблон первым параметром, в который будут подставлены переменные, пример:</p>
+<pre>console.log("%s is %d years old.", "Bob", 42)</pre>
+<p>и выведет оно, как вы уже догадались: <em>Bob is 42 years old.</em></p>
+<p>Для подстановки можно использовать следующие подшаблоны:</p>
+<ul>
+<li><strong>%o</strong> &#8211; для ссылки на объект</li>
+<li><strong>%d</strong>, <strong>%i</strong> &#8211; целые чила (integer)</li>
+<li><strong>%s</strong> &#8211; строки</li>
+<li><strong>%f</strong> &#8211; числа с плавающей запятой (float)</li>
+</ul>
+<p><span id="more-928"></span></p>
+<p>Далее перейдем к схожим методам, а именно <strong>console.info()</strong>, <strong>console.warn()</strong>, <strong>console.error()</strong>,<strong> console.debug()</strong>. Все они работают аналогично <strong>console.log()</strong>, а метод <strong>console.debug()</strong> вообще является его алисом(deprecated). Отличие по сути только в варианте вывода(примеры для FireFox и Chrome):</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-955" title="consol_output" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/04/consol_output.png" alt="" width="154" height="116" /><img decoding="async" loading="lazy" class="alignnone size-full wp-image-956" title="console_output_chrome" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_output_chrome.png" alt="" width="123" height="87" /></p>
+<p>&nbsp;</p>
+<p>Иногда, когда объект вложеный удобнее использовать не <strong>console.log()</strong>, а <strong>console.dir()</strong>, который выведет все в виде структуры:</p>
+<pre>console.log(location)
+console.dir(location)</pre>
+<p><img decoding="async" loading="lazy" class="alignnone size-medium wp-image-957" title="console_dir" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_dir-300x125.png" alt="" width="300" height="125" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_dir-300x125.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_dir-500x209.png 500w, https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_dir.png 534w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>чтобы вывести красиво HTML/XML можно использовать <strong>console.dirxml()</strong>:</p>
+<pre>console.dirxml(document.body)</pre>
+<p>правда, если говорить о <strong>Chrome</strong>, то там объединили понятие <strong>dir/dirxml</strong> и <strong>log</strong> и для сложных обектов со вложенными свойствами используют <strong>dir<strong>/dirxml</strong></strong> вместо <strong>log</strong> по умолчанию.</p>
+<p>Если в консоль выводится много информации, то будет полезно разделять информацию по группам исползуя метод <strong>console.group() </strong>плюс вспомогательные <strong>console.groupEnd()</strong> и <strong>console.groupCollapsed()</strong>:</p>
+<pre>console.clear()
+console.group("module A")
+console.log('a')
+console.log('a')
+console.log('a')
+console.group("nested module B")
+console.log('b')
+console.log('b')
+console.log('b')
+console.groupEnd()
+console.groupCollapsed("nested collapsed module C")
+console.log('c')
+console.log('c')
+console.log('c')
+console.groupEnd()
+console.groupEnd()
+console.group("module D")
+console.log('d')
+console.log('d')
+console.log('d')
+console.groupEnd()</pre>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-958" title="console_groups" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_groups.png" alt="" width="259" height="260" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_groups.png 259w, https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_groups-150x150.png 150w" sizes="(max-width: 259px) 100vw, 259px" /></p>
+<p>Лично мне кажется, что группировка реализована не совсем удобно: нельзя записывать данные в несколько групп паралельно, т.е. пока одна группа не закрыта &#8211; мы пишем в нее.</p>
+<p>Для оценки времени выполнения чего-либо существует удобный метод <strong>console.time()</strong> и <strong>console.timeEnd()</strong>, синтаксис:</p>
+<pre>console.time(timerName);</pre>
+<pre>console.timeEnd(timerName);</pre>
+<p>Пример:</p>
+<pre>console.time("timer1")
+console.time("timer2")
+var i = 10000, j = 0;
+while(i--){ j++}
+console.timeEnd("timer1")
+while(j--){}
+console.timeEnd("timer2")</pre>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-959" title="console_time" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_time.png" alt="" width="198" height="41" /></p>
+<p>Есть также в консоли и метод для трассировки вызова &#8211; <strong>console.trace()</strong>. Наиболее полезное примененеие ему &#8211; вывод полного стека вызовов при возникновении ошибки &#8211; что делает браузер по умолчанию, но всеже, если мы переопределили стандартное поведение браузера, нам очень поможет этот метод:</p>
+<pre>(function foo() {
+  function bar() { console.trace(); };
+  bar();
+})()</pre>
+<p>К сожалению, в FireBug это не работает, а Chrome выдал следующее:</p>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-960" title="console_trace" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/04/console_trace.png" alt="" width="276" height="95" /></p>
+<p>Через консоль еще можно проверять ожидаемые значения используя метод <strong>console.assert()</strong>, который в случае невыполнения условия внутри вернет <strong>console.error()</strong>.</p>
+<p>Для работы с <strong>DOM</strong> есть ряд полезных хелперов:</p>
+<ul>
+<li><strong>$(), $$()</strong> &#8211; краткая запись для document.querySelector</li>
+<li><strong>$x()</strong> &#8211; получение элемента по XPath</li>
+<li><strong>$0</strong> &#8211; выбранный инспектором элемент</li>
+<li><strong>$1</strong> &#8211; предыдущий выбранный инспектором элемент</li>
+<li><strong>$n()</strong> &#8211; показать один из пяти последних выбранных элементов (параметром идет номер элемента) &#8211; работает только для <strong>FireBug</strong></li>
+</ul>
+<p>Другие полезные хелперы:</p>
+<ul>
+<li><strong>keys()</strong> &#8211; выводит ключи объекта</li>
+<li><strong>values()</strong> &#8211; выводи значения объекта</li>
+<li><strong>inspect()</strong> &#8211; открывает объект для инспектирования</li>
+<li><strong>clear()</strong> &#8211; очищает консоль</li>
+</ul>
+<p>Ну и конечно самый главный метод <strong>help()</strong>, плохо что его так и не реализовали в <strong>Chrome</strong>, но в <strong>FireBug</strong> он работает отлично, рекомендую.</p>
+<p>&nbsp;</p>
+<p>Ну и еще как <strong>бонус</strong>, для тех, кто долистал этот посто до конца. В <strong>FireBug</strong> есть интересный синтаксис работы с переменными из замыкания используя &#8220;<em>%</em>&#8220;:</p>
+<pre>function Person(name)
+{
+    this.introduce = function()
+    {
+        return 'Hello, my name is ' + name;
+    }
+}
+
+var someone = new Person("Arthur");
+someone.%name; // выведет "Arthur"</pre>
+<p>&nbsp;</p>
+<p>Советую следить за обновлениями набора методов, так как бразуры постоянно совершенствуются и добавляют новые интересные плюшки.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/04/%d0%b2%d0%be%d0%b7%d0%bc%d0%be%d0%b6%d0%bd%d0%be%d1%81%d1%82%d0%b8-%d0%ba%d0%be%d0%bd%d1%81%d0%be%d0%bb%d0%b8-%d0%b1%d1%80%d0%b0%d1%83%d0%b7%d0%b5%d1%80%d0%b0/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

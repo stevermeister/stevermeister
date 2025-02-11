@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	Comments on: Совсем немного о многопроцессовости в PHP	</title>
+	<atom:link href="https://stepansuvorov.com/blog/2012/07/%d1%81%d0%be%d0%b2%d1%81%d0%b5%d0%bc-%d0%bd%d0%b5%d0%bc%d0%bd%d0%be%d0%b3%d0%be-%d0%be-%d0%bc%d0%bd%d0%be%d0%b3%d0%be%d0%bf%d1%80%d0%be%d1%86%d0%b5%d1%81%d1%81%d0%be%d0%b2%d0%be%d1%81%d1%82%d0%b8/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog/2012/07/%d1%81%d0%be%d0%b2%d1%81%d0%b5%d0%bc-%d0%bd%d0%b5%d0%bc%d0%bd%d0%be%d0%b3%d0%be-%d0%be-%d0%bc%d0%bd%d0%be%d0%b3%d0%be%d0%bf%d1%80%d0%be%d1%86%d0%b5%d1%81%d1%81%d0%be%d0%b2%d0%be%d1%81%d1%82%d0%b8/</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 09 Aug 2012 08:55:08 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>
+		By: admin		</title>
+		<link>https://stepansuvorov.com/blog/2012/07/%d1%81%d0%be%d0%b2%d1%81%d0%b5%d0%bc-%d0%bd%d0%b5%d0%bc%d0%bd%d0%be%d0%b3%d0%be-%d0%be-%d0%bc%d0%bd%d0%be%d0%b3%d0%be%d0%bf%d1%80%d0%be%d1%86%d0%b5%d1%81%d1%81%d0%be%d0%b2%d0%be%d1%81%d1%82%d0%b8/#comment-200</link>
+
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<pubDate>Thu, 09 Aug 2012 08:55:08 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=265#comment-200</guid>
+
+					<description><![CDATA[In reply to &lt;a href=&quot;https://stepansuvorov.com/blog/2012/07/%d1%81%d0%be%d0%b2%d1%81%d0%b5%d0%bc-%d0%bd%d0%b5%d0%bc%d0%bd%d0%be%d0%b3%d0%be-%d0%be-%d0%bc%d0%bd%d0%be%d0%b3%d0%be%d0%bf%d1%80%d0%be%d1%86%d0%b5%d1%81%d1%81%d0%be%d0%b2%d0%be%d1%81%d1%82%d0%b8/#comment-199&quot;&gt;Shturman&lt;/a&gt;.
+
+exec - конечно можно, но это будет уже не php.
+крон - ну тоже нормальная альтернатива, только его не применишь, когда вызовы нужно делать очень часто.]]></description>
+			<content:encoded><![CDATA[<p>In reply to <a href="https://stepansuvorov.com/blog/2012/07/%d1%81%d0%be%d0%b2%d1%81%d0%b5%d0%bc-%d0%bd%d0%b5%d0%bc%d0%bd%d0%be%d0%b3%d0%be-%d0%be-%d0%bc%d0%bd%d0%be%d0%b3%d0%be%d0%bf%d1%80%d0%be%d1%86%d0%b5%d1%81%d1%81%d0%be%d0%b2%d0%be%d1%81%d1%82%d0%b8/#comment-199">Shturman</a>.</p>
+<p>exec &#8211; конечно можно, но это будет уже не php.<br />
+крон &#8211; ну тоже нормальная альтернатива, только его не применишь, когда вызовы нужно делать очень часто.</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		By: Shturman		</title>
+		<link>https://stepansuvorov.com/blog/2012/07/%d1%81%d0%be%d0%b2%d1%81%d0%b5%d0%bc-%d0%bd%d0%b5%d0%bc%d0%bd%d0%be%d0%b3%d0%be-%d0%be-%d0%bc%d0%bd%d0%be%d0%b3%d0%be%d0%bf%d1%80%d0%be%d1%86%d0%b5%d1%81%d1%81%d0%be%d0%b2%d0%be%d1%81%d1%82%d0%b8/#comment-199</link>
+
+		<dc:creator><![CDATA[Shturman]]></dc:creator>
+		<pubDate>Thu, 09 Aug 2012 07:17:42 +0000</pubDate>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=265#comment-199</guid>
+
+					<description><![CDATA[Можно без всяких дополнительных классов запускать процессы через, exec. Правда распарарлелить работу скрипта который обрабатывается при запросе к апачу так наврядли получится, но, к  примеру, у меня крон менеджер запускает все свои задачи в фон, паралельным выполнением именно таким образом.]]></description>
+			<content:encoded><![CDATA[<p>Можно без всяких дополнительных классов запускать процессы через, exec. Правда распарарлелить работу скрипта который обрабатывается при запросе к апачу так наврядли получится, но, к  примеру, у меня крон менеджер запускает все свои задачи в фон, паралельным выполнением именно таким образом.</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Greasemonkey &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/greasemonkey/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 11 Aug 2012 10:07:08 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Избавляемся от Facebook рекламы c Greasemonkey</title>
+		<link>https://stepansuvorov.com/blog/2012/08/%d0%b8%d0%b7%d0%b1%d0%b0%d0%b2%d0%bb%d1%8f%d0%b5%d0%bc%d1%81%d1%8f-%d0%be%d1%82-facebook-%d1%80%d0%b5%d0%ba%d0%bb%d0%b0%d0%bc%d1%8b-c-greasemonkey/</link>
+					<comments>https://stepansuvorov.com/blog/2012/08/%d0%b8%d0%b7%d0%b1%d0%b0%d0%b2%d0%bb%d1%8f%d0%b5%d0%bc%d1%81%d1%8f-%d0%be%d1%82-facebook-%d1%80%d0%b5%d0%ba%d0%bb%d0%b0%d0%bc%d1%8b-c-greasemonkey/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 11 Aug 2012 10:07:08 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[facebook]]></category>
+		<category><![CDATA[Greasemonkey]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=419</guid>
+
+					<description><![CDATA[Для тех, кто может не знает, расскажу что для FF есть прекрасный аддон Greasemonkey, который позволят выполнять дополнительный javascript для страницы, тем самым позволяя ее изменять под наши нужды. После того как вы поставите это дополнение в браузер, его необходимо &#8230; <a href="https://stepansuvorov.com/blog/2012/08/%d0%b8%d0%b7%d0%b1%d0%b0%d0%b2%d0%bb%d1%8f%d0%b5%d0%bc%d1%81%d1%8f-%d0%be%d1%82-facebook-%d1%80%d0%b5%d0%ba%d0%bb%d0%b0%d0%bc%d1%8b-c-greasemonkey/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-medium wp-image-421" title="facebookCleaner" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/08/facebookCleaner-300x300.png" alt="" width="163" height="163" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2012/08/facebookCleaner-300x300.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2012/08/facebookCleaner-150x150.png 150w, https://stepansuvorov.com/blog/wp-content/uploads/2012/08/facebookCleaner.png 340w" sizes="(max-width: 163px) 100vw, 163px" /></p>
+<p>Для тех, кто может не знает, расскажу что для FF есть прекрасный аддон <a href="https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/">Greasemonkey</a>, который позволят выполнять дополнительный javascript для страницы, тем самым позволяя ее изменять под наши нужды.</p>
+<p><span id="more-419"></span>После того как вы поставите это дополнение в браузер, его необходимо будет активировать, и создать новый скрипт ( New User Script ). Появится следующее окошко:</p>
+<p><img decoding="async" fetchpriority="high" class="alignnone size-medium wp-image-420" title="new_user_script" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/08/new_user_script-300x247.png" alt="" width="300" height="247" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2012/08/new_user_script-300x247.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2012/08/new_user_script-363x300.png 363w, https://stepansuvorov.com/blog/wp-content/uploads/2012/08/new_user_script.png 606w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>где есть поля:</p>
+<ul>
+<li>name &#8211; имя вашего скрипта</li>
+<li>namespace &#8211; не обязательно</li>
+<li>description &#8211; тоже не обязательно, но лучше написать</li>
+<li>Includes &#8211; очень важное поле в нем нужно указать сайты (можно по маске), на которых мы хотим чтобы запускался наш скрипт(в нашем случае это будет http://www.facebook.com/* )</li>
+<li>Excludes &#8211; противоположное предыдущему</li>
+</ul>
+<p>После заполнение этого диалога должен открыться редактор текста, в котором мы и создадим наше дополнение.</p>
+<p>Пишем следующий код(закомментированные строчки инструкции не трогаем):</p>
+<pre>var element = document.getElementById('pagelet_side_ads');
+if(element)element.parentNode.removeChild(element);
+
+var element = document.getElementById('pagelet_ego_pane_w');
+if(element)element.parentNode.removeChild(element);</pre>
+<p>Этими 4мя строчками мы удаляем 2 блока рекламы. Сохраняем текст. Перегружаем страничку &#8211; должно работать, если нет &#8211; пишем комментарий.</p>
+<p>Так же стоит отметить что для greasemonkey существуюет множество уже готовых скриптов, которые можно найти на сайте <a href="http://userscripts.org">userscripts.org</a>, а вот ссылка на разобранный только что пример &#8211; <a href="http://userscripts.org/scripts/show/140668">facebookClean</a>.</p>
+<p>Важная деталь для тех, кто будет создавать скрипты отдельно от greasemonkey, а потом пытаться их загрузить: файл необходимо называть расширением не просто .js, а <strong>.user.js</strong> &#8211; только в этом случае при открытии браузером он будет принят как скрипт greasemonkey.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/08/%d0%b8%d0%b7%d0%b1%d0%b0%d0%b2%d0%bb%d1%8f%d0%b5%d0%bc%d1%81%d1%8f-%d0%be%d1%82-facebook-%d1%80%d0%b5%d0%ba%d0%bb%d0%b0%d0%bc%d1%8b-c-greasemonkey/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

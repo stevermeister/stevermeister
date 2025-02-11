@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>scope &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/scope/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sun, 22 Jan 2017 08:51:51 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>AngularJS: Синтаксис Controller as</title>
+		<link>https://stepansuvorov.com/blog/2015/09/angularjs-%d1%81%d0%b8%d0%bd%d1%82%d0%b0%d0%ba%d1%81%d0%b8%d1%81-controller-as/</link>
+					<comments>https://stepansuvorov.com/blog/2015/09/angularjs-%d1%81%d0%b8%d0%bd%d1%82%d0%b0%d0%ba%d1%81%d0%b8%d1%81-controller-as/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 16 Sep 2015 20:15:58 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[ng-controller]]></category>
+		<category><![CDATA[scope]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2837</guid>
+
+					<description><![CDATA[Решил выложить пример кода &#8220;Controller as&#8221; в песочнице, чтобы можно было поиграться и понять, что нельзя миксовать 2 стиля написания контроллеров: либо $scope и писать просто переменные, либо this и делать синтаксис Controller as.]]></description>
+										<content:encoded><![CDATA[<p>Решил выложить <a href="http://plnkr.co/edit/B9YOb3?p=preview">пример кода &#8220;Controller as&#8221; в песочнице</a>, чтобы можно было поиграться и понять, что нельзя миксовать 2 стиля написания контроллеров: либо <strong>$scope</strong> и писать просто переменные, либо <strong>this</strong> и делать синтаксис <strong>Controller as</strong>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/09/angularjs-%d1%81%d0%b8%d0%bd%d1%82%d0%b0%d0%ba%d1%81%d0%b8%d1%81-controller-as/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Snippet to visualise amount of watchers for each AngularJS scope</title>
+		<link>https://stepansuvorov.com/blog/2015/03/snippet-to-visualise-amount-of-watchers-for-each-angularjs-scope/</link>
+					<comments>https://stepansuvorov.com/blog/2015/03/snippet-to-visualise-amount-of-watchers-for-each-angularjs-scope/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 14 Mar 2015 21:05:51 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[scope]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2434</guid>
+
+					<description><![CDATA[I&#8217;ve created snippet to analyse how many watchers you have in your web app and on which elements they are placed. Actually I just extended this piece of code and add overlay element visualisation, so now we have (gist): [javascript] &#8230; <a href="https://stepansuvorov.com/blog/2015/03/snippet-to-visualise-amount-of-watchers-for-each-angularjs-scope/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" fetchpriority="high" class="alignnone size-full wp-image-2455" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/03/Screenshot-2015-03-14-13.48.29.png" alt="watchers-visualisation" width="428" height="355" /></p>
+<p>I&#8217;ve created snippet to analyse how many watchers you have in your web app and on which elements they are placed.</p>
+<p><span id="more-2434"></span></p>
+<p>Actually I just extended this <a title="http://ng.malsup.com/#!/counting-watchers" href="http://ng.malsup.com/#!/counting-watchers">piece of code</a> and add overlay element visualisation, so now we have (<a title="https://gist.github.com/stevermeister/b161d31b0a41da78eafa" href="https://gist.github.com/stevermeister/b161d31b0a41da78eafa">gist</a>):</p>
+<p>[javascript]<br />
+(function visualizeAngularWatchers() {<br />
+  var i, data, scope,<br />
+  count = 0,<br />
+  all = document.all,<br />
+  len = all.length,<br />
+  test = {},<br />
+  overlayMain = angular.element(&#8216;&lt;div/&gt;&#8217;);<br />
+  overlayMain.css({&#8216;z-index&#8217;: 9999});<br />
+  angular.element(document.body).append(overlayMain);</p>
+<p>  for (i = 0; i &lt; len; i++) {<br />
+    data = angular.element(all[i]).data();<br />
+    scope = data.$scope || data.$isolateScope;<br />
+    if (scope &amp;&amp; scope.$$watchers) {<br />
+      if ( !test[ scope.$id ] ) {<br />
+        test[ scope.$id ] = true;<br />
+        count += scope.$$watchers.length;<br />
+        createOverlay(angular.element(all[i]), scope.$$watchers.length)<br />
+      }<br />
+    }<br />
+  }</p>
+<p>  function createOverlay(element, amount){<br />
+        var persent = Math.pow(2, amount),<br />
+        over = angular.element(&#8216;&lt;div style=&quot;background:rgba(180,120,0,.&#8217; + persent + &#8216;); position:absolute;&quot; /&gt;&#8217;);<br />
+        over.width(element.width());<br />
+        over.height(element.height());<br />
+        over.offset({ top: element.offset().top, left: element.offset().left})<br />
+        overlayMain.append(over);<br />
+  }</p>
+<p>  return count;<br />
+})();<br />
+[/javascript]</p>
+<p>and you can run it in console or create code-snippet for Chrome.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/03/snippet-to-visualise-amount-of-watchers-for-each-angularjs-scope/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Наследование scope в AngularJS</title>
+		<link>https://stepansuvorov.com/blog/2014/09/%d0%bd%d0%b0%d1%81%d0%bb%d0%b5%d0%b4%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-scope-%d0%b2-angularjs/</link>
+					<comments>https://stepansuvorov.com/blog/2014/09/%d0%bd%d0%b0%d1%81%d0%bb%d0%b5%d0%b4%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-scope-%d0%b2-angularjs/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 10 Sep 2014 20:44:02 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[prototype]]></category>
+		<category><![CDATA[scope]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1892</guid>
+
+					<description><![CDATA[Думал накидать статью на эту тему, а потом внезапно обнаружил очень хороший материал на angular-wiki и перевод на хабре, ну и обсуждение на стеке. &#160;]]></description>
+										<content:encoded><![CDATA[<p>Думал накидать статью на эту тему, а потом внезапно обнаружил очень <a title="Understanding Scopes" href="https://github.com/angular/angular.js/wiki/Understanding-Scopes">хороший материал</a> на angular-wiki и <a href="http://habrahabr.ru/post/182670/">перевод</a> на хабре, ну и <a title="stackoverflow.com" href="http://stackoverflow.com/questions/14049480/what-are-the-nuances-of-scope-prototypal-prototypical-inheritance-in-angularjs">обсуждение</a> на стеке.</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/09/%d0%bd%d0%b0%d1%81%d0%bb%d0%b5%d0%b4%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-scope-%d0%b2-angularjs/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Передача данных между сущностями AngularJS</title>
+		<link>https://stepansuvorov.com/blog/2014/09/angularjs-data-transfer/</link>
+					<comments>https://stepansuvorov.com/blog/2014/09/angularjs-data-transfer/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 06 Sep 2014 08:22:58 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[scope]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1898</guid>
+
+					<description><![CDATA[Один из самых распространенных вопросов по AngularJS &#8211; передача данных от одной сущности другой. На самом деле вариантов не так много. Попробуем их все рассмотреть. Для начала определимся какими типами сущностей будем оперировать: это будет контроллер, сервис и представление. Из &#8230; <a href="https://stepansuvorov.com/blog/2014/09/angularjs-data-transfer/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Один из самых распространенных вопросов по <strong>AngularJS</strong> &#8211; передача данных от одной сущности другой. На самом деле вариантов не так много. Попробуем их все рассмотреть.</p>
+<p><span id="more-1898"></span>Для начала определимся какими типами сущностей будем оперировать: это будет <strong>контроллер</strong>, <strong>сервис</strong> и <strong>представление</strong>.</p>
+<h2>Из контроллера в представление</h2>
+<p>Посредством<strong> $scope</strong></p>
+<p>[javascript]<br />
+$scope.name = &#8216;Bob&#8217;;<br />
+[/javascript]</p>
+<p>либо для нового синтаксиса контроллера через <strong>this</strong> в контроллере:</p>
+<p>[javascript]<br />
+this.name = &#8216;Bob&#8217;;<br />
+[/javascript]</p>
+<p>а в шаблоне представления получим через переменную:</p>
+<p>[html]<br />
+&lt;h1&gt;Hi, {{name}}&lt;/h1&gt;<br />
+[/html]</p>
+<p>для нового синтаксиса:</p>
+<p>[html]<br />
+&lt;div ng-controller=&quot;userController as user&quot;&gt;<br />
+&lt;h1&gt;Hi, {{user.name}}&lt;/h1&gt;<br />
+&lt;/div&gt;<br />
+[/html]</p>
+<p>Код примера <a title="jsfiddle.net" href="http://jsfiddle.net/STEVER/8p31cgge/">тут</a>.</p>
+<h2>Из представления в контроллер</h2>
+<p>Для этого мы используем<strong> two-way data binding</strong> с помощью директив <strong>ng-bind</strong> и <strong>ng-model</strong> в представлении:</p>
+<p>[html]<br />
+&lt;input ng-model=&quot;name.first&quot; /&gt;<br />
+[/html]</p>
+<p>теперь при изменении значения поля ввода будет изменяться <strong>name.first</strong> значение в контроллере.</p>
+<p>Пример <a title="jsfiddle.net" href="http://jsfiddle.net/STEVER/q0vfaph5/">тут</a>.</p>
+<h2>Из представления в представление</h2>
+<p>Фактически осуществляется посредством контроллера (рассмотрено выше), но переменную-свойство в контроллере можем не создавать: она будет создана автоматически. Итого имеем связь представление &#8211; контроллер &#8211; представление. Важно, чтобы 2 элемента представления, которые собираемся синхронизировать, находились в рамках одного контроллера.</p>
+<p>[html]<br />
+&lt;div ng-controller=&quot;userController&quot;&gt;;<br />
+    &lt;input ng-model&quot;name.first&quot;&gt;;<br />
+    &lt;textarea ng-model=&quot;name.first&quot;&gt;;<br />
+&lt;/div&gt;<br />
+[/html]</p>
+<p>Пример <a title="jsfiddle.net" href="http://jsfiddle.net/STEVER/eyxj1nhf/">тут</a>.</p>
+<h2>Из контроллера в сервис</h2>
+<p>тут все просто: инжектим сервис в контроллер и задаем значение свойству, либо вызываем сеттер-метод (что ИМХО более верно):</p>
+<p>[javascript]<br />
+app.controller(&#8216;userController&#8217;, function (nameStorage) {<br />
+    nameStorage.setName(&#8216;Alice&#8217;);<br />
+    alert(nameStorage.getName());<br />
+})<br />
+.service(&#8216;nameStorage&#8217;, function () {<br />
+   var _name = &#8216;Bob&#8217;;<br />
+   return {<br />
+       setName: function (name) {<br />
+         _name = name;<br />
+       },<br />
+      getName: function () {<br />
+         return _name;<br />
+      }<br />
+}<br />
+});<br />
+[/javascript]</p>
+<p>Пример <a title="jsfiddle.net" href="http://jsfiddle.net/STEVER/fcLgt7co/">тут</a>.</p>
+<h2>Из сервиса в контроллер</h2>
+<p>Мы не можем изменять данные контроллера в сервисе, но мы можем &#8220;залинковать&#8221; объект-свойство сервиса на свойство контроллера, тогда в случае изменений внутри этого объекта &#8211; данные контроллера также будут обновлены:</p>
+<p>[javascript]<br />
+app.controller(&#8216;userController&#8217;, function ($scope, nameStorage) {<br />
+    $scope.name = nameStorage.name;<br />
+    alert($scope.name.first + &#8216; &#8216; + $scope.name.last);<br />
+    setTimeout(function () {<br />
+        alert($scope.name.first + &#8216; &#8216; + $scope.name.last);<br />
+    });<br />
+})<br />
+    .service(&#8216;nameStorage&#8217;, function () {<br />
+        this.name = {<br />
+            first: &#8216;Alice&#8217;,<br />
+            last: &#8216;Green&#8217;<br />
+        };</p>
+<p>    //just to inimitate sevice change<br />
+    var self = this;<br />
+    setTimeout(function () {<br />
+        self.name.first = &#8216;Bob&#8217;;<br />
+    });<br />
+});<br />
+[/javascript]</p>
+<p>из-за того, что нужно было имитировать изменения сервиса, пример получился не самый простой. Вот <a title="jsfiddle.net" href="http://jsfiddle.net/STEVER/cL00127n/">полный код</a> примера, надеюсь с ним будет проще.</p>
+<h2>Из сервиса в представление</h2>
+<p>Осуществляется посредствам контроллера, то есть сервис &#8211; контроллер &#8211; представление.</p>
+<p>[javascript]<br />
+app.controller(&#8216;userController&#8217;, function ($scope, nameStorage) {<br />
+    $scope.name = nameStorage.name;<br />
+})<br />
+    .service(&#8216;nameStorage&#8217;, function ($timeout) {<br />
+    this.name = {<br />
+        first: &#8216;Alice&#8217;,<br />
+        last: &#8216;Green&#8217;<br />
+    };</p>
+<p>    //just to inimitate sevice change<br />
+    var self = this;<br />
+    $timeout(function () {<br />
+        self.name.first = &#8216;Bob&#8217;;<br />
+    }, 2000);<br />
+});<br />
+[/javascript]</p>
+<p>и представление соответственно:</p>
+<p>[html]<br />
+&lt;div ng-controller=&quot;userController&quot;&gt;<br />
+    &lt;h1&gt;{{name.first + &#8216; &#8216; + name.last}}&lt;/h1&gt;<br />
+&lt;/div&gt;<br />
+[/html]</p>
+<p>Полный пример <a title="jsfiddle.net" href="http://jsfiddle.net/STEVER/wmhg5qp2/">тут</a>.</p>
+<h2>Из представления в сервис</h2>
+<p>Аналогично предыдущему: представление &#8211; контроллер &#8211; сервис.</p>
+<p><a title="jsfiddle.net" href="http://jsfiddle.net/STEVER/egs9c9kc/">Пример</a>.</p>
+<h2>Из сервиса в сервис</h2>
+<p>Один сервис инжектит другой и там вызывается сеттер-метод:</p>
+<p>[javascript]<br />
+app<br />
+.controller(&#8216;userController&#8217;, function ($scope, userStorage) {</p>
+<p>})<br />
+.service(&#8216;nameStorage&#8217;, function () {<br />
+    this.name = {<br />
+        first: &#8216;Alice&#8217;,<br />
+        last: &#8216;Green&#8217;<br />
+    };<br />
+})<br />
+.service(&#8216;userStorage&#8217;, function (nameStorage) {<br />
+    nameStorage.name = {<br />
+        first: &#8216;Bob&#8217;,<br />
+        last: &#8216;Brown&#8217;<br />
+    };<br />
+});<br />
+[/javascript]</p>
+<p><a title="jsfiddle.net" href="http://jsfiddle.net/STEVER/x0Lwgxs2/">Пример</a>.</p>
+<h2>Из контроллера в контроллер</h2>
+<p>Самый интересный случай, когда в зависимости от специфики может быть решен различными способами. Возможные варианты:</p>
+<ul>
+<li>из родительского контроллера в дочерний</li>
+<li>и дочернего в родительский</li>
+<li>из контроллера в контроллер, когда оба находятся на одном уровне (либо в разных ветках иерархии)</li>
+</ul>
+<p>Рассмотрим каждый отдельно.</p>
+<h2>Из родительского контроллера в дочерний</h2>
+<p>тут также могут быть 2 случая:</p>
+<ul>
+<li>открытый scope дочернего контроллера</li>
+<li>изолированный scope дочернего контроллера</li>
+</ul>
+<p>В случае с открытым &#8211; все просто: дочерний контроллер наследует свойства scope родителя по умолчанию:</p>
+<p>[html]<br />
+&lt;div ng-controller=&quot;userController&quot;&gt;<br />
+    &lt;div ng-controller=&quot;nameController&quot;&gt;<br />
+    &lt;/div&gt;<br />
+&lt;/div&gt;<br />
+[/html]</p>
+<p>&#8211; как видим <em>nameController</em> является дочерним по отношению к <em>userController</em>, поэтому мы легко можем получить доступ к свойствам родителя:</p>
+<p>[javascript]<br />
+app<br />
+.controller(&#8216;userController&#8217;, function ($scope) {<br />
+    $scope.name = &#8216;Bob&#8217;;<br />
+    setTimeout(function(){<br />
+      $scope.name = &#8216;Alice&#8217;;<br />
+    });<br />
+})<br />
+.controller(&#8216;nameController&#8217;, function ($scope) {<br />
+    alert($scope.name);<br />
+    setTimeout(function(){<br />
+      alert($scope.name);<br />
+    });<br />
+});<br />
+[/javascript]</p>
+<p><a title="jsfiddle.net" href="http://jsfiddle.net/STEVER/spskhL7o/">Пример</a>.</p>
+<p>С случае с изолированным scope(который мы можем получить при создании директивы) нам необходимо &#8220;залинковать&#8221; необходимые свойства родительского в дочерний. Представление будет выглядеть следующим образом:</p>
+<p>[html]<br />
+&lt;div ng-controller=&quot;userController&quot;&gt;<br />
+    &lt;div user name=&quot;{{name}}&quot;&gt;&lt;/div&gt;<br />
+&lt;/div&gt;<br />
+[/html]</p>
+<p>а код директивы и контроллера:</p>
+<p>[javascript]<br />
+var app = angular.module(&#8216;foo&#8217;, [])</p>
+<p>app<br />
+.controller(&#8216;userController&#8217;, function ($scope) {<br />
+    $scope.name = &#8216;Bob&#8217;;<br />
+    setTimeout(function(){<br />
+      $scope.name = &#8216;Alice&#8217;;<br />
+      $scope.$apply()<br />
+    });<br />
+})<br />
+.directive(&#8216;user&#8217;, function () {<br />
+    return {<br />
+        scope: {<br />
+            name: &#8216;@&#8217;<br />
+        },<br />
+        link: function(scope){<br />
+            alert(scope.name);<br />
+            setTimeout(function(){<br />
+              alert(scope.name);<br />
+            });<br />
+        }<br />
+    };<br />
+});<br />
+[/javascript]</p>
+<p>В этом месте мы описываем связывание:</p>
+<p>[javascript]<br />
+scope: {<br />
+  name: &#8216;@&#8217;<br />
+},<br />
+[/javascript]</p>
+<p>&#8211; это означает, что <em>name</em> будет взято из атрибута директивы.</p>
+<p><a title="jsfiddle.net" href="http://jsfiddle.net/STEVER/321x8w2L/">Полный код</a>.</p>
+<h2>Из дочернего контроллера в родительский</h2>
+<p>Вот этот вариант уже поинтереснее, тут не все так просто, ибо не смотря на то, что мы можем получить доступ к свойствам scope родителя, этот доступ будет только на чтение. При попытке изменить какое-либо свойство родителя, мы лишь получим создание одноименного свойства в дочернем контроллере. Это объясняется прототипной моделью наследования scope.</p>
+<p>Возможны 2 решения:</p>
+<ul>
+<li>изменяя не само свойство, а свойство свойства (знаю, сильно запутано, но <a title="jsfiddle.net" href="http://jsfiddle.net/STEVER/xteh8gs9/">на примере</a> не должно быть сложно) То есть, вместо <em>$scope.name</em>, используем <em>$scope.name.first</em>.</li>
+<li>через специально созданный сеттер-метод в родительском котроллере. <a title="jsfiddle.net" href="http://jsfiddle.net/STEVER/7q7guwo6/">Пример</a>. :</li>
+</ul>
+<div>
+<p>[javascript]<br />
+app.controller(&#8216;userController&#8217;, function ($scope) {<br />
+    $scope.name = &#8216;Bob&#8217; ;<br />
+    alert($scope.name);<br />
+    setTimeout(function(){<br />
+      alert($scope.name);<br />
+    }, 500);</p>
+<p>    $scope.setName = function(name){<br />
+        $scope.name = name;<br />
+    };</p>
+<p>})<br />
+.controller(&#8216;nameController&#8217;, function ($scope) {<br />
+   setTimeout(function(){<br />
+      $scope.setName(&#8216;Alice&#8217;);<br />
+    });<br />
+});<br />
+[/javascript]</p>
+</div>
+<p>Случай с изолированным скоупом полностью аналогичен предыдущему (Из родительского контроллера в дочерний), только линковка будет делаться не односторонняя:</p>
+<p>[javascript]<br />
+scope: {<br />
+  name: &#8216;@&#8217;<br />
+},<br />
+[/javascript]</p>
+<p>а двунаправленная</p>
+<p>[javascript]<br />
+scope: {<br />
+  name: &#8216;=&#8217;<br />
+},<br />
+[/javascript]</p>
+<p><a title="jsfiddle.net" href="http://jsfiddle.net/STEVER/L02te727/">Полный пример</a>.</p>
+<h2>Передача данных между контроллерами находящимися на разных ветках</h2>
+<p>т.е., грубо говоря, когда мы не можем применить к ним характеристику родитель-ребенок. Решение будет заключаться в нахождении общего родительского контроллера( вплоть до<strong> $rootScope</strong> ), посредством которого и будет осуществлена передача: контроллер А &#8211; общий родительский контроллер &#8211; контроллер Б.</p>
+<p>Передача данных дочернего и родительского контроллера уже рассмотрена выше, поэтому даю просто общий <a title="jsfiddle.net" href="http://jsfiddle.net/STEVER/k22ku4kx/">пример</a>  связки (контроллерА &#8211; родительский контроллер &#8211; контроллерБ)</p>
+<p>Также передача данных между несвязанными напрямую контроллерами может происходить с помощью событий.</p>
+<h2>Общение контроллеров с помощью событий</h2>
+<p>Это на столько отдельный случай, что я решил посвятить ему целый пункт.</p>
+<p>Сразу оговорюсь: если вы еще только начинаете работать с <strong>AngularJS</strong> &#8211; <span style="text-decoration: underline;">не используйте этот подход</span>. При неумелом его использовании может получиться такой &#8220;салат&#8221; из зависимостей, что потом сами не разберетесь.</p>
+<p>Передавать события (с данными) можно посредством двух методов <strong>$scope.$emit</strong> и <strong>$scope.$broadcast</strong>. Отличие <strong>$emit</strong> от <strong>$broadcast</strong> заключается в том, что <strong>$emit</strong> передает события вверх по цепочке в скоупы всех родительских контроллеров, а <strong>$broadcast</strong> наоборот &#8211; в дочерние:</p>
+<p>[javascript]<br />
+    $scope.emitEvent = function() {<br />
+        var data  = { x: 5 };<br />
+        $scope.$emit(&#8216;myevent&#8217;, data);<br />
+    }</p>
+<p>    $scope.broadcastEvent = function() {<br />
+        var data  = { y: 10 };<br />
+        $scope.$broadcast(&#8216;myevent&#8217;, data);<br />
+    }<br />
+[/javascript]</p>
+<p>Чтобы словить событие необходимо использовать метод <strong>$scope.$on</strong>.</p>
+<p>[javascript]<br />
+$scope.$on(&#8216;myevent&#8217;, function(data){<br />
+    //&#8230;<br />
+});<br />
+[/javascript]</p>
+<p><a title="jsfiddle.net" href="http://jsfiddle.net/STEVER/hhfwco97/">Полный пример</a> работы с событиями.</p>
+<h2>Общение контроллеров с помощью специального сервиса</h2>
+<p>Существует еще один способ общения между сервисами, который напомнил <a href="https://www.facebook.com/vladimir.gomonov">Владимир Гомонов</a> ( благодарю за дополнение! ), &#8211; это использование специального сервиса, который будет инжектиться в оба контроллера и в итоге получим связку: контроллер А &#8211; сервис &#8211; контроллер Б. Взаимодействие контроллер &#8211; сервис и сервис &#8211; контроллер уже рассмотрено выше, поэтому только выложу общий <a href="http://jsfiddle.net/STEVER/9a2sLdy6/">пример</a>.</p>
+<p>Вроде бы все возможные варианты передачи данных в рамках <strong>AngularJS</strong> перечислил, если что-то забыл &#8211; пишите &#8211; добавим.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/09/angularjs-data-transfer/feed/</wfw:commentRss>
+			<slash:comments>31</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

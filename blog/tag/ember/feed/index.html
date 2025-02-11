@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>ember &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/ember/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 03 Apr 2014 19:40:14 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Очень быстрый старт с Ember.js</title>
+		<link>https://stepansuvorov.com/blog/2014/04/%d0%be%d1%87%d0%b5%d0%bd%d1%8c-%d0%b1%d1%8b%d1%81%d1%82%d1%80%d1%8b%d0%b9-%d1%81%d1%82%d0%b0%d1%80%d1%82-%d1%81-ember-js/</link>
+					<comments>https://stepansuvorov.com/blog/2014/04/%d0%be%d1%87%d0%b5%d0%bd%d1%8c-%d0%b1%d1%8b%d1%81%d1%82%d1%80%d1%8b%d0%b9-%d1%81%d1%82%d0%b0%d1%80%d1%82-%d1%81-ember-js/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Thu, 03 Apr 2014 19:40:14 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[ember]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1626</guid>
+
+					<description><![CDATA[Да, я не просто назвал пост Очень быстрый, потому что все найденные мной статьи &#8220;быстрый старт&#8221; оказывались каким-то болотом, которое уж точно не давало быстрого старта. Создадим пустой файлик index.html и пошагово создадим в нем  Ember  приложение. Шаг1 &#8211; Подключение &#8230; <a href="https://stepansuvorov.com/blog/2014/04/%d0%be%d1%87%d0%b5%d0%bd%d1%8c-%d0%b1%d1%8b%d1%81%d1%82%d1%80%d1%8b%d0%b9-%d1%81%d1%82%d0%b0%d1%80%d1%82-%d1%81-ember-js/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Да, я не просто назвал пост <strong>Очень</strong> быстрый, потому что все найденные мной статьи &#8220;быстрый старт&#8221; оказывались каким-то болотом, которое уж точно не давало быстрого старта.</p>
+<p><span id="more-1626"></span></p>
+<p>Создадим пустой файлик <em>index.html</em> и пошагово создадим в нем  <strong>Ember  </strong>приложение.</p>
+<h2>Шаг1 &#8211; Подключение</h2>
+<p>Кроме самого фреймворка Ember.js нам необходимо также подключить его зависимости &#8211; Handlabrs и jQuery, поэтому добавляем в файл:</p>
+<p>[html]<br />
+&lt;script type=&#8217;text/javascript&#8217; src=&#8217;jquery.js&#8217;&gt;&lt;/script&gt;<br />
+&lt;script type=&#8217;text/javascript&#8217; src=&quot;handlebars.js&quot;&gt;&lt;/script&gt;<br />
+&lt;script type=&#8217;text/javascript&#8217; src=&quot;ember.js&quot;&gt;&lt;/script&gt;<br />
+[/html]</p>
+<p>чтобы еще ускорить процесс можно взять сразу все с CDN, даже не скачивая:</p>
+<p>[html]<br />
+&lt;script type=&#8217;text/javascript&#8217; src=&#8217;//code.jquery.com/jquery-1.9.1.js&#8217;&gt;&lt;/script&gt;<br />
+  &lt;script type=&#8217;text/javascript&#8217; src=&quot;http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0-rc.3/handlebars.js&quot;&gt;&lt;/script&gt;<br />
+  &lt;script type=&#8217;text/javascript&#8217; src=&quot;http://cdnjs.cloudflare.com/ajax/libs/ember.js/1.0.0-rc.1/ember.js&quot;&gt;&lt;/script&gt;<br />
+[/html]</p>
+<h2>Шаг2 &#8211; Добавляем шаблоны</h2>
+<p>Шаблоны <strong>Ember.js</strong> проекта обычно хранятся в отдельных <strong>.hbs</strong> файлах, но для упрощения мы используем другой вариант &#8211; шаблоны внутри скрипт-тегов.</p>
+<p>Давайте добавим шаблон <em>application</em> в наш <em>index.html</em> файл:</p>
+<p>[html]<br />
+&lt;script type=&quot;text/x-handlebars&quot; data-template-name=&quot;application&quot;&gt;<br />
+  &lt;div class=&quot;container&quot;&gt;<br />
+    &lt;h1&gt;Ember.js быстрое погружение без подготовки&lt;/h1&gt;<br />
+    &lt;p&gt;{{message}}&lt;/p&gt;<br />
+  &lt;/div&gt;<br />
+&lt;/script&gt;<br />
+[/html]</p>
+<h2>Шаг3 &#8211; Инициализируем приложение</h2>
+<p>Просто добавим еще один script-тег с содержимым:</p>
+<p>[html]<br />
+&lt;script type=&#8217;text/javascript&#8217;&gt;<br />
+  App = Ember.Application.create({});<br />
+&lt;/script&gt;<br />
+[/html]</p>
+<p>Приложение создано,  оно уже выводит наш шаблон.</p>
+<h2>Шаг 4 &#8211; Добавляем контроллер</h2>
+<p>Ember инициализирует какждый шаблон в контекте конкретного контроллера. Для шаблона <em>application</em> это будет <em>ApplicationController</em>, который Ember создаст сам автоматически, если вы не определили его изначально. Но давайте попробуем создать свой и добавить значение для переменной шаблона <em>message</em>:</p>
+<p>[javascript]<br />
+App.ApplicationController = Ember.Controller.extend({<br />
+    message: &#8216;А эту строку выведет в шаблон&#8217;<br />
+});<br />
+[/javascript]</p>
+<p>Хочу обратить ваше внимание: в Ember все сущности создается как наследники-расширения(типа <strong>extend</strong>) с подобным синтаксисом.</p>
+<h2>Шаг 5 &#8211; Определяем роуты</h2>
+<p>Роуты (routes) &#8211; очень мощный инструмент Ember.js фреймворка, который позволяет удобно сочетать шаблоны и контроллеры в приложении. Добавим 2 новых контроллера и роуты для них:</p>
+<p>[javascript]<br />
+  App.Router.map(function() {<br />
+    this.route(&quot;index&quot;, { path: &quot;/&quot; });<br />
+    this.route(&quot;list&quot;, { path: &quot;/list&quot; });<br />
+  });</p>
+<p>  App.IndexController = Ember.Controller.extend({<br />
+    message: &#8216;Hello! See how index.hbs is evaluated in the context of IndexController&#8217;<br />
+  });</p>
+<p>  App.ListRoute = Ember.Route.extend({<br />
+    setupController: function(controller) {<br />
+      controller.set(&#8216;content&#8217;, [&#8216;angular.js&#8217;, &#8216;backbone.js&#8217;, &#8217;ember.js&#8217;]);<br />
+    }<br />
+  });<br />
+[/javascript]</p>
+<p>Чтобы это заработало необходимо добавить в наш application-шаблон переменную <strong>{{outlet}}</strong>, в которую роутер будет подгружать соответствующий шаблон в зависимости от роута. Мы также используем <strong>{{linkTo}}</strong> хелпер для навигации:</p>
+<p>[javascript]<br />
+&lt;script type=&quot;text/x-handlebars&quot; data-template-name=&quot;application&quot;&gt;<br />
+      &lt;div class=&quot;container&quot;&gt;<br />
+          &lt;h1&gt;Ember.js быстрое погружение без подготовки&lt;/h1&gt;<br />
+        &lt;p&gt;{{message}}&lt;/p&gt;<br />
+        &lt;div class=&quot;row&quot;&gt;<br />
+          {{#linkTo index class=&quot;span3 btn btn-large btn-block&quot;}}Home{{/linkTo}}<br />
+          {{#linkTo list class=&quot;span3 btn btn-large btn-block&quot;}}List{{/linkTo}}<br />
+        &lt;/div&gt;<br />
+        {{outlet}}<br />
+      &lt;/div&gt;<br />
+    &lt;/script&gt;</p>
+<p>    &lt;script type=&quot;text/x-handlebars&quot; data-template-name=&quot;list&quot;&gt;<br />
+      &lt;h3 class=&quot;demo-panel-title&quot;&gt;Это шаблон списка&lt;/h3&gt;<br />
+      &lt;ul&gt;<br />
+      {{#each item in content}}<br />
+          &lt;li&gt;{{item}}&lt;/li&gt;<br />
+      {{/each}}<br />
+       &lt;/ul&gt;<br />
+    &lt;/script&gt;</p>
+<p>    &lt;script type=&quot;text/x-handlebars&quot; data-template-name=&quot;index&quot;&gt;<br />
+      &lt;h3 class=&quot;demo-panel-title&quot;&gt;Шаблон главной страницы&lt;/h3&gt;<br />
+      &lt;p&gt;{{message}}&lt;/p&gt;<br />
+    &lt;/script&gt;<br />
+[/javascript]</p>
+<p>Это все! Более подробно на <a title="emberjs.com guies" href="http://emberjs.com/guides/">оф сайте</a>.</p>
+<p>Полный код приложения в <a href="http://jsbin.com/vatup/1/">песочнице</a>.</p>
+<p>Отдельная благодарность<strong> Mike Grassotti</strong> и его <a title="stackoverflow" href="http://stackoverflow.com/questions/14204674/how-to-architect-an-ember-js-application/14205734#14205734">развернутый ответ</a> на stackoverflow.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/04/%d0%be%d1%87%d0%b5%d0%bd%d1%8c-%d0%b1%d1%8b%d1%81%d1%82%d1%80%d1%8b%d0%b9-%d1%81%d1%82%d0%b0%d1%80%d1%82-%d1%81-ember-js/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Angular vs Ember</title>
+		<link>https://stepansuvorov.com/blog/2014/02/angular-vs-ember/</link>
+					<comments>https://stepansuvorov.com/blog/2014/02/angular-vs-ember/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 26 Feb 2014 14:22:31 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[ember]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1427</guid>
+
+					<description><![CDATA[Анализируя какой фреймворк взять для проекта сделал небольшой сравнительный анализ AngularJS и Ember.js на основе статей, видео конференций и собственного опыта. То что получилось кратко-тезисно: Преимущества AngularJS Применение патерна Dependency Injection, что делает каждый модуль более независимым, а приложение более гибким &#8230; <a href="https://stepansuvorov.com/blog/2014/02/angular-vs-ember/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-medium wp-image-1435" title="ember-angular-logo" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/02/ember-angular-logo-300x150.png" alt="" width="300" height="150" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/02/ember-angular-logo-300x150.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/02/ember-angular-logo-500x250.png 500w, https://stepansuvorov.com/blog/wp-content/uploads/2014/02/ember-angular-logo.png 1000w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>Анализируя какой фреймворк взять для проекта сделал небольшой сравнительный анализ <strong>AngularJS</strong> и <strong>Ember.js</strong> на основе статей, видео конференций и собственного опыта.</p>
+<p><span id="more-1427"></span>То что получилось кратко-тезисно:</p>
+<h2>Преимущества AngularJS</h2>
+<ul>
+<li>Применение патерна <strong>Dependency Injection</strong>, что делает каждый модуль более независимым, а приложение более гибким в целом</li>
+<li><strong>декларативность</strong> &#8211; использует <strong>расширенный html</strong> и не требует дополнительных модулей работы с шаблонами</li>
+<li><strong>REST</strong>-дружелюбный (а в случае с <strong><a href="https://github.com/mgonto/restangular">restAngular</a></strong> &#8211; REST-ориентированный)</li>
+<li>намного меньше строк кода (<strong>15k</strong> &lt; <strong>35k</strong>)</li>
+<li>большое <strong>open sourse</strong> <strong>сообщество</strong></li>
+<li><strong>google</strong></li>
+<li>есть набор удобных <strong>фильтров</strong> (дата, валюта и т.д.)</li>
+<li>полностью покрывается <strong>юнит-тестами</strong>, возможность модульного тестирования &#8220;из коробки&#8221;</li>
+<li><strong>быстрый старт </strong></li>
+</ul>
+<h2>Преимущества Ember.js</h2>
+<div>
+<ul>
+<li><strong>структурный</strong> подход</li>
+<li>четкое <strong>MVC</strong> разделение</li>
+<li><strong>URL</strong>-ориентированная разработка</li>
+</ul>
+<h2>Недостатки AngularJS</h2>
+<div>
+<ul>
+<li><strong>области видимости $scope</strong> не совсем прозрачны, отсутствие строгого контроля со стороны фремворка позволяет не опытному разработчику заложить много &#8220;мин замедленного действия&#8221;</li>
+<li>строго <strong>html-ориентированный</strong></li>
+<li><strong>система маршрутизации</strong> (<strong><a href="http://docs.angularjs.org/api/ngRoute.$routeProvider">$routeProvider</a></strong>) требует серьезных доработок</li>
+<li>отсутствует возможность отложенной загрузки модулей (<strong>lazy-loading</strong>)</li>
+<li>отчеты об ошибках</li>
+<li>монолитность, невозможность использовать компоненты отдельно</li>
+</ul>
+<h2>Недостатки Ember</h2>
+<div>
+<ul>
+<li>структура перегружена</li>
+<li><a href="http://discuss.emberjs.com/t/getting-started-with-ember-js-is-easy-no-it-isnt/559">высокий</a> порог входа</li>
+<li>app-oriented</li>
+<li>tests</li>
+<li>зависимость от <strong>шаблонизатора</strong></li>
+</ul>
+</div>
+<div>Понравилась фраза разработчика <strong>Ember.js</strong>: &#8220;<em>Сравнение в данном случае не уместно, потому что <strong>Ember.js</strong> &#8211; это <strong>фреймворк</strong>, а <strong>AngularJS</strong> &#8211; это <strong>инструмент</strong> для создания фреймворков</em>&#8220;.</div>
+</div>
+</div>
+<div><strong>P.S.:</strong> если есть что еще добавить &#8211; пишите &#8211; с радостью дополню пост</div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/02/angular-vs-ember/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

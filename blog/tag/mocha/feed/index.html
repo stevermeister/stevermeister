@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Mocha &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/mocha/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Fri, 29 Nov 2013 14:08:53 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Используем Mocha для unit-тестов</title>
+		<link>https://stepansuvorov.com/blog/2013/11/mocha/</link>
+					<comments>https://stepansuvorov.com/blog/2013/11/mocha/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 29 Nov 2013 14:07:11 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[Mocha]]></category>
+		<category><![CDATA[tests]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=891</guid>
+
+					<description><![CDATA[Mocha &#8211; JavaScript тест-фреймворк, который можно запускать как на node.js, так и в браузере, удобен для асинхронного тестирования. * Правильное произношение слова: &#8220;мока&#8220;. Установка Достаточно выполнить следующую команду $ npm install -g mocha Проверяем установку $ mocha --version 1.14.0 Простой пример По &#8230; <a href="https://stepansuvorov.com/blog/2013/11/mocha/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-medium wp-image-892" title="mocha_logo" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/01/mocha_logo-300x116.png" alt="" width="300" height="116" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2013/01/mocha_logo-300x116.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2013/01/mocha_logo-500x194.png 500w, https://stepansuvorov.com/blog/wp-content/uploads/2013/01/mocha_logo.png 507w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p><a href="http://visionmedia.github.com/mocha/">Mocha</a> &#8211; JavaScript тест-фреймворк, который можно запускать как на node.js, так и в браузере, удобен для асинхронного тестирования.</p>
+<p>* Правильное произношение слова: &#8220;<em>мока</em>&#8220;.</p>
+<p><span id="more-891"></span></p>
+<h2>Установка</h2>
+<p>Достаточно выполнить следующую команду</p>
+<pre>$ npm install -g mocha</pre>
+<p>Проверяем установку</p>
+<pre>$ mocha --version
+1.14.0</pre>
+<h2></h2>
+<h2>Простой пример</h2>
+<p>По умолчанию <strong>Mocha</strong> запускает тесты из директории <strong>test</strong>, поэтому создадим такую директорию, а в ней <strong>test.js</strong>:</p>
+<pre>var assert = require("assert")
+     describe('#indexOf()', function(){
+         it('should return -1 when the value is not present', function(){
+             assert.equal(-1, [1,2,3].indexOf(5));
+             assert.equal(-1, [1,2,3].indexOf(0));
+}) })</pre>
+<p>Теперь выполним</p>
+<pre>$ mocha test
+1 passing (3ms)</pre>
+<h2></h2>
+<h2>Синтаксис</h2>
+<p>В базовом синтаксисе тестов на Mocha все стандартно: начинаются с <strong>describe();</strong>, сами тесты в <strong>it();</strong> , которые находятся внутри <strong>describe()</strong>. Также, в случае большого количества блоков, мы можем группировать <strong>describe()</strong> друг в друга.</p>
+<p>Так же доступны хуки: <strong>before()</strong>, <strong>after()</strong>, <strong>beforeEach()</strong>, и <strong>afterEach()</strong>. Хуки так же должны быть описаны внутри блока <strong>describe()</strong>.</p>
+<p>&nbsp;</p>
+<h2>Asset библиотеки</h2>
+<p>Mocha позволяет использовать на выбор библиотеку/стиль для сравнений:</p>
+<ul>
+<li><a href="https://github.com/visionmedia/should.js">should.js</a> BDD style</li>
+<li><a href="https://github.com/LearnBoost/expect.js">expect.js</a></li>
+<li><a href="http://chaijs.com/">chai</a> expect(), assert() and should style assertions</li>
+<li><a href="https://github.com/visionmedia/better-assert">better-assert</a></li>
+</ul>
+<p>&nbsp;</p>
+<h2>Асинхронные тесты</h2>
+<p>Идея ассинхронных тестов на mocha заключается в том, что мы передаем дополнительный callback-параметр <strong>done</strong>, который выполняем в случае успешного прохождения:</p>
+<pre>describe('User#save()', function(){
+    it('should save without error', function(done){
+         var user = new User('Luna');
+         user.save(function(){
+            done();
+         });
+    })
+})</pre>
+<p>Все хуки ( <strong>before()</strong>,<strong> after()</strong>,<strong> beforeEach()</strong>,<strong> afterEach() </strong> ) также поддерживают асинхронную модель поведения:</p>
+<pre>beforeEach(function(done){
+       db.clear(function(){
+         done();
+})})</pre>
+<p>&nbsp;</p>
+<h2>Логирование</h2>
+<p>Поддерживается стандартный метод <strong>console.log()</strong>, который выведет параметр на экран консоли при запуске тестов.</p>
+<p>&nbsp;</p>
+<h2>Постоянное выполнение тестов</h2>
+<p>Можно запускать <strong>Mocha</strong> как одноразово, так и в режиме постоянного тестирования в ожидании изменений. Для второго варианта указываем флажок <strong>watch</strong>:</p>
+<pre>$ mocha --watch</pre>
+<p>&nbsp;</p>
+<h2>Генераторы отчетов</h2>
+<p>Mocha богат в выборе стиле отчетов:</p>
+<ul>
+<li>Dot Matrix &#8211; по умолчанию</li>
+<li>Spec</li>
+<li>Nyan</li>
+<li>TAP</li>
+<li>Landing Strip</li>
+<li>List</li>
+<li>Progress</li>
+<li>JSON</li>
+<li>JSON Stream</li>
+<li>JSONCov</li>
+<li>HTMLCov</li>
+<li>Min</li>
+<li>Doc</li>
+<li>XUnit</li>
+<li>TeamCity</li>
+<li>Markdown</li>
+<li>HTML</li>
+</ul>
+<p>Чтобы задать конкретный стиль при запуске тестов используем параметр <strong>reporter</strong>:</p>
+<pre>$ mocha --reporter list</pre>
+<p>&nbsp;</p>
+<h2>Запуск в браузере</h2>
+<p><strong>Mocha</strong> можно запустить и в браузере, для этого необходимо подключить скрипт стилей и указать какой интерфейс вы хотите использовать и потом запускать тесты.</p>
+<pre>&lt;html&gt;
+&lt;head&gt;
+&lt;link rel="stylesheet" href="mocha.css" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id="mocha"&gt;&lt;/div&gt;
+&lt;script src="jquery.js"&gt;&lt;/script&gt;
+&lt;script src="expect.js"&gt;&lt;/script&gt;
+&lt;script src="mocha.js"&gt;&lt;/script&gt;
+&lt;script&gt;mocha.setup('bdd')&lt;/script&gt;
+&lt;script src="test.array.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    mocha.checkLeaks();
+    mocha.globals(['jQuery']);
+    mocha.run();
+&lt;/script&gt; 
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>&nbsp;</p>
+<p>В своем проекте мы использовали связку <strong>mocha</strong> + <strong>chai.expect</strong>. и запускали через <strong><a href="http://karma-runner.github.io/0.10/index.html">karma</a></strong>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/11/mocha/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

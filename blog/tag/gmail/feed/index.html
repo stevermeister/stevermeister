@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>gmail &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/gmail/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 28 Jul 2012 19:30:32 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Почта gmail со своего домена</title>
+		<link>https://stepansuvorov.com/blog/2012/07/%d0%bf%d0%be%d1%87%d1%82%d0%b0-gmail-%d1%81%d0%be-%d1%81%d0%b2%d0%be%d0%b5%d0%b3%d0%be-%d0%b4%d0%be%d0%bc%d0%b5%d0%bd%d0%b0/</link>
+					<comments>https://stepansuvorov.com/blog/2012/07/%d0%bf%d0%be%d1%87%d1%82%d0%b0-gmail-%d1%81%d0%be-%d1%81%d0%b2%d0%be%d0%b5%d0%b3%d0%be-%d0%b4%d0%be%d0%bc%d0%b5%d0%bd%d0%b0/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 28 Jul 2012 19:07:57 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[email]]></category>
+		<category><![CDATA[gmail]]></category>
+		<category><![CDATA[google]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=346</guid>
+
+					<description><![CDATA[Как оказалось совсем не трудно связать свой домен с гугловым почтовым сервером, причем бесплатно. То есть если у вас есть домен виде mydomain.com, то вы сможете себе сделать почтовый ящик с адресом info@mydomain.com или somename@mydomain.com. Вся процедура не займет больше &#8230; <a href="https://stepansuvorov.com/blog/2012/07/%d0%bf%d0%be%d1%87%d1%82%d0%b0-gmail-%d1%81%d0%be-%d1%81%d0%b2%d0%be%d0%b5%d0%b3%d0%be-%d0%b4%d0%be%d0%bc%d0%b5%d0%bd%d0%b0/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Как оказалось совсем не трудно связать свой домен с гугловым почтовым сервером, причем бесплатно. То есть если у вас есть домен виде<em> mydomain.com</em>, то вы сможете себе сделать почтовый ящик с адресом<em> info@mydomain.com</em> или <em>somename@mydomain.com</em>. Вся процедура не займет больше часа.</p>
+<p><img decoding="async" fetchpriority="high" class="alignnone size-medium wp-image-349" title="email" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/07/email-300x213.png" alt="" width="300" height="213" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2012/07/email-300x213.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2012/07/email.png 405w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p><span id="more-346"></span>Пройдем по шагам что необходимо сделать:</p>
+<ol>
+<li><strong>Регистрируемся</strong> в сервисе <a title="google apps" href="https://www.google.com/a/cpanel/standard/new3?hl=ru">Google Apps</a>.</li>
+<li><strong>Авторизоваться</strong> новым только что созданным аккаунтом. (Если вы уже были авторизованы в гугле, то стоит переключить аккаунт) Тут так же может возникать ошибка &#8220;Request-URI To Large&#8221; &#8211; это баг гугла, игнорим.</li>
+<li>Подтвердить право собственности домена. (Инструкция есть на странице гугл-сервиса)</li>
+<li>Самый важный шаг: находим ссылку «<strong>Подключить электронную почту</strong>» и жмем ее. После чего вам будет показана инструкция по изменению <a title="MX запись" href="http://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%BF%D0%B8%D1%81%D1%8C_MX">MX записей</a> на хостинге.</li>
+<li><strong>Изменяем MX</strong> записи в соответствии с инструкцией в панели управления вашим доменом.  Возвращаемся в Google Apps и жмем на кнопку «Я выполнил(а) эти действия»</li>
+</ol>
+<p>Из основного все. После того как обновятся MX-записи и google это проверит &#8211; можно будет использовать ящик <em>somename@mydomain.com</em>.<br />
+Когда я настраивал себе мне очень помогла вот эта <a href="http://comphobby.ru/2011/01/07/kak-privyazat-pochtu-gmail-k-sobstvennomu-domenu/">статья</a>. Если что-то не понятно &#8211; пожалуйста пишите в комментариях &#8211; я обязательно расширю пост.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/07/%d0%bf%d0%be%d1%87%d1%82%d0%b0-gmail-%d1%81%d0%be-%d1%81%d0%b2%d0%be%d0%b5%d0%b3%d0%be-%d0%b4%d0%be%d0%bc%d0%b5%d0%bd%d0%b0/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

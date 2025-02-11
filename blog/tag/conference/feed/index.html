@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>conference &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/conference/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sun, 22 Jan 2017 08:39:19 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>ngEurope 2016. brief review</title>
+		<link>https://stepansuvorov.com/blog/2016/10/ngeurope-2016-brief-review/</link>
+					<comments>https://stepansuvorov.com/blog/2016/10/ngeurope-2016-brief-review/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 28 Oct 2016 08:59:12 +0000</pubDate>
+				<category><![CDATA[Возможно будет интересно]]></category>
+		<category><![CDATA[Angular2]]></category>
+		<category><![CDATA[conference]]></category>
+		<category><![CDATA[Daniel Rosenwasser]]></category>
+		<category><![CDATA[ionic]]></category>
+		<category><![CDATA[Martin Probst]]></category>
+		<category><![CDATA[Miško Hevery]]></category>
+		<category><![CDATA[ngEurope]]></category>
+		<category><![CDATA[Paris]]></category>
+		<category><![CDATA[Pawel Kozlowski]]></category>
+		<category><![CDATA[Rob Worman]]></category>
+		<category><![CDATA[RxJs]]></category>
+		<category><![CDATA[Tero Parviainen]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3134</guid>
+
+					<description><![CDATA[Several days ago I had a chance to visit ngEurope conference. It was 2 nice intensive days filled with presentations. If by some reason you were not there and don&#8217;t have time to watch all 16 hours I made some &#8230; <a href="https://stepansuvorov.com/blog/2016/10/ngeurope-2016-brief-review/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" fetchpriority="high" class="alignnone wp-image-3192" src="https://stepansuvorov.com/blog/wp-content/uploads/2016/11/DSC_8298.jpg" alt="" width="208" height="275" /></p>
+<p>Several days ago I had a chance to visit ngEurope conference. It was 2 nice intensive days filled with presentations. If by some reason you were not there and don&#8217;t have time to watch all 16 hours I made some notes for you.</p>
+<p><span id="more-3134"></span></p>
+<h1>First Day</h1>
+<h1>Keynote (slides coming soon, <a href="https://www.youtube.com/watch?v=wpxnU62mNJ4">video</a>)</h1>
+<p><a href="https://twitter.com/mhevery">Miško Hevery</a> made this presentation in so automatic mode like he made the same one more than 10 times already: looking in one point and reading text learned by heart. Check it out: he was alive first 1-2 minutes &#8211; rest was for robot that was reading the text.</p>
+<p>Key points:</p>
+<ul>
+<li>focus not only on web but also mobile and desktop apps<img decoding="async" class="alignnone wp-image-3135" src="https://stepansuvorov.com/blog/wp-content/uploads/2016/10/Screen-Shot-2016-10-29-at-18.30.47.png" alt="angular-mobile-desktop" width="256" height="153" /></li>
+<li>Angular2 is not a framework, but a platform<img decoding="async" class="alignnone wp-image-3136" src="https://stepansuvorov.com/blog/wp-content/uploads/2016/10/Screen-Shot-2016-10-29-at-18.32.09.png" alt="angular2 platform" width="341" height="146" /></li>
+<li>performance part: lazy loading, property tricks</li>
+<li>detailed errors</li>
+<li>explanation of change detection options</li>
+<li>a bit about tools (angular-cli, augury)</li>
+<li>several words about AoT</li>
+<li>and Angular Universal</li>
+</ul>
+<p>I think it&#8217;s good talk to have something like general overview of all the coming conference topics.</p>
+<h1>Angular &amp; RxJs (<a href="https://docs.google.com/presentation/d/1Q4raWgWEkhJsPNWD9O_67kIc3PtkwebppqRFhFPKQVE/edit#slide=id.p">slides</a>, <a href="https://www.youtube.com/watch?v=WWR9nxVx1ec">video</a>)</h1>
+<p><strong><a href="https://twitter.com/robwormald">Rob Worman</a></strong> with his favourite topic &#8211; <strong>reactive programming</strong>. Where could we find reactive approach in ng2?</p>
+<ul>
+<li>Forms</li>
+<li>Http</li>
+<li>Async pipe</li>
+<li>Router</li>
+<li>@Query</li>
+</ul>
+<p>Next Rob provided example of <a href="https://twitter.github.io/typeahead.js/">typeahead</a> component building with ng2 and RxJs. Step by step with explanations. It&#8217;s the best quick start with RxJs that you could find. Strictly recommend if you did not have experience with reactive programming before.</p>
+<p>Nice parts to take if you already working with RxJs:</p>
+<ul>
+<li>method <strong><a href="https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/operators/let.md">let()</a></strong> and taking out common part of the sequence</li>
+<li>try to avoid using <strong>async pipes</strong> in many places (better to combine them in one on component params level)</li>
+<li>future plans: to make <strong>Observable.fromEvent</strong> even more easy to use with <strong>@ObserveChild</strong>, <strong>@ObserveChildren</strong> decorators:</li>
+</ul>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-3137" src="https://stepansuvorov.com/blog/wp-content/uploads/2016/10/Screen-Shot-2016-10-30-at-11.38.15.png" alt="observeChild-decorator" width="538" height="127" /></p>
+<h1>Angular BatScanner (<a href="https://docs.google.com/presentation/d/15zkae091b57jYbYTwOyv0uO-13KpYqs3_DI_dsU5CRA/edit?usp=drive_web">slides</a>, <a href="https://www.youtube.com/watch?v=2DHpmyFWULQ">video</a>)</h1>
+<p>It was quick presentation of chrome extension for inspecting Angular2 application performance (<strong><a href="https://chrome.google.com/webstore/detail/angular-batscanner/gcngciildkejiapchdgpcniflijoiadf">BatScanner</a></strong>) by <strong><a href="https://twitter.com/douglasduteil">Douglas Duteil</a></strong>. Also Douglas showed the way of creating &#8220;hooks for hooks&#8221; and compiler injections to reach the goal.</p>
+<h1>Widgets for Angular2 (<a href="https://pkozlowski-opensource.github.io/ng-europe-2016">slides</a>, <a href="https://www.youtube.com/watch?v=l8OHU-TEG7g">video</a>)</h1>
+<p><strong><a href="https://twitter.com/pkozlowski_os">Pawel Kozlowski</a></strong> named his talk even &#8220;<em>Custom widgets for Angular2? Piece of cake!</em>&#8220;.</p>
+<p>Let me retell you all the ingredients:</p>
+<ul>
+<li>clear inline bindings                                                     <img decoding="async" loading="lazy" class="alignnone wp-image-3139" src="https://stepansuvorov.com/blog/wp-content/uploads/2016/10/Screen-Shot-2016-10-30-at-15.39.55.png" alt="clear-bindings" width="212" height="51" /></li>
+<li>usage of <strong><a href="https://developer.mozilla.org/en/docs/Web/HTML/Element/template">&lt;template&gt; tag</a></strong></li>
+<li>css encapsulation</li>
+<li>rxjs</li>
+<li>ngZone for async update of the DOM</li>
+<li>nice template shortcuts                                  <img decoding="async" loading="lazy" class="alignnone wp-image-3140" src="https://stepansuvorov.com/blog/wp-content/uploads/2016/10/Screen-Shot-2016-10-30-at-15.58.44.png" alt="ng2-template-shortcuts" width="260" height="91" /></li>
+<li>change detection strategies</li>
+<li>server side rendering</li>
+<li>animations</li>
+<li>UI-toolkit (<a href="https://ng-bootstrap.github.io/#/home">ng-bootstap</a>)</li>
+</ul>
+<h1>Data science with angular (<a href="https://www.youtube.com/watch?v=ZVEp9K_cynU&amp;list=PLhc_bKwZngxW87YmkOpe77reW9N958qFN&amp;index=8">video</a>)</h1>
+<p>Pretty funny speaker, <a href="https://twitter.com/auser">Ari Lerner</a>. His virtual machine with slides crashed and after some unsuccessful tries we switched to next(Unit Tests) speaker.</p>
+<h1>Unit Tests for Angular2 Applications(<a href="https://docs.google.com/presentation/d/1fFxQvx2WHFPqR4piq0oWgKBuSMvrCwc1vfYggHlYEbQ/edit#slide=id.p">slides</a>, <a href="https://www.youtube.com/watch?v=dVtDnvTLaIo">video</a>)</h1>
+<p>Frankly speaking did not get <a href="https://twitter.com/vikerman">Vikram Subramanian</a> presentation: for developers who already worked with ng2 unit-tests it should be obvious, but for the rest it was not clear enough.</p>
+<p>May be it was extra difficulty to focus on subject because of previous presentation confusion.</p>
+<h1>Embedded hybrid features in Mobile Banking App (<a href="https://www.youtube.com/watch?v=kmNRgOLZhXQ&amp;list=PLhc_bKwZngxW87YmkOpe77reW9N958qFN&amp;index=6">video</a>)</h1>
+<p>I would say that <a class="ProfileHeaderCard-nameLink u-textInheritColor js-nav" href="https://twitter.com/wilmveel">Willem Veelenturf</a> presented not really technical topic. His experience how they make ionic application with the same performance as native app and the main idea(if I&#8217;m not mistaken) that they created own cordova plugins and integrate them with existing ionic app. And it was a statement that ING baking app(that they made) is the best in Netherlands. Sorry Willem, but it&#8217;s obvious that ABN AMRO mobile app is the best in NL ;)</p>
+<h1>Security in Angular2 (<a href="https://www.youtube.com/watch?v=WN-XczmI-LY&amp;list=PLhc_bKwZngxW87YmkOpe77reW9N958qFN&amp;index=7">video</a>)</h1>
+<p><a href="https://twitter.com/martin_probst">Martin Probst</a> and <a href="https://twitter.com/7261706861656c">Raphaël Jamet</a> provided nice hints how Angular2 helps you to prevent XSS vulnerabilities and how not to brake it.</p>
+<p>It was all about sanitizing the data. And it&#8217;s good for all of us that Angular provides sanitizer from box. More over it knows about different contexts and it will not try to sanitize &#8220;&lt;script&gt;&#8221; tag if it&#8217;s URL resource.</p>
+<p><img decoding="async" loading="lazy" class="alignnone wp-image-3145" src="https://stepansuvorov.com/blog/wp-content/uploads/2016/11/Screen-Shot-2016-11-05-at-16.28.11.png" alt="security-contexts" width="136" height="139" /></p>
+<p>But sometimes you need to output content that can not be sanitized by Angular, for example you want to place youtube video(that is not provided from your domain) on your site. In this case you need to do sanitization yourself, and don&#8217;t be lazy by just using <strong><em>bypassSecurityTrustResourceUrl</em></strong> method to switch of Angular one!</p>
+<h1>Gettings to Angular2 (slides coming soon, <a href="https://www.youtube.com/watch?v=2b-tEis9k4M&amp;list=PLhc_bKwZngxW87YmkOpe77reW9N958qFN&amp;index=10">video</a>)</h1>
+<p>It was a talk by <a href="https://twitter.com/jbourey">Jen Bourey</a> about <strong>ng1/ng2</strong> migration. Most part of the presentation was about <strong>ngUpgrade</strong> tool. And the most efficient way &#8211; page oriented upgrade:<img decoding="async" loading="lazy" class="alignnone wp-image-3193" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/01/Screen-Shot-2017-01-07-at-18.00.37.png" alt="" width="282" height="211" /></p>
+<p>and it&#8217;s possible with parallel routing:</p>
+<p><img decoding="async" loading="lazy" class="alignnone wp-image-3194" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/01/Screen-Shot-2017-01-07-at-18.03.00.png" alt="" width="343" height="231" /></p>
+<p>Everything had been shown on live demo together with lazy loading.</p>
+<p><strong>!important</strong>: <strong>$compile</strong> service will not work if you try to update ng1 directive to ng2.</p>
+<p><a href="https://github.com/bourey/ngupgrade-example">ngupgrade-example</a> on github.</p>
+<p><strong>UPD</strong>: nice article by Victor Savkin &#8211; <a href="https://vsavkin.com/migrating-angular-1-applications-to-angular-2-in-5-simple-steps-40621800a25b#.rymu2uexu">Migrating Angular 1 Applications to Angular 2 in 5 Simple Steps</a>.</p>
+<h1>Typescript latest (<a href="https://www.youtube.com/watch?v=o8YI2hvassE&amp;list=PLhc_bKwZngxW87YmkOpe77reW9N958qFN&amp;index=9">video</a>)</h1>
+<p>The most part of the talk by <a href="https://twitter.com/drosenwasser">Daniel Rosenwasser</a> was about why we should use Typescript, but not about new features as title said. It was live coding where Daniel showed that you should not be afraid of Typescript and it&#8217;s really easy to switch from EcmaScript 2015. And then it was angular1 example how to write it with Typescript. And finally at the end of the talk we started with new features:</p>
+<ul>
+<li>easy types with <strong>@types</strong></li>
+<li>nullable types</li>
+</ul>
+<p>and for <strong>TS2.1</strong>:</p>
+<ul>
+<li>async/await</li>
+<li><a href="http://www.typescriptlang.org/play/#src=let%20someArray%20%3D%20%5B1%2C%202%2C%203%2C%204%2C%205%5D%3B%0D%0Alet%20someObject%20%3D%20%7B%20a%3A%201%2C%20b%3A%202%2C%20c%3A%203%2C%20d%3A%204%2C%20e%3A%205%7D%3B%0D%0A%0D%0Alet%20copyOfSomeArray%20%3D%20%5B%20...someArray%20%5D%3B%0D%0Alet%20copyOfSomeObject%20%3D%20%7B%20...someObject%20%7D%3B%0D%0A%0D%0Alet%20concatOfArrays%20%3D%20%5B...someArray%2C%20...someArray%5D%3B%0D%0Alet%20mergeOfObjects%20%3D%20%7B...someObject%2C%20...someObject%20%7D%3B%0D%0A%0D%0Alet%20%5Ba1%2C%20b1%2C%20c1%2C%20...rest1%5D%20%3D%20someArray%3B%0D%0Alet%20%7Ba2%2C%20b2%2C%20c2%2C%20...rest2%7D%20%3D%20someObject%3B">Object Rest &amp; Spread</a>:
+<ul>
+<li>copy</li>
+<li>merge/concat</li>
+<li>destructure</li>
+</ul>
+</li>
+</ul>
+<h1>AngularFire2 and you (slides coming soon, <a href="https://www.youtube.com/watch?v=uLzMOaFt6vc&amp;list=PLhc_bKwZngxW87YmkOpe77reW9N958qFN&amp;index=11">video</a>)</h1>
+<p><a href="https://twitter.com/erikhaddad">Erik Haddad</a> just made promotion for <strong>Firebase</strong>. Nothing new. May be it could be nice intro for developers who are just starting with Firebase.</p>
+<p>And, yes, <strong>AngularFire2</strong> has reactive approach based on <strong>Observables</strong> that&#8217;s nice!</p>
+<h1>Second Day</h1>
+<h2>Angular CLI &amp; You (<a href="https://www.youtube.com/watch?v=LN2xvQqAo-g">video</a>)</h2>
+<p>It was a story from <strong><a href="https://twitter.com/hanslatwork">Hans Larsen</a> </strong>that started with explanation how painful was the process of working with ng1 environment.</p>
+<p>And with angular-cli you everything from box:</p>
+<ul>
+<li>ng new</li>
+<li>ng build</li>
+<li>ng serve</li>
+<li>ng test/ ng e2e</li>
+<li>ng generate &#8230;  &#8211; that will do not only code scaffolding for you but also all the imports</li>
+</ul>
+<p>So:</p>
+<ul>
+<li>compile SASS/LESS</li>
+<li>TypeScript transpiration</li>
+<li>Building</li>
+<li>Asset optimisation</li>
+<li>Live reload via websockets</li>
+<li>Environment file(dev/prod configuration)</li>
+<li>Also!: AoT and Tree Shacking</li>
+</ul>
+<p>And some words what&#8217;s coming:</p>
+<ul>
+<li>FASTER</li>
+<li>Split CLI and Toolkit</li>
+<li>Refactoring tools (mostly for updating Angular versions)</li>
+<li>Addons and scripting</li>
+<li>Library development</li>
+</ul>
+<p>And after the presentation I also asked Hans about future plans for creating ng2 module library that could be easily integrated into cli, so you can install and apply any ng2 3rd party module by one command like:</p>
+<pre>ng install material
+</pre>
+<p>but unfortunately there are still no plans of doing it in nearest future.</p>
+<h2>Angular2 Applications with Augury (<a href="https://www.youtube.com/watch?v=YaDFDGS3EFM">video</a>)</h2>
+<p>It was introduction of the most powerful(current moment) chrome extension to debug and analyse Angular2 applications &#8211; <a href="https://augury.angular.io/"><strong>Augury</strong></a> by <strong><a href="https://twitter.com/vanessayuenn">Vanessa Yuen</a></strong>. She announced this tool like &#8220;not just a debugger&#8221;</p>
+<p>So what does it do for you:</p>
+<ul>
+<li>component relations</li>
+<li>detailed component info &amp; editable properties</li>
+<li>dependancy diagram</li>
+<li>change detection strategy</li>
+<li>router structure</li>
+</ul>
+<p>After it was live demo with debugger Fish Game and explanation what is under the hood of Augury: it&#8217;s build with Angular2 and with using its debug API.</p>
+<p>Roadmap:</p>
+<ul>
+<li>bugfix</li>
+<li>injector graph improvements</li>
+<li>native platform support</li>
+</ul>
+<h2>Getting Universal with Angular2 (<a href="https://www.youtube.com/watch?v=faWCLmYsFQ8">video</a>)</h2>
+<p><strong><a href="https://twitter.com/manekinekko">Wassim Chegham</a></strong> explained what is <strong>Angular Universal</strong> and when should we care about server side.</p>
+<p>Why:</p>
+<ul>
+<li>SEO</li>
+<li>link preview (for social media)</li>
+<li><strong>web app gap</strong> (or first page rendering)</li>
+</ul>
+<p>How to sync the state between first page rendered on server and real spa? It&#8217;s manager by special script <strong>preboot.js</strong> that records all the events before single page application is loaded and tries to reproduce it after.</p>
+<p>To start:</p>
+<p>[javascript]<br />
+import { UniversalModule } from &#8216;angular2-universal/browser&#8217;<br />
+[/javascript]</p>
+<p>and for server side:</p>
+<p>[javascript]<br />
+import { UniversalModule } from &#8216;angular2-universal/node&#8217;<br />
+[/javascript]</p>
+<p>There are a lot of renders for different node frameworks, for example <strong>express</strong>.</p>
+<p>There is <a href="https://github.com/angular/universal-starter">Angular-Universal node starter</a>.</p>
+<p><strong>Angular-cli</strong> support is coming soon.</p>
+<h2>From UI-Router to Component Router (slides coming soon, <a href="https://www.youtube.com/watch?v=vQFImWHxCDM">video</a>)</h2>
+<p>Very good structured talk about routers by <strong><a href="https://twitter.com/nirkaufman">Nir Kaufman</a></strong>, really recommend you to watch this presentation have more deep understanding of routers in general:</p>
+<ul>
+<li>states</li>
+<li>use hash</li>
+<li>tracing events</li>
+<li>template syntax</li>
+<li>nested states + lazy loading</li>
+<li>parameters + Observables</li>
+<li>resolve</li>
+<li>extra data</li>
+<li>events</li>
+<li>guards</li>
+<li>multiple views</li>
+</ul>
+<p>Book to read &#8211;<a href="https://leanpub.com/router"> Angular Router by Victor Savkin</a></p>
+<h2>Reactive Music Apps in Angular and RxJs (<a href="https://www.youtube.com/watch?v=-fPyfSAEZgk">video</a>)</h2>
+<p>It&#8217;s difficult to resume presentation of <a href="https://twitter.com/teropa">Tero Parviainen</a>, you just need to watch it!</p>
+<p>He took patters from <a href="https://www.youtube.com/watch?v=yNi0bukYRnA">Terry Riley &#8220;In C&#8221;</a> and with ng2 and RxJs made visualised music box out of it.</p>
+<p><img decoding="async" loading="lazy" class="alignnone wp-image-3205" src="https://stepansuvorov.com/blog/wp-content/uploads/2017/01/Screen-Shot-2017-01-08-at-18.27.00.png" alt="" width="275" height="153" /></p>
+<p><a href="http://teropa.info/in-c/">Demo</a> and <a href="https://github.com/teropa/in-c">code</a>.</p>
+<h2>ngAnimate2 = Layouts + Animation (<a href="https://www.youtube.com/watch?v=NGNE7LMd9VY">video</a>)</h2>
+<p><a href="https://twitter.com/yearofmoo"><strong>Matias Niemelä</strong></a> uncovered ng2 animation magic. Basics is:</p>
+<ul>
+<li>defined inside <strong>@Component</strong></li>
+<li><strong>DSL</strong>(Domain Specific Language) &#8211; animation syntax</li>
+<li>animation triggers are <strong>State-based</strong></li>
+</ul>
+<p>Example:</p>
+<p>[javascript]<br />
+@Component({<br />
+   animations: [ trigger(&#8216;myAnimation&#8217;),<br />
+                 [ transition(&#8216;* =&amp;amp;amp;amp;gt; *&#8217;,<br />
+                   [ style({opacity:0}),<br />
+                     animate(1000, { opacity: 1 })<br />
+                   ])<br />
+               ]],<br />
+   template: `&lt;div [@myAnimation]=&quot;state&quot;&gt;&#8230;&lt;/div&gt;`<br />
+})<br />
+class Cmp {}<br />
+[/javascript]</p>
+<p>Animations have callbacks:</p>
+<ul>
+<li>(<strong>@animation.start</strong>)=&#8221;onStart($event)&#8221;</li>
+<li>(<strong>@animation.done</strong>)=&#8221;onDone($event)&#8221;</li>
+</ul>
+<p>Coming soon:</p>
+<ul>
+<li>styling with CSS classes &#8211; style(&#8216;.invisible&#8217;)</li>
+<li>query() + select()</li>
+<li>css parser</li>
+<li>renderer/js integration</li>
+<li>immediate canceling</li>
+</ul>
+<p>If you just started with angular2 animations I really recommend to watch the presentation: it&#8217;s less than 20min but it contains material for several hours of intensive learning. May be Matias expected to have more time for talk, because he was sliding the slides so fast that I guess most past of the audience got lost the focus very soon.</p>
+<p>Demo <a href="https://github.com/matsko/ng2eu-2016-code">source code</a>.</p>
+<h2>Evolution of Web on Mobile (<a href="https://www.youtube.com/watch?v=7rzjmsUBmFQ">video</a>)</h2>
+<p>I found presentation <a href="https://twitter.com/@adamdbradley">Adam Bradley</a> not interesting at all. I expected more from the lead of Ionic platform. &#8220;<em>cars history, web/js history, now days mobiles, browsers, js much faster, bottleneck &#8211; network</em>&#8221; &#8211; that&#8217;s all you need to know from this speech.</p>
+<h2>You will learn RxJs (slides coming soon, <a href="https://www.youtube.com/watch?v=uQ1zhJHclvs">video</a>)</h2>
+<p>A lot of live coding from <a href="https://twitter.com/@andrestaltz"><strong>André Staltz</strong></a> to build own <strong>RxJs</strong> library. All types of callbacks we could group in 3: <strong>next</strong>, <strong>error</strong>, <strong>complete</strong>, if we combine all 3 into one object and call it observer:</p>
+<p>[javascript]<br />
+const observer = {<br />
+  next: () =&gt; {},<br />
+  error: () =&gt; {},<br />
+  complete: () =&gt; {}<br />
+}<br />
+[/javascript]</p>
+<p>and can pass this object to special method giveMeData:</p>
+<p>[javascript]<br />
+giveMeData(observer);<br />
+[/javascript]</p>
+<p>so inside this method we could have:</p>
+<p>[javascript]<br />
+function giveMeData(ob){<br />
+   ob.next(&#8216;data&#8217;);<br />
+   ob.complete();<br />
+};<br />
+[/javascript]</p>
+<p>and now let&#8217;s assume that we have object `observable` and `giveMeData` is property of this object:</p>
+<p>[javascript]<br />
+const observable = {<br />
+    giveMeData: (ob) =&gt; {}<br />
+};<br />
+[/javascript]</p>
+<p>And now we can rename `giveMeData` to `subscribe`.<br />
+So on and so forth with map and filter methods&#8230;<br />
+Nice to have more deep understanding of reactive programming pattens.</p>
+<h2>Minifying Angular2 Applications ( <a href="https://docs.google.com/presentation/d/1SaHtM1_mpBZuN74wxAJSPQRB0sPbWRSJPQZsxx4_BpE/preview?slide=id.p">slides</a>, <a href="https://www.youtube.com/watch?v=Ml7qHlk80kc">video</a>)</h2>
+<p>Presentation from <strong><a href="https://twitter.com/@jakeherringbone">Alex Eagle</a></strong> was not about minification, it was about building tools and optimization in general:</p>
+<ul>
+<li>style checker</li>
+<li>type checker (tslint)</li>
+<li>ngc(AoT optimization) over tsc</li>
+<li>lazy loading</li>
+<li>tree-shaking</li>
+<li>minification</li>
+<li>compression</li>
+</ul>
+<h2>Full throttle Cross-platform development with Angular2, Cordova and Electron (<a href="https://www.youtube.com/watch?v=TqFnVdPFVU0">video</a>)</h2>
+<p><strong><a href="https://twitter.com/@christianweyer">Christian Weyer</a></strong> and <a href="https://twitter.com/thorstenhans"><strong>Thorsten Hans </strong></a>made some fun out of live coding with ng2 building app for different platforms. Thorsten did the coding and Christian kept audience warm.</p>
+<h2>Custom renderers in Angular2  (<a href="https://www.youtube.com/watch?v=iE-wYf4AaiM">video</a>)</h2>
+<p>May be I was just tired after all the talks at the end of the day, but frankly speaking I expected more from this topic by <strong><a href="https://twitter.com/@marclaval">Marc Laval</a></strong>.  It was pretty abstract, but not highlighting the idea and it was a lot of code on slides that makes everything even more confusing. It was something about <a href="https://github.com/mlaval/angular-richtext-renderer">angular-richtext</a>, <a href="https://github.com/NativeScript/nativescript-angular">nativescript</a> and <a href="https://github.com/angular/react-native-renderer">react-native</a> renderers.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2016/10/ngeurope-2016-brief-review/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>ng-nl 2016. brief review</title>
+		<link>https://stepansuvorov.com/blog/2016/02/ng-nl-2016-brief-review/</link>
+					<comments>https://stepansuvorov.com/blog/2016/02/ng-nl-2016-brief-review/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 19 Feb 2016 04:17:25 +0000</pubDate>
+				<category><![CDATA[Events]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[conference]]></category>
+		<category><![CDATA[event]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[ng-nl]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3024</guid>
+
+					<description><![CDATA[This year I also visited NG-NL Conference in Amsterdam and to keep the tradition will share my notes/thoughts about it. Basically the conference was dedicated to looking deep in Angular2 parts and reactive programming experiments. All the topics were split into 2 tracks. You &#8230; <a href="https://stepansuvorov.com/blog/2016/02/ng-nl-2016-brief-review/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" loading="lazy" class="alignnone wp-image-3026" src="https://stepansuvorov.com/blog/wp-content/uploads/2016/02/DSC_7455.jpg" alt="ng-nl2106 label " width="184" height="275" /></p>
+<p>This year I also visited <a title="http://www.ng-nl.org/" href="http://www.ng-nl.org/">NG-NL Conference in Amsterdam</a> and to <a href="https://stepansuvorov.com/blog/2015/02/ng-nl-brief-review/">keep the tradition</a> will share my notes/thoughts about it.</p>
+<p>Basically the conference was dedicated to looking deep in <strong>Angular2 parts</strong> and <strong>reactive programming</strong> experiments.</p>
+<p>All the topics were split into 2 tracks. You can find all the program details <a href="http://ng-nl.org/#/#programme">here</a>. My route was the following:</p>
+<p><a href="https://stepansuvorov.com/blog/wp-content/uploads/2016/02/ng-nl-table-2.png"><img decoding="async" loading="lazy" class="alignnone wp-image-3027 size-full" src="https://stepansuvorov.com/blog/wp-content/uploads/2016/02/ng-nl-table-2.png" alt="ng-nl-schedule" width="782" height="757" /></a></p>
+<p><em>Because keynote talks were not separated and columns were not sync in time you could get the illusion of time jump</em>.</p>
+<p><span id="more-3024"></span></p>
+<h2>Awesome Productivity with Angular 2 (<a href="https://www.youtube.com/watch?v=1RzYpIAn-3g">video</a>)</h2>
+<p><a href="https://twitter.com/martin_probst">Martin Probst</a> started keynote with kind of excuse why we need to do step forward -&#8220;<em>frameworks have to move</em>&#8221; &#8211; that sounds really funny. Probably it was soft launch or preparation not to scary developers with new features.</p>
+<p>After it was quick introduction of all new things in Angular2. New <strong>template syntax</strong> that gets rid of tons nested directives and uses explicit attribute binding, and you always know whether it is property, event or two-way binding:</p>
+<ul>
+<li><strong>[property]</strong> &#8211; property binding</li>
+<li><strong>(event)</strong> &#8211; event binding</li>
+<li><strong>[(two-way)]</strong> &#8211; two-way biding (still confusing)</li>
+</ul>
+<p>Some words about the <strong>component concept</strong> that will kill old directives, scopes, controllers. Exact announcement about <strong>performance</strong>: Angular2 is 4-times faster than Angular1.</p>
+<p>Martin also said that team works not only on framework but also on the environment. To make dev tools unified and productive. So <a href="https://github.com/angular/angular-cli">angular-cli</a>.</p>
+<p>And it was a part why we should use <strong>TypeScript</strong>:</p>
+<ul>
+<li>makes code more reliable</li>
+<li>much better doc generation</li>
+<li>allows autocompletion</li>
+<li>gives safer API changes</li>
+<li>fast API renaming</li>
+</ul>
+<p>And, of course, the statement that we can easily use Angular2 without TypeScript is not true, using Angular2 without TypeScript is hard pain: even examples on official site are not always up-to-date.</p>
+<p>Well, it was quite informative, thank you!</p>
+<h2>ngUpgrade Your App to Angular 2 (slides coming soon, video coming soon)</h2>
+<p>It was light talk by <a href="https://twitter.com/teropa">Tero Parviainen</a> who showed the step by step migration to Angular2 with help of <strong>ngUpgrade</strong>.</p>
+<p>When you have ideal decoupled component application you can start with ngUpgrade:</p>
+<p>[javascript]<br />
+import {UpgradeAdapter} from &#8216;angular2/upgrade&#8217;;</p>
+<p>var adapter = new UpgradeAdapter();<br />
+var app = angular.module(&#8216;myApp&#8217;, []);</p>
+<p>adapter.bootstrap(document.body, [&#8216;myApp&#8217;]);<br />
+[/javascript]</p>
+<p>and to have new components in old project you should you such hack:</p>
+<p>[javascript]<br />
+app.directive(&#8216;productDetail&#8217;,<br />
+  adapter.downgradeNg2Component(ProductDetail));<br />
+[/javascript]</p>
+<p>and the same goes for services:</p>
+<p>[javascript]<br />
+adapter.addProvider(ProductService);<br />
+[/javascript]</p>
+<p>But when you code is not ideal (that we usually call real life) you have to solve all architectural issues first and only then do ngUpgrade manipulations.</p>
+<p>Fist step could be to remove all ng-include and ng-controller statements and replace them into components. For more detailed instructions check <a href="http://teropa.info/blog/2015/10/18/refactoring-angular-apps-to-components.html">this Tero&#8217;s article</a>.</p>
+<p><strong>@Tero</strong>, the way of presenting information by commenting code videos works perfectly!</p>
+<p>&nbsp;</p>
+<h2>How to Write a Library for Angular 2 (<a href="http://slides.com/ocombe/ngnl2016#/">slides</a>, video coming soon)</h2>
+<p><a href="https://twitter.com/OCombe">Olivier Combe</a> was making fast coding talk about steps of Angular2 library creation.</p>
+<p>First of all it would be better to make workshop out of this talk, to let everyone do the same steps. Because when you don&#8217;t do it simultaneously all the steps looks so obvious.</p>
+<p>I know Olivier, that&#8217;s not his first conference in speaker role, but he was nervous and all talk was in a hurry, it looked like he&#8217;d prepared presentation for an hour and was told to make it in 15 minutes.</p>
+<p>There were some hint how to setup Karma preprocessors for TypeScript.</p>
+<p>Did not know about <a href="https://docs.npmjs.com/misc/developers#keeping-files-out-of-your-package">.nmpignore file</a> before.</p>
+<p><strong>@Olivier</strong>, it would be really nice addition if you put some code and commands into your presentation.</p>
+<p>&nbsp;</p>
+<h2>Angular 2 Change Detection Explained (<a href="http://pascalprecht.github.io/slides/angular-2-change-detection-explained/#/">slides</a>, <a href="https://www.youtube.com/watch?v=CUxD91DWkGM">video</a>)</h2>
+<p>Couldn&#8217;t miss <a href="https://twitter.com/PascalPrecht">Pascal Precht</a> talk and switched to track2 for it. Should also say that room was <a href="https://stepansuvorov.com/blog/wp-content/uploads/2016/02/DSC_7434.jpg">overcrowded</a>.</p>
+<p>The talk started with explaining the problem that we want to solve &#8211; basically it&#8217;s Model &#8211; DOM synchronisation. (recommended reading &#8220;<a href="http://teropa.info/blog/2015/03/02/change-and-its-detection-in-javascript-frameworks.html">Change And Its Detection In JavaScript Frameworks</a>&#8221; by Tero Parviainen) Model could be changed by:</p>
+<ul>
+<li>events (click, submit)</li>
+<li>ajax requests and fetching data from remote source</li>
+<li>timers</li>
+</ul>
+<p>and how Angular gets known about it? &#8211;  ZONES!</p>
+<p>Some explanation about async flow magic and back to zones:</p>
+<p>[javascript]<br />
+zone.run(() =&gt; {<br />
+  foo();<br />
+  setTimeout(doSth, 0);<br />
+  bar();<br />
+});<br />
+[/javascript]</p>
+<p>and for Angular2 it&#8217;s <a href="https://angular.io/docs/js/latest/api/core/NgZone-class.html">ngZone</a>.</p>
+<p>More details in <a href="http://blog.thoughtram.io/angular/2016/01/22/understanding-zones.html">Understanding Zones</a> and <a href="http://blog.thoughtram.io/angular/2016/02/01/zones-in-angular-2.html">Zones in Angular 2</a>.</p>
+<p>Smart change detection with<strong> immutable objects</strong>: it&#8217;s easy to check whether object has changed or not.</p>
+<p><strong>ChangeDetectionStrategy.OnPush</strong> &#8211; where you could setup logic and do not update component each time.</p>
+<p><strong>Observables</strong> to setup change &#8220;listener&#8221; only for specific component.</p>
+<p><strong>@Pascal</strong>, waiting for your superduper demo examples code :)</p>
+<h2></h2>
+<p>&nbsp;</p>
+<h2>Lunch</h2>
+<p>During lunch brake I had a chance to speak to <a href="https://twitter.com/IgorMinar">Igor Minar</a> and <a href="https://twitter.com/martin_probst">Martin Probst</a>, asked them about <strong>TypeScript</strong> like an extra complexity to move a project to Angular2. It looks like they are going solid for it, even with future ES7 and decorators. So if you want to use Angular2 you MUST learn TypeScript. It was a good advice from Martin to try TypeScript with current Angular1.X version and only after, when we are confident enough move to Angular2 and use it together. Let&#8217;s see how far we will go.</p>
+<p>&nbsp;</p>
+<h2>Reactive Angular 2 (<a href="https://docs.google.com/presentation/d/1dC4oyxrE5IqDSJpKI_akszfFgBx24vC7YDYzmbrvnmM/edit#slide=id.p">slides</a>, <a href="https://www.youtube.com/watch?v=xAEFTSMEgIQ">video</a>)</h2>
+<p>It was life coding with <a href="https://twitter.com/robwormald">Rob Wormald</a>. He lifted the curtain of <strong>reactive programming</strong>. We made Typeahead component with <strong>Observables</strong>, it was really nice example to show how to put everything in one stream. Then we created chat app with firebase. And after it was Todo app with Redux. Third one was really difficult to follow.</p>
+<p>Related example from Rob suddenly found on internet &#8211; <a href="http://plnkr.co/edit/NfRZv6aY5OpaljKuzEym?p=preview">plnk</a>.</p>
+<p>&nbsp;</p>
+<h2>Introduction to RxJS 5 (<a href="http://slides.com/gerardsans/ng-nl-rxjs5#/">slides</a>, <a href="https://www.youtube.com/watch?v=loYkHSQ_4Dg">video</a>)</h2>
+<p>More reactive stuff from <a href="https://twitter.com/gerardsans">Gerard Sans</a>. History of streams: <strong>pipes</strong>(unix, 1973) &#8211; &gt; <strong>streams</strong>(node.js, 2009) -&gt; <strong>observables</strong> (Microsoft, 2012) -&gt;<strong>observables</strong> (Angular2, 2014). Some obvious things that you can do with array in ES5 like forEach, map, filter, reduce. Examples with Observables. Subscribe. No debugger support yet.</p>
+<p>RxJs could be implementation in Angular2 for:</p>
+<ul>
+<li>asynchronous processing</li>
+<li>http</li>
+<li>forms: controls, validation</li>
+<li>component events</li>
+</ul>
+<p>&#8230;and again Typeahead component example (<a href="http://plnkr.co/edit/B4BxDWgegexn7gq6qql4?p=preview">plnk</a>), now with nicer styles.</p>
+<p>&nbsp;</p>
+<h2>Angular 2 and the Single Immutable State Tree (<a href="https://speakerdeck.com/cironunes/angular-2-and-the-single-immutable-state-tree">slides</a>, video coming soon)</h2>
+<p>Talk of <a href="https://twitter.com/cironunesdev">Ciro Nunes</a> about immutables has a lot in common with Pascal&#8217;s &#8220;Angular 2 Change Detection Explained&#8221;.</p>
+<p>pure function &#8211; returns new object.</p>
+<p><strong>ChangeDetectionStrategy.OnPush</strong></p>
+<p><strong>Redux</strong> &#8211; unidirectional data flow.</p>
+<p>Angular implementation</p>
+<p>[javascript]<br />
+const appStore = createStore(rootReducer);<br />
+bootstrap(App, [<br />
+   provide(&#8216;AppStore&#8217;, {userValue: appStore}),<br />
+   Actions<br />
+]);<br />
+[/javascript]</p>
+<p>or</p>
+<ul>
+<li><a href="https://github.com/ngrx/store" rel="nofollow">ngrx/store</a></li>
+<li><a href="http://victorsavkin.com/post/137821436516/managing-state-in-angular-2-applications">Managing state in Angular2 applications </a></li>
+</ul>
+<p><strong>@Ciro</strong>, it looks like 3rd link under presentation is broken.</p>
+<p>&nbsp;</p>
+<h2>The new Component Router for Angular 2 and 1.x (<a href="http://de.slideshare.net/ManfredSteyer1/angular-2-and-15-routing">slides</a>, video coming soon)</h2>
+<p><a href="https://twitter.com/ManfredSteyer">Manfred Steyer</a> started with some kind of fast slides, some of them with German notation.</p>
+<p>Router LIfe Cycle Callbacks:</p>
+<ul>
+<li>onActivate</li>
+<li>onDeactivate</li>
+<li>canDeactivate</li>
+<li>@canActivate</li>
+</ul>
+<p>Nice concept of honest authorisation with checkbox only :)</p>
+<p>Lazy loading for components is there.</p>
+<p>Router part inside each component:</p>
+<p>[javascript]<br />
+app.component(&#8216;bookFlight&#8217;,  {<br />
+    controller: BookFlightController,<br />
+    templateUrl: &#8216;components/book-flight/book-flight.html&#8217;,<br />
+    $routeConfig: [<br />
+        { path: &#8216;/&#8217;, component: &#8216;passenger&#8217;, name: &#8216;Passenger&#8217; },<br />
+        { path: &#8216;/flight&#8217;, component: &#8216;flight&#8217;, name: &#8216;Flight&#8217;, useAsDefault: true },<br />
+        { path: &#8216;/booking&#8217;, component: &#8216;booking&#8217;, name: &#8216;Booking&#8217; },<br />
+        { path: &#8216;/passenger/:id&#8217;, component: &#8216;passengerEdit&#8217;, name: &#8216;PassengerEdit&#8217; }<br />
+    ]<br />
+}); </p>
+<p>[/javascript]</p>
+<p>Access control could be done via @canActivate:</p>
+<p>[javascript]<br />
+app.component(&#8216;passengerEdit&#8217;, {<br />
+    controller: PassengerEditController,<br />
+    template: passengerEditTemplate,<br />
+    $canActivate: () =&gt; {<br />
+        console.debug(&quot;$canActivate&quot;);<br />
+        return true;<br />
+    }<br />
+});<br />
+[/javascript]</p>
+<p>Can be installed in Angular1 via ng-controller, unfortunately did not find this place in your code.</p>
+<p>Link to router config examples: <a href="https://github.com/manfredsteyer/angular-2-component-router-sample/blob/master/app.js">Angular2</a> and <a href="https://github.com/manfredsteyer/angular-1.5-component-router/blob/master/wwwroot/app/app.ts">Angular1.5</a></p>
+<p><strong>@Manfred</strong>, I think it should be some piece of code that goes after each model slide for better understanding. Second thing &#8211; we don&#8217;t need ControllerAs for Angular1.5 anymore.</p>
+<p>&nbsp;</p>
+<h2>Rendering in Angular 2  (<a href="http://zizzamia.github.io/rendering-in-angular-2/">slides</a>, <a href="https://www.youtube.com/watch?v=IbLO08NMMXY">video</a>)</h2>
+<p><a href="https://twitter.com/Zizzamia">Leonardo Zizzamia</a> presented one more topic about trying to solve problem of synchronising Model and UI.</p>
+<p>Render decoupling to make it possible to use different renders. Make it possible to have the same code base, same templates for different platforms.</p>
+<p><a href="https://github.com/matsko/angular2-canvas-renderer-experiment">Canvas Root Render</a></p>
+<p>Angular2 Rendering is still in beta</p>
+<p>and nice app &#8211; https://getplan.co based on Angualr1.4.9 (still migrating to 2)</p>
+<p>&nbsp;</p>
+<h2>Which Way Is Up? (<a href="https://www.youtube.com/watch?v=oO0b7iplgYY">video</a>)</h2>
+<p><a href="https://twitter.com/toddmotto">Todd Motto</a> told us a nice story about Jerry, a pirat-packman-developer<img decoding="async" loading="lazy" class="alignnone size-full wp-image-3030" src="https://stepansuvorov.com/blog/wp-content/uploads/2016/02/DSC_7453.jpg" alt="Jerry js " width="1478" height="979" /></p>
+<p>I&#8217;ll not retell you the story, better wait for the video ;)</p>
+<p>Todd just assembled all our doubts and fears about JS boom(what technology to use?), open source and participating in community life.</p>
+<p>Some lessons from the story:</p>
+<ul>
+<li>don&#8217;t be scared of new technologies</li>
+<li>but don&#8217;t try to use them all at once, just keep an eye on them</li>
+<li>contribute to open source projects &#8211; the great way of knowledge sharing</li>
+<li>you know it well only when you can explain it well &#8211; write a blog, explain your thoughts</li>
+<li>and keep in mind:</li>
+</ul>
+<p style="font-size: 29px;">Nothing was achieved in comfort zone!</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2016/02/ng-nl-2016-brief-review/feed/</wfw:commentRss>
+			<slash:comments>6</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>ng-nl. brief review</title>
+		<link>https://stepansuvorov.com/blog/2015/02/ng-nl-brief-review/</link>
+					<comments>https://stepansuvorov.com/blog/2015/02/ng-nl-brief-review/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 14 Feb 2015 01:19:03 +0000</pubDate>
+				<category><![CDATA[Events]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[conference]]></category>
+		<category><![CDATA[event]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[ng-nl]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2334</guid>
+
+					<description><![CDATA[I was happy to visit NG-NL Conference in Amsterdam (the first AngularJS one in NL) and would like to share my thoughts with you. As far as there were a lot of topics to discuss conference was run in 2 tracks. Here &#8230; <a href="https://stepansuvorov.com/blog/2015/02/ng-nl-brief-review/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" loading="lazy" class="alignnone wp-image-2335" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/logo.png" alt="logo" width="300" height="300" /></p>
+<p>I was happy to visit <a title="http://www.ng-nl.org/" href="http://www.ng-nl.org/">NG-NL Conference in Amsterdam</a> (the first AngularJS one in NL) and would like to share my thoughts with you.</p>
+<p><span id="more-2334"></span></p>
+<p>As far as there were a lot of topics to discuss conference was run in 2 tracks. <a title="http://www.ng-nl.org/#schedule" href="http://www.ng-nl.org/#schedule">Here</a> you can find the whole schedule. I followed next route:</p>
+<p><a href="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/nov5Gjenk9lc_1hzCzj8dBPyNi3OZq6Hl4HViGEToUE.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2336" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/nov5Gjenk9lc_1hzCzj8dBPyNi3OZq6Hl4HViGEToUE.png" alt="ng-nl plan" width="800" height="567" /></a> so several words about each one.</p>
+<h2>Intro + Welcome (<a title="docs.google.com/presentation" href="https://docs.google.com/presentation/d/1tE3fQUbmQUsMDmA0wc7z6dEhtyLk44GBKrVRtB58xoc/edit#slide=id.g78c807a97_329">slides</a>, <a title="youtube.com" href="https://www.youtube.com/watch?v=dJFV8wFU23A">video</a>)</h2>
+<p>It was great speech by <a class="ProfileHeaderCard-nameLink u-textInheritColor js-nav " href="https://twitter.com/js_dev">Aaron Frost</a>. We can say that it was about everything and nothing(from tech side) the same time. He provided good structured way how everyone can grow as a professional inside AngularJS/JavaScript(and probably not only) community.</p>
+<p>After several days/weeks/months listeners could forget the context, but they never forget awesome comparison that authors of frameworks and tools like builders who are constructing a bridge across the river, river of different development issues. And they know that these bridges would be used not only by them but mostly by juniors. So he wished us <em>create our own bridges, help to improve existing ones and never troll builders</em>.</p>
+<p>Very inspiring! Thank you, Aaron.</p>
+<h2>Videogular and the future of HTML5 video (<a href="http://slides.com/elecash/deck#/">slides</a>, <a title="youtube.com" href="https://www.youtube.com/watch?v=I7ZUkd44-Co">video</a>)</h2>
+<p>It was presentation of <a title="http://www.videogular.com/" href="http://www.videogular.com/">Videogular</a> &#8211; HTML5 video player for AngularJS by <a class="ProfileHeaderCard-nameLink u-textInheritColor js-nav " href="https://twitter.com/elecash">Raúl Jiménez</a>. First part of the presentation for me was like &#8220;reading&#8221; documentation for component and explaining obvious things. Second part was more interesting with life coding and real example. Site <a title="http://sawfish.stimme.de/" href="http://sawfish.stimme.de/">sawfish.stimme.de</a> shows <strong>Videogular</strong> connected to google maps API that is really impressing!</p>
+<p><strong>@Raul</strong>, I will definitely have more detailed look on your project.</p>
+<h2>Lazy load anything using ocLazyLoad (<a href="http://slides.com/ocombe/ng-nl#/">slides</a>, <a title="youtube.com" href="https://www.youtube.com/watch?v=mM45wIg_fpI">video</a>)</h2>
+<p>A very short talk by <a class="ProfileHeaderCard-nameLink u-textInheritColor js-nav " href="https://twitter.com/OCombe">Olivier Combe</a>. He presented his extension <a title="https://github.com/ocombe/ocLazyLoad" href="https://github.com/ocombe/ocLazyLoad">ocLazyLoad</a> that allows to do lazy loading for modules in AngularJS. Pointed out how important lazy loading is, especially for mobile limited network connection. Also it was some explanation how it could work with router (both ngRoute and ui-router). It&#8217;s nice that ocLazyLoad also support dependancy injection for loaded modules.</p>
+<p>There are some expectations to get similar functionality in Angular1.5, we&#8217;ll see.</p>
+<p><strong>@Olivier</strong>, why only 20 min for such a fundamental concept? Already dived into the <a title="github.com" href="https://github.com/ocombe/ocLazyLoad/blob/master/dist/ocLazyLoad.js">source code</a>.</p>
+<h2>Visual Review &#8211; Automated GUI testing with Protractor</h2>
+<p><a class="ProfileHeaderCard-nameLink u-textInheritColor js-nav " href="https://twitter.com/dmarjenburgh">Daniel Marjenburgh</a> presented <a title="https://github.com/xebia/VisualReview" href="https://github.com/xebia/VisualReview">Visual Review</a> &#8211; tool to check visual changes between different project builds (btw name is terrible extremely difficult to google it :). The tool works together with protractor (thanks to special plugin <a title="https://github.com/xebia/VisualReview-protractor" href="https://github.com/xebia/VisualReview-protractor">VisualReview-protractor</a>) that makes it really tasty. The base idea is quite simple: to make and compare screenshots. In protractor scenario code it looks simply like:</p>
+<p>[javascript]<br />
+vr.takeScreenshot(&#8216;AngularJS-homepage&#8217;);<br />
+[/javascript]</p>
+<p><strong>@Daniel</strong>, I liked the idea. Only one question is still open for me: how could I make it work with remote browsers (for example <a title="http://www.browserstack.com/" href="http://www.browserstack.com/">Browserstack</a> service)?</p>
+<h2>TDD in javascript &#8211; Not a myth (<a href="http://slides.com/ofird/tdd-in-javascript-not-a-myth--2#/">slides</a>)</h2>
+<p>In all the details and for the very basics &#8211; TDD in JavaScript by <a class="ProfileHeaderCard-nameLink u-textInheritColor js-nav&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;
+" href="https://twitter.com/ofirdagan2">Ofir Dagan</a>. In this presentation you could find answers for all the questions: &#8220;why to do testing?&#8221;, &#8220;how to do it right?&#8221;, &#8220;which tools to use?&#8221;, &#8220;how to analyse the coverage?&#8221; and even &#8220;how mother nature do TDD&#8221;. It&#8217;s really good and quick introduction for developers who want to start with testing.</p>
+<p><strong>@Ofir</strong>, I wish I met you 2 years ago when I started my &#8220;trial and error method&#8221; with TDD.</p>
+<h2>Inside The Angular Directive Compiler (<a href="https://www.youtube.com/watch?v=saA4rUSBSUk">video</a>)</h2>
+<p>I even could not imaging that this lecture about Directive Compiler would be so interesting for me. Step by step together with <a class="ProfileHeaderCard-nameLink u-textInheritColor js-nav&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;
+" href="https://twitter.com/teropa">Tero Parviainen</a> we recreated functionality of <a title="docs.angularjs.org" href="https://docs.angularjs.org/api/ng/service/$compile">$compileProvider.$compile</a> method. It consists of 4 steps:</p>
+<ul>
+<li><strong>compile</strong> (parse html template for directives)</li>
+<li><strong>link</strong> (link them to the scope)</li>
+<li><strong>inheritance</strong> (create new scope if needed and operate with it)</li>
+<li><strong>isolation </strong>(not provide the scope by itself but do attribute binding)</li>
+</ul>
+<p><strong>@Tero</strong>, you pushed me to look into source code more often :) And of course thank you for the book!</p>
+<h2>Domain Model Objects in AngularJS (<a title="youtube.com" href="https://www.youtube.com/watch?v=iz9zBWrhZUg">video</a>)</h2>
+<p><a class="ProfileHeaderCard-nameLink u-textInheritColor js-nav&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;
+" href="https://twitter.com/GHengeveld">Gert Hengeveld</a> showed how we could create Model layer based on javascript classes (or constructor functions). During all the presentation I had filling that backend developer wants to bring his concepts to client side(To be sure that I understood concept correctly I went to <a title="Angular model objects with JavaScript classes" href="https://medium.com/opinionated-angularjs/angular-model-objects-with-javascript-classes-2e6a067c73bc">original article</a>). I was not convinced that I should try this approach. There were so many theoretical things that we ostensibly would be able to do with this structure(I even don&#8217;t remember the whole list): validation, relations, etc&#8230; I would like to see your implementation of this concepts. Because without implementation it&#8217;s nothing to discuss. In our applications for data layer we are using <a title="https://github.com/mgonto/restangular" href="https://github.com/mgonto/restangular">Restangular</a> wrapped with our services where we do validation and all this stuff, and it works pretty well.</p>
+<p><strong>@Gert</strong>, if you have some code to share &#8211; please show it, I really would like to have a look.</p>
+<h2>How I made a mess of my Angular application (<a href="http://slides.com/djsmith/how-we-made-a-mess-of-our-angular-app/#/">slides</a>, <a title="youtube.com" href="https://www.youtube.com/watch?v=n8JdXkKhDyU&amp;feature=em-subs_digest">video</a>)</h2>
+<p>Very funny speech by <a class="ProfileHeaderCard-nameLink u-textInheritColor js-nav&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;
+" href="https://twitter.com/djsmith42">Dave Smith</a> about past Angular mistakes and ruler punishment. I just provide the list of mentioned mistakes and solution(in brackets) for them:</p>
+<ul>
+<li>scope abuse ( do not create scope everywhere)</li>
+<li>global controller functions ( use another syntax )</li>
+<li>shadow scope ( use &#8220;controllers as &#8221; or nested model)</li>
+<li>$watch abuse ( use ng-change, events, flux pattern)</li>
+<li>ng-include ( just don&#8217;t use ng-include)</li>
+<li>pass scope like param to services ( never do so)</li>
+<li>home grown build tools ( many existing proven tools)</li>
+</ul>
+<p>btw, it was a suggestion to put own Angular mistakes on twitter with tag <a href="https://twitter.com/hashtag/ngoops?src=hash">#ngoops</a> (not much for now)</p>
+<p><strong>@Dave</strong>, mine were(except several from your list):</p>
+<ul>
+<li>bad file structure</li>
+<li>everything in controller (DOM manipulations and business logic)</li>
+<li>used jQuery a lot instead native directives</li>
+</ul>
+<h2>Modern authentication solutions (<a href="https://www.dropbox.com/s/6144v595abh2lzq/steyer_oauth2_javascript.pdf?dl=0">slides</a>, <a title="youtube.com" href="https://www.youtube.com/watch?v=7oGDG47KrXU">video</a>)</h2>
+<p><a class="ProfileHeaderCard-nameLink u-textInheritColor js-nav&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;
+" href="https://twitter.com/ManfredSteyer">Manfred Steyer</a> told us a lot about OAuth 2.0 and OpenID and not much about AngularJS implementation.  And it would be also interesting to hear about some existing solutions for Angular and compare them.</p>
+<p><strong>@Manfred</strong>, 45 min definitely not enough for OAuth specific. I guess audience divided into 2 parts: who worked with OAuth before &#8211; for them it was boring, and who did not know this protocol &#8211; they still don&#8217;t know it.</p>
+<h2>AngularJS Lab</h2>
+<p>I don&#8217;t know why, but we skipped this.</p>
+<p>But still I had quite interesting talk with <a class="ProfileHeaderCard-nameLink u-textInheritColor js-nav&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;
+" href="https://twitter.com/cburgdorf">Christoph Burgdorf</a>. Christoph, thank you for advise about detecting language for authorised user.</p>
+<h2>Closing Keynote (<a title="youtube.com" href="https://www.youtube.com/watch?v=czHsSDw6Dys">video</a>)</h2>
+<p><img decoding="async" loading="lazy" class="alignnone size-full wp-image-2339" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/02/keynote.jpg" alt="keynote" width="588" height="456" /></p>
+<p>I&#8217;m glad to be with <a class="ProfileHeaderCard-nameLink u-textInheritColor js-nav&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;
+" href="https://twitter.com/CarmenPopoviciu">Carmen Popoviciu</a> in one community.</p>
+<p>&nbsp;</p>
+<p><strong>@organisers</strong>, <strong>@speakers,</strong> thank you very much for such a great event!</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/02/ng-nl-brief-review/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

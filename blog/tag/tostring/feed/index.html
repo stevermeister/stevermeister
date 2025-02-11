@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>toString &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/tostring/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 28 Jun 2014 08:15:56 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>jQuery to String</title>
+		<link>https://stepansuvorov.com/blog/2014/06/jquery-to-string/</link>
+					<comments>https://stepansuvorov.com/blog/2014/06/jquery-to-string/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 28 Jun 2014 08:14:21 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[toString]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1775</guid>
+
+					<description><![CDATA[Иногда возникает необходимость получить html-содержимое jQuery-объекта в виде строки. Первое что приходит в голову [javascript]$element.html();[/javascript] да, это работает, но мы не получаем html-кода самого контейнера (или корневого элемента). Следующий вариант, который приходит в голову &#8211; сделать обертку копии текущего элемента &#8230; <a href="https://stepansuvorov.com/blog/2014/06/jquery-to-string/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Иногда возникает необходимость получить <strong>html</strong>-содержимое <strong>jQuery</strong>-объекта в виде <strong>строки</strong>. Первое что приходит в голову</p>
+<p>[javascript]$element.html();[/javascript]</p>
+<p>да, это работает, но мы не получаем html-кода самого контейнера (или корневого элемента). Следующий вариант, который приходит в голову &#8211; сделать <strong>обертку</strong> копии текущего элемента и после уже получить содержимое:</p>
+<p>[javascript]$(&#8216;&lt;div&gt;&#8217;).append($element.clone()).html();[/javascript]</p>
+<p>но как-то это громоздкою.<br />
+Погуглив нашел еще интересный вариант, который работает в <strong>jQuery</strong> начиная с версии <strong>1.6</strong>:</p>
+<p>[javascript]$element.prop(&#8216;outerHTML&#8217;); [/javascript]</p>
+<p>Ну и можно еще поиграть с переопределением метода toString (сделано в качестве эксперимента и крайне не рекомендуется делать в реальном проекте):</p>
+<p>[javascript]<br />
+$.fn.toString = function() {<br />
+   return $(this).prop(&#8216;outerHTML&#8217;);<br />
+}<br />
+[/javascript]</p>
+<p>после чего</p>
+<p>[javascript]alert($element) [/javascript]</p>
+<p>выведет не просто [Object object], а строку &#8211; HTML содержимое объекта.</p>
+<p>И <a title="jsfiddle" href="http://jsfiddle.net/STEVER/LPPzh/">код</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/06/jquery-to-string/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

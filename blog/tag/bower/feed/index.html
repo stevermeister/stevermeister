@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>bower &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/bower/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Fri, 03 Jul 2015 13:15:25 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Пакетный менеджер Bower</title>
+		<link>https://stepansuvorov.com/blog/2013/03/%d0%bf%d0%b0%d0%ba%d0%b5%d1%82%d0%bd%d1%8b%d0%b9-%d0%bc%d0%b5%d0%bd%d0%b5%d0%b4%d0%b6%d0%b5%d1%80-bower/</link>
+					<comments>https://stepansuvorov.com/blog/2013/03/%d0%bf%d0%b0%d0%ba%d0%b5%d1%82%d0%bd%d1%8b%d0%b9-%d0%bc%d0%b5%d0%bd%d0%b5%d0%b4%d0%b6%d0%b5%d1%80-bower/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 26 Mar 2013 19:25:50 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[bower]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=894</guid>
+
+					<description><![CDATA[Currently, people are managing dependencies, such as JavaScript libraries, manually. This sucks. Крупные проекты как правило используют большое количество сторонних библиотек, таких как jQuery, Underscore, различные UI и плагины к ним, компонентные фреймворки и шаблоны к ним. Так вот, хранить &#8230; <a href="https://stepansuvorov.com/blog/2013/03/%d0%bf%d0%b0%d0%ba%d0%b5%d1%82%d0%bd%d1%8b%d0%b9-%d0%bc%d0%b5%d0%bd%d0%b5%d0%b4%d0%b6%d0%b5%d1%80-bower/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><a href="http://twitter.github.com/bower/"><img decoding="async" class="alignnone size-medium wp-image-895" title="bower_logo" src="https://stepansuvorov.com/blog/wp-content/uploads/2013/01/bower_logo-300x136.png" alt="" width="300" height="136" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2013/01/bower_logo-300x136.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2013/01/bower_logo-500x227.png 500w, https://stepansuvorov.com/blog/wp-content/uploads/2013/01/bower_logo.png 564w" sizes="(max-width: 300px) 100vw, 300px" /></a></p>
+<blockquote><p>Currently, people are managing dependencies, such as JavaScript libraries, manually. This sucks.</p></blockquote>
+<p>Крупные проекты как правило используют большое количество сторонних библиотек, таких как <strong>jQuery</strong>, <strong>Underscore</strong>, различные <strong>UI</strong> и плагины к ним, <strong>компонентные фреймворки</strong> и шаблоны к ним. Так вот, хранить весь этот сторонний код вместе с проектом не очень удобно. А, если еще учесть, что каждая библиотека должна иметь хотя бы 2 файла: минифицированый и отладочный, то структура проекта превращается в свалку, в которой уже довольно трудно разобраться. Да, частично решают вопрос git-ссылки репозитрия (когда мы не копируем контент, а ставим ссылку на репозиторий библиотеки), но это все равно не очень удобно. Хотелось бы совсем избавиться от этого стороннего кода в репозитории. Вот для этого и нужен <strong><a href="http://twitter.github.com/bower/">bower</a></strong>.</p>
+<p><span id="more-894"></span></p>
+<p>По сути, вместо всех этих сторонних библиотек с помощью <strong>bower</strong> мы можем хранить в репозитории только инструкцию по их загрузке и потом при разворачивании проекта выполнить команду, которая подтянет все необходимые файлы к нам.</p>
+<p><strong>Bower</strong> написан на javascript для платформы <strong>node.js</strong>.</p>
+<p>Устанавливается через <strong>npm</strong>:</p>
+<pre>npm install bower -g</pre>
+<p>После установки можно выполнить простую команду (в директории проекта):</p>
+<pre>bower install jquery</pre>
+<p>которая подгрузит к нам библиотеку jquery в ./components/jquery (по умолчанию)</p>
+<p>Устанавливать библиотеки (пакеты) можно через:</p>
+<ul>
+<li>имя &#8211;
+<pre>bower install jquery</pre>
+</li>
+<li>ссылка на git-репозиторий (полная)
+<pre>bower install git://github.com/components/jquery.git</pre>
+</li>
+<li>ссылка на git-репозиторий (относительная)
+<pre>bower install components/jquery</pre>
+</li>
+<li>http ссылка на файл
+<pre>bower install http://foo.com/jquery.awesome-plugin.js</pre>
+</li>
+<li><span style="line-height: normal;"><span style="line-height: normal;"><span style="line-height: normal;">локальный путь</span></span></span>
+<pre>bower install ./repos/jquery</pre>
+</li>
+</ul>
+<p>Причем в случае, если это будет ссылка на <strong>архив</strong>, &#8211; <strong>bower</strong> сам распакует его содержимое.</p>
+<p>Если нужна конкретная версия библиотеки, то это можно задать с помощью тега:</p>
+<pre>bower install jquery#1.8.1
+bower install git://github.com/components/jquery.git#~1.8.1
+bower install components/jquery#1.8.x</pre>
+<p>Кроме команды <strong>install</strong>, есть также команда <strong>update</strong>.</p>
+<p>Для поиска по готовым пакетам существуют команды <strong>list</strong> и <strong>search</strong>. Также можно воспользоваться <a href="http://sindresorhus.com/bower-components/">вот этим</a> онлайн инструментом.</p>
+<p>Теперь перейдем к самой интересной части &#8211; составлению конфиг файла для проекта, который подтянет все зависимости одной командой</p>
+<pre>bower install</pre>
+<p>Для этого в диретории проекта необходимо создать файл <strong>component.json</strong>, который по своей сути чем-то напоминает <strong>package.json</strong>(для <strong>npm</strong>), со следующим содержанием:</p>
+<pre>{
+ "name": "myProject",
+ "version": "1.0.0",
+ "dependencies": { "jquery": "~1.7.2" }
+}</pre>
+<p>где <strong>name</strong> и <strong>version</strong> просто поля описательного характера, а вот параметр <strong>dependencies</strong> &#8211; основаная часть, в которой будем описывать все библиотеки для загрузки. В нашем случае это <strong>jQuery</strong> с указанием версии.</p>
+<p>Еще есть никому не ясная опция <strong>main</strong>, которая подразумевает указание одного главного файла каждого типа(css, html, js) и которую разработчики заложили на будущее.</p>
+<p>В реальном проекте блок зависимостей может выглядеть как-то так:</p>
+<pre>{
+  "angular-bootstrap": "0.1.0",
+  "angular-complete": "1.0.4",
+<span style="font-family: 'Courier 10 Pitch', Courier, monospace; font-size: 13px; font-style: normal; line-height: 1.5;"> "angular-ui": "0.4.0",</span>
+<span style="font-family: 'Courier 10 Pitch', Courier, monospace; font-size: 13px; font-style: normal; line-height: 1.5;"> "chosen": "0.9.11",</span>
+<span style="font-family: 'Courier 10 Pitch', Courier, monospace; font-size: 13px; font-style: normal; line-height: 1.5;"> "lodash": "1.0.0-rc.3"</span>
+}</pre>
+<p>также хочу обратить ваше внимание на то, что <strong>bower</strong> понимает вложенные зависимости. Если вы устанавливаете какой-то модуль, который зависит от <strong>jQuery</strong>, то нет необходимости отдельно прописывать установку <strong>jQuery</strong>, так как <strong>bower</strong> сам поймет что данную библиотеку необходимо установить.</p>
+<p>Также можно добавлять свои пакеты(библиотеки) в репозиторий <strong>bower</strong>. Делается это следующей командой:</p>
+<pre>bower register myawesomepackagename git://github.com/maccmans/face</pre>
+<p>&#8211; т.е. указывается название пакета и путь к нему.</p>
+<p>После чего вашу библиотеку можно будет также установить с помощью bower:</p>
+<pre>bower install myawesomepackagename</pre>
+<p>Если вас не полностью удовлетворяет стандартный функционал, который можно задать конфиг файлом, &#8211; то можете воспользоваться прекрасным набором <strong>bower</strong> <strong>api</strong> методов и расширить инструментарий.</p>
+<pre>var bower = require('bower');
+bower.commands
+     .install(paths, options)
+     .on('end', function (data) {
+    data &amp;&amp; console.log(data);
+});</pre>
+<p>Все команды вызывают 3 типа событий: <strong>data</strong>, <strong>end</strong>, и <strong>error</strong>. Для <strong>install</strong> еще вызывается специальное событие <strong>package</strong>, которое говорит о том, что пакет был установлен.</p>
+<p>Сам bower также имеет конфигурационный файл <strong>.bowerrc</strong> (не путать с файлом конфигурации компонент проекта &#8211; <strong>component.json</strong>). Также составлен в json формате и в нем мы можем задать следующие настройки:</p>
+<pre>{
+"directory" : "components",
+"json" : "component.json",
+"endpoint" : "https://bower.herokuapp.com"
+}</pre>
+<p>где</p>
+<ul>
+<li><strong>directory</strong> &#8211; директория, куда будут загружается компоненты</li>
+<li><strong>json</strong> &#8211; файл конфигурации компонент</li>
+<li><strong>endpoint</strong> &#8211; позволяет запустить собственный Bower сервер-хранилище компонент</li>
+</ul>
+<p>Если что-то еще осталось не ясно &#8211; задавайте вопросы &#8211; дополню пост.</p>
+<p><strong>UPD</strong>: Начиная с версии 0.9 <strong>component.json</strong> переименовали <strong>bower.json</strong>.</p>
+<p>Материалы, которые вдохновляли на написание данной статьи:</p>
+<ul>
+<li><a href="http://twitter.github.com/bower">Оф сайт Bower</a></li>
+<li><a title="nice article by Andrew Burgess" href="http://net.tutsplus.com/tutorials/tools-and-tips/meet-bower-a-package-manager-for-the-web/">Meet Bower: A Package Manager For The Web</a></li>
+<li><a href="https://docs.google.com/document/d/1APq7oA9tNao1UYWyOm8dKqlRP2blVkROYLZ2fLIjtWc">Док файл, в котором идет доработка и обсуждедие спецификации Bower</a></li>
+</ul>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2013/03/%d0%bf%d0%b0%d0%ba%d0%b5%d1%82%d0%bd%d1%8b%d0%b9-%d0%bc%d0%b5%d0%bd%d0%b5%d0%b4%d0%b6%d0%b5%d1%80-bower/feed/</wfw:commentRss>
+			<slash:comments>13</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

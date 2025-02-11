@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>QUnit &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/qunit/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Tue, 25 Sep 2012 16:11:54 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Тестируем JavaScript c помощью QUnit</title>
+		<link>https://stepansuvorov.com/blog/2012/09/%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d1%83%d0%b5%d0%bc-javascript-c-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e-qunit/</link>
+					<comments>https://stepansuvorov.com/blog/2012/09/%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d1%83%d0%b5%d0%bc-javascript-c-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e-qunit/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 25 Sep 2012 16:11:54 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[QUnit]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=641</guid>
+
+					<description><![CDATA[Отбросив все объяснения зачем писать юнит-тесты, перейдем сразу к рассмотрению вопроса как их писать с помощью QUnit. Для начала скачаем последнюю версию библиотеки с официального сайта(она содержит в себе 2 файла js и css) и создадим обычных HTML файл, в &#8230; <a href="https://stepansuvorov.com/blog/2012/09/%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d1%83%d0%b5%d0%bc-javascript-c-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e-qunit/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-full wp-image-642" title="qunit_logo" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/09/qunit_logo.png" alt="" width="179" height="180" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2012/09/qunit_logo.png 179w, https://stepansuvorov.com/blog/wp-content/uploads/2012/09/qunit_logo-150x150.png 150w" sizes="(max-width: 179px) 100vw, 179px" /></p>
+<p>Отбросив все объяснения <strong>зачем</strong> писать юнит-тесты, перейдем сразу к рассмотрению вопроса <strong>как</strong> их писать с помощью <a href="http://qunitjs.com">QUnit</a>.</p>
+<p><span id="more-641"></span>Для начала скачаем последнюю версию библиотеки с официального сайта(она содержит в себе 2 файла js и css) и создадим обычных HTML файл, в котором будем выполнять наши тесты:</p>
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;QUnit Example&lt;/title&gt;
+  &lt;link rel="stylesheet" href="qunit.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="qunit"&gt;&lt;/div&gt;
+  &lt;script src="qunit.js"&gt;&lt;/script&gt;
+  &lt;script src="tests.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>Файл tests.js с описанием тестов:</p>
+<pre>QUnit.test( "hello test", function() {
+  ok( 1 == "1", "Passed!" );
+});</pre>
+<p>Запустим HTML файл и посмотрим что у нас получилось.</p>
+<p>Разберем этот пример более подробно: QUnit.test &#8211; метод, который вызывает тест для определенного функционала, имеет следующий синтаксис:</p>
+<pre>QUnit.test( checkFunctionName, callback)</pre>
+<p>причем, каждый функциональный тест может включать в себя множество подтестов-условий, например:</p>
+<pre>QUnit.test( "hello test", function() {
+  ok( 0 == "0", "Passed!" );
+  ok( 1 == "1", "Passed!" );
+  ok( 2 == "2", "Passed!" );
+ });</pre>
+<p>Кроме этого мы можем объединять тесты в <strong>группы</strong>, следующим образом:</p>
+<pre>module( "group digits" );
+QUnit.test( "chech zero", function() {
+    ok( 0 == "0", "Passed!" );
+}
+QUnit.test( "chech one", function() {
+    ok( 1 == "1", "Passed!" );
+}</pre>
+<p>Также QUnit позволяет нам проводить <strong>асинхронные</strong> тесты, для этого обрамляем условие в метод QUnit.<strong>asyncTest</strong> и вызвать метод start(), когда когда действие выполнится:</p>
+<pre>QUnit.asyncTest( "asynchronous test: one second later!", function() {
+  setTimeout(function() {
+    ok( true, "Passed and ready to resume!" );
+    start();
+  }, 1000);
+});</pre>
+<p>Кроме метода start() для асинхронной работы еще есть и метод stop() &#8211; для случая когда нам снова необходимо дождаться отработки асинхронного модуля.</p>
+<p>Теперь пройдемся по методам с помощью которых мы создаем <strong>условия</strong>:</p>
+<pre>ok( state, message ); //проверят что первое TRUE
+equal(actual, expected, message);// ==
+strictEqual( actual, expected, message ); // ===
+deepEqual( actual, expected, message ); // === в составном типе
+throws( block, expected, message ); // для теста exceptions</pre>
+<p>Также с помощью метода <strong>expect</strong>(), мы можем уточнить сколько проверок ожидаем сделать в рамках одного теста:</p>
+<pre>QUnit.asyncTest( "asynchronous test: one second later!", function() {
+  expect(1);
+  setTimeout(function() {
+    ok( true, "Passed and ready to resume!" );
+    start();
+  }, 1000);
+});</pre>
+<p>и тест будет не пройден, если итоговое число проверок не соответствует заданному.</p>
+<p>Библиотека позволяет навешивать <strong>callback</strong>-функции на различные действия begin, done, log, moduleDone, moduleStart, testDone, testStart:</p>
+<pre>QUnit.begin(function(){ //do something });</pre>
+<p>QUnit дает возможность конфигурировать некоторые параметры через QUnit.config:</p>
+<pre>QUnit.config.reorder = false;</pre>
+<p>&nbsp;</p>
+<p>И напоследок бонус &#8211; то, чего я не нашел в инете &#8211; цепочка асинхронных вызовов. На <a href="http://habrahabr.ru/post/83170/">хабре</a> предложили такой вариант решения:</p>
+<pre>asyncTest('asynctest', function () {
+  // Pause the test
+  expect(3);
+
+  $.get(function () {
+    // асинхронные проверки
+    ok(true);
+  });
+
+  $.get(function () {
+    // другие асинхронные проверки
+    ok(true);
+    ok(true);
+  });
+
+  setTimeout(function () {
+    start();
+  }, 2000);
+});</pre>
+<p>Т.е. ждать 2 секунды, а потом проверять. Сомнительное решение, которое не будет работать, если суммарное время асинхронных вызовов будет больше чем 2 секунды. Может оно конечно так и задумывалось?</p>
+<p>Попробуем его немного переделать, так чтобы не нужно было привязываться к конкретному времени ожидания:</p>
+<pre>asyncTest('asynctest', function () {
+  // Pause the test
+  expect(3);
+  var asyncNumberLeft = 2;
+  function checkEnd(){
+    asyncNumberLeft--;
+    if(asyncNumberLeft === 0){
+       start();
+    }
+  }
+
+  $.get(function () {
+    // асинхронные проверки
+    ok(true);
+    checkEnd();
+  });
+
+  $.get(function () {
+    // другие асинхронные проверки
+    ok(true);
+    ok(true);
+    checkEnd();
+  });
+
+});</pre>
+<p>Но если мы действительно хотим добавить какой-то лимит по времени выполнения, то таймаут следует оставить.</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/09/%d1%82%d0%b5%d1%81%d1%82%d0%b8%d1%80%d1%83%d0%b5%d0%bc-javascript-c-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e-qunit/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

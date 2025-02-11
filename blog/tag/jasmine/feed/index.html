@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>jasmine &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/jasmine/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sun, 28 Feb 2016 15:28:55 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Jasmine и юнит тесты</title>
+		<link>https://stepansuvorov.com/blog/2012/10/jasmine-%d0%b8-%d1%8e%d0%bd%d0%b8%d1%82-%d1%82%d0%b5%d1%81%d1%82%d1%8b/</link>
+					<comments>https://stepansuvorov.com/blog/2012/10/jasmine-%d0%b8-%d1%8e%d0%bd%d0%b8%d1%82-%d1%82%d0%b5%d1%81%d1%82%d1%8b/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Thu, 11 Oct 2012 10:22:51 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[jasmine]]></category>
+		<category><![CDATA[javascript]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=660</guid>
+
+					<description><![CDATA[Jasmine на данный момент одна из самым популярных библиотек для организации юнит тестирования JavaScript. На официальном сайте есть довольно хороший быстрый старт с примерами, но если все же хочется на русском и с комментариями &#8211; то добро пожаловать под кат. &#8230; <a href="https://stepansuvorov.com/blog/2012/10/jasmine-%d0%b8-%d1%8e%d0%bd%d0%b8%d1%82-%d1%82%d0%b5%d1%81%d1%82%d1%8b/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-full wp-image-661" title="jasmine_logo" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/10/jasmine_logo.png" alt="" width="282" height="90" /></p>
+<p>Jasmine на данный момент одна из самым популярных библиотек для организации юнит тестирования JavaScript.</p>
+<p>На официальном сайте есть довольно хороший <a href="http://pivotal.github.com/jasmine/">быстрый старт</a> с примерами, но если все же хочется на русском и с комментариями &#8211; то добро пожаловать под кат.</p>
+<p><span id="more-660"></span>Первым делом скачиваем себе библиотеку с <a href="http://github.com/pivotal/jasmine/downloads">офсайта</a>. Далее создаем себе <a title="вот готовая, если лень создавать ;)" href="http://jsfiddle.net/STEVER/HVPRB/">песочницу</a> для экспериментов. Вместе с библиотекой сразу идет пример использования, но возможно сходу разобраться в нем будет не просто. Более простая версия будет выглядеть так:</p>
+<pre>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;link rel="stylesheet" type="text/css" href="jasmine.css"&gt;
+  &lt;script type="text/javascript" src="jasmine.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript" src="tests.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript"&gt;
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.specFilter = function(spec) {
+        console.log(spec);
+      };
+      window.onload = function() {jasmineEnv.execute();};
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;&lt;/body&gt;
+&lt;/html&gt;</pre>
+<pre>tests.js - файл, в котором мы опишем наши тесты</pre>
+<pre>jasmine.getEnv - аналог синглтона для получения основного объекта</pre>
+<pre>jasmineEnv.specFilter - callback для получения результатов</pre>
+<p>Сразу модуль для рендера результатов(jasmine-html.js) и подключим его. Итоговый код будет такой:</p>
+<pre>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;link rel="stylesheet" type="text/css" href="jasmine.css"&gt;
+  &lt;script type="text/javascript" src="jasmine.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript" src="jasmine-html.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript" src="tests.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript"&gt;
+      var jasmineEnv = jasmine.getEnv();
+      var htmlReporter = new jasmine.HtmlReporter();
+      jasmineEnv.addReporter(htmlReporter);
+      jasmineEnv.specFilter = function(spec) {
+        return htmlReporter.specFilter(spec);
+      };
+
+      window.onload = function() {jasmineEnv.execute();};
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>Песочница есть, теперь можем переходить к экспериментам в tests.js:</p>
+<pre>describe("Jasmine", function() {
+  it("makes testing JavaScript awesome!", function() {
+    expect(true).toBe(true);
+  });
+});</pre>
+<pre>describe - описание блока тестов</pre>
+<pre>it - описание теста</pre>
+<p>* describe может включать в себя другой describe (если нужны подсекции)</p>
+<p>далее идет сам тест:</p>
+<pre>expect(true).toBe(true);</pre>
+<p>понятное дело, что вместо <em>true</em> тут будет 2 выражения, которые должны быть равны. Какие еще могут быть варианты для сравнения?</p>
+<pre>expect(true).not.toBe(true);</pre>
+<pre>expect(a).toEqual(b);</pre>
+<p>Отличие <strong>toEqual</strong> от <strong>toBe</strong> в том, что toBe &#8211; это строгое ссылочное сравнение (для объектов <em>a = b = {}</em> ), а в случае с toEqual &#8211; сравнение по содержимому( <em>a = {}, b = {}</em> ). Во втором случае toBe вернет <strong>fail</strong>.</p>
+<p>Также возможны варианты для нахождение совпадений подстроки:</p>
+<pre>var message = 'foo bar baz';
+
+expect(message).toMatch(/bar/);
+expect(message).toMatch('bar');
+expect(message).not.toMatch('bar');</pre>
+<p>Либо нахождения свойства в объекте:</p>
+<pre>var a = { foo: 'foo' };
+
+expect(a.foo).toBeDefined();
+expect(a.bar).not.toBeDefined();</pre>
+<p>Варианты проверки null и undefinded:</p>
+<pre>expect(a).not.toBeUndefined();
+expect(b).toBeUndefined();
+
+expect(a).toBeNull();
+expect(b).not.toBeNull();</pre>
+<p>Аналогично работают методы: toBeTruthy, toBeFalsy, toContain(проверяет наличие значение в массиве), toBeLessThan, toBeGreaterThan, toBeCloseTo.</p>
+<p>Если мы захотим проверить имя класса конструктора( аналог instanceof):</p>
+<pre>expect({}).toEqual(jasmine.any(Object));
+expect(12).toEqual(jasmine.any(Number));</pre>
+<p>Также есть метод проверки исключений:</p>
+<pre>var foo = function() {
+  return 1 + 2;
+};
+var bar = function() {
+  return a + 1;
+};
+
+expect(foo).not.toThrow();
+expect(bar).toThrow();</pre>
+<p>В группе тестов мы можем использовать инструкции <strong>beforeEach</strong> и <strong>afterEach</strong>, в которых мы указываем что нужно выполнить до/после каждого теста:</p>
+<pre>describe("A spec", function() {
+  var foo;
+
+  beforeEach(function() {
+    foo = new Object;
+  });
+
+  afterEach(function() {
+    foo = null;            expect(bar).toBeNull();
+  });
+
+  it("first test", function() {
+    expect(foo).toEqual(1);
+  });
+
+  it("second test", function() {
+    expect(foo).toEqual(1);
+  });</pre>
+<p>Группы и тесты обладают интересной особенностью, если мы поставим перед <em>describe</em> или <em>it</em> символ <em>x</em>, т.е. <strong>x<em>describe</em></strong> и <strong><em>xit</em></strong>, то они будут проигнорированы. (При этом ошибка о том, что метод не найден, вызвана не будет)</p>
+<p>Еще с помощью Jasmine мы можем выставлять <strong>наблюдателей</strong>(observer) на разные объекты с помощью метода <strong>spyOn</strong>:</p>
+<pre>beforeEach(function() {
+    spyOn(foo, 'setBar');expect({}).toEqual(jasmine.any(Object)); expect(12).toEqual(jasmine.any(Number));
+            expect(bar).toBeNull();
+    foo.setBar(123);
+    foo.setBar(456, 'another param');
+  });</pre>
+<p>После чего станут доступны следующие проверки:</p>
+<pre>expect(foo.setBar).toHaveBeenCalled();
+expect(foo.setBar.calls.length).toEqual(2);
+expect(foo.setBar).toHaveBeenCalledWith(123);
+expect(foo.setBar).toHaveBeenCalledWith(456, 'another param');
+expect(foo.setBar.mostRecentCall.args[0]).toEqual(456);
+expect(foo.setBar.calls[0].args[0]).toEqual(123);</pre>
+<p>Для метода <strong>spyOn</strong> существует ряд надстроек:</p>
+<pre>spyOn(foo, 'getBar').andCallThrough(); // продолжаем выполнение основной функции
+spyOn(foo, 'getBar').andReturn(745); // подменяем возвращаемое значение
+spyOn(foo, 'getBar').andCallFake(function() {return 1001;}); // подменяем метод</pre>
+<p>и более сложные:</p>
+<pre>setBar = jasmine.createSpy('setBar');
+foo = jasmine.createSpyObj('foo', ['setBar']);</pre>
+<p>По сути тоже самое что и spyOn(foo, &#8216;setBar&#8217;), только тут мы можем создавать наблюдатель на функцию(как в первом случае), а не на метод объекта и делать это динамически(формируя название функции).</p>
+<p>В случае, когда мы должны произвести тест через некоторое время после запуска тестируемого кода, на помощь нам приходит метод<strong> jasmine.Clock</strong>( аналог setTimeOut):</p>
+<pre>var timerCallback;
+beforeEach(function() {
+    timerCallback = jasmine.createSpy('timerCallback');
+    jasmine.Clock.useMock();
+  });
+
+it("causes a timeout to be called synchronously", function() {
+    setTimeout(function() {
+      timerCallback(); // это функция выполнится через 100мс
+    }, 100);
+
+    expect(timerCallback).not.toHaveBeenCalled(); // еще не выполнилась
+
+    jasmine.Clock.tick(101); // ждем 101 мс
+
+    expect(timerCallback).toHaveBeenCalled(); // уже должна была выполниться
+  });</pre>
+<p>&nbsp;</p>
+<p>А сейчас разберем самое сложное место во всей библиотеке &#8211; <strong>асинхронные</strong> тесты, которые по моему мнению очень слабо разобраны в примерах на официальном сайте. Создаются они с помощью очередей организованных через методы <strong>runs</strong>() и <strong>waitsFor</strong>().  В метод <strong>runs</strong>() мы передаем наши асинхронные действия, а в <strong>waitsFor</strong>() прописываем условие, по которому мы узнаем что асинхронное действие завершено &#8211; обычно для этого используется глобальная переменная, как флаг. Допустим у нас есть асинхронный метод:</p>
+<pre>function asynchFunc(value, callback){
+  setTimeout(function() {  //через 0.5с он
+    value++;   // изменит значение
+    callback(value); // и вернет его через callback
+  }, 500);
+}</pre>
+<p>Теперь напишем тест для него:</p>
+<pre>describe("Asynchronous specs", function() {
+    var value, flag;
+
+    it("async test", function() {
+        runs(function() {
+            flag = false;  // начальные значения
+            value = 0;
+            asynchFunc(value, function(x){
+                value = x;
+                flag = true;  // указывает на то что тест выполнен
+            });
+        });
+
+        waitsFor(function() {
+            return flag; // ждет когда флаг переключится в true
+        }, "Message for timeout case", 750);
+        // после выполняет следующий блок кода
+        runs(function() {
+            expect(value).toBeGreaterThan(0);
+        });
+    });
+});</pre>
+<p>Метод waitsFor имеет следующий синтаксис:</p>
+<pre>waitsFor(conditionCallback, TimeOutMessage, TimeOut)
+conditionCallback - функция возвращающая true/false, она постоянно вызывается методом waitsFor пока не вернет true либо наступит TimeOut
+TimeOut - максимально время работы метода в мс
+TimeOutMessage - сообщение по приходу TimeOut</pre>
+<p>Итак еще раз: мы помещаем наши асинхронные действия в метод runs() и при выполнении этого действия меняем флаг, а в waitsFor() помещаем функцию, которая будет возвращать этот самый флаг. Причем тут может быть как один флаг, так и гораздо более сложные проверки (например, если у нас идет несколько асинхронных вызовов).</p>
+<p>Полный пример в <a title="asynch test" href="http://jsfiddle.net/STEVER/HVPRB/3/">песочнице</a>.</p>
+<p>Желаю вам успешно пройденных тестов!</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/10/jasmine-%d0%b8-%d1%8e%d0%bd%d0%b8%d1%82-%d1%82%d0%b5%d1%81%d1%82%d1%8b/feed/</wfw:commentRss>
+			<slash:comments>11</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

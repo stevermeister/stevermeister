@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>promise &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/promise/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sun, 22 Jan 2017 08:50:33 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Angular + ES6 Promise</title>
+		<link>https://stepansuvorov.com/blog/2016/09/angular-es6-promise/</link>
+					<comments>https://stepansuvorov.com/blog/2016/09/angular-es6-promise/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 12 Sep 2016 17:43:29 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[es6]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[promise]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3125</guid>
+
+					<description><![CDATA[It would be really nice if we could use native ECMAScript 2015 Promises with Angular instead of $q service that is provided from box to be close to pure JavaScript: [javascript] //somewhere inside component controller let promise = new Promise((resolve) &#8230; <a href="https://stepansuvorov.com/blog/2016/09/angular-es6-promise/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>It would be really nice if we could use native <strong>ECMAScript 2015</strong> <strong>Promises</strong> with <strong>Angular</strong> instead of <strong>$q</strong> service that is provided from box to be close to pure JavaScript:</p>
+<p>[javascript]<br />
+//somewhere inside component controller<br />
+let promise = new Promise((resolve) =&gt; setTimeout(() =&gt; resolve(&#8216;resolved&#8217;), 2000));<br />
+promise.then(x =&gt; this.x = x);<br />
+[/javascript]</p>
+<p>But in this case we will have to run <strong>digest</strong> manually for each resolve(to synchronise view and model):</p>
+<p>[javascript]<br />
+let promise = new Promise((resolve) =&gt; setTimeout(() =&gt; resolve(&#8216;resolved&#8217;), 2000));<br />
+promise.then(x =&gt; {<br />
+  $scope.apply();<br />
+  this.x = x;<br />
+});<br />
+[/javascript]</p>
+<p>But what if we hack the <strong>Promise</strong> and intercept our <strong>digest</strong> call there:</p>
+<p><span id="more-3125"></span></p>
+<p>[javascript]<br />
+class SubPromise extends Promise {<br />
+  constructor(executor) {<br />
+    super(function(_resolve, _reject) {<br />
+      var resolve = (data) =&gt; {<br />
+        var res = _resolve(data);<br />
+        angular.element(document.body).injector().get(&#8216;$rootScope&#8217;).$apply();<br />
+        return res;<br />
+      }<br />
+      return executor(resolve, _reject);<br />
+    });<br />
+  }<br />
+}<br />
+[/javascript]</p>
+<p>now we just need to overwrite standard <strong>Promise</strong>:</p>
+<p>[javascript]<br />
+window.Promise = SubPromise;<br />
+[/javascript]</p>
+<p>to keep it simple to cover for <strong>unit-tests</strong> you can also wrap it into an angular <strong>factory</strong>:</p>
+<p>[javascript]<br />
+factory(&#8216;Promise&#8217;, () =&gt; Promise);<br />
+[/javascript]</p>
+<p><a href="http://plnkr.co/edit/fysuo9?p=preview">Here</a> you can play with the code.</p>
+<p><a href="http://stackoverflow.com/q/35971958/274500">Discussion on stackoverflow</a> about customising ES6 Promise.</p>
+<p><strong>!Attention:</strong> This experiment was made just for learning purposes and it should not be applied for the real projects.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2016/09/angular-es6-promise/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>setTimeout + ES6 Promise</title>
+		<link>https://stepansuvorov.com/blog/2016/09/settimeout-es6-promise/</link>
+					<comments>https://stepansuvorov.com/blog/2016/09/settimeout-es6-promise/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 10 Sep 2016 09:35:27 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[es6]]></category>
+		<category><![CDATA[promise]]></category>
+		<category><![CDATA[setTimeout]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3120</guid>
+
+					<description><![CDATA[I&#8217;m just thinking how convenient could it be if we have setTimeout returning promise. [javascript] setTimeout(1000).then(/* &#8230; do whatever */); [/javascript] Let&#8217;s create our own one and call it &#8216;delay&#8217; (using ES6 Promise): [javascript] delay = ms =&#62; new Promise(resolve &#8230; <a href="https://stepansuvorov.com/blog/2016/09/settimeout-es6-promise/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>I&#8217;m just thinking how convenient could it be if we have setTimeout returning promise.</p>
+<p>[javascript]<br />
+  setTimeout(1000).then(/* &#8230; do whatever */);<br />
+[/javascript]</p>
+<p>Let&#8217;s create our own one and call it &#8216;delay&#8217; (using ES6 Promise):</p>
+<p><span id="more-3120"></span></p>
+<p>[javascript]<br />
+delay = ms =&gt; new Promise(resolve =&gt; setTimeout(resolve, ms));<br />
+[/javascript]</p>
+<p>so now we already can use our delay function:</p>
+<p>[javascript]<br />
+  delay(1000).then(/* &#8230; do whatever */);<br />
+[/javascript]</p>
+<p>but let&#8217;s not forget about promise cancelation, in this case we need to store reject and timeout id:</p>
+<p>[javascript]<br />
+  delay = ms =&gt; {<br />
+    var promiseCancel, promise = new Promise((resolve, reject) =&gt; {<br />
+        let timeoutId = setTimeout(resolve, ms);<br />
+        promiseCancel = () =&gt; {<br />
+          clearTimeout(timeoutId);<br />
+          reject(Error(&quot;Cancelled&quot;));<br />
+        }<br />
+    });<br />
+    promise.cancel = () =&gt; {<br />
+      promiseCancel();<br />
+    };<br />
+    return promise;<br />
+  }<br />
+[/javascript]</p>
+<p><a href="https://plnkr.co/edit/TeqWpQmj6QD6KlajEc5Z?p=preview">Plunker</a> to play with this code.</p>
+<p><a href="http://stackoverflow.com/a/34255423/274500">Stackoverflow discussion</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2016/09/settimeout-es6-promise/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Антипаттерны в промисах</title>
+		<link>https://stepansuvorov.com/blog/2014/03/%d0%b0%d0%bd%d1%82%d0%b8%d0%bf%d0%b0%d1%82%d1%82%d0%b5%d1%80%d0%bd%d1%8b-%d0%b2-%d0%bf%d1%80%d0%be%d0%bc%d0%b8%d1%81%d0%b0%d1%85/</link>
+					<comments>https://stepansuvorov.com/blog/2014/03/%d0%b0%d0%bd%d1%82%d0%b8%d0%bf%d0%b0%d1%82%d1%82%d0%b5%d1%80%d0%bd%d1%8b-%d0%b2-%d0%bf%d1%80%d0%be%d0%bc%d0%b8%d1%81%d0%b0%d1%85/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Thu, 13 Mar 2014 11:35:32 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[antipattern]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[promise]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1587</guid>
+
+					<description><![CDATA[Промисы просты в использовании, когда вы уже поняли принцип. Однако существуют некоторые подводные камни, которые доставят немало неприятностей. Перевод/переработка статьи Promise Anti-patterns. Вложенные промисы (Nested Promises) В коде может возникнуть ситуация целой кучи вложенных друг в друга промисов: [javascript] loadSomething().then(function(something) &#8230; <a href="https://stepansuvorov.com/blog/2014/03/%d0%b0%d0%bd%d1%82%d0%b8%d0%bf%d0%b0%d1%82%d1%82%d0%b5%d1%80%d0%bd%d1%8b-%d0%b2-%d0%bf%d1%80%d0%be%d0%bc%d0%b8%d1%81%d0%b0%d1%85/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<blockquote><p>Промисы просты в использовании, когда вы уже поняли принцип. Однако существуют некоторые подводные камни, которые доставят немало неприятностей.</p></blockquote>
+<p>Перевод/переработка статьи <a href="http://taoofcode.net/promise-anti-patterns/">Promise Anti-patterns</a>.</p>
+<p><span id="more-1587"></span></p>
+<h2>Вложенные промисы (Nested Promises)</h2>
+<p>В коде может возникнуть ситуация целой кучи вложенных друг в друга промисов:</p>
+<p>[javascript]<br />
+loadSomething().then(function(something) {<br />
+    loadAnotherthing().then(function(another) {<br />
+        DoSomethingOnThem(something, another);<br />
+    });<br />
+});<br />
+[/javascript]</p>
+<p>Причина, по которой было сделано так, &#8211;  вам нужно было сделать что-то с результатами обоих промисов, а поставить их в цепочку было нельзя, так как <strong>then()</strong> возвращает только результат последнего.</p>
+<p>Но на самом деле причина в том, что вы не знаете о методе <strong>all()</strong>.</p>
+<p><strong>Так правильно</strong>:</p>
+<p>[javascript]<br />
+q.all([loadSomething(), loadAnotherThing()])<br />
+   .spread(function(something, another) {<br />
+      DoSomethingOnThem(something, another);<br />
+    });<br />
+[/javascript]</p>
+<p>Намного проще, правда? Метод <strong>q.all() </strong>обработает переданные в него промисы и будет возвращен результат посредством метода<strong> spread()</strong></p>
+<h2></h2>
+<h2>Разорваная цепочка (The Broken Chain)</h2>
+<p>Ваш код выглядит следующим образом:</p>
+<p>[javascript]<br />
+function anAsyncCall() {<br />
+    var promise = doSomethingAsync();<br />
+    promise.then(function() {<br />
+        somethingComplicated();<br />
+    });<br />
+    return promise;<br />
+}<br />
+[/javascript]</p>
+<p>Проблема: любая ошибка в методе <em>somethingComplicated</em>() не будет отловлена. Идея промисов &#8211; выполнение в цепочке: каждый вызов <strong>then()</strong> возвращает <span style="text-decoration: underline;">новый промис</span>. То есть в данном примере вместо первоначального промиса, нужно возвращать последний промис, который вернет <strong>then()</strong>.</p>
+<p><strong>Так правильно</strong>:</p>
+<p>[javascript]<br />
+function anAsyncCall() {<br />
+    var promise = doSomethingAsync();<br />
+    return promise.then(function() {<br />
+        somethingComplicated()<br />
+    });<br />
+}<br />
+[/javascript]</p>
+<h2></h2>
+<h2>Беспорядок в коллекции (The Collection Kerfuffle)</h2>
+<p>Имеется массив, стоит задача последовательно асинхронно обработать каждый элемент. У вас получится что-то наподобие рекурсии:</p>
+<p>[javascript]<br />
+function workMyCollection(arr) {<br />
+    var resultArr = [];<br />
+    function _recursive(idx) {<br />
+        if (idx &amp;gt;= resultArr.length) return resultArr;<br />
+        return doSomethingAsync(arr[idx]).then(function(res) {<br />
+            resultArr.push(res);<br />
+            return _recursive(idx + 1);<br />
+        });<br />
+    }<br />
+    return _recursive(0);<br />
+}[/javascript]</p>
+<p>Ух, это код совсем не понятен с первого взгляда.</p>
+<p>Когда вы изначально не знаете сколько звеньев будет в цепочке промисов, то крайне полезны станут методы <strong>map()</strong> и <strong>reduce()</strong> объекта <strong>Array</strong>.</p>
+<p>Помните, что<strong> q.all()</strong> принимает массив промисов и разрешает его в массив результатов? Мы можем просто применить <strong>map()</strong> в комбинации с <strong>q.all()</strong>:</p>
+<p>[javascript]<br />
+function workMyCollection(arr) {<br />
+   return q.all(arr.map(function(item) {<br />
+      return doSomethingAsync(item);<br />
+   }));<br />
+}[/javascript]</p>
+<p>К сожалению, это не будет являться полным решением, так как такое решение убивает всю асинхронность вызовов и займет соответственно больше времени.</p>
+<p>Если вам хочется запустить ваши промисы одновременно, то можно сделать <strong>reduce</strong>.</p>
+<p><strong>Так лучше:</strong></p>
+<p>[javascript]<br />
+function workMyCollection(arr) {<br />
+    return arr.reduce(function(promise, item) {<br />
+        return promise.then(function(result) {<br />
+            return doSomethingAsyncWithResult(item, result);<br />
+        });<br />
+    }, q());<br />
+}[/javascript]</p>
+<p>Вероятно тоже не идеальное решение, но уж точно лучше изначального.</p>
+<h2>Тень промиса (The Ghost Promise)</h2>
+<p>Иногда возникают ситуации, когда метод в зависимости от условия выполняет что-то синхронно либо асинхронно, но для поддержания единства поведения всего метода вы создаете промис и для синхронной операции:</p>
+<p>[javascript]<br />
+var promise;<br />
+if (asyncCallNeeded) promise = doSomethingAsync();<br />
+else promise = Q.resolve(42);<br />
+promise.then(function() {<br />
+    doSomethingCool();<br />
+});[/javascript]</p>
+<p>Это конечно не самый худший антипаттерн, но мы определенно можем сделать его лучше обернув значение/промис в <strong>Q()</strong>. Этот метод возьмет либо значение либо промис и обработает его соответственно:</p>
+<p>[javascript]<br />
+Q(asyncCallNeeded ? doSomethingAsync() : 42)<br />
+    .then( function(value){<br />
+        doSomethingGood(); })<br />
+    .catch( function(err) {<br />
+        handleTheError();<br />
+    });[/javascript]</p>
+<h2></h2>
+<h2>Пристрастный отлов ошибок (The Overly Keen Error Handler)</h2>
+<p>Метод <strong>then()</strong> принимает 2 параметра-обработчика: успешного вызова и вызова с ошибкой. Вероятно где-то у вас встретится такой код:</p>
+<p>[javascript]<br />
+somethingAsync.then( function() {<br />
+     return somethingElseAsync();<br />
+}, function(err) {<br />
+     handleMyError(err);<br />
+});<br />
+[/javascript]</p>
+<p>Проблема заключается в том, что если ошибка случится в первом обработчике, то она не будет направлена на обработчик ошибок.</p>
+<p><strong>Так правильно</strong>:</p>
+<p>[javascript]<br />
+somethingAsync .then(function() {<br />
+    return somethingElseAsync();<br />
+}) .then(null, function(err) {<br />
+    handleMyError(err);<br />
+});<br />
+[/javascript]</p>
+<p>или с использованием <strong>catch()</strong>:</p>
+<p>[javascript]<br />
+somethingAsync .then(function() {<br />
+    return somethingElseAsync();<br />
+}) .catch(function(err) {<br />
+    handleMyError(err);<br />
+});[/javascript]</p>
+<h2></h2>
+<h2>Забытый промис (The Forgotten Promise)</h2>
+<p>Ситуация: вы вызываете метод, который возвращает промис, но забывая об этом  создаете еще один:</p>
+<p>[javascript]<br />
+var deferred = Q.defer();<br />
+doSomethingAsync().then(function(res) {<br />
+    res = manipulateMeInSomeWay(res);<br />
+    deferred.resolve(res);<br />
+}, function(err) {<br />
+    deferred.reject(err);<br />
+});<br />
+return deferred.promise;<br />
+[/javascript]</p>
+<p>Это ломает изначальную задумку, ради которой промисы и создавались.</p>
+<p><strong>Так правильно</strong>:</p>
+<p>[javascript]<br />
+return doSomethingAsync().then(function(res) {<br />
+    return manipulateMeInSomeWay(res);<br />
+});<br />
+[/javascript]</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/03/%d0%b0%d0%bd%d1%82%d0%b8%d0%bf%d0%b0%d1%82%d1%82%d0%b5%d1%80%d0%bd%d1%8b-%d0%b2-%d0%bf%d1%80%d0%be%d0%bc%d0%b8%d1%81%d0%b0%d1%85/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

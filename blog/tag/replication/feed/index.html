@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>replication &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/replication/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Tue, 27 Nov 2012 15:34:01 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Репликация MongoDb быстрая настройка</title>
+		<link>https://stepansuvorov.com/blog/2012/11/%d1%80%d0%b5%d0%bf%d0%bb%d0%b8%d0%ba%d0%b0%d1%86%d0%b8%d1%8f-mongodb-%d0%b1%d1%8b%d1%81%d1%82%d1%80%d0%b0%d1%8f-%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0/</link>
+					<comments>https://stepansuvorov.com/blog/2012/11/%d1%80%d0%b5%d0%bf%d0%bb%d0%b8%d0%ba%d0%b0%d1%86%d0%b8%d1%8f-mongodb-%d0%b1%d1%8b%d1%81%d1%82%d1%80%d0%b0%d1%8f-%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 27 Nov 2012 15:34:01 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[MongoDB]]></category>
+		<category><![CDATA[replication]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=757</guid>
+
+					<description><![CDATA[MongoDb поддерживает 2 формы репликации: реплисеты(Replica Sets ) и ведущий-ведомый(Master-Slave). Рекомендуется использовать более новый подход &#8211; реплисеты. О реплисетах  можно подробно прочесть на официальном сайте. Мы в свою чередь разберем как можно быстро создать и настроить данный вид репликации. Когда мы говорим &#8230; <a href="https://stepansuvorov.com/blog/2012/11/%d1%80%d0%b5%d0%bf%d0%bb%d0%b8%d0%ba%d0%b0%d1%86%d0%b8%d1%8f-mongodb-%d0%b1%d1%8b%d1%81%d1%82%d1%80%d0%b0%d1%8f-%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" fetchpriority="high" class="alignnone size-medium wp-image-758" title="mongodb_replication" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/11/mongodb_replication-300x300.png" alt="" width="300" height="300" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2012/11/mongodb_replication-300x300.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2012/11/mongodb_replication-150x150.png 150w, https://stepansuvorov.com/blog/wp-content/uploads/2012/11/mongodb_replication.png 450w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p><strong>MongoDb</strong> поддерживает 2 формы <strong>репликации</strong>: <strong>реплисеты</strong>(Replica Sets ) и <strong>ведущий-ведомый</strong>(Master-Slave). Рекомендуется использовать более новый подход &#8211; реплисеты.</p>
+<p>О реплисетах  можно подробно прочесть на <a href="http://ru.wiki.mongodb.org/display/DOCS/Replica+Sets">официальном сайте</a>. Мы в свою чередь разберем как можно быстро создать и настроить данный вид репликации.</p>
+<p><span id="more-757"></span>Когда мы говорим о репликации, мы подразумеваем, что у нас есть несколько баз. Для локальных экспериментов можно запустить несколько демонов указав им разные порты и директории для баз.</p>
+<p>Создадим несколько директорий для экспериментальных баз:</p>
+<pre>$ mkdir db1</pre>
+<pre>$ mkdir db2</pre>
+<pre>$ mkdir db3</pre>
+<p>Запуск демона MongoDb (mongod) выполняется следующей командой</p>
+<pre>$ mongod</pre>
+<p>если хотим указать путь к базе и порт, тогда так:</p>
+<pre>$ mongod --dbpath db1 --port 27001</pre>
+<p>плюс добавим еще параметр указывающий на то что это репликасет:</p>
+<pre>$ mongod --dbpath db1 --port 27001 --replSet myreplica</pre>
+<p><em>myreplica</em> &#8211; в данном случае имя для нашего репликасета.</p>
+<p>Теперь таким же образом запускаем еще 2 демона:</p>
+<pre>$ mongod --dbpath db2 --port 27002 --replSet myreplica</pre>
+<pre>$ mongod --dbpath db3 --port 27003 --replSet myreplica</pre>
+<p>В итоге у нас подготовлены 3 базы и нам следует теперь распределить между ними роли: кто будет <strong>Первичным</strong>(Primary) звеном, к которому будут добавлены остальные.</p>
+<p>Допустим мы решили сделать db1 главным. Для этого заходим на него используя mongoshell :</p>
+<pre>$ mongo --port 27001</pre>
+<p>и делаем</p>
+<pre>mongo&gt; rs.initiate()</pre>
+<p>для инициализации конфигурации.</p>
+<p>Все манипуляции с репликасетом выполняются с помощью методов объекта <strong>rs</strong>. Весь список методов пожно получить выполнив команду <em>rs.help()</em>.</p>
+<p>Проверим статус нашего репликасета:</p>
+<pre>mongo&gt; rs.status()</pre>
+<p>как видим в свойстве <em>members</em> присутсвует только текущий сервер, для того чтобы добавить остальные делаем:</p>
+<pre>mongo&gt; rs.add("myhost:27002")</pre>
+<pre>mongo&gt; rs.add("myhost:27003")</pre>
+<p><em>myhost</em> &#8211; имя нашего хоста (должно быть написано при выводе <em>rs.status()</em>)</p>
+<p>Выволним еще раз <em>rs.status()</em> и убедимся что базы были добавлены.</p>
+<p>Вот и все. Старался передать материал максимально просто. За более полной информацией по конфигурированию можно обратиться к <a href="http://docs.mongodb.org/manual/reference/replica-configuration/">офсайт докам</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/11/%d1%80%d0%b5%d0%bf%d0%bb%d0%b8%d0%ba%d0%b0%d1%86%d0%b8%d1%8f-mongodb-%d0%b1%d1%8b%d1%81%d1%82%d1%80%d0%b0%d1%8f-%d0%bd%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0/feed/</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>git-hook &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/git-hook/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Thu, 22 Oct 2015 08:02:05 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Git pre-push hook</title>
+		<link>https://stepansuvorov.com/blog/2015/03/git-pre-push-hook/</link>
+					<comments>https://stepansuvorov.com/blog/2015/03/git-pre-push-hook/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 13 Mar 2015 19:40:07 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[deploy]]></category>
+		<category><![CDATA[git]]></category>
+		<category><![CDATA[git-hook]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[pre-push]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=2166</guid>
+
+					<description><![CDATA[Я уже писал о том как можно использовать git хуки для запуска grunt команд и делать предварительную проверку перед заливкой кода в главный репозиторий. В этой заметке я покажу, как можно избежать проверки не закомиченных изменений. Git pre-push hook будет выглядеть вот &#8230; <a href="https://stepansuvorov.com/blog/2015/03/git-pre-push-hook/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Я уже писал о том <a title="git hook: Не пускаем в репозиторий ошибки" href="https://stepansuvorov.com/blog/2013/01/git-hook/">как можно использовать git хуки для запуска grunt команд</a> и делать предварительную проверку перед заливкой кода в главный репозиторий. В этой заметке я покажу, как можно избежать проверки не закомиченных изменений.</p>
+<p><span id="more-2166"></span></p>
+<p>Git pre-push hook будет выглядеть вот так:</p>
+<p>[shell]<br />
+#!/bin/sh<br />
+grunt test<br />
+RETVAL=$?<br />
+if [ $RETVAL -ne 0 ]<br />
+  then<br />
+    echo &quot;Grunt task failed, exiting&#8230;&quot;<br />
+    exit 1<br />
+fi</p>
+<p>echo &quot;Complete.&quot;<br />
+[/shell]</p>
+<p>Как видите ничего сложного. Теперь при каждом пуше будет вызываться &#8220;<strong>grunt test</strong>&#8220;. Важно не забыть сделать этот файл исполняемым (<strong>chmod +x pre-push</strong>)</p>
+<p>Есть еще один момент: когда вы попытались запушить поломанный код &#8211; тесты не прошли &#8211; вы починили код, но при этом забыли закоммитить &#8211; тесты прошли &#8211; и поломанный код попал на сервер (так как фикс не был закоммичен).</p>
+<p>Поэтому перед началом тестов прячем все незакоммиченные изменения (<strong>git stash</strong>), а потом возвращаем их назад:</p>
+<p>[shell]<br />
+#!/bin/sh<br />
+CHANGES=$(git diff &#8211;numstat | wc -l)<br />
+CHANGES_CACHED=$(git diff &#8211;cached &#8211;numstat | wc -l)<br />
+TOTAL_CHANGES=$(($CHANGES + $CHANGES_CACHED))</p>
+<p>git stash -k<br />
+grunt test</p>
+<p>RETVAL=$?</p>
+<p>if [ $TOTAL_CHANGES -ne &quot;0&quot; ]<br />
+then<br />
+  echo &quot;Popping&quot; $TOTAL_CHANGES &quot;changes off the stack&#8230;&quot;<br />
+  git stash pop -q<br />
+fi      </p>
+<p>if [ $RETVAL -ne 0 ]<br />
+then<br />
+  echo &quot;Grunt task failed, exiting&#8230;&quot;<br />
+  exit 1<br />
+fi</p>
+<p>echo &quot;Complete.&quot;<br />
+[/shell]</p>
+<p>Полный код <a title="gist" href="https://gist.github.com/stevermeister/e530409b19daac932ee2">тут</a>. Идея взята от <a title="http://old.briangonzalez.org/posts/run-grunt-task-pre-push-to-git-repo" href="http://old.briangonzalez.org/posts/run-grunt-task-pre-push-to-git-repo">сюда</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/03/git-pre-push-hook/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>html &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/html/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 28 Mar 2015 15:57:28 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Быстро делаем виджет для mac</title>
+		<link>https://stepansuvorov.com/blog/2015/03/%d0%b1%d1%8b%d1%81%d1%82%d1%80%d0%be-%d0%b4%d0%b5%d0%bb%d0%b0%d0%b5%d0%bc-%d0%b2%d0%b8%d0%b4%d0%b6%d0%b5%d1%82-%d0%b4%d0%bb%d1%8f-mac/</link>
+					<comments>https://stepansuvorov.com/blog/2015/03/%d0%b1%d1%8b%d1%81%d1%82%d1%80%d0%be-%d0%b4%d0%b5%d0%bb%d0%b0%d0%b5%d0%bc-%d0%b2%d0%b8%d0%b4%d0%b6%d0%b5%d1%82-%d0%b4%d0%bb%d1%8f-mac/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 28 Mar 2015 15:14:59 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[dashboard]]></category>
+		<category><![CDATA[html]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[mac]]></category>
+		<category><![CDATA[widget]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1601</guid>
+
+					<description><![CDATA[На самом деле создать виджет для маковского дашборда дело 5 минут. Не знаю зачем все так запутали в мануалах и статьях. Всего навсего нужно создать директорию, в которой сделать html страничку и манифест файл &#8211; Info.plist и файл Default.png &#8211; картинка, &#8230; <a href="https://stepansuvorov.com/blog/2015/03/%d0%b1%d1%8b%d1%81%d1%82%d1%80%d0%be-%d0%b4%d0%b5%d0%bb%d0%b0%d0%b5%d0%bc-%d0%b2%d0%b8%d0%b4%d0%b6%d0%b5%d1%82-%d0%b4%d0%bb%d1%8f-mac/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>На самом деле создать виджет для маковского дашборда дело 5 минут. Не знаю зачем все так запутали в мануалах и статьях.</p>
+<p><img decoding="async" class="alignnone size-full wp-image-2484" src="https://stepansuvorov.com/blog/wp-content/uploads/2015/03/Screenshot-2015-03-28-16.06.37.png" alt="myweather" width="177" height="151" /></p>
+<p>Всего навсего нужно создать директорию, в которой сделать <strong>html страничку</strong> и манифест файл &#8211; <strong>Info.plist</strong> и файл <strong>Default.png</strong> &#8211; картинка, которая будте показываться, пока виджет не инициализирован. После чего переименовать эту директорию в *.wdgt. Все. Советы по обходу граблей под катом.</p>
+<p><span id="more-1601"></span></p>
+<p>Подсказки:</p>
+<ul>
+<li>файл <strong>Default.png</strong> должжен быть обязательно &#8211; без него виджет не будет валидным</li>
+<li>внимательно просмотрите <a title="developer.apple.com" href="https://developer.apple.com/library/mac/documentation/AppleApplications/Conceptual/Dashboard_ProgTopics/Articles/WidgetBasics.html#//apple_ref/doc/uid/TP40008117-SW15">описание полей</a> и возможных значений для info.plist</li>
+<li>если вы хотите работать с сетью, обязательно должен стоять <span style="text-decoration: underline;">специальный ключ разрешающий работу с сетью</span>:
+<p>[xml]<br />
+&lt;key&gt;AllowNetworkAccess&lt;/key&gt;<br />
+	&lt;true/&gt;<br />
+[/xml]</p>
+</li>
+<li>очень часто возникают странные проблемы с кешированием: и даже установив новую версию виджета вы видите, что ничего не обновилось. Я решал это путем переименования файлов/названия самого виджета/версии виджета</li>
+<li>иконку для виджета можно задать поместив в папку файл icon.png</li>
+<li>с дебагом все совсем печально: никакой консоли нет. в сети советуют тупо создать текстовое поле в виджете и туда логировать в случае необходимости информацию, типа:
+<p>[javascript]<br />
+document.getElementById(&#8216;debug&#8217;).textContent = &#8216;something that you want to log&#8217;;<br />
+[/javascript]</p>
+</li>
+</ul>
+<h2>Пример</h2>
+<p>Как примера я взял разработку погодного виджета, пожалуй одного из самых популярных. Данные беру с <a title="http://openweathermap.org/" href="http://openweathermap.org/">openweathermap</a>.</p>
+<p>Для удобства создал <strong>grunt</strong> конфигурацию, которая сама копирует файлы и переименовывает папку в файл с расширением <strong>*.wdgt</strong>.</p>
+<p>Код примера <a title="github.com" href="https://github.com/stevermeister/myweather.wdgt">тут</a>.</p>
+<p>В моем виджете всегда светит солнышко. <em>It&#8217;s not a bug, it&#8217;s feature</em>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2015/03/%d0%b1%d1%8b%d1%81%d1%82%d1%80%d0%be-%d0%b4%d0%b5%d0%bb%d0%b0%d0%b5%d0%bc-%d0%b2%d0%b8%d0%b4%d0%b6%d0%b5%d1%82-%d0%b4%d0%bb%d1%8f-mac/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>The Open Graph (OG) protocol</title>
+		<link>https://stepansuvorov.com/blog/2014/07/the-open-graph-og-protocol/</link>
+					<comments>https://stepansuvorov.com/blog/2014/07/the-open-graph-og-protocol/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 05 Jul 2014 14:41:30 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[html]]></category>
+		<category><![CDATA[og]]></category>
+		<category><![CDATA[open graph]]></category>
+		<category><![CDATA[protocol]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1837</guid>
+
+					<description><![CDATA[Только сейчас узнал, что есть способ дать фейсбуку(и другим социальным сервисам) понять какое превью изображение выводить в случае ссылки на ваш сайт. Как оказалось этому посвящен целый протокол &#8211; Open Graph. Вся информация передается в html meta-тэгах: [html] &#60;meta property=&#34;og:title&#34; &#8230; <a href="https://stepansuvorov.com/blog/2014/07/the-open-graph-og-protocol/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><a href="http://ogp.me/"><img decoding="async" fetchpriority="high" class="alignnone size-full wp-image-1838" title="logo open graph" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/07/logo.png" alt="" width="300" height="300" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/07/logo.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/07/logo-150x150.png 150w" sizes="(max-width: 300px) 100vw, 300px" /></a></p>
+<p>Только сейчас узнал, что есть способ дать фейсбуку(и другим социальным сервисам) понять какое превью изображение выводить в случае ссылки на ваш сайт. Как оказалось этому посвящен целый протокол &#8211; <a href="http://ogp.me/">Open Graph</a>. Вся информация передается в html meta-тэгах:</p>
+<p>[html]<br />
+&lt;meta property=&quot;og:title&quot; content=&quot;The Rock&quot; /&gt;<br />
+&lt;meta property=&quot;og:type&quot; content=&quot;video.movie&quot; /&gt;<br />
+&lt;meta property=&quot;og:url&quot; content=&quot;http://www.imdb.com/title/tt0117500/&quot; /&gt;<br />
+&lt;meta property=&quot;og:image&quot; content=&quot;http://ia.media-imdb.com/images/rock.jpg&quot; /&gt;<br />
+[/html]</p>
+<p>Более подробно подробно &#8211; на оф сайте.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/07/the-open-graph-og-protocol/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>WebStorm: Editing HTML Inside of JS Literals</title>
+		<link>https://stepansuvorov.com/blog/2014/02/webstorm-editing-html-inside-of-js-literals/</link>
+					<comments>https://stepansuvorov.com/blog/2014/02/webstorm-editing-html-inside-of-js-literals/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sun, 16 Feb 2014 20:26:16 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[editor]]></category>
+		<category><![CDATA[html]]></category>
+		<category><![CDATA[webStorm]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1465</guid>
+
+					<description><![CDATA[I just got known that WebStorm has such a nice possibility to edit HTML that is presented like a string (in JavaScript code) in separate window. All you need to do is press [Alt]+[Enter] and vuala: &#160;]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-medium wp-image-1466" title="webstorm html inner edit" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/02/Screenshot-2014-02-16-21.19.36-300x116.png" alt="" width="300" height="116" srcset="https://stepansuvorov.com/blog/wp-content/uploads/2014/02/Screenshot-2014-02-16-21.19.36-300x116.png 300w, https://stepansuvorov.com/blog/wp-content/uploads/2014/02/Screenshot-2014-02-16-21.19.36.png 495w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+<p>I just got known that <strong>WebStorm</strong> has such a nice possibility to <strong>edit HTML</strong> that is presented like a string (in JavaScript code) in separate window. All you need to do is press <strong>[Alt]</strong>+<strong>[Enter]</strong> and vuala:</p>
+<p><a href="https://stepansuvorov.com/blog/wp-content/uploads/2014/02/Screenshot-2014-02-16-21.25.10.png"><img decoding="async" loading="lazy" class="alignnone size-full wp-image-1467" title="webstorm html inner edit" src="https://stepansuvorov.com/blog/wp-content/uploads/2014/02/Screenshot-2014-02-16-21.25.10.png" alt="" width="278" height="255" /></a></p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/02/webstorm-editing-html-inside-of-js-literals/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

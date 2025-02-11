@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>ngSticky &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/ngsticky/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 14 Jun 2014 17:52:02 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>ngSticky &#8211; атрибут директива для позиционирования панелей управления</title>
+		<link>https://stepansuvorov.com/blog/2014/06/ngsticky/</link>
+					<comments>https://stepansuvorov.com/blog/2014/06/ngsticky/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 14 Jun 2014 17:52:02 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[ngSticky]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1733</guid>
+
+					<description><![CDATA[Вдохновленный angular-sticky написал свой  ngSticky вариант: [javascript] angular.module(&#8216;ui&#8217;) .directive(&#8216;ngSticky&#8217;, function($window) { return function($scope, element) { var start, $win = element($window); $win.on(&#8216;scroll&#8217;, function() { var scroll = $win.scrollTop(); start = start &#124;&#124; element.offset().top; if (scroll &#62; start) { element.addClass(&#8216;stuck&#8217;); } else &#8230; <a href="https://stepansuvorov.com/blog/2014/06/ngsticky/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Вдохновленный <a href="https://github.com/mattosborn/angular-sticky">angular-sticky</a> написал свой  <a title="gist" href="https://gist.github.com/stevermeister/ec4c7da12deaf8e86469">ngSticky</a> вариант:</p>
+<p><span id="more-1733"></span></p>
+<p>[javascript]<br />
+  angular.module(&#8216;ui&#8217;)<br />
+    .directive(&#8216;ngSticky&#8217;, function($window) {<br />
+      return function($scope, element) {<br />
+        var  start,<br />
+             $win = element($window);</p>
+<p>        $win.on(&#8216;scroll&#8217;, function() {</p>
+<p>          var scroll = $win.scrollTop();</p>
+<p>          start = start || element.offset().top;</p>
+<p>          if (scroll &gt; start) {<br />
+            element.addClass(&#8216;stuck&#8217;);<br />
+          } else {<br />
+            element.removeClass(&#8216;stuck&#8217;);<br />
+          }<br />
+        });</p>
+<p>        $win.on(&#8216;resize&#8217;, function recheckPositions() {<br />
+          element.width( element.parent().width() );<br />
+        });</p>
+<p>      };<br />
+    });<br />
+[/javascript]</p>
+<p>CSS:</p>
+<p>[css]<br />
+.stuck {<br />
+  position: fixed;<br />
+  top: 0;<br />
+}<br />
+[/css]</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/06/ngsticky/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

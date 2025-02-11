@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>ajax &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/ajax/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Fri, 01 Sep 2023 15:40:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>jQuery: $.put and $.delete</title>
+		<link>https://stepansuvorov.com/blog/2014/04/jquery-put-and-delete/</link>
+					<comments>https://stepansuvorov.com/blog/2014/04/jquery-put-and-delete/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 01 Apr 2014 09:52:55 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[ajax]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1644</guid>
+
+					<description><![CDATA[jQuery Ajax helpers set does not have shortcuts for &#160;PUT and DELETE methods, but nothing prevents us to make them ourselves. put delete And a short form for both is:]]></description>
+										<content:encoded><![CDATA[
+<p><strong>jQuery Ajax</strong> helpers set does not have shortcuts for &nbsp;<strong>PUT</strong> and <strong>DELETE</strong> methods, but nothing prevents us to make them ourselves.</p>
+
+
+
+<span id="more-1644"></span>
+
+
+
+<h2 class="wp-block-heading">put</h2>
+
+
+
+<div class="wp-block-kevinbatdorf-code-block-pro" data-code-block-pro-font-family="Code-Pro-JetBrains-Mono" style="font-size:.875rem;font-family:Code-Pro-JetBrains-Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25rem"><span style="display:block;padding:16px 0 0 16px;margin-bottom:-1px;width:100%;text-align:left;background-color:#2e3440ff"><svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14"><g fill="none" fill-rule="evenodd" transform="translate(1 1)"><circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle><circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle><circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle></g></svg></span><span role="button" tabindex="0" data-code="$.put = function(url, data, callback, type){
+
+  if ( $.isFunction(data) ){
+    type = type || callback,
+    callback = data,
+    data = {}
+  }
+
+  return $.ajax({
+    url: url,
+    type: 'PUT',
+    success: callback,
+    data: data,
+    contentType: type
+  });
+}" style="color:#d8dee9ff;display:none" aria-label="Copy" class="code-block-pro-copy-button"><svg xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path class="with-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path><path class="without-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg></span><pre class="shiki nord" style="background-color: #2e3440ff" tabindex="0"><code><span class="line"><span style="color: #D8DEE9">$</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">put</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">function</span><span style="color: #ECEFF4">(</span><span style="color: #D8DEE9">url</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span><span style="color: #ECEFF4">){</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">if</span><span style="color: #D8DEE9FF"> ( </span><span style="color: #D8DEE9">$</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">isFunction</span><span style="color: #D8DEE9FF">(</span><span style="color: #D8DEE9">data</span><span style="color: #D8DEE9FF">) )</span><span style="color: #ECEFF4">{</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #D8DEE9">type</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">||</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #D8DEE9">callback</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #D8DEE9">data</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">{}</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #ECEFF4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">return</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">$</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">ajax</span><span style="color: #D8DEE9FF">(</span><span style="color: #ECEFF4">{</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">url</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">url</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">type</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">&#39;</span><span style="color: #A3BE8C">PUT</span><span style="color: #ECEFF4">&#39;</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">success</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">data</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">contentType</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #ECEFF4">}</span><span style="color: #D8DEE9FF">)</span><span style="color: #81A1C1">;</span></span>
+<span class="line"><span style="color: #ECEFF4">}</span></span></code></pre></div>
+
+
+
+<h2 class="wp-block-heading">delete</h2>
+
+
+
+<div class="wp-block-kevinbatdorf-code-block-pro" data-code-block-pro-font-family="Code-Pro-JetBrains-Mono" style="font-size:.875rem;font-family:Code-Pro-JetBrains-Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25rem"><span style="display:block;padding:16px 0 0 16px;margin-bottom:-1px;width:100%;text-align:left;background-color:#2e3440ff"><svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14"><g fill="none" fill-rule="evenodd" transform="translate(1 1)"><circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle><circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle><circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle></g></svg></span><span role="button" tabindex="0" data-code="$.delete = function(url, data, callback, type){
+
+  if ( $.isFunction(data) ){
+    type = type || callback,
+    callback = data,
+    data = {}
+  }
+
+  return $.ajax({
+    url: url,
+    type: 'DELETE',
+    success: callback,
+    data: data,
+    contentType: type
+  });
+}" style="color:#d8dee9ff;display:none" aria-label="Copy" class="code-block-pro-copy-button"><svg xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path class="with-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path><path class="without-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg></span><pre class="shiki nord" style="background-color: #2e3440ff" tabindex="0"><code><span class="line"><span style="color: #D8DEE9">$</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">delete</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">function</span><span style="color: #ECEFF4">(</span><span style="color: #D8DEE9">url</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span><span style="color: #ECEFF4">){</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">if</span><span style="color: #D8DEE9FF"> ( </span><span style="color: #D8DEE9">$</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">isFunction</span><span style="color: #D8DEE9FF">(</span><span style="color: #D8DEE9">data</span><span style="color: #D8DEE9FF">) )</span><span style="color: #ECEFF4">{</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #D8DEE9">type</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">||</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #D8DEE9">callback</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #D8DEE9">data</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">{}</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #ECEFF4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">return</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">$</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">ajax</span><span style="color: #D8DEE9FF">(</span><span style="color: #ECEFF4">{</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">url</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">url</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">type</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">&#39;</span><span style="color: #A3BE8C">DELETE</span><span style="color: #ECEFF4">&#39;</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">success</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">data</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #88C0D0">contentType</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #ECEFF4">}</span><span style="color: #D8DEE9FF">)</span><span style="color: #81A1C1">;</span></span>
+<span class="line"><span style="color: #ECEFF4">}</span></span></code></pre></div>
+
+
+
+<p>And a short form for both is:</p>
+
+
+
+<div class="wp-block-kevinbatdorf-code-block-pro" data-code-block-pro-font-family="Code-Pro-JetBrains-Mono" style="font-size:.875rem;font-family:Code-Pro-JetBrains-Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;line-height:1.25rem"><span style="display:block;padding:16px 0 0 16px;margin-bottom:-1px;width:100%;text-align:left;background-color:#2e3440ff"><svg xmlns="http://www.w3.org/2000/svg" width="54" height="14" viewBox="0 0 54 14"><g fill="none" fill-rule="evenodd" transform="translate(1 1)"><circle cx="6" cy="6" r="6" fill="#FF5F56" stroke="#E0443E" stroke-width=".5"></circle><circle cx="26" cy="6" r="6" fill="#FFBD2E" stroke="#DEA123" stroke-width=".5"></circle><circle cx="46" cy="6" r="6" fill="#27C93F" stroke="#1AAB29" stroke-width=".5"></circle></g></svg></span><span role="button" tabindex="0" data-code="jQuery.each( [ &quot;put&quot;, &quot;delete&quot; ], function( i, method ) {
+  jQuery[ method ] = function( url, data, callback, type ) {
+    if ( jQuery.isFunction( data ) ) {
+      type = type || callback;
+      callback = data;
+      data = undefined;
+    }
+
+    return jQuery.ajax({
+      url: url,
+      type: method,
+      dataType: type,
+      data: data,
+      success: callback
+    });
+  };
+});" style="color:#d8dee9ff;display:none" aria-label="Copy" class="code-block-pro-copy-button"><svg xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path class="with-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path><path class="without-check" stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg></span><pre class="shiki nord" style="background-color: #2e3440ff" tabindex="0"><code><span class="line"><span style="color: #D8DEE9">jQuery</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">each</span><span style="color: #D8DEE9FF">( [ </span><span style="color: #ECEFF4">&quot;</span><span style="color: #A3BE8C">put</span><span style="color: #ECEFF4">&quot;</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">&quot;</span><span style="color: #A3BE8C">delete</span><span style="color: #ECEFF4">&quot;</span><span style="color: #D8DEE9FF"> ]</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">function</span><span style="color: #ECEFF4">(</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">i</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">method</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">)</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">{</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #D8DEE9">jQuery</span><span style="color: #D8DEE9FF">[ </span><span style="color: #D8DEE9">method</span><span style="color: #D8DEE9FF"> ] </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">function</span><span style="color: #ECEFF4">(</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">url</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">)</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">{</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #81A1C1">if</span><span style="color: #D8DEE9FF"> ( </span><span style="color: #D8DEE9">jQuery</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">isFunction</span><span style="color: #D8DEE9FF">( </span><span style="color: #D8DEE9">data</span><span style="color: #D8DEE9FF"> ) ) </span><span style="color: #ECEFF4">{</span></span>
+<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #D8DEE9">type</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">||</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span><span style="color: #81A1C1">;</span></span>
+<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #D8DEE9">callback</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #81A1C1">;</span></span>
+<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #D8DEE9">data</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">undefined;</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #ECEFF4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #81A1C1">return</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">jQuery</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">ajax</span><span style="color: #D8DEE9FF">(</span><span style="color: #ECEFF4">{</span></span>
+<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #88C0D0">url</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">url</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #88C0D0">type</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">method</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #88C0D0">dataType</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">type</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #88C0D0">data</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">data</span><span style="color: #ECEFF4">,</span></span>
+<span class="line"><span style="color: #D8DEE9FF">      </span><span style="color: #88C0D0">success</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">callback</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #ECEFF4">}</span><span style="color: #D8DEE9FF">)</span><span style="color: #81A1C1">;</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #ECEFF4">}</span><span style="color: #81A1C1">;</span></span>
+<span class="line"><span style="color: #ECEFF4">}</span><span style="color: #D8DEE9FF">)</span><span style="color: #81A1C1">;</span></span></code></pre></div>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/04/jquery-put-and-delete/feed/</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>jQuery Ajax Simple Mock</title>
+		<link>https://stepansuvorov.com/blog/2014/01/jquery-ajax-simple-mock/</link>
+					<comments>https://stepansuvorov.com/blog/2014/01/jquery-ajax-simple-mock/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Tue, 21 Jan 2014 15:27:12 +0000</pubDate>
+				<category><![CDATA[Рекомендую]]></category>
+		<category><![CDATA[ajax]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[mock]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1401</guid>
+
+					<description><![CDATA[jQuery Ajax Simple Mock from Cowboy to bookmarks.]]></description>
+										<content:encoded><![CDATA[<p><a href="https://gist.github.com/cowboy/1371254">jQuery Ajax Simple Mock</a> from <a href="https://github.com/cowboy">Cowboy</a> to bookmarks.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/01/jquery-ajax-simple-mock/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Пишем свой Uploader с нуля на javascript используя FileApi. Часть4</title>
+		<link>https://stepansuvorov.com/blog/2012/07/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0-4/</link>
+					<comments>https://stepansuvorov.com/blog/2012/07/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0-4/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Mon, 30 Jul 2012 11:17:21 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[ajax]]></category>
+		<category><![CDATA[fileApi]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[uploader]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=341</guid>
+
+					<description><![CDATA[В частях 1, 2, 3 мы научились читать файлы с диска.Теперь попробуем разобрать процесс отправки файлов на сервер с помощью технологии ajax. В начале вспомним как работать с аяксом для передачи файла на сервер: Метод передачи будет POST Обязательно нужно &#8230; <a href="https://stepansuvorov.com/blog/2012/07/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0-4/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>В частях <a href="https://stepansuvorov.com/blog/2012/04/%D0%BF%D0%B8%D1%88%D0%B5%D0%BC-%D1%81%D0%B2%D0%BE%D0%B9-uploader-%D1%81-%D0%BD%D1%83%D0%BB%D1%8F-%D0%BD%D0%B0-javascript-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D1%83%D1%8F-fileapi-%D1%87%D0%B0/">1</a>, <a href="https://stepansuvorov.com/blog/2012/06/%D0%BF%D0%B8%D1%88%D0%B5%D0%BC-%D1%81%D0%B2%D0%BE%D0%B9-uploader-%D1%81-%D0%BD%D1%83%D0%BB%D1%8F-%D0%BD%D0%B0-javascript-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D1%83%D1%8F-fileapi-%D1%87%D0%B0-2/">2</a>, <a href="https://stepansuvorov.com/blog/2012/07/%D0%BF%D0%B8%D1%88%D0%B5%D0%BC-%D1%81%D0%B2%D0%BE%D0%B9-uploader-%D1%81-%D0%BD%D1%83%D0%BB%D1%8F-%D0%BD%D0%B0-javascript-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D1%83%D1%8F-fileapi-%D1%87%D0%B0-3/">3</a> мы научились читать файлы с диска.Теперь попробуем разобрать процесс отправки файлов на сервер с помощью технологии ajax.</p>
+<p>В начале вспомним как работать с аяксом для передачи файла на сервер:</p>
+<ol>
+<li>Метод передачи будет POST</li>
+<li>Обязательно нужно будет указать Content-Type, а именно multipart/form-data</li>
+<li>Правильно сформировать само тело сообщения</li>
+</ol>
+<p>Получим следующий код(по пунктам):</p>
+<pre>var request = new XMLHttpRequest(); 
+request.onreadystatechange = ajaxReady; 
+request.open('POST', 'uploader.php', true); // (1)
+request.setRequestHeader('Content-Type', contentType); // (2)
+request.sendAsBinary(createTestMsg()); // (3)</pre>
+<p><span id="more-341"></span>ajaxReady &#8211; это просто callback-функция, которая вызовется при ajax-ответе. Для нее пока установим простую заглушку:</p>
+<pre>function ajaxReady() {
+    if (request.readyState == 4 &amp;&amp; request.status == 200) {
+        alert(request.responseText);
+    }
+}</pre>
+<p>uploader.php  &#8211; тоже пока файл-заглушка на стороне сервера, следующего содержания:</p>
+<pre>&lt;?php
+
+var_dump($_POST);
+var_dump($_FILES);</pre>
+<p>Теперь перейдем к более важным моментам. contentType определяем следующим образом:</p>
+<pre>var boundary = "AJAX-----------------------" + (new Date).getTime();
+var contentType = "multipart/form-data; boundary=" + boundary;</pre>
+<p>boundary &#8211; это случайная последовательность байт, которые не должны встречаться в самом файле. Вы можете придумать свой алгоритм для генерации данной последовательности, т.к. это лишь пример.</p>
+<p>Ну и самое основное &#8211; формирование сообщения:</p>
+<pre>function createTestMsg(){
+    var fieldName = 'testfile';
+    var fileName  = '4.jpg';
+    var CRLF = "\r\n";
+
+    var msg = "--" + boundary + CRLF;
+    msg += 'Content-Disposition: form-data; ';
+    msg += 'name="' + fieldName + '"; ';
+    msg += 'filename="'+ fileName + '"' + CRLF;
+    msg += 'Content-Type: application/octet-stream';
+    msg += CRLF + CRLF; // marks end of the headers part
+    msg += Array(9999).join(7) + CRLF;
+    msg += "--" + boundary + "--" + CRLF;
+    return msg;
+}</pre>
+<p>Array(9999).join(7) &#8211; это такой вариант генерации фэйкового контента для файла.</p>
+<p>Вот тут можно посмотреть весь код: http://learn.javascript.ru/play/E1MhM, но в песочнице он работать не будет, т.к. нет файла uploader.php на строне сервера, так что в любом случае нужно копировать локально и смотреть.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/07/%d0%bf%d0%b8%d1%88%d0%b5%d0%bc-%d1%81%d0%b2%d0%be%d0%b9-uploader-%d1%81-%d0%bd%d1%83%d0%bb%d1%8f-%d0%bd%d0%b0-javascript-%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d1%83%d1%8f-fileapi-%d1%87%d0%b0-4/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

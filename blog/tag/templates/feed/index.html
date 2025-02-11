@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>templates &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/templates/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sat, 07 Jan 2017 20:36:07 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>Шпаргалка по синтаксису шаблонов Angular2</title>
+		<link>https://stepansuvorov.com/blog/2017/01/%d1%88%d0%bf%d0%b0%d1%80%d0%b3%d0%b0%d0%bb%d0%ba%d0%b0-%d0%bf%d0%be-%d1%81%d0%b8%d0%bd%d1%82%d0%b0%d0%ba%d1%81%d0%b8%d1%81%d1%83-%d1%88%d0%b0%d0%b1%d0%bb%d0%be%d0%bd%d0%be%d0%b2-angular2/</link>
+					<comments>https://stepansuvorov.com/blog/2017/01/%d1%88%d0%bf%d0%b0%d1%80%d0%b3%d0%b0%d0%bb%d0%ba%d0%b0-%d0%bf%d0%be-%d1%81%d0%b8%d0%bd%d1%82%d0%b0%d0%ba%d1%81%d0%b8%d1%81%d1%83-%d1%88%d0%b0%d0%b1%d0%bb%d0%be%d0%bd%d0%be%d0%b2-angular2/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Sat, 07 Jan 2017 20:26:30 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[Angular2]]></category>
+		<category><![CDATA[cheatsheet]]></category>
+		<category><![CDATA[templates]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3197</guid>
+
+					<description><![CDATA[взято с официальной документации, переведено/переработано. &#60;input [value]=&#8221;firstName&#8221;&#62; задание свойства value &#60;div [attr.role]=&#8221;myAriaRole&#8221;&#62; задание атрибута role. &#60;div [class.extra-sparkle]=&#8221;isDelightful&#8221;&#62; Выставляет класс extra-sparkle по условию isDelightful &#60;div [style.width.px]=&#8221;mySize&#8221;&#62; задает значение width в пикселях. &#60;button (click)=&#8221;readRainbow($event)&#8221;&#62; Привязывает обраобтчик клика readRainbow &#60;p&#62;Hello {{ponyName}}&#60;/p&#62; &#60;div title=&#8221;Hello {{ponyName}}&#8220;&#62; Подставляет значение выражения &#60;my-cmp [(title)]=&#8221;name&#8221;&#62; Двойное связывание, альтернатива: &#8230; <a href="https://stepansuvorov.com/blog/2017/01/%d1%88%d0%bf%d0%b0%d1%80%d0%b3%d0%b0%d0%bb%d0%ba%d0%b0-%d0%bf%d0%be-%d1%81%d0%b8%d0%bd%d1%82%d0%b0%d0%ba%d1%81%d0%b8%d1%81%d1%83-%d1%88%d0%b0%d0%b1%d0%bb%d0%be%d0%bd%d0%be%d0%b2-angular2/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>взято с <a href="https://angular.io/docs/ts/latest/guide/cheatsheet.html">официальной документации</a>, переведено/переработано.</p>
+<table class="ng-scope">
+<tbody>
+<tr>
+<th></th>
+<th></th>
+</tr>
+<tr class="ng-scope">
+<td>&lt;input <strong>[value]</strong>=&#8221;firstName&#8221;&gt;</td>
+<td>задание свойства <strong>value</strong></td>
+</tr>
+<tr class="ng-scope">
+<td>&lt;div <strong>[attr.role]</strong>=&#8221;myAriaRole&#8221;&gt;</td>
+<td>задание атрибута <strong>role</strong>.</td>
+</tr>
+<tr class="ng-scope">
+<td>&lt;div <strong>[class.extra-sparkle]</strong>=&#8221;isDelightful&#8221;&gt;</td>
+<td>Выставляет класс <strong>extra-sparkle</strong> по условию <strong>isDelightful</strong></td>
+</tr>
+<tr class="ng-scope">
+<td>&lt;div <strong>[style.width.px]</strong>=&#8221;mySize&#8221;&gt;</td>
+<td>задает значение <strong>width</strong> в пикселях.</td>
+</tr>
+<tr class="ng-scope">
+<td>&lt;button <strong>(click)</strong>=&#8221;readRainbow($event)&#8221;&gt;</td>
+<td>Привязывает обраобтчик клика <strong>readRainbow</strong></td>
+</tr>
+<tr class="ng-scope">
+<td>&lt;p&gt;Hello <strong>{{ponyName}}</strong>&lt;/p&gt;<br />
+&lt;div title=&#8221;Hello <strong>{{ponyName}}</strong>&#8220;&gt;</td>
+<td>Подставляет значение выражения</td>
+</tr>
+<tr class="ng-scope">
+<td>&lt;my-cmp <strong>[(title)]</strong>=&#8221;name&#8221;&gt;</td>
+<td>Двойное связывание, альтернатива: &lt;my-cmp [title]=&#8221;name&#8221; (titleChange)=&#8221;name=$event&#8221;&gt;</td>
+</tr>
+<tr class="ng-scope">
+<td>&lt;video <strong>#movieplayer</strong> &#8230;&gt;<br />
+&lt;button <strong>(click)</strong>=&#8221;movieplayer.play()&#8221;&gt;<br />
+&lt;/video&gt;</td>
+<td>Создает локальную переменную <strong>movieplayer</strong>, которая является ссылкой на элемент <strong>video</strong></td>
+</tr>
+<tr class="ng-scope">
+<td>&lt;p <strong>*myUnless</strong>=&#8221;myExpression&#8221;&gt;&#8230;&lt;/p&gt;</td>
+<td>Символ <strong>*</strong> превращает текущий элмент во втроенный шаблон: :&lt;template [myUnless]=&#8221;myExpression&#8221;&gt;&lt;p&gt;&#8230;&lt;/p&gt;&lt;/template&gt;</td>
+</tr>
+<tr class="ng-scope">
+<td>&lt;p&gt;Card No.: <strong>{{cardNumber | myCardNumberFormatter}}</strong>&lt;/p&gt;</td>
+<td>Применение <strong>myCardNumberFormatter</strong> пайпа.</td>
+</tr>
+<tr class="ng-scope">
+<td>&lt;p&gt;Employer: <strong>{{employer?.companyName}}</strong>&lt;/p&gt;</td>
+<td>Указание не обязательного поля с помощью оператора &#8220;<strong>?</strong>&#8220;</td>
+</tr>
+</tbody>
+</table>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/01/%d1%88%d0%bf%d0%b0%d1%80%d0%b3%d0%b0%d0%bb%d0%ba%d0%b0-%d0%bf%d0%be-%d1%81%d0%b8%d0%bd%d1%82%d0%b0%d0%ba%d1%81%d0%b8%d1%81%d1%83-%d1%88%d0%b0%d0%b1%d0%bb%d0%be%d0%bd%d0%be%d0%b2-angular2/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>AngularJS: подружить $httpBackend моки с шаблонами</title>
+		<link>https://stepansuvorov.com/blog/2014/01/angularjs-%d0%bf%d0%be%d0%b4%d1%80%d1%83%d0%b6%d0%b8%d1%82%d1%8c-httpbackend-%d0%bc%d0%be%d0%ba%d0%b8-%d1%81-%d1%88%d0%b0%d0%b1%d0%bb%d0%be%d0%bd%d0%b0%d0%bc%d0%b8/</link>
+					<comments>https://stepansuvorov.com/blog/2014/01/angularjs-%d0%bf%d0%be%d0%b4%d1%80%d1%83%d0%b6%d0%b8%d1%82%d1%8c-httpbackend-%d0%bc%d0%be%d0%ba%d0%b8-%d1%81-%d1%88%d0%b0%d0%b1%d0%bb%d0%be%d0%bd%d0%b0%d0%bc%d0%b8/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 29 Jan 2014 15:12:09 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[$httpBackend]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[mock]]></category>
+		<category><![CDATA[templates]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1413</guid>
+
+					<description><![CDATA[Если необходимо использовать одновременно mock-сервис $httpBackend(из ngMock или ngMockE2E) и загрузку шаблонов из файлов(которая идет через незамоканы $httpBackend сервис), получаем конфликт с выдачей следующей ошибки: Error: Unexpected request: GET views/main.html Которая говорит о том, что наш мок не знает ничего о &#8230; <a href="https://stepansuvorov.com/blog/2014/01/angularjs-%d0%bf%d0%be%d0%b4%d1%80%d1%83%d0%b6%d0%b8%d1%82%d1%8c-httpbackend-%d0%bc%d0%be%d0%ba%d0%b8-%d1%81-%d1%88%d0%b0%d0%b1%d0%bb%d0%be%d0%bd%d0%b0%d0%bc%d0%b8/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Если необходимо использовать одновременно mock-сервис <strong>$httpBackend</strong>(из <strong>ngMock</strong> или <strong>ngMockE2E</strong>) и загрузку шаблонов из файлов(которая идет через незамоканы <strong>$httpBackend </strong>сервис), получаем конфликт с выдачей следующей ошибки:</p>
+<pre>Error: Unexpected request: GET views/main.html</pre>
+<p>Которая говорит о том, что наш мок не знает ничего о шаблонах.</p>
+<p>Возможны 2 варианта решения:</p>
+<ol>
+<li>отказаться вообще от загрузки html файлов (гуглить в тему <strong>кеширования шаблонов</strong> и <strong>html2js</strong>) &#8211; это позволит не использовать <strong>$httpBackend</strong> сервис вообще</li>
+<li>сделать заглушку на заглушку: дать инструкции мок сервису <strong>пропускать запросы на шаблоны</strong>. Делается это так: <span style="background-color: #f4f4f4;">$httpBackend.whenGET(/^tepmlates\//).passThrough();</span></li>
+</ol>
+<p><span id="more-1413"></span></p>
+<p>Полный код второго варианта:</p>
+<pre>app.run(function ($httpBackend) {
+        $httpBackend.whenGET(/^tepmlates\//).passThrough();
+});</pre>
+<p>&nbsp;</p>
+<p><a href="http://endlessindirection.wordpress.com/2013/05/18/angularjs-delay-response-from-httpbackend/">Полезная статья</a> в тему и <a title="plunker" href="http://plnkr.co/edit/pbjcDl?p=preview">пример</a>, также обсуждение на <a title="StackOverflow" href="http://stackoverflow.com/questions/14761045/jasmine-tests-angularjs-directives-with-templateurl">SO</a>.</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/01/angularjs-%d0%bf%d0%be%d0%b4%d1%80%d1%83%d0%b6%d0%b8%d1%82%d1%8c-httpbackend-%d0%bc%d0%be%d0%ba%d0%b8-%d1%81-%d1%88%d0%b0%d0%b1%d0%bb%d0%be%d0%bd%d0%b0%d0%bc%d0%b8/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

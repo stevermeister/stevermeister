@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>$httpBackend &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/httpbackend/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Wed, 29 Jan 2014 15:12:09 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>AngularJS: подружить $httpBackend моки с шаблонами</title>
+		<link>https://stepansuvorov.com/blog/2014/01/angularjs-%d0%bf%d0%be%d0%b4%d1%80%d1%83%d0%b6%d0%b8%d1%82%d1%8c-httpbackend-%d0%bc%d0%be%d0%ba%d0%b8-%d1%81-%d1%88%d0%b0%d0%b1%d0%bb%d0%be%d0%bd%d0%b0%d0%bc%d0%b8/</link>
+					<comments>https://stepansuvorov.com/blog/2014/01/angularjs-%d0%bf%d0%be%d0%b4%d1%80%d1%83%d0%b6%d0%b8%d1%82%d1%8c-httpbackend-%d0%bc%d0%be%d0%ba%d0%b8-%d1%81-%d1%88%d0%b0%d0%b1%d0%bb%d0%be%d0%bd%d0%b0%d0%bc%d0%b8/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Wed, 29 Jan 2014 15:12:09 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[$httpBackend]]></category>
+		<category><![CDATA[AngularJs]]></category>
+		<category><![CDATA[mock]]></category>
+		<category><![CDATA[templates]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=1413</guid>
+
+					<description><![CDATA[Если необходимо использовать одновременно mock-сервис $httpBackend(из ngMock или ngMockE2E) и загрузку шаблонов из файлов(которая идет через незамоканы $httpBackend сервис), получаем конфликт с выдачей следующей ошибки: Error: Unexpected request: GET views/main.html Которая говорит о том, что наш мок не знает ничего о &#8230; <a href="https://stepansuvorov.com/blog/2014/01/angularjs-%d0%bf%d0%be%d0%b4%d1%80%d1%83%d0%b6%d0%b8%d1%82%d1%8c-httpbackend-%d0%bc%d0%be%d0%ba%d0%b8-%d1%81-%d1%88%d0%b0%d0%b1%d0%bb%d0%be%d0%bd%d0%b0%d0%bc%d0%b8/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Если необходимо использовать одновременно mock-сервис <strong>$httpBackend</strong>(из <strong>ngMock</strong> или <strong>ngMockE2E</strong>) и загрузку шаблонов из файлов(которая идет через незамоканы <strong>$httpBackend </strong>сервис), получаем конфликт с выдачей следующей ошибки:</p>
+<pre>Error: Unexpected request: GET views/main.html</pre>
+<p>Которая говорит о том, что наш мок не знает ничего о шаблонах.</p>
+<p>Возможны 2 варианта решения:</p>
+<ol>
+<li>отказаться вообще от загрузки html файлов (гуглить в тему <strong>кеширования шаблонов</strong> и <strong>html2js</strong>) &#8211; это позволит не использовать <strong>$httpBackend</strong> сервис вообще</li>
+<li>сделать заглушку на заглушку: дать инструкции мок сервису <strong>пропускать запросы на шаблоны</strong>. Делается это так: <span style="background-color: #f4f4f4;">$httpBackend.whenGET(/^tepmlates\//).passThrough();</span></li>
+</ol>
+<p><span id="more-1413"></span></p>
+<p>Полный код второго варианта:</p>
+<pre>app.run(function ($httpBackend) {
+        $httpBackend.whenGET(/^tepmlates\//).passThrough();
+});</pre>
+<p>&nbsp;</p>
+<p><a href="http://endlessindirection.wordpress.com/2013/05/18/angularjs-delay-response-from-httpbackend/">Полезная статья</a> в тему и <a title="plunker" href="http://plnkr.co/edit/pbjcDl?p=preview">пример</a>, также обсуждение на <a title="StackOverflow" href="http://stackoverflow.com/questions/14761045/jasmine-tests-angularjs-directives-with-templateurl">SO</a>.</p>
+<p>&nbsp;</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2014/01/angularjs-%d0%bf%d0%be%d0%b4%d1%80%d1%83%d0%b6%d0%b8%d1%82%d1%8c-httpbackend-%d0%bc%d0%be%d0%ba%d0%b8-%d1%81-%d1%88%d0%b0%d0%b1%d0%bb%d0%be%d0%bd%d0%b0%d0%bc%d0%b8/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

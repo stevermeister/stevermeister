@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>RequireJS &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/requirejs/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Sun, 22 Jan 2017 08:54:56 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>RequireJS Optimizer</title>
+		<link>https://stepansuvorov.com/blog/2012/11/requirejs-optimizer/</link>
+					<comments>https://stepansuvorov.com/blog/2012/11/requirejs-optimizer/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 02 Nov 2012 13:34:15 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[RequireJS]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=718</guid>
+
+					<description><![CDATA[На блоге уже был обзор RequireJs, как загрузчика модулей, теперь разберем еще одну его возможность &#8211; компоновку/сборку проекта &#8211; RequireJS Optimizer. Что умеет делать делать RequireJS Optimizer? оптимизировать JavaScript файлы: компоновать и минифицировать( по умолчанию UglifyJS ) оптимизировать CSS файлы &#8230; <a href="https://stepansuvorov.com/blog/2012/11/requirejs-optimizer/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>На блоге уже был обзор <a href="https://stepansuvorov.com/blog/2012/10/%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D0%B5%D0%B9-requirejs/">RequireJs</a>, как загрузчика модулей, теперь разберем еще одну его возможность &#8211; компоновку/сборку проекта &#8211; <strong>RequireJS Optimizer</strong>.</p>
+<p><span id="more-718"></span>Что умеет делать делать <strong>RequireJS Optimizer</strong>?</p>
+<ul>
+<li>оптимизировать JavaScript файлы: компоновать и минифицировать( по умолчанию <a href="https://github.com/mishoo/UglifyJS">UglifyJS</a> )</li>
+<li>оптимизировать CSS файлы</li>
+</ul>
+<p>Возможны варианты запуска: Node.js(желательно), Rhino.</p>
+<p>Установка на ноду:</p>
+<pre>$ npm install requirejs</pre>
+<p>Проверим работоспособность:</p>
+<pre>$ r.js -v
+r.js: 2.1.1, RequireJS: 2.1.1</pre>
+<p>Теперь проделаем все по примеру с офсайта. Создаем следующую структуру проекта:</p>
+<ul>
+<li>appdirectory
+<ul>
+<li>main.html</li>
+<li>css
+<ul>
+<li>common.css</li>
+<li>main.css</li>
+</ul>
+</li>
+<li>scripts
+<ul>
+<li>require.js</li>
+<li>main.js</li>
+<li>one.js</li>
+<li>two.js</li>
+<li>three.js</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="http://requirejs.org/docs/download.html#rjs">r.js</a></li>
+</ul>
+<p>Для тех, кому лень создавать эти все файлы, <a href="http://learn.javascript.ru/files/play/50/92/50923fcb2eb34.gz">вот</a> готовая структура.</p>
+<p>Переходим в директорию <em>appdirectory/scripts</em> и выполняем команду:</p>
+<pre>$ node ../../r.js -o name=main out=main-built.js baseUrl=.</pre>
+<p>либо если <strong>r.js</strong> установлен глобальной командой, то можно так:</p>
+<pre>$ r.js -o name=main out=main-built.js baseUrl=.</pre>
+<pre>"-o" - основная команда, которой запускается оптимизатор
+"name=" - параметр для главного исходного файла(без расширения .js)
+"out=" - исходящий файл</pre>
+<p>И в итоге оптимизатор должен выдать собранный и оптимизированный код проекта в файл <em>main-built.js</em>.</p>
+<p>Если мы хотим require.js тоже строить в наш билд-файл, тогда добавим 2 опции:</p>
+<pre>$ r.js -o baseUrl=. paths.requireLib=require name=main include=requireLib out=main-built.js</pre>
+<p>&#8211; в которых сделаем подключение модуля(<em>include</em>) и скажем где его брать(<em>path</em>).</p>
+<p>Если мы хотим исключить какой-то файл из сборки(например: чтобы отдельно его подключить для отладки), то мы должны использовать опцию <em>excludeShallow</em>:</p>
+<pre>$ r.js -o name=main excludeShallow=two out=main-built.js baseUrl=.</pre>
+<p>и указать ей файл, который мы хотим исключить. В данном случае это <em>two.js</em>.</p>
+<p>Также можно сказать r.js чтобы собрал файлы, но не оптимизировал их, для этого выставляем опцию <em>optimize=none</em>:</p>
+<pre>$ r.js -o name=main optimize=none  out=main-built.js baseUrl=.</pre>
+<p>Для скриптов, которые хотим грузить используя <a href="http://ru.wikipedia.org/wiki/Content_Delivery_Network">CDN</a> либо с других сторонних доменов, необходимо задать в <em>path</em> ключевое слово &#8220;<em>empty:</em>&#8220;(чтобы r.js не пытался их подгрузить):</p>
+<pre><code>$ r.js -o name=main out=main-built.js baseUrl=. paths.jquery=empty:</code></pre>
+<p>но, понятное дело, в коде останется полный путь:</p>
+<pre>requirejs.config({
+  paths: {
+    'jquery': 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min'
+  }
+});</pre>
+<p>Для сжатия <strong>CSS файлов</strong> используем следующую команду:</p>
+<pre><code>$ r.js -o cssIn=main.css out=main-built.css</code></pre>
+<p>&nbsp;</p>
+<p>Ну и чтобы совсем уже все было здорово можно записать все команды в один файл конфигурации, а потом просто вызвать его:</p>
+<pre>$ r.js -o build.js</pre>
+<p>Вот так вот выглядит минимальный файл конфигурации:</p>
+<pre>({
+    baseUrl: "appdirectory/scripts/",
+    name: "main",
+    out: "main-built.js",
+})</pre>
+<p><span style="text-decoration: underline;">Внимание!</span> Именно так: обрамленный круглыми скобками JSON формат, а в конце нет точки с запятой.</p>
+<p>Если мы хотим оптимизировать весь проект: файл за файлом, то делаем так:</p>
+<pre>({
+    appDir: "appdirectory/",
+    baseUrl: "scripts",
+    dir: "./build",
+    modules: [
+        {
+            name: "main"
+        }
+    ]
+})</pre>
+<p>В итоге мы получим структуру аналогичную нашему проекту, только с оптимизированными файлами. Тут также нужно не забыть создать отдельную директорию (в нашем случае это <em>./build</em> ), чтобы не перетереть текущий проект. (Так что по запросу &#8220;А-а-а! RequireJs стер мой проект!&#8221; сюда)</p>
+<pre>appDir - директория приложения
+baseUrl - путь к скриптам от appDir
+dir - директория где будут созданы оптимизированные варианты</pre>
+<p>&nbsp;</p>
+<p>Есть еще один вариант запуска оптимизатора &#8211; через модуль requirejs в node.js. Это нам позволит сделать следующий код:</p>
+<pre>var requirejs = require("requirejs");
+
+var config = {
+    appDir: "appdirectory/",
+    baseUrl: "scripts",
+    dir: "./build",
+    modules: [
+        {
+            name: "main"
+        }
+    ]
+};
+requirejs.optimize( config, function(results) {
+    console.log(results);
+});</pre>
+<p>и теперь выполним его напрямую на ноде(без r.js):</p>
+<pre>node build.js</pre>
+<p>&nbsp;</p>
+<p>И на закуску две интересные опции конфига &#8211; <strong>onBuildRead</strong> и <strong>onBuildWrite</strong> &#8211;  callback-метода, которые будут вызваны, когда оптимизатор прочитает/запишет файл, пример:</p>
+<pre>...
+onBuildRead: function (moduleName, path, contents) {
+        return contents.replace(/foo/g, 'bar');
+    },
+
+onBuildWrite: function (moduleName, path, contents) {
+        return contents.replace(/bar/g, 'foo');
+    },
+...</pre>
+<p>&nbsp;</p>
+<p>Вот <a href="https://github.com/jrburke/r.js/blob/master/build/example.build.js">тут</a> можно найти полный и подробно комментированный(на английском) пример конфигурационного файла для <strong>RequireJs Optimizer</strong>.</p>
+<p>&nbsp;</p>
+<p><strong>UPD</strong>: различие между опциями <strong>exclude</strong> и <strong>excludeShallow</strong>:</p>
+<p>exclude &#8211; исключает всю ветку зависимостей за исключаемым файлом(т.е. если файл 1 внутри себя еще содержал зависимость от файлов 2 и 3, то все файлы будут исключены)</p>
+<p>excludeShallow &#8211; исключает только сам файл, оставляя при этом все файлы зависимостей</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/11/requirejs-optimizer/feed/</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Загрузчик модулей RequireJS</title>
+		<link>https://stepansuvorov.com/blog/2012/10/%d0%b7%d0%b0%d0%b3%d1%80%d1%83%d0%b7%d1%87%d0%b8%d0%ba-%d0%bc%d0%be%d0%b4%d1%83%d0%bb%d0%b5%d0%b9-requirejs/</link>
+					<comments>https://stepansuvorov.com/blog/2012/10/%d0%b7%d0%b0%d0%b3%d1%80%d1%83%d0%b7%d1%87%d0%b8%d0%ba-%d0%bc%d0%be%d0%b4%d1%83%d0%bb%d0%b5%d0%b9-requirejs/#comments</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 19 Oct 2012 05:35:00 +0000</pubDate>
+				<category><![CDATA[Хочу сделать мир лучше]]></category>
+		<category><![CDATA[AMD]]></category>
+		<category><![CDATA[javascript]]></category>
+		<category><![CDATA[RequireJS]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=673</guid>
+
+					<description><![CDATA[RequireJS &#8211; если не самый популярный, то один из самых популярных файловых/модульных загрузчиков. При создании крупных компонентных проектов без него (или его аналогов) не обойтись, т.к. он решает основные проблемы таких приложений: &#8211; зависимости между модулями &#8211; засорение глобальной области &#8230; <a href="https://stepansuvorov.com/blog/2012/10/%d0%b7%d0%b0%d0%b3%d1%80%d1%83%d0%b7%d1%87%d0%b8%d0%ba-%d0%bc%d0%be%d0%b4%d1%83%d0%bb%d0%b5%d0%b9-requirejs/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p><img decoding="async" class="alignnone size-full wp-image-674" title="require-js_logo" src="https://stepansuvorov.com/blog/wp-content/uploads/2012/10/require-js_logo.png" alt="" width="220" height="138" /></p>
+<p><strong>RequireJS</strong> &#8211; если не самый популярный, то один из самых популярных файловых/модульных загрузчиков. При создании крупных компонентных проектов без него (или его аналогов) не обойтись, т.к. он решает основные проблемы таких приложений:</p>
+<p>&#8211; зависимости между модулями</p>
+<p>&#8211; засорение глобальной области</p>
+<p><strong>RequireJS</strong> использует <a title="Asynchronous Module Definition" href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a> концепцию. Создан для использования в браузере, но возможно использование и с node.js. Поддерживается всеми современными и не только веб браузерами: RequireJS works in IE 6+, Firefox 2+, Safari 3.2+, Chrome 3+, and Opera 10+. Имеет сравнительно небольшой размер(5.5k в сжатом виде). Поддерживает несколько плагинов: <a href="http://requirejs.org/docs/download.html#text">text</a>, <a href="http://requirejs.org/docs/download.html#domReady">domReady</a>, <a href="http://requirejs.org/docs/download.html#cs">cs (CoffeeScript)</a>, <a href="http://requirejs.org/docs/download.html#i18n">i18n </a>.</p>
+<p><span id="more-673"></span>Разберем более подробно, как можно использовать <a href="http://requirejs.org"><strong>RequireJS</strong></a> для нашего проекта. Вот <a title="requireJS download" href="http://requirejs.org/docs/download.html">тут</a> берем свеженькую версию(Для ознакомления желательно использовать несжатый вариант &#8220;<em>With Comments</em>&#8220;).</p>
+<p>Теперь создаем заготовку HTML страницы, где будем экспериментировать с нашим загрузчиком:</p>
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;script data-main="scripts/main" src="scripts/require.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>Тут хочу обратить ваше внимание на особенность использования дата-атрибута, из которого <strong>RequireJS</strong> получает информацию о главном файле с инструкциями по загрузке(в нашем случае это будет /scripts/main.js)</p>
+<p>Создаем <em>main.js</em> со следующим содержанием:</p>
+<pre>require(["util"], function(util) {
+  alert("это выполнится только тогда, когда файл util.js будет загружен");
+});</pre>
+<p>Создадим пустой util.js файл и проверим работу. На данный момент у вас должна получится такая структура директорий:</p>
+<ul>
+<li>index.html</li>
+<li>scripts/
+<ul>
+<li>main.js</li>
+<li>require.js</li>
+<li>util.js</li>
+</ul>
+</li>
+</ul>
+<p>По сути работа с RequireJS заключается в использовании 2х методов <strong>define</strong> и <strong>require</strong>.</p>
+<p>Метод <strong>define</strong> служит для описания модулей и имеет следующий синтаксис:</p>
+<pre>define( [moduleName,] dependencies, callback)
+moduleName - имя модуля (необязательный параметр)
+dependencies - массив зависимостей(с другими модулями)
+callback - тело модуля, в которое передаются dependencies</pre>
+<p>Для нашего случая будет выглядеть так(модуль содержит только одну зависимость):</p>
+<pre>define( "unit",
+        ['jQuery'],
+        function( jQuery ){
+          return { foo : "bar" };
+        }
+);</pre>
+<p>Но если бы модуль содержал больше зависимостей, мы бы могли добавить их:</p>
+<pre>['jQuery', 'jQueryUI', 'AnotherModule']</pre>
+<p>и соответственно в функцию бы добавилось больше параметров:</p>
+<pre>function( jQuery, jQueryUI, AnotherModule ){</pre>
+<p>Метод<strong> require</strong> фактически должен вызываться только один раз в главном файле(но в проекте может быть не один главный/корневой файл) имеет схожий синтаксис с define, но не имеет параметра названия модуля:</p>
+<pre>require( requiredModules, callback)</pre>
+<p>Мы уже поместили вызов метода в main.js:</p>
+<pre>require(["util"], function(util) {
+  //важно то, что util будет доступно только тут
+  //и его не будет в глобальной области видимости
+});</pre>
+<p>Настроить опции RequireJS можно через метод <strong>require.config</strong>(), например:</p>
+<pre>  require.config({
+baseUrl: "/another/path",
+paths: { "some": "some/v1.0" },
+waitSeconds: 15
+  });</pre>
+<p>Возможные параметры:</p>
+<pre>baseUrl - базовый путь, где лежат все модули
+paths - пути для модулей, которые находятся не в baseUrl
+waitSeconds - таймаут, который загрузчик будет ждать скрипта
+shim - для поддержки модулей сторонних модулей описанных не через define
+map - позволяет ссылаться через алиас на разные файлы для разных сборок
+config - для дополнительных настроек, которые будут доступны в модулях
+packages - указание директорий/пакетов, для множественной загрузки модулей
+context - указание контекста(например: <code>version1, <code>version2</code></code>)
+deps - массив зависимостей
+callback - вызовется, когда будут загружены зависимости указынные в параметре deps
+enforceDefine - true/false. вызовет ошибку, припопытке загрузки скрипта без define
+xhtml - true/false. использование <a href="https://developer.mozilla.org/en-US/docs/DOM/document.createElementNS">createElementNS</a> для создания скрипт тегов
+urlArgs - дополнительные параметры при запросе скрипта(удобно использовать решая вопрос кеширования)
+scriptType - тип скрипта, по умолчанию "text/javascript" (можно также "text/javascript;version=1.8")</pre>
+<p>Более подробно рассмотрим некоторые из них.</p>
+<p>Параметр <strong>shim</strong> позволяет добавить сторонние модули(которые определены не в AMD стиле, или проще говоря: без метода define) к общей схеме.</p>
+<pre>requirejs.config({
+    paths:{
+        'jquery': 'https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery'
+    },
+    shim: {
+        'jquery': {
+            exports: 'jQuery',
+        }
+    }
+});
+
+require(["util", "jquery"], function(util, $) {
+    console.log($(document));
+})</pre>
+<p>Внимание! Я специально в примере подключил старую(1.4.4) версию <strong>jQuery</strong>, т.к. новая(&gt;1.7.1) уже умная &#8211; совместима с AMD: если обнаруживает метод define, то автоматически прописывает себя. Т.е. мы можем использовать модуль &#8220;<strong>jquery</strong>&#8221; без объявления его через <strong>shim</strong>.</p>
+<p>С помощью параметра <strong>map</strong> мы можем сделать более гибкими связи между модулями, например новый модуль зависит от более новой версии библиотеки, а старый модуль, но который все равно нужно поддерживать, &#8211; использует древнюю версию. Так вот для обоих модулей мы можем прописать одну зависимость на библиотеку, а через <strong>map</strong> реализовать версионность:</p>
+<pre>requirejs.config({
+  map: {
+     'some/newmodule': { 'foo': 'foo1.2' },
+     'some/oldmodule': { 'foo': 'foo1.0' }
+  }
+});</pre>
+<p>Структура файлов при этом:</p>
+<ul>
+<li>foo1.0.js</li>
+<li>foo1.2.js</li>
+<li>some/
+<ul>
+<li>newmodule.js</li>
+<li>oldmodule.js</li>
+</ul>
+</li>
+</ul>
+<p>Т.е., в случае чего мы не будем менять по файлам все зависимости, а просто отредактируем <strong>map</strong> параметр в конфиге.</p>
+<p>Из основного это все. Есть еще <strong>RequireJS optimizer</strong>, но это тема для отдельной статьи. Буду рад уточнениями и дополнениям в комментариях.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2012/10/%d0%b7%d0%b0%d0%b3%d1%80%d1%83%d0%b7%d1%87%d0%b8%d0%ba-%d0%bc%d0%be%d0%b4%d1%83%d0%bb%d0%b5%d0%b9-requirejs/feed/</wfw:commentRss>
+			<slash:comments>24</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

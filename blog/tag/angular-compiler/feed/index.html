@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>angular-compiler &#8211; Stepan Suvorov Blog</title>
+	<atom:link href="https://stepansuvorov.com/blog/tag/angular-compiler/feed/" rel="self" type="application/rss+xml" />
+	<link>https://stepansuvorov.com/blog</link>
+	<description>Release 2.0</description>
+	<lastBuildDate>Fri, 28 Jul 2017 13:57:26 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.3.1</generator>
+	<item>
+		<title>View encapsulation и другие опции компилятора</title>
+		<link>https://stepansuvorov.com/blog/2017/07/view-encapsulation-off/</link>
+					<comments>https://stepansuvorov.com/blog/2017/07/view-encapsulation-off/#respond</comments>
+		
+		<dc:creator><![CDATA[Stepan]]></dc:creator>
+		<pubDate>Fri, 28 Jul 2017 13:56:03 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[Angular]]></category>
+		<category><![CDATA[angular-compiler]]></category>
+		<guid isPermaLink="false">http://stepansuvorov.com/blog/?p=3424</guid>
+
+					<description><![CDATA[Это крайне не рекомендовано, но, тем не менее, иногда приходится глобально выключать инкапсуляцию стилей. Чтобы этого достичь мы можем воспользоваться настройками при бутстрапе модуля, то есть вместо: platformBrowserDynamic().bootstrapModule(AppModule); сделать: View the code on Gist. Полный список параметров компиляции, которые мы &#8230; <a href="https://stepansuvorov.com/blog/2017/07/view-encapsulation-off/">Continue reading <span class="meta-nav">&#8594;</span></a>]]></description>
+										<content:encoded><![CDATA[<p>Это крайне не рекомендовано, но, тем не менее, иногда приходится глобально выключать инкапсуляцию стилей. Чтобы этого достичь мы можем воспользоваться настройками при бутстрапе модуля, то есть вместо:</p>
+<pre>platformBrowserDynamic().bootstrapModule(AppModule);</pre>
+<p><span id="more-3424"></span></p>
+<p>сделать:</p>
+<p>View the code on <a href="https://gist.github.com/stevermeister/68c678b749a077cb2fe97514de2ef6da">Gist</a>.</p>
+<p>Полный список параметров компиляции, которые мы можем менять при инициализации модуля:</p>
+<ul>
+<li><strong>useDebug</strong> &#8211; включение дебаг режима (и уже деприкейтед начиная с v4)</li>
+<li><strong>useJit</strong> &#8211; переключатель режима: <strong>Codegen</strong> и <strong>Interpretative</strong> (не путать с AOT/JIT), по умолчанию работает кодогенерация.</li>
+<li><strong>defaultEncapsulation</strong> &#8211; задает инкапсуляцию стилей по умолчанию (то что мы сделали выше)</li>
+<li><strong>providers</strong> &#8211; переопределение провайдеров для компилятора <strong><a href="https://github.com/angular/angular/blob/4.3.x/packages/compiler/src/jit/compiler_factory.ts#L48-L97">COMPILER_PROVIDERS</a></strong> (вы не можете сделать тоже самое в ngModule, так как компилятор использует <strong><a href="https://github.com/angular/angular/blob/4.3.x/packages/compiler/src/jit/compiler_factory.ts#L115">свой собственный инжектор</a></strong>)</li>
+<li><strong>missingTranlsations</strong> &#8211; задает стратегию поведения при отсутсвующих переводах</li>
+<li><strong>enableLegacyTemplate</strong> &#8211; чтобы продолжать поддерживать тег <strong>template</strong></li>
+</ul>
+]]></content:encoded>
+					
+					<wfw:commentRss>https://stepansuvorov.com/blog/2017/07/view-encapsulation-off/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>
