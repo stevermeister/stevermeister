@@ -6,7 +6,7 @@
 - 🛗 Organizer of the **Angular Kharkiv Meetup** (before the war 😔 #StandWithUkraine).[old recordings](https://www.youtube.com/@AngularKharkiv).
 - 🎥 Regularly publishing episodes on:  
   - [Angular Pro Screencast](https://www.youtube.com/@AngularPro)  
-  - [AI Pro Screencast](https://www.youtube.com/@aiproai)  
+  - [ProductiveDevelopers](https://www.youtube.com/@productivedevelopers)  
 - 📝 Read my articles on my [CTO Blog](https://ctoiam.com), where I share insights on leadership, technology, and scaling startups.
 - 🎤 View my presentation archive at [slides.com](https://stepan.js.org/slides.com).
 - 💬 Feel free to ask me about **scaling your startup**.  
