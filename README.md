@@ -1,15 +1,15 @@
 <h1 align="center">Hi 👋, I'm Stepan Suvorov</h1>
 <h3 align="center">A passionate Developer Advocate from 🇳🇱 Netherlands (born in 🇺🇦 Ukraine)</h3>
 
-- 🐝 I am the **CTO at Studytube**.  
-- 🅰️ Recognized as a **Google Developer Expert (GDE)** in Angular.  
+- 🐝 I am the **CTO at Roadsoft**.  
+- 🅰️ Recognized as a **Google Developer Expert (GDE)**.  
 - 🛗 Organizer of the **Angular Kharkiv Meetup** (before the war 😔 #StandWithUkraine).[old recordings](https://www.youtube.com/@AngularKharkiv).
 - 🎥 Regularly publishing episodes on:  
   - [Angular Pro Screencast](https://www.youtube.com/@AngularPro)  
   - [ProductiveDevelopers](https://www.youtube.com/@productivedevelopers)  
 - 📝 Read my articles on my [CTO Blog](https://ctoiam.com), where I share insights on leadership, technology, and scaling startups.
 - 🎤 View my presentation archive at [slides.com](https://stepan.js.org/slides.com).
-- 💬 Feel free to ask me about **scaling your startup**.  
+- 💬 Feel free to ask me about **scaling your startup with AI**.  
 
 ### Open Source Projects:
 - [The Tax](https://thetax.nl) - Online Income Tax Calculation for the Netherlands  
@@ -19,7 +19,6 @@
 ## 📬 Let's Connect!
 - [LinkedIn](https://www.linkedin.com/in/stepansuvorov)
 - [GitHub](https://github.com/stevermeister)
-- [Twitter](https://twitter.com/stevermeister)
 
 ## 🛠️ Languages and Tools:
 
@@ -40,9 +39,17 @@
   
 ## Work Experience:
 
-<table>
+<table>  
+<tr>
+    <td>2025 - Present</td>
+    <td><a href="https://www.studytube.nl/">Roadsoft</a> - CTO
+      <ul>
+        <li>Leading the development of AI-driven product features and leading the AI Transformation Strategy to automate internal processes, enhancing operational efficiency.</li>      
+      </ul>
+    </td>
+  </tr>
   <tr>
-    <td>2014 - Present</td>
+    <td>2014 - 2025</td>
     <td><a href="https://www.studytube.nl/">Studytube</a> - Chief Technology Officer  
       <ul>
         <li>Scaled the company from a 10-person startup to a 250-person organization, including 100 technical staff, by establishing robust hiring pipelines and defining engineering levels.</li>
