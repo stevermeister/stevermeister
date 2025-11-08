@@ -42,7 +42,7 @@
 <table>  
 <tr>
     <td>2025 - Present</td>
-    <td><a href="https://www.studytube.nl/">Roadsoft</a> - CTO
+    <td><a href="https://roadsoft.ai/">Roadsoft</a> - CTO
       <ul>
         <li>Leading the development of AI-driven product features and leading the AI Transformation Strategy to automate internal processes, enhancing operational efficiency.</li>      
       </ul>
