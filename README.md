@@ -1,15 +1,14 @@
 <h1 align="center">Hi 👋, I'm Stepan Suvorov</h1>
 <h3 align="center">A passionate Developer Advocate from 🇳🇱 Netherlands (born in 🇺🇦 Ukraine)</h3>
 
-- 🐝 I am the **CTO at Roadsoft**.  
-- 🅰️ Recognized as a **Google Developer Expert (GDE)**.  
-- 🛗 Organizer of the **Angular Kharkiv Meetup** (before the war 😔 #StandWithUkraine).[old recordings](https://www.youtube.com/@AngularKharkiv).
+- 🐝 I am the **CTO at Roadsoft**.   
+- 🛗 ExOrganizer of the **Angular Kharkiv Meetup** (before the war 😔 #StandWithUkraine).[old recordings](https://www.youtube.com/@AngularKharkiv).
 - 🎥 Regularly publishing episodes on:  
   - [Angular Pro Screencast](https://www.youtube.com/@AngularPro)  
   - [ProductiveDevelopers](https://www.youtube.com/@productivedevelopers)  
 - 📝 Read my articles on my [CTO Blog](https://ctoiam.com), where I share insights on leadership, technology, and scaling startups.
 - 🎤 View my presentation archive at [slides.com](https://stepan.js.org/slides.com).
-- 💬 Feel free to ask me about **scaling your startup with AI**.  
+- 💬 Feel free to ask me about **scaling your startup with AI** and now also **AI Voice Agents**.  
 
 ### Open Source Projects:
 - [The Tax](https://thetax.nl) - Online Income Tax Calculation for the Netherlands  
